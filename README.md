@@ -17,9 +17,9 @@ Workout, Константин Хан
 
 Анализ конкурентов. Данные с сайтов:
 
-https://rskrf.ru/tips/obzory-i-topy/7-luchshikh-fitnes-prilozheniy-dlya-android/
+* https://rskrf.ru/tips/obzory-i-topy/7-luchshikh-fitnes-prilozheniy-dlya-android/
 
-https://rskrf.ru/tips/obzory-i-topy/7-luchshikh-fitnes-prilozheniy-na-ios/
+* https://rskrf.ru/tips/obzory-i-topy/7-luchshikh-fitnes-prilozheniy-na-ios/
 
 
 На что обращают внимание пользователи:
