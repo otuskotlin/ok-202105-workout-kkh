@@ -3,6 +3,9 @@ import io.kotest.matchers.shouldBe
 
 class TestJs : StringSpec({
     "test js" {
-        KotestClasses().testFun() shouldBe "JS"
+        KotestClass().testFun() shouldBe "JS"
+    }
+    "test string js" {
+        1.toString() shouldBe "1"
     }
 })
