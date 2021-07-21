@@ -16,7 +16,9 @@ kotlin {
     js {
         browser()
     }
-    
+
+    val kotestVersion: String by project
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -27,7 +29,35 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+
+                implementation("io.kotest:kotest-assertions-core:$kotestVersion")
+                implementation("io.kotest:kotest-property:$kotestVersion")
             }
+        }
+        val jvmMain by getting {
+            dependencies {
+                implementation(kotlin("stdlib-jdk8"))
+            }
+        }
+        val jvmTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit5"))
+                implementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+            }
+        }
+        val jsMain by getting {
+            dependencies {
+                implementation(kotlin("stdlib-js"))
+            }
+        }
+        val jsTest by getting {
+            dependencies {
+                implementation(kotlin("test-js"))
+                implementation("io.kotest:kotest-framework-engine:$kotestVersion")
+            }
+        }
+        tasks.withType<Test>().configureEach {
+            useJUnitPlatform()
         }
     }
 }
