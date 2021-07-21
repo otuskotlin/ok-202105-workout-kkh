@@ -11,3 +11,4 @@ pluginManagement {
 include("ok-m1l1")
 include("m1l6")
 include("common")
+include("m2l2-testing")
