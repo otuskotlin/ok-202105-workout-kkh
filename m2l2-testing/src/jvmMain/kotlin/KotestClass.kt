@@ -3,3 +3,8 @@ actual class KotestClass {
         return "JVM"
     }
 }
+
+class Broomstick {
+    fun flyable() = true
+    fun comback() = true
+}
