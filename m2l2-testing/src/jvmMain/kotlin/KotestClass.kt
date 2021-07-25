@@ -1,5 +1,5 @@
 actual class KotestClass {
-    actual fun testFun(): String {
+    actual suspend fun testFun(): String {
         return "JVM"
     }
 }

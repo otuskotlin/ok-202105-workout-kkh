@@ -1,3 +1,3 @@
 expect class KotestClass {
-    fun testFun(): String
+    suspend fun testFun(): String
 }
