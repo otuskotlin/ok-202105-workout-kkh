@@ -20,7 +20,7 @@ paths:
       summary: Endpoint for creation of an exercise
       operationId: createExercise
       requestBody:
-        description: Pet object that needs to be added to the store
+        description: Exercise object that needs to be added
         content:
           application/json:
             schema:
@@ -33,9 +33,154 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateExerciseResponse'
+  /exercise/read:
+    post:
+      tags:
+        - exercise
+      summary: Endpoint for creation of an exercise
+      operationId: readExercise
+      requestBody:
+        description: Exercise object that needs to be readed
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadExerciseRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadExerciseResponse'
 components:
   schemas:
-    CreateExerciseRequest:
+
+    BaseMessage:
       type: object
+      properties:
+        messageType:
+          type: string
+      discriminator:
+        propertyName: messageType
+
+    BaseRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+        debug:
+          $ref: '#/components/schemas/Debug'
+
+    BaseResponse:
+      type: object
+      properties:
+        result:
+          type: string
+          enum:
+            - success
+            - error
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiError'
+
+    ApiError:
+      type: object
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+
+    Debug:
+      type: object
+      properties:
+        mode:
+          type: string
+          default:
+            - prod
+          enum:
+            - prod
+            - test
+            - stub
+        stub:
+          type: string
+
+    CreateableExercise:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Название упражнения
+        description:
+          type: string
+        targetMuscleGroup:
+          type: array
+          items:
+            type: string
+        synergisticMuscleGroup:
+          type: array
+          items:
+            type: string
+        executionTechnique:
+          type: string
+
+    UpdatableExercise:
+      allOf:
+        - $ref: '#/components/schemas/CreateableExercise'
+        - type: object
+          properties:
+            id:
+              type: string
+
+    ResultExercise:
+      allOf:
+        - $ref: '#/components/schemas/UpdatableExercise'
+        - type: object
+          properties:
+            permissions:
+              type: array
+              items:
+                $ref: '#/components/schemas/ExercisePermissions'
+
+    ExercisePermissions:
+      type: string
+      enum:
+        - read
+        - update
+        - delete
+        - send
+
+    CreateExerciseRequest:
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            createExercise:
+              $ref: '#/components/schemas/CreateableExercise'
+            debug:
+              type: object
+              properties:
+                stub:
+                  type: string
+                  enum:
+                    - success
+                    - nameEmpty
+                    - errorDb
+
     CreateExerciseResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            createdExercise:
+              $ref: '#/components/schemas/ResultExercise'
+
+    ReadExerciseRequest:
+      type: object
+
+    ReadExerciseResponse:
       type: object

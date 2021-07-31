@@ -54,9 +54,9 @@ Workout, Константин Хан
 ### Описание сущности exercise
 
 * title
-* describe;
+* description;
 * targetMuscleGroup;
-* synergists;
+* synergisticMuscleGroup;
 * executionTechnique.
 
 ### Описание сущности workout
