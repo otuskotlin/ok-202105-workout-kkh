@@ -1,0 +1,41 @@
+openapi: 3.0.3
+info:
+  title: Workout
+  description: 'Workout is an app for building a workout program'
+  license:
+    name: MIT
+  version: 0.0.1
+servers:
+  - url: https://localhost
+tags:
+  - name: exercise
+    description: Everything about your exercises
+  - name: workout
+    description: Everything about your workout program
+paths:
+  /exercise/create:
+    post:
+      tags:
+        - exercise
+      summary: Endpoint for creation of an exercise
+      operationId: createExercise
+      requestBody:
+        description: Pet object that needs to be added to the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExerciseRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateExerciseResponse'
+components:
+  schemas:
+    CreateExerciseRequest:
+      type: object
+    CreateExerciseResponse:
+      type: object
