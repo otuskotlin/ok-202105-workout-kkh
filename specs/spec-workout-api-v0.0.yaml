@@ -99,7 +99,47 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateExerciseResponse'
 
+  /exercise/delete:
+    post:
+      tags:
+        - exercise
+      summary: Delete an exercise
+      operationId: deleteExercise
+      requestBody:
+        description: The request object to delete an exercise
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteExerciseRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteExerciseResponse'
 
+  /exercise/search:
+    post:
+      tags:
+        - exercise
+      summary: Search the exercises
+      operationId: searchExercise
+      requestBody:
+        description: The request object to search the exercises
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchExerciseRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchExerciseResponse'
 
 components:
   schemas:
