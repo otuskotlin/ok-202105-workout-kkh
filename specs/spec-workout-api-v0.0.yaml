@@ -240,6 +240,20 @@ components:
         - delete
         - send
 
+    InitExerciseRequest:
+      description: Structure to request the initial state when starting the web client
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+
+    InitExerciseResponse:
+      description: Structure to respond with the initial state when starting the web client
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+
     CreateExerciseRequest:
       allOf:
         - $ref: '#/components/schemas/BaseMessage'
