@@ -157,8 +157,6 @@ components:
       properties:
         requestId:
           type: string
-        debug:
-          $ref: '#/components/schemas/Debug'
 
     BaseResponse:
       type: object
@@ -181,19 +179,16 @@ components:
         field:
           type: string
 
-    Debug:
+    BaseDebugRequest:
       type: object
       properties:
         mode:
           type: string
-          default:
-            - prod
+          default: prod
           enum:
             - prod
             - test
             - stub
-        stub:
-          type: string
 
     CreateableExercise:
       type: object
@@ -263,14 +258,16 @@ components:
             createExercise:
               $ref: '#/components/schemas/CreateableExercise'
             debug:
-              type: object
-              properties:
-                stub:
-                  type: string
-                  enum:
-                    - success
-                    - nameEmpty
-                    - errorDb
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - nameEmpty
+                        - errorDb
 
     CreateExerciseResponse:
       allOf:
@@ -282,7 +279,25 @@ components:
               $ref: '#/components/schemas/ResultExercise'
 
     ReadExerciseRequest:
-      type: object
+      description: The structure to get exercise
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            readExerciseId:
+              type: string
+            debug:
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - errorDb
 
     ReadExerciseResponse:
       type: object
