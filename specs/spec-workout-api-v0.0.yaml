@@ -191,6 +191,7 @@ components:
             - stub
 
     CreatableExercise:
+      description: The structure with data about the declaration to request about creation
       type: object
       properties:
         title:
@@ -210,6 +211,7 @@ components:
           type: string
 
     UpdatableExercise:
+      description: Structure for a data about the declaration in request to update
       allOf:
         - $ref: '#/components/schemas/CreatableExercise'
         - type: object
@@ -321,4 +323,66 @@ components:
         - type: object
           properties:
             readExercise:
-              $ref: ''
+              $ref: '#/components/schemas/ResponseExercise'
+
+    UpdateExerciseRequest:
+      description: Structure for request an update to an existing exercise
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            createExercise:
+              $ref: '#/components/schemas/UpdatableExercise'
+            debug:
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyTitle
+                        - errorDb
+
+    UpdateExerciseResponse:
+      description: The structure to respond to a request with an exercise information
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            updateExercise:
+              $ref: '#/components/schemas/ResponseExercise'
+
+    DeleteExerciseRequest:
+      description: The structure to request to delete an exercise
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            deleteExerciseId:
+              type: string
+            debug:
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - errorDb
+
+    DeleteExerciseResponse:
+      description: Structure to respond to a request to delete an exercise
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            deleteExercise:
+              $ref: '#/components/schemas/ResponseExercise'
