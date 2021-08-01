@@ -270,6 +270,7 @@ components:
                         - errorDb
 
     CreateExerciseResponse:
+      description:
       allOf:
         - $ref: '#/components/schemas/BaseMessage'
         - $ref: '#/components/schemas/BaseResponse'
@@ -277,6 +278,19 @@ components:
           properties:
             createdExercise:
               $ref: '#/components/schemas/ResultExercise'
+
+    ResponseExercise:
+      description: The structure describing the declaration in the response
+      allOf:
+        - $ref: '#/components/schemas/UpdatableExercise'
+        - type: object
+          properties:
+            permissions:
+              type: array
+              uniqueItems: true
+              items:
+                $ref: '#/components/schemas/ExercisePermissions'
+
 
     ReadExerciseRequest:
       description: The structure to get exercise
@@ -300,4 +314,11 @@ components:
                         - errorDb
 
     ReadExerciseResponse:
-      type: object
+      description: The structure to respond to a request with an exercise information
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            readExercise:
+              $ref: ''
