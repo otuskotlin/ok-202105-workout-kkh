@@ -12,15 +12,38 @@ tags:
     description: Everything about your exercises
   - name: workout
     description: Everything about your workout program
+
 paths:
+
+  /exercise/init:
+    post:
+      tags:
+        - exercise
+      summary: Get status on initialization
+      operationId: initExercise
+      requestBody:
+        description: The request object to an initialization on start application
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitExerciseRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitExerciseResponse'
+
   /exercise/create:
     post:
       tags:
         - exercise
-      summary: Endpoint for creation of an exercise
+      summary: Create a new exercise
       operationId: createExercise
       requestBody:
-        description: Exercise object that needs to be added
+        description: The request object to create a new exercise
         content:
           application/json:
             schema:
@@ -33,14 +56,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateExerciseResponse'
+
   /exercise/read:
     post:
       tags:
         - exercise
-      summary: Endpoint for creation of an exercise
+      summary: Get information about an exercise
       operationId: readExercise
       requestBody:
-        description: Exercise object that needs to be readed
+        description: The request object to obtain an exercise information
         content:
           application/json:
             schema:
@@ -53,6 +77,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReadExerciseResponse'
+
+  /exercise/update:
+    post:
+      tags:
+        - exercise
+      summary: Update information about an exercise
+      operationId: updateExercise
+      requestBody:
+        description: The request object to update an exercise information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExerciseRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateExerciseResponse'
+
+
+
 components:
   schemas:
 
