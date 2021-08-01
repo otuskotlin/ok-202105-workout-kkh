@@ -190,7 +190,7 @@ components:
             - test
             - stub
 
-    CreateableExercise:
+    CreatableExercise:
       type: object
       properties:
         title:
@@ -211,7 +211,7 @@ components:
 
     UpdatableExercise:
       allOf:
-        - $ref: '#/components/schemas/CreateableExercise'
+        - $ref: '#/components/schemas/CreatableExercise'
         - type: object
           properties:
             id:
@@ -256,7 +256,7 @@ components:
         - type: object
           properties:
             createExercise:
-              $ref: '#/components/schemas/CreateableExercise'
+              $ref: '#/components/schemas/CreatableExercise'
             debug:
               allOf:
                 - $ref: '#/components/schemas/BaseDebugRequest'
@@ -270,7 +270,7 @@ components:
                         - errorDb
 
     CreateExerciseResponse:
-      description:
+      description: The structure to respond to a request about the declaration an exercise
       allOf:
         - $ref: '#/components/schemas/BaseMessage'
         - $ref: '#/components/schemas/BaseResponse'
