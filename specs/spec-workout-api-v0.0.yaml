@@ -190,6 +190,37 @@ components:
             - test
             - stub
 
+    BasePaginatedRequest:
+      description: The structure with a description of a requested page in requests of lists
+      type: object
+      properties:
+        size:
+          type: integer
+          description: The size of a requested page
+          format: int32
+        lastId:
+          type: string
+          description: ID of the last object of the previous page
+
+    BasePaginatedResponse:
+      description: The structure with a description of a page in request
+      type: object
+      properties:
+        size:
+          type: integer
+          description: The size of a requested page
+          format: int32
+        lastId:
+          type: string
+          description: ID of the last object of the previous page
+        position:
+          type: string
+          enum:
+            - first
+            - middle
+            - last
+
+
     CreatableExercise:
       description: The structure with data about the declaration to request about creation
       type: object
@@ -386,3 +417,27 @@ components:
           properties:
             deleteExercise:
               $ref: '#/components/schemas/ResponseExercise'
+
+    SearchExerciseRequest:
+      description: Structure to request a search of an exercise
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            page:
+              $ref: '#/components/schemas/BasePaginatedRequest'
+
+    SearchExerciseResponse:
+      description: Structure to respond to a request search of exercise
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            page:
+              $ref: '#/components/schemas/BasePaginatedResponse'
+            foundExercises:
+              type: array
+              items:
+                $ref: '#/components/schemas/ResponseExercise'
