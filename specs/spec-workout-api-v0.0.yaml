@@ -9,9 +9,9 @@ servers:
   - url: https://localhost
 tags:
   - name: exercise
-    description: Everything about your exercises
+    description: CRUDS for an exercise
   - name: workout
-    description: Everything about your workout program
+    description: CRUDS for a workout program
 
 paths:
 
