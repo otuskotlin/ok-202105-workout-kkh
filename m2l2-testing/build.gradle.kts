@@ -2,9 +2,6 @@ plugins {
     kotlin("multiplatform")
 }
 
-group = "ru.otus.otuskotlin.workout"
-version = "0.0.1"
-
 repositories {
     mavenCentral()
 }
