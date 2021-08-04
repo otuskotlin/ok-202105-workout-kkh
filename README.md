@@ -64,12 +64,12 @@ Workout, Константин Хан
 * date;
 * duration;
 * recoveryTime;
-* Map<exercise, List<doingTheExercise>>
+* Map<Exercise, List<Performance>>
 
-doingTheExercise - подход
+Performance - подход, выполнение
 
 * status;
-* Map<weight, repetition>
+* Map<weight, repetition> (Double, Double)
 * modification;
 
 status:
@@ -78,6 +78,15 @@ status:
 * ACTIVE
 * DONE
 * SKIP
+
+modification:
+
+* CLASSIC
+* CLUSTER
+* WITHOUT_LAST
+* DROP_SET
+* SUPER_SET
+* CIRCUIT
 
 ### Портрет пользователя:
 

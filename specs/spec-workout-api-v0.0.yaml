@@ -138,8 +138,8 @@ components:
   schemas:
 
     BaseMessage:
-      description: Base class to requests and responses
       type: object
+      description: Base class to requests and responses
       properties:
         messageType:
           description: A discriminator contaiting the message class type and used to deserialization
@@ -149,15 +149,15 @@ components:
         propertyName: messageType
 
     BaseRequest:
-      description: Base class to all requests
       type: object
+      description: Base class to all requests
       properties:
         requestId:
           type: string
 
     BaseResponse:
-      description: Base class to all responses
       type: object
+      description: Base class to all responses
       properties:
         result:
           type: string
@@ -170,8 +170,8 @@ components:
             $ref: '#/components/schemas/RequestError'
 
     RequestError:
-      description: Description of request processing error
       type: object
+      description: Description of request processing error
       properties:
         message:
           type: string
@@ -190,8 +190,8 @@ components:
             - stub
 
     BasePaginatedRequest:
-      description: The structure with a description of a requested page in requests of lists
       type: object
+      description: The structure with a description of a requested page in requests of lists
       properties:
         size:
           type: integer
@@ -202,8 +202,8 @@ components:
           description: ID of the last object of the previous page
 
     BasePaginatedResponse:
-      description: The structure with a description of a page in request
       type: object
+      description: The structure with a description of a page in request
       properties:
         size:
           type: integer
@@ -220,8 +220,8 @@ components:
             - last
 
     CreatableExercise:
-      description: The structure with data about the declaration to request about creation
       type: object
+      description: The structure with data about the exercise to request about creation
       properties:
         title:
           type: string
@@ -238,6 +238,67 @@ components:
             type: string
         executionTechnique:
           type: string
+
+
+    CreatableWorkout:
+      description: The structure with data about the workout to request about creation
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date of workout
+          example: "2021-08-04"
+        duration:
+          type: number
+          format: double
+          description: Duration of workout
+        recoveryTime:
+          type: number
+          format: double
+          description: Recovery time between exercises
+        exercises:
+          $ref: '#/components/schemas/Exercises'
+
+    Exercises:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          exercise:
+            $ref: '#/components/schemas/CreatableExercise'
+          doingTheExercise:
+            $ref: '#/components/schemas/DoingTheExercise'
+
+    DoingTheExercise:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - PLAN
+            - ACTIVE
+            - DONE
+            - SKIP
+        sets:
+          $ref: '#/components/schemas/Sets'
+        modification:
+          type: string
+
+    OneSet:
+      type: object
+      properties:
+        weight:
+          type: number
+          format: double
+        repetition:
+          type: number
+          format: int32
+
+    Sets:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/OneSet'
 
     UpdatableExercise:
       description: Structure for a data about the declaration in request to update
