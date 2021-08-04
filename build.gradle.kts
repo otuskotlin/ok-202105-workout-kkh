@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") apply false
     kotlin("multiplatform") apply false
+    id("org.openapi.generator") apply false
 }
 
 group = "ru.otus.otuskotlin.workout"
