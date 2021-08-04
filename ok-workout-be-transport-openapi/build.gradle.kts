@@ -35,12 +35,14 @@ sourceSets{
 
 dependencies {
     val jacksonVersion: String by project
+    val kotlinVersion: String by project
 
     implementation(kotlin("stdlib"))
     testImplementation(kotlin("test-junit"))
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
 
 }
 
