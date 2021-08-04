@@ -248,7 +248,7 @@ components:
           type: string
           format: date
           description: Date of workout
-          example: "2021-08-04"
+          example: 2021-08-04
         duration:
           type: number
           format: double
@@ -267,10 +267,10 @@ components:
         properties:
           exercise:
             $ref: '#/components/schemas/CreatableExercise'
-          doingTheExercise:
-            $ref: '#/components/schemas/DoingTheExercise'
+          performance:
+            $ref: '#/components/schemas/Performance'
 
-    DoingTheExercise:
+    Performance:
       type: object
       properties:
         status:
@@ -281,9 +281,18 @@ components:
             - DONE
             - SKIP
         sets:
-          $ref: '#/components/schemas/Sets'
+          type: array
+          items:
+            $ref: '#/components/schemas/OneSet'
         modification:
           type: string
+          enum:
+            - CIRCUIT
+            - CLASSIC
+            - CLUSTER
+            - DROP_SET
+            - SUPER_SET
+            - WITHOUT_LAST
 
     OneSet:
       type: object
@@ -294,11 +303,6 @@ components:
         repetition:
           type: number
           format: int32
-
-    Sets:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/OneSet'
 
     UpdatableExercise:
       description: Structure for a data about the declaration in request to update
