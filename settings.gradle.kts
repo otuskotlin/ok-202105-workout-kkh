@@ -7,6 +7,7 @@ pluginManagement {
 
         kotlin("jvm") version kotlinVersion
         kotlin("multiplatform") version kotlinVersion
+        kotlin("plugin.serialization") version kotlinVersion
 
         id("org.openapi.generator") version openApiVersion
     }
@@ -17,3 +18,4 @@ include("m1l6")
 include("common")
 include("m2l2-testing")
 include("ok-workout-be-transport-openapi")
+include("ok-workout-be-transport-mp")

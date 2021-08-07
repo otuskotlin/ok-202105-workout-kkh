@@ -27,7 +27,7 @@ openApiGenerate {
     )
 }
 
-sourceSets{
+sourceSets {
     main {
         java.srcDir("$buildDir/generate-resources/main/src/main/kotlin")
     }
