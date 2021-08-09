@@ -133,7 +133,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SearchExerciseResponse'
-
   /workout/init:
     post:
       tags:
@@ -154,6 +153,86 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InitExerciseResponse'
+  /workout/create:
+    post:
+      tags:
+        - workout
+      summary: Create a new workout
+      operationId: createWorkout
+      requestBody:
+        description: The request object to create a new workout
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkoutRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkoutResponse'
+  /workout/read:
+    post:
+      tags:
+        - workout
+      summary: Get information about a workout
+      operationId: readWorkout
+      requestBody:
+        description: The request object to obtain a workout information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadWorkoutRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadWorkoutResponse'
+  /workout/update:
+    post:
+      tags:
+        - workout
+      summary: Update information about a workout
+      operationId: updateWorkout
+      requestBody:
+        description: The request object to update a workout information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkoutRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkoutResponse'
+  /workout/delete:
+    post:
+      tags:
+        - workout
+      summary: Delete a workout
+      operationId: deleteWorkout
+      requestBody:
+        description: The request object to delete a workout
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteWorkoutRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorkoutResponse'
 
 components:
   schemas:
@@ -325,9 +404,18 @@ components:
           format: int32
 
     UpdatableExercise:
-      description: Structure for a data about the declaration in request to update
+      description: Structure for a data about the exercise in request to update
       allOf:
         - $ref: '#/components/schemas/CreatableExercise'
+        - type: object
+          properties:
+            id:
+              type: string
+
+    UpdatableWorkout:
+      description: Structure for a data about the workout in request to update
+      allOf:
+        - $ref: '#/components/schemas/CreatableWorkout'
         - type: object
           properties:
             id:
@@ -341,9 +429,19 @@ components:
             permissions:
               type: array
               items:
-                $ref: '#/components/schemas/ExercisePermissions'
+                $ref: '#/components/schemas/Permissions'
 
-    ExercisePermissions:
+    ResultWorkout:
+      allOf:
+        - $ref: '#/components/schemas/UpdatableWorkout'
+        - type: object
+          properties:
+            permissions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Permissions'
+
+    Permissions:
       type: string
       enum:
         - read
@@ -399,7 +497,7 @@ components:
                         - nameEmpty
                         - errorDb
 
-    CreatableWorkoutRequest:
+    CreateWorkoutRequest:
       allOf:
         - $ref: '#/components/schemas/BaseMessage'
         - $ref: '#/components/schemas/BaseResponse'
@@ -429,8 +527,18 @@ components:
             createdExercise:
               $ref: '#/components/schemas/ResultExercise'
 
+    CreateWorkoutResponse:
+      description: The structure to respond to a request about the declaration a workout
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            createdWorkout:
+              $ref: '#/components/schemas/ResultWorkout'
+
     ResponseExercise:
-      description: The structure describing the declaration in the response
+      description: The structure describing the exercise in the response
       allOf:
         - $ref: '#/components/schemas/UpdatableExercise'
         - type: object
@@ -439,7 +547,19 @@ components:
               type: array
               uniqueItems: true
               items:
-                $ref: '#/components/schemas/ExercisePermissions'
+                $ref: '#/components/schemas/Permissions'
+
+    ResponseWorkout:
+      description: The structure describing the workout in the response
+      allOf:
+        - $ref: '#/components/schemas/UpdatableWorkout'
+        - type: object
+          properties:
+            permissions:
+              type: array
+              uniqueItems: true
+              items:
+                $ref: '#/components/schemas/Permissions'
 
     ReadExerciseRequest:
       description: The structure to get exercise
@@ -449,6 +569,27 @@ components:
         - type: object
           properties:
             readExerciseId:
+              type: string
+            debug:
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - errorDb
+
+    ReadWorkoutRequest:
+      description: The structure to get workout
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            readWorkoutId:
               type: string
             debug:
               allOf:
@@ -472,6 +613,16 @@ components:
             readExercise:
               $ref: '#/components/schemas/ResponseExercise'
 
+    ReadWorkoutResponse:
+      description: The structure to respond to a request with a workout information
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            readWorkout:
+              $ref: '#/components/schemas/ResponseWorkout'
+
     UpdateExerciseRequest:
       description: Structure for request an update to an existing exercise
       allOf:
@@ -479,8 +630,29 @@ components:
         - $ref: '#/components/schemas/BaseRequest'
         - type: object
           properties:
-            createExercise:
+            updateExercise:
               $ref: '#/components/schemas/UpdatableExercise'
+            debug:
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyTitle
+                        - errorDb
+
+    UpdateWorkoutRequest:
+      description: Structure for request an update to an existing workout
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            updateWorkout:
+              $ref: '#/components/schemas/UpdatableWorkout'
             debug:
               allOf:
                 - $ref: '#/components/schemas/BaseDebugRequest'
@@ -503,6 +675,16 @@ components:
             updateExercise:
               $ref: '#/components/schemas/ResponseExercise'
 
+    UpdateWorkoutResponse:
+      description: The structure to respond to a request with a workout information
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            updateWorkout:
+              $ref: '#/components/schemas/ResponseWorkout'
+
     DeleteExerciseRequest:
       description: The structure to request to delete an exercise
       allOf:
@@ -511,6 +693,27 @@ components:
         - type: object
           properties:
             deleteExerciseId:
+              type: string
+            debug:
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - errorDb
+
+    DeleteWorkoutRequest:
+      description: The structure to request to delete a workout
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            deleteWorkoutId:
               type: string
             debug:
               allOf:
@@ -533,6 +736,16 @@ components:
           properties:
             deleteExercise:
               $ref: '#/components/schemas/ResponseExercise'
+
+    DeleteWorkoutResponse:
+      description: Structure to respond to a request to delete a workout
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            deleteWorkout:
+              $ref: '#/components/schemas/ResponseWorkout'
 
     SearchExerciseRequest:
       description: Structure to request a search of an exercise
