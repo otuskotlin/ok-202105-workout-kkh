@@ -134,6 +134,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchExerciseResponse'
 
+  /workout/init:
+    post:
+      tags:
+        - workout
+      summary: Get status on initialization
+      operationId: initWorkout
+      requestBody:
+        description: The request object to an initialization on start application
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitWorkoutRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitExerciseResponse'
+
 components:
   schemas:
 
@@ -238,7 +259,6 @@ components:
             type: string
         executionTechnique:
           type: string
-
 
     CreatableWorkout:
       description: The structure with data about the workout to request about creation
@@ -345,6 +365,20 @@ components:
         - $ref: '#/components/schemas/BaseResponse'
         - type: object
 
+    InitWorkoutRequest:
+      description: Structure to request the initial state when starting the web client
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+
+    InitWorkoutResponse:
+      description: Structure to respond with the initial state when starting the web client
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+
     CreateExerciseRequest:
       allOf:
         - $ref: '#/components/schemas/BaseMessage'
@@ -353,6 +387,26 @@ components:
           properties:
             createExercise:
               $ref: '#/components/schemas/CreatableExercise'
+            debug:
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - nameEmpty
+                        - errorDb
+
+    CreatableWorkoutRequest:
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            createWorkout:
+              $ref: '#/components/schemas/CreatableWorkout'
             debug:
               allOf:
                 - $ref: '#/components/schemas/BaseDebugRequest'
