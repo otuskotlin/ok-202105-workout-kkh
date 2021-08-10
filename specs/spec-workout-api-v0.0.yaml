@@ -233,6 +233,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteWorkoutResponse'
+  /workout/search:
+    post:
+      tags:
+        - workout
+      summary: Search the workout
+      operationId: searchWorkout
+      requestBody:
+        description: The request object to search the workout
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchWorkoutRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchWorkoutResponse'
 
 components:
   schemas:
@@ -288,36 +308,6 @@ components:
             - prod
             - test
             - stub
-
-    BasePaginatedRequest:
-      type: object
-      description: The structure with a description of a requested page in requests of lists
-      properties:
-        size:
-          type: integer
-          description: The size of a requested page
-          format: int32
-        lastId:
-          type: string
-          description: ID of the last object of the previous page
-
-    BasePaginatedResponse:
-      type: object
-      description: The structure with a description of a page in request
-      properties:
-        size:
-          type: integer
-          description: The size of a requested page
-          format: int32
-        lastId:
-          type: string
-          description: ID of the last object of the previous page
-        position:
-          type: string
-          enum:
-            - first
-            - middle
-            - last
 
     CreatableExercise:
       type: object
@@ -754,8 +744,8 @@ components:
         - $ref: '#/components/schemas/BaseRequest'
         - type: object
           properties:
-            page:
-              $ref: '#/components/schemas/BasePaginatedRequest'
+            search:
+              type: string
 
     SearchExerciseResponse:
       description: Structure to respond to a request search of exercise
@@ -764,9 +754,35 @@ components:
         - $ref: '#/components/schemas/BaseResponse'
         - type: object
           properties:
-            page:
-              $ref: '#/components/schemas/BasePaginatedResponse'
             foundExercises:
               type: array
               items:
                 $ref: '#/components/schemas/ResponseExercise'
+
+    SearchWorkoutRequest:
+      description: Structure to request a search of an exercise
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            date:
+              type: string
+              format: date
+              description: Date of workout
+              example: 2021-08-04
+            search:
+              type: string
+              description: Text of search
+
+    SearchWorkoutResponse:
+      description: Structure to respond to a request search of workout
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            foundExercises:
+              type: array
+              items:
+                $ref: '#/components/schemas/ResponseWorkout'
