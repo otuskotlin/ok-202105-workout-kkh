@@ -6,6 +6,7 @@ import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
 import java.text.SimpleDateFormat
 import java.time.Instant
+import java.time.LocalDate
 import java.util.*
 
 fun BeContext.setQuery(query: InitExerciseRequest) = apply {
@@ -40,7 +41,7 @@ fun BeContext.setQuery(query: SearchExerciseRequest) = apply {
 fun BeContext.setQuery(query: SearchWorkoutRequest) = apply {
     requestId = query.requestId ?: ""
     requestSearchWorkout.apply {
-        date = SimpleDateFormat("yyyy-MM-dd").parse(query.date) ?: Date.from(Instant.now())
+        date = LocalDate.parse(query.date) ?: LocalDate.now()
         searchMuscleGroup = query.searchMuscleGroup ?: ""
         searchExercise = query.searchExercise ?: ""
     }
