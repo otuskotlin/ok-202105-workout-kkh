@@ -44,6 +44,14 @@ fun BeContext.toDeleteExerciseResponse() = DeleteExerciseResponse(
     deleteExercise = responseExercise.takeIf { it != ExerciseModel() }?.toTransport()
 )
 
+fun BeContext.toSearchExerciseResponse() = SearchExerciseResponse(
+    requestId = requestId.takeIf { it.isNotBlank() },
+    result = if (errors.find { it.level == IError.Level.ERROR } == null) SearchExerciseResponse.Result.SUCCESS
+    else SearchExerciseResponse.Result.ERROR,
+    errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
+    foundExercises = foundExercises.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
+)
+
 fun BeContext.toInitWorkoutResponse() = InitWorkoutResponse(
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) InitWorkoutResponse.Result.SUCCESS
@@ -81,6 +89,14 @@ fun BeContext.toDeleteWorkoutResponse() = DeleteWorkoutResponse(
     else DeleteWorkoutResponse.Result.ERROR,
     errors = errors.takeIf { errors.isNotEmpty() }?.map { it.toTransport() },
     deleteWorkout = responseWorkout.takeIf { it != WorkoutModel() }?.toTransport()
+)
+
+fun BeContext.toSearchWorkoutResponse() = SearchWorkoutResponse(
+    requestId = requestId.takeIf { it.isNotBlank() },
+    result = if (errors.find { it.level == IError.Level.ERROR } == null) SearchWorkoutResponse.Result.SUCCESS
+    else SearchWorkoutResponse.Result.ERROR,
+    errors = errors.takeIf { errors.isNotEmpty() }?.map { it.toTransport() },
+    foundWorkouts = foundWorkouts.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
 )
 
 fun IError.toTransport() = RequestError(

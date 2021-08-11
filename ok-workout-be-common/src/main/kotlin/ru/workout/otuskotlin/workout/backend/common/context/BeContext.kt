@@ -14,5 +14,7 @@ data class BeContext(
     var responseWorkout: WorkoutModel = WorkoutModel(),
     var responseWorkouts: MutableList<WorkoutModel> = mutableListOf(),
     var requestSearchWorkout: SearchWorkoutModel = SearchWorkoutModel(),
-    var errors: MutableList<IError> = mutableListOf()
+    var errors: MutableList<IError> = mutableListOf(),
+    var foundExercises: MutableList<ExerciseModel> = mutableListOf(),
+    var foundWorkouts: MutableList<WorkoutModel> = mutableListOf()
 )
