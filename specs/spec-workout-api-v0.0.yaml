@@ -351,12 +351,12 @@ components:
           enum:
             - CLASSIC
             - CIRCUIT
-        exercises:
+        exercisesBlock:
           type: array
           items:
-            $ref: '#/components/schemas/Exercises'
+            $ref: '#/components/schemas/ExercisesBlock'
 
-    Exercises:
+    ExercisesBlock:
       type: object
       properties:
         exercise:

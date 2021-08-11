@@ -25,10 +25,10 @@ import kotlinx.serialization.encoding.*
  * @param modificationBlockExercises 
  */
 @Serializable
-data class Exercises (
+data class ExercisesBlock (
     @SerialName(value = "exercise") val exercise: CreatableExercise? = null,
     @SerialName(value = "sets") val sets: kotlin.collections.List<OneSet>? = null,
-    @SerialName(value = "modificationBlockExercises") val modificationBlockExercises: Exercises.ModificationBlockExercises? = null
+    @SerialName(value = "modificationBlockExercises") val modificationBlockExercises: ExercisesBlock.ModificationBlockExercises? = null
 ) {
 
     /**

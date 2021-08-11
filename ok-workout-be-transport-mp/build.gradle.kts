@@ -59,36 +59,36 @@ kotlin {
         }
     }
 
-//    openApiGenerate {
-//        val openapiGroup = "${rootProject.group}.mp.transport"
-//        generatorName.set("kotlin")
-//        library.set("multiplatform")
-//        outputDir.set(generationDir)
-//        packageName.set(openapiGroup)
-//        apiPackage.set("$openapiGroup.api")
-//        modelPackage.set("$openapiGroup.models")
-//        invokerPackage.set("$openapiGroup.invoker")
-//        inputSpec.set("$rootDir/specs/spec-workout-api-v0.0.yaml")
-//
-//        globalProperties.apply {
-//            put("models", "")
-//            put("modelDocs", "false")
-//        }
-//
-//        configOptions.set(
-//            mapOf(
-//                "dateLibrary" to "string",
-//                "enumPropertyNaming" to "UPPERCASE",
-//                "collectionType" to "list"
-//            )
-//        )
-//    }
-//
-//    tasks {
-//        compileKotlinMetadata {
-//            dependsOn(openApiGenerate)
-//        }
-//    }
+    openApiGenerate {
+        val openapiGroup = "${rootProject.group}.mp.transport"
+        generatorName.set("kotlin")
+        library.set("multiplatform")
+        outputDir.set(generationDir)
+        packageName.set(openapiGroup)
+        apiPackage.set("$openapiGroup.api")
+        modelPackage.set("$openapiGroup.models")
+        invokerPackage.set("$openapiGroup.invoker")
+        inputSpec.set("$rootDir/specs/spec-workout-api-v0.0.yaml")
+
+        globalProperties.apply {
+            put("models", "")
+            put("modelDocs", "false")
+        }
+
+        configOptions.set(
+            mapOf(
+                "dateLibrary" to "string",
+                "enumPropertyNaming" to "UPPERCASE",
+                "collectionType" to "list"
+            )
+        )
+    }
+
+    tasks {
+        compileKotlinMetadata {
+            dependsOn(openApiGenerate)
+        }
+    }
 
     tasks.withType<Test>().configureEach {
         useJUnitPlatform()

@@ -11,7 +11,7 @@
 */
 package ru.otus.otuskotlin.workout.mp.transport.models
 
-import ru.otus.otuskotlin.workout.mp.transport.models.Exercises
+import ru.otus.otuskotlin.workout.mp.transport.models.ExercisesBlock
 import ru.otus.otuskotlin.workout.mp.transport.models.Permissions
 import ru.otus.otuskotlin.workout.mp.transport.models.ResultExerciseAllOf
 import ru.otus.otuskotlin.workout.mp.transport.models.UpdatableWorkout
@@ -26,7 +26,7 @@ import kotlinx.serialization.encoding.*
  * @param duration Duration of workout
  * @param recoveryTime Recovery time between exercises
  * @param modificationWorkout 
- * @param exercises 
+ * @param exercisesBlock 
  * @param id 
  * @param permissions 
  */
@@ -39,7 +39,7 @@ data class ResultWorkout (
     /* Recovery time between exercises */
     @SerialName(value = "recoveryTime") val recoveryTime: kotlin.Double? = null,
     @SerialName(value = "modificationWorkout") val modificationWorkout: ResultWorkout.ModificationWorkout? = null,
-    @SerialName(value = "exercises") val exercises: kotlin.collections.List<Exercises>? = null,
+    @SerialName(value = "exercisesBlock") val exercisesBlock: kotlin.collections.List<ExercisesBlock>? = null,
     @SerialName(value = "id") val id: kotlin.String? = null,
     @SerialName(value = "permissions") val permissions: kotlin.collections.List<Permissions>? = null
 ) {

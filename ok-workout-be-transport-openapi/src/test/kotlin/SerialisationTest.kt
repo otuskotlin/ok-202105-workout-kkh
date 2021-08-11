@@ -1,7 +1,9 @@
 import com.fasterxml.jackson.databind.ObjectMapper
+import ru.otus.otuskotlin.workout.openapi.models.BaseMessage
 import ru.otus.otuskotlin.workout.openapi.models.CreatableExercise
 import ru.otus.otuskotlin.workout.openapi.models.CreateExerciseRequest
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class SerialisationTest {
@@ -25,5 +27,13 @@ class SerialisationTest {
         assertTrue("json must contain discriminator") {
             json.contains(""""messageType":"${createRequest::class.simpleName}"""")
         }
+    }
+
+    @Test
+    fun deserializationTest() {
+        val json = om.writeValueAsString(createRequest)
+        val deserialized = om.readValue(json, BaseMessage::class.java) as CreateExerciseRequest
+        println(deserialized)
+        assertEquals(requestId, deserialized.requestId)
     }
 }
