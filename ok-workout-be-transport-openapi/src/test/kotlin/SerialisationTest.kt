@@ -80,6 +80,9 @@ class SerialisationTest {
         val deserialized = om.readValue(json, BaseMessage::class.java) as CreateWorkoutRequest
         println(deserialized)
         assertEquals(requestId, deserialized.requestId)
+        assertTrue("workout must have one exercises") {
+            deserialized.createWorkout?.exercisesBlock?.size == 1
+        }
     }
 
 }
