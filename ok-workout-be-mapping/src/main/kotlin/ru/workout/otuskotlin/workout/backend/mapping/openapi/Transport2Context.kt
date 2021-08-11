@@ -21,7 +21,7 @@ fun BeContext.setQuery(query: ReadExerciseRequest) = apply {
 
 fun BeContext.setQuery(query: UpdateExerciseRequest) = apply {
     requestId = query.requestId ?: ""
-    requestExercise = query.createExercise?.toModel() ?: ExerciseModel()
+    requestExercise = query.updateExercise?.toModel() ?: ExerciseModel()
 }
 
 fun BeContext.setQuery(query: DeleteExerciseRequest) = apply {

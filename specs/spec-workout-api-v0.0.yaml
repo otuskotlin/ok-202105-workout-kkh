@@ -401,6 +401,11 @@ components:
         weight:
           type: number
           format: double
+        measure:
+          type: string
+          enum:
+            - KG
+            - LB
         repetition:
           type: number
           format: int32
