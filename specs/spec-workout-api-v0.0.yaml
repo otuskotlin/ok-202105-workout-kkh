@@ -783,9 +783,12 @@ components:
               format: date
               description: Date of workout
               example: 2021-08-04
-            search:
+            searchMuscleGroup:
               type: string
-              description: Text of search
+              description: Text of search of a muscle group
+            searchExercise:
+              type: string
+              description: Text of search of an exercise in workouts
 
     SearchWorkoutResponse:
       description: Structure to respond to a request search of workout
