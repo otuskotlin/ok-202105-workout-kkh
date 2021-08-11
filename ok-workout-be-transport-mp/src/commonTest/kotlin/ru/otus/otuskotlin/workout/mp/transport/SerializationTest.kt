@@ -2,7 +2,6 @@ package ru.otus.otuskotlin.workout.mp.transport
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import ru.otus.otuskotlin.workout.mp.transport.models.CreateExerciseRequest
 import kotlin.test.Test
 import kotlin.test.assertContains
 

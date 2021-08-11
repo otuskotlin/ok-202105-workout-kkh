@@ -11,30 +11,34 @@
 */
 package ru.otus.otuskotlin.workout.mp.transport.models
 
+import ru.otus.otuskotlin.workout.mp.transport.models.CreatableWorkout
 import ru.otus.otuskotlin.workout.mp.transport.models.Exercises
+import ru.otus.otuskotlin.workout.mp.transport.models.UpdatableExerciseAllOf
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 /**
- * The structure with data about the workout to request about creation
+ * Structure for a data about the workout in request to update
  * @param date Date of workout
  * @param duration Duration of workout
  * @param recoveryTime Recovery time between exercises
  * @param modificationWorkout 
  * @param exercises 
+ * @param id 
  */
 @Serializable
-data class CreatableWorkout (
+data class UpdatableWorkout (
     /* Date of workout */
     @SerialName(value = "date") val date: kotlin.String? = null,
     /* Duration of workout */
     @SerialName(value = "duration") val duration: kotlin.Double? = null,
     /* Recovery time between exercises */
     @SerialName(value = "recoveryTime") val recoveryTime: kotlin.Double? = null,
-    @SerialName(value = "modificationWorkout") val modificationWorkout: CreatableWorkout.ModificationWorkout? = null,
-    @SerialName(value = "exercises") val exercises: kotlin.collections.List<Exercises>? = null
+    @SerialName(value = "modificationWorkout") val modificationWorkout: UpdatableWorkout.ModificationWorkout? = null,
+    @SerialName(value = "exercises") val exercises: kotlin.collections.List<Exercises>? = null,
+    @SerialName(value = "id") val id: kotlin.String? = null
 ) {
 
     /**

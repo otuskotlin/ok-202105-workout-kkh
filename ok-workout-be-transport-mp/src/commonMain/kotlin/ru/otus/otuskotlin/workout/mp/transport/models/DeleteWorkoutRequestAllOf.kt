@@ -11,7 +11,7 @@
 */
 package ru.otus.otuskotlin.workout.mp.transport.models
 
-import ru.otus.otuskotlin.workout.mp.transport.models.Permissions
+import ru.otus.otuskotlin.workout.mp.transport.models.BaseDebugRequest
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
@@ -19,10 +19,12 @@ import kotlinx.serialization.encoding.*
 
 /**
  * 
- * @param permissions 
+ * @param deleteWorkoutId 
+ * @param debug 
  */
 @Serializable
-data class ResultExerciseAllOf (
-    @SerialName(value = "permissions") val permissions: kotlin.collections.List<Permissions>? = null
+data class DeleteWorkoutRequestAllOf (
+    @SerialName(value = "deleteWorkoutId") val deleteWorkoutId: kotlin.String? = null,
+    @SerialName(value = "debug") val debug: BaseDebugRequest? = null
 )
 

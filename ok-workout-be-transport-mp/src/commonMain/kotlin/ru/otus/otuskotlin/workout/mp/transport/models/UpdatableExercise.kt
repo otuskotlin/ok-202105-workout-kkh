@@ -19,7 +19,7 @@ import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 /**
- * Structure for a data about the declaration in request to update
+ * Structure for a data about the exercise in request to update
  * @param title Название упражнения
  * @param description 
  * @param targetMuscleGroup 

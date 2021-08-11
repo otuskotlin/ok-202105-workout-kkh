@@ -63,7 +63,7 @@ kotlin {
 //        val openapiGroup = "${rootProject.group}.mp.transport"
 //        generatorName.set("kotlin")
 //        library.set("multiplatform")
-//        outputDir.set(generatioDir)
+//        outputDir.set(generationDir)
 //        packageName.set(openapiGroup)
 //        apiPackage.set("$openapiGroup.api")
 //        modelPackage.set("$openapiGroup.models")

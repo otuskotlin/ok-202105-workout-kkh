@@ -20,7 +20,7 @@ import kotlinx.serialization.*
 */
 
 @Serializable
-enum class ExercisePermissions(val value: kotlin.String) {
+enum class Permissions(val value: kotlin.String) {
 
 
     @SerialName(value = "read")

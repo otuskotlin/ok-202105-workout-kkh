@@ -20,12 +20,12 @@ import kotlinx.serialization.encoding.*
 
 /**
  * 
- * @param createExercise 
+ * @param updateExercise 
  * @param debug 
  */
 @Serializable
 data class UpdateExerciseRequestAllOf (
-    @SerialName(value = "createExercise") val createExercise: UpdatableExercise? = null,
+    @SerialName(value = "updateExercise") val updateExercise: UpdatableExercise? = null,
     @SerialName(value = "debug") val debug: BaseDebugRequest? = null
 )
 

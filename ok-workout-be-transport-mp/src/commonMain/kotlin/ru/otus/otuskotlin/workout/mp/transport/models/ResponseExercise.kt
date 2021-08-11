@@ -11,7 +11,7 @@
 */
 package ru.otus.otuskotlin.workout.mp.transport.models
 
-import ru.otus.otuskotlin.workout.mp.transport.models.ExercisePermissions
+import ru.otus.otuskotlin.workout.mp.transport.models.Permissions
 import ru.otus.otuskotlin.workout.mp.transport.models.ResponseExerciseAllOf
 import ru.otus.otuskotlin.workout.mp.transport.models.UpdatableExercise
 
@@ -20,7 +20,7 @@ import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 /**
- * The structure describing the declaration in the response
+ * The structure describing the exercise in the response
  * @param title Название упражнения
  * @param description 
  * @param targetMuscleGroup 
@@ -38,6 +38,6 @@ data class ResponseExercise (
     @SerialName(value = "synergisticMuscleGroup") val synergisticMuscleGroup: kotlin.collections.List<kotlin.String>? = null,
     @SerialName(value = "executionTechnique") val executionTechnique: kotlin.String? = null,
     @SerialName(value = "id") val id: kotlin.String? = null,
-    @SerialName(value = "permissions") val permissions: kotlin.collections.Set<ExercisePermissions>? = null
+    @SerialName(value = "permissions") val permissions: kotlin.collections.Set<Permissions>? = null
 )
 

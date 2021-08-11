@@ -11,25 +11,29 @@
 */
 package ru.otus.otuskotlin.workout.mp.transport.models
 
+import ru.otus.otuskotlin.workout.mp.transport.models.BaseDebugRequest
 import ru.otus.otuskotlin.workout.mp.transport.models.BaseMessage
 import ru.otus.otuskotlin.workout.mp.transport.models.BaseRequest
-import ru.otus.otuskotlin.workout.mp.transport.models.SearchExerciseRequestAllOf
+import ru.otus.otuskotlin.workout.mp.transport.models.UpdatableWorkout
+import ru.otus.otuskotlin.workout.mp.transport.models.UpdateWorkoutRequestAllOf
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 /**
- * Structure to request a search of an exercise
+ * Structure for request an update to an existing workout
  * @param messageType A discriminator contaiting the message class type and used to deserialization
  * @param requestId 
- * @param search 
+ * @param updateWorkout 
+ * @param debug 
  */
 @Serializable
-data class SearchExerciseRequest (
+data class UpdateWorkoutRequest (
     /* A discriminator contaiting the message class type and used to deserialization */
     @SerialName(value = "messageType") override val messageType: kotlin.String? = null,
     @SerialName(value = "requestId") val requestId: kotlin.String? = null,
-    @SerialName(value = "search") val search: kotlin.String? = null
+    @SerialName(value = "updateWorkout") val updateWorkout: UpdatableWorkout? = null,
+    @SerialName(value = "debug") val debug: BaseDebugRequest? = null
 ) : BaseMessage
 

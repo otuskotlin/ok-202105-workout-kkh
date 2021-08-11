@@ -11,7 +11,6 @@
 */
 package ru.otus.otuskotlin.workout.mp.transport.models
 
-import ru.otus.otuskotlin.workout.mp.transport.models.BasePaginatedRequest
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
@@ -19,10 +18,10 @@ import kotlinx.serialization.encoding.*
 
 /**
  * 
- * @param page 
+ * @param search 
  */
 @Serializable
 data class SearchExerciseRequestAllOf (
-    @SerialName(value = "page") val page: BasePaginatedRequest? = null
+    @SerialName(value = "search") val search: kotlin.String? = null
 )
 

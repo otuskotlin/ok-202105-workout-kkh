@@ -12,24 +12,35 @@
 package ru.otus.otuskotlin.workout.mp.transport.models
 
 import ru.otus.otuskotlin.workout.mp.transport.models.BaseMessage
-import ru.otus.otuskotlin.workout.mp.transport.models.BaseRequest
-import ru.otus.otuskotlin.workout.mp.transport.models.SearchExerciseRequestAllOf
+import ru.otus.otuskotlin.workout.mp.transport.models.BaseResponse
+import ru.otus.otuskotlin.workout.mp.transport.models.RequestError
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 /**
- * Structure to request a search of an exercise
+ * Structure to respond with the initial state when starting the web client
  * @param messageType A discriminator contaiting the message class type and used to deserialization
- * @param requestId 
- * @param search 
+ * @param result 
+ * @param errors 
  */
 @Serializable
-data class SearchExerciseRequest (
+data class InitWorkoutResponse (
     /* A discriminator contaiting the message class type and used to deserialization */
     @SerialName(value = "messageType") override val messageType: kotlin.String? = null,
-    @SerialName(value = "requestId") val requestId: kotlin.String? = null,
-    @SerialName(value = "search") val search: kotlin.String? = null
-) : BaseMessage
+    @SerialName(value = "result") val result: InitWorkoutResponse.Result? = null,
+    @SerialName(value = "errors") val errors: kotlin.collections.List<RequestError>? = null
+) : BaseMessage {
+
+    /**
+     * 
+     * Values: SUCCESS,ERROR
+     */
+    @Serializable
+    enum class Result(val value: kotlin.String) {
+        @SerialName(value = "success") SUCCESS("success"),
+        @SerialName(value = "error") ERROR("error");
+    }
+}
 

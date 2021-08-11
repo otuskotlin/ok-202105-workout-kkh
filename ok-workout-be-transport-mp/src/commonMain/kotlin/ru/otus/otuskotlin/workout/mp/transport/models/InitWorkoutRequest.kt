@@ -13,23 +13,20 @@ package ru.otus.otuskotlin.workout.mp.transport.models
 
 import ru.otus.otuskotlin.workout.mp.transport.models.BaseMessage
 import ru.otus.otuskotlin.workout.mp.transport.models.BaseRequest
-import ru.otus.otuskotlin.workout.mp.transport.models.SearchExerciseRequestAllOf
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 /**
- * Structure to request a search of an exercise
+ * Structure to request the initial state when starting the web client
  * @param messageType A discriminator contaiting the message class type and used to deserialization
  * @param requestId 
- * @param search 
  */
 @Serializable
-data class SearchExerciseRequest (
+data class InitWorkoutRequest (
     /* A discriminator contaiting the message class type and used to deserialization */
     @SerialName(value = "messageType") override val messageType: kotlin.String? = null,
-    @SerialName(value = "requestId") val requestId: kotlin.String? = null,
-    @SerialName(value = "search") val search: kotlin.String? = null
+    @SerialName(value = "requestId") val requestId: kotlin.String? = null
 ) : BaseMessage
 

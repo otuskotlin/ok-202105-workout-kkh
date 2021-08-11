@@ -11,21 +11,20 @@
 */
 package ru.otus.otuskotlin.workout.mp.transport.models
 
+import ru.otus.otuskotlin.workout.mp.transport.models.BaseDebugRequest
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 /**
- * The structure with a description of a requested page in requests of lists
- * @param size The size of a requested page
- * @param lastId ID of the last object of the previous page
+ * 
+ * @param readWorkoutId 
+ * @param debug 
  */
 @Serializable
-data class BasePaginatedRequest (
-    /* The size of a requested page */
-    @SerialName(value = "size") val size: kotlin.Int? = null,
-    /* ID of the last object of the previous page */
-    @SerialName(value = "lastId") val lastId: kotlin.String? = null
+data class ReadWorkoutRequestAllOf (
+    @SerialName(value = "readWorkoutId") val readWorkoutId: kotlin.String? = null,
+    @SerialName(value = "debug") val debug: BaseDebugRequest? = null
 )
 

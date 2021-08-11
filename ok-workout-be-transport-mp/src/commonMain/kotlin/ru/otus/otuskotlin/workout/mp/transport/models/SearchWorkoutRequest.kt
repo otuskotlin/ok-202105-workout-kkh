@@ -14,27 +14,33 @@ package ru.otus.otuskotlin.workout.mp.transport.models
 import ru.otus.otuskotlin.workout.mp.transport.models.BaseMessage
 import ru.otus.otuskotlin.workout.mp.transport.models.BaseResponse
 import ru.otus.otuskotlin.workout.mp.transport.models.RequestError
-import ru.otus.otuskotlin.workout.mp.transport.models.ResponseExercise
-import ru.otus.otuskotlin.workout.mp.transport.models.SearchExerciseResponseAllOf
+import ru.otus.otuskotlin.workout.mp.transport.models.SearchWorkoutRequestAllOf
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 /**
- * Structure to respond to a request search of exercise
+ * Structure to request a search of an exercise
  * @param messageType A discriminator contaiting the message class type and used to deserialization
  * @param result 
  * @param errors 
- * @param foundExercises 
+ * @param date Date of workout
+ * @param searchMuscleGroup Text of search of a muscle group
+ * @param searchExercise Text of search of an exercise in workouts
  */
 @Serializable
-data class SearchExerciseResponse (
+data class SearchWorkoutRequest (
     /* A discriminator contaiting the message class type and used to deserialization */
     @SerialName(value = "messageType") override val messageType: kotlin.String? = null,
-    @SerialName(value = "result") val result: SearchExerciseResponse.Result? = null,
+    @SerialName(value = "result") val result: SearchWorkoutRequest.Result? = null,
     @SerialName(value = "errors") val errors: kotlin.collections.List<RequestError>? = null,
-    @SerialName(value = "foundExercises") val foundExercises: kotlin.collections.List<ResponseExercise>? = null
+    /* Date of workout */
+    @SerialName(value = "date") val date: kotlin.String? = null,
+    /* Text of search of a muscle group */
+    @SerialName(value = "searchMuscleGroup") val searchMuscleGroup: kotlin.String? = null,
+    /* Text of search of an exercise in workouts */
+    @SerialName(value = "searchExercise") val searchExercise: kotlin.String? = null
 ) : BaseMessage {
 
     /**

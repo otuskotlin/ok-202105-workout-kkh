@@ -11,7 +11,7 @@
 */
 package ru.otus.otuskotlin.workout.mp.transport.models
 
-import ru.otus.otuskotlin.workout.mp.transport.models.Permissions
+import ru.otus.otuskotlin.workout.mp.transport.models.ResultWorkout
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
@@ -19,10 +19,10 @@ import kotlinx.serialization.encoding.*
 
 /**
  * 
- * @param permissions 
+ * @param createdWorkout 
  */
 @Serializable
-data class ResultExerciseAllOf (
-    @SerialName(value = "permissions") val permissions: kotlin.collections.List<Permissions>? = null
+data class CreateWorkoutResponseAllOf (
+    @SerialName(value = "createdWorkout") val createdWorkout: ResultWorkout? = null
 )
 

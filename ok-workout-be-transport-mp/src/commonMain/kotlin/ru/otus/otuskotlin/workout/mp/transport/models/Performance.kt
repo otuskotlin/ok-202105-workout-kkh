@@ -11,7 +11,6 @@
 */
 package ru.otus.otuskotlin.workout.mp.transport.models
 
-import ru.otus.otuskotlin.workout.mp.transport.models.OneSet
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
@@ -19,40 +18,12 @@ import kotlinx.serialization.encoding.*
 
 /**
  * 
- * @param status 
- * @param sets 
- * @param modification 
+ * @param weight 
+ * @param repetition 
  */
 @Serializable
 data class Performance (
-    @SerialName(value = "status") val status: Performance.Status? = null,
-    @SerialName(value = "sets") val sets: kotlin.collections.List<OneSet>? = null,
-    @SerialName(value = "modification") val modification: Performance.Modification? = null
-) {
-
-    /**
-     * 
-     * Values: PLAN,ACTIVE,DONE,SKIP
-     */
-    @Serializable
-    enum class Status(val value: kotlin.String) {
-        @SerialName(value = "PLAN") PLAN("PLAN"),
-        @SerialName(value = "ACTIVE") ACTIVE("ACTIVE"),
-        @SerialName(value = "DONE") DONE("DONE"),
-        @SerialName(value = "SKIP") SKIP("SKIP");
-    }
-    /**
-     * 
-     * Values: CIRCUIT,CLASSIC,CLUSTER,DROP_SET,SUPER_SET,WITHOUT_LAST
-     */
-    @Serializable
-    enum class Modification(val value: kotlin.String) {
-        @SerialName(value = "CIRCUIT") CIRCUIT("CIRCUIT"),
-        @SerialName(value = "CLASSIC") CLASSIC("CLASSIC"),
-        @SerialName(value = "CLUSTER") CLUSTER("CLUSTER"),
-        @SerialName(value = "DROP_SET") DROP_SET("DROP_SET"),
-        @SerialName(value = "SUPER_SET") SUPER_SET("SUPER_SET"),
-        @SerialName(value = "WITHOUT_LAST") WITHOUT_LAST("WITHOUT_LAST");
-    }
-}
+    @SerialName(value = "weight") val weight: kotlin.Double? = null,
+    @SerialName(value = "repetition") val repetition: kotlin.Double? = null
+)
 

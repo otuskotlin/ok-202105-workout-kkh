@@ -13,28 +13,28 @@ package ru.otus.otuskotlin.workout.mp.transport.models
 
 import ru.otus.otuskotlin.workout.mp.transport.models.BaseMessage
 import ru.otus.otuskotlin.workout.mp.transport.models.BaseResponse
+import ru.otus.otuskotlin.workout.mp.transport.models.ReadWorkoutResponseAllOf
 import ru.otus.otuskotlin.workout.mp.transport.models.RequestError
-import ru.otus.otuskotlin.workout.mp.transport.models.ResponseExercise
-import ru.otus.otuskotlin.workout.mp.transport.models.SearchExerciseResponseAllOf
+import ru.otus.otuskotlin.workout.mp.transport.models.ResponseWorkout
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 /**
- * Structure to respond to a request search of exercise
+ * The structure to respond to a request with a workout information
  * @param messageType A discriminator contaiting the message class type and used to deserialization
  * @param result 
  * @param errors 
- * @param foundExercises 
+ * @param readWorkout 
  */
 @Serializable
-data class SearchExerciseResponse (
+data class ReadWorkoutResponse (
     /* A discriminator contaiting the message class type and used to deserialization */
     @SerialName(value = "messageType") override val messageType: kotlin.String? = null,
-    @SerialName(value = "result") val result: SearchExerciseResponse.Result? = null,
+    @SerialName(value = "result") val result: ReadWorkoutResponse.Result? = null,
     @SerialName(value = "errors") val errors: kotlin.collections.List<RequestError>? = null,
-    @SerialName(value = "foundExercises") val foundExercises: kotlin.collections.List<ResponseExercise>? = null
+    @SerialName(value = "readWorkout") val readWorkout: ResponseWorkout? = null
 ) : BaseMessage {
 
     /**
