@@ -362,7 +362,7 @@ components:
       type: object
       properties:
         exercise:
-          $ref: '#/components/schemas/CreatableExercise'
+          $ref: '#/components/schemas/ResponseExercise'
         sets:
           type: array
           items:
@@ -428,26 +428,6 @@ components:
           properties:
             id:
               type: string
-
-    ResultExercise:
-      allOf:
-        - $ref: '#/components/schemas/UpdatableExercise'
-        - type: object
-          properties:
-            permissions:
-              type: array
-              items:
-                $ref: '#/components/schemas/Permissions'
-
-    ResultWorkout:
-      allOf:
-        - $ref: '#/components/schemas/UpdatableWorkout'
-        - type: object
-          properties:
-            permissions:
-              type: array
-              items:
-                $ref: '#/components/schemas/Permissions'
 
     Permissions:
       type: string
@@ -533,7 +513,7 @@ components:
         - type: object
           properties:
             createdExercise:
-              $ref: '#/components/schemas/ResultExercise'
+              $ref: '#/components/schemas/ResponseExercise'
 
     CreateWorkoutResponse:
       description: The structure to respond to a request about the declaration a workout
@@ -543,7 +523,7 @@ components:
         - type: object
           properties:
             createdWorkout:
-              $ref: '#/components/schemas/ResultWorkout'
+              $ref: '#/components/schemas/ResponseWorkout'
 
     ResponseExercise:
       description: The structure describing the exercise in the response

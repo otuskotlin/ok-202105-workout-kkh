@@ -12,12 +12,36 @@ fun BeContext.toInitExerciseResponse() = InitExerciseResponse(
     errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
 )
 
+fun BeContext.toCreateExerciseResponse() = CreateExerciseResponse(
+    requestId = requestId.takeIf { it.isNotBlank() },
+    result = if (errors.find { it.level == IError.Level.ERROR } == null) CreateExerciseResponse.Result.SUCCESS
+    else CreateExerciseResponse.Result.ERROR,
+    errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
+    createdExercise = responseExercise.takeIf { it != ExerciseModel() }?.toTransport()
+)
+
 fun BeContext.toReadExerciseResponse() = ReadExerciseResponse(
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) ReadExerciseResponse.Result.SUCCESS
     else ReadExerciseResponse.Result.ERROR,
     errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
     readExercise = responseExercise.takeIf { it != ExerciseModel() }?.toTransport()
+)
+
+fun BeContext.toUpdateExerciseResponse() = UpdateExerciseResponse(
+    requestId = requestId.takeIf { it.isNotBlank() },
+    result = if (errors.find { it.level == IError.Level.ERROR } == null) UpdateExerciseResponse.Result.SUCCESS
+    else UpdateExerciseResponse.Result.ERROR,
+    errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
+    updateExercise = responseExercise.takeIf { it != ExerciseModel() }?.toTransport()
+)
+
+fun BeContext.toDeleteExerciseResponse() = DeleteExerciseResponse(
+    requestId = requestId.takeIf { it.isNotBlank() },
+    result = if (errors.find { it.level == IError.Level.ERROR } == null) DeleteExerciseResponse.Result.SUCCESS
+    else DeleteExerciseResponse.Result.ERROR,
+    errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
+    deleteExercise = responseExercise.takeIf { it != ExerciseModel() }?.toTransport()
 )
 
 fun BeContext.toInitWorkoutResponse() = InitWorkoutResponse(
@@ -27,12 +51,36 @@ fun BeContext.toInitWorkoutResponse() = InitWorkoutResponse(
     errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
 )
 
+fun BeContext.toCreateWorkoutResponse() = CreateWorkoutResponse(
+    requestId = requestId.takeIf { it.isNotBlank() },
+    result = if (errors.find { it.level == IError.Level.ERROR } == null) CreateWorkoutResponse.Result.SUCCESS
+    else CreateWorkoutResponse.Result.ERROR,
+    errors = errors.takeIf { errors.isNotEmpty() }?.map { it.toTransport() },
+    createdWorkout = responseWorkout.takeIf { it != WorkoutModel() }?.toTransport()
+)
+
 fun BeContext.toReadWorkoutResponse() = ReadWorkoutResponse(
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) ReadWorkoutResponse.Result.SUCCESS
     else ReadWorkoutResponse.Result.ERROR,
     errors = errors.takeIf { errors.isNotEmpty() }?.map { it.toTransport() },
     readWorkout = responseWorkout.takeIf { it != WorkoutModel() }?.toTransport()
+)
+
+fun BeContext.toUpdateWorkoutResponse() = UpdateWorkoutResponse(
+    requestId = requestId.takeIf { it.isNotBlank() },
+    result = if (errors.find { it.level == IError.Level.ERROR } == null) UpdateWorkoutResponse.Result.SUCCESS
+    else UpdateWorkoutResponse.Result.ERROR,
+    errors = errors.takeIf { errors.isNotEmpty() }?.map { it.toTransport() },
+    updateWorkout = responseWorkout.takeIf { it != WorkoutModel() }?.toTransport()
+)
+
+fun BeContext.toDeleteWorkoutResponse() = DeleteWorkoutResponse(
+    requestId = requestId.takeIf { it.isNotBlank() },
+    result = if (errors.find { it.level == IError.Level.ERROR } == null) DeleteWorkoutResponse.Result.SUCCESS
+    else DeleteWorkoutResponse.Result.ERROR,
+    errors = errors.takeIf { errors.isNotEmpty() }?.map { it.toTransport() },
+    deleteWorkout = responseWorkout.takeIf { it != WorkoutModel() }?.toTransport()
 )
 
 fun IError.toTransport() = RequestError(
@@ -59,17 +107,9 @@ fun WorkoutModel.toTransport() = ResponseWorkout(
 )
 
 fun ExercisesBlockModel.toTransport() = ExercisesBlock(
-    exercise = exercise.toCreatableExercise(),
+    exercise = exercise.toTransport(),
     sets = sets.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
     modificationBlockExercises = ExercisesBlock.ModificationBlockExercises.valueOf(modificationBlockExercises.name)
-)
-
-fun ExerciseModel.toCreatableExercise() = CreatableExercise(
-    title = title.takeIf { it.isNotBlank() },
-    description = description.takeIf { it.isNotBlank() },
-    targetMuscleGroup = targetMuscleGroup.takeIf { it.isNotEmpty() },
-    synergisticMuscleGroup = synergisticMuscleGroup.takeIf { it.isNotEmpty() },
-    executionTechnique = executionTechnique.takeIf { it.isNotBlank() }
 )
 
 fun OneSetModel.toTransport() = OneSet(
