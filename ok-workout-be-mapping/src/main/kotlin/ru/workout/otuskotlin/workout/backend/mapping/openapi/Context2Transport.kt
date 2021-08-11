@@ -99,11 +99,11 @@ fun BeContext.toSearchWorkoutResponse() = SearchWorkoutResponse(
     foundWorkouts = foundWorkouts.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
 )
 
-fun IError.toTransport() = RequestError(
+private fun IError.toTransport() = RequestError(
     message = message.takeIf { it.isNotBlank() },
     field = field.takeIf { it.isNotBlank() }
 )
-
+private
 fun ExerciseModel.toTransport() = ResponseExercise(
     title = title.takeIf { it.isNotBlank() },
     description = description.takeIf { it.isNotBlank() },
@@ -114,7 +114,7 @@ fun ExerciseModel.toTransport() = ResponseExercise(
     permissions = permissions.takeIf { it.isNotEmpty() }?.map { Permissions.valueOf(it.name) }?.toSet()
 )
 
-fun WorkoutModel.toTransport() = ResponseWorkout(
+private fun WorkoutModel.toTransport() = ResponseWorkout(
     date = date.takeIf { date.isNotBlank() },
     duration = duration.takeIf { it > 0.0 } ?: 0.0,
     recoveryTime = recoveryTime.takeIf { it > 0.0 } ?: 0.0,
@@ -122,13 +122,13 @@ fun WorkoutModel.toTransport() = ResponseWorkout(
     exercisesBlock = exercisesBlock.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
 )
 
-fun ExercisesBlockModel.toTransport() = ExercisesBlock(
+private fun ExercisesBlockModel.toTransport() = ExercisesBlock(
     exercise = exercise.toTransport(),
     sets = sets.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
     modificationBlockExercises = ExercisesBlock.ModificationBlockExercises.valueOf(modificationBlockExercises.name)
 )
 
-fun OneSetModel.toTransport() = OneSet(
+private fun OneSetModel.toTransport() = OneSet(
     performance = performance.takeIf { it.isNotEmpty() }?.map {
         Performance(
             weight = it.weight.takeIf { weight -> (weight > 0.0) } ?: 0.0,

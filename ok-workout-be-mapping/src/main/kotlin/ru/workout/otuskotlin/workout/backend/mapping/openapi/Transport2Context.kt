@@ -1,9 +1,9 @@
 package ru.workout.otuskotlin.workout.backend.mapping.openapi
 
 import ru.otus.otuskotlin.workout.openapi.models.*
+import ru.otus.otuskotlin.workout.openapi.models.Performance
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
-import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
+import ru.workout.otuskotlin.workout.backend.common.models.*
 import java.time.LocalDate
 
 fun BeContext.setQuery(query: InitExerciseRequest) = apply {
@@ -35,6 +35,15 @@ fun BeContext.setQuery(query: SearchExerciseRequest) = apply {
     requestSearchExercise = query.search ?: ""
 }
 
+fun BeContext.setQuery(query: InitWorkoutRequest) = apply {
+    requestId = query.requestId ?: ""
+}
+
+fun BeContext.setQuery(query: CreateWorkoutRequest) = apply {
+    requestId = query.requestId ?: ""
+    requestWorkout = query.createWorkout?.toModel() ?: WorkoutModel()
+}
+
 fun BeContext.setQuery(query: SearchWorkoutRequest) = apply {
     requestId = query.requestId ?: ""
     requestSearchWorkout.apply {
@@ -53,10 +62,45 @@ private fun CreatableExercise.toModel() = ExerciseModel(
 )
 
 private fun UpdatableExercise.toModel() = ExerciseModel(
-    idExercise = ExerciseIdModel(id ?: ""),
     title = title ?: "",
     description = description ?: "",
     targetMuscleGroup = targetMuscleGroup?.toMutableList() ?: mutableListOf(),
     synergisticMuscleGroup = synergisticMuscleGroup?.toMutableList() ?: mutableListOf(),
-    executionTechnique = executionTechnique ?: ""
+    executionTechnique = executionTechnique ?: "",
+    idExercise = ExerciseIdModel(id ?: "")
+)
+
+private fun CreatableWorkout.toModel() = WorkoutModel(
+    date = date ?: "",
+    duration = duration?.takeIf { it > 0.0 } ?: 0.0,
+    recoveryTime = recoveryTime?.takeIf { it > 0.0 } ?: 0.0,
+    modificationWorkout = WorkoutModel.ModificationWorkout.valueOf(modificationWorkout?.name ?: "CLASSIC"),
+    exercisesBlock = exercisesBlock.takeIf { it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList()
+        ?: mutableListOf()
+)
+
+private fun ExercisesBlock.toModel() = ExercisesBlockModel(
+    exercise = exercise?.toModel() ?: ExerciseModel(),
+    sets = sets.takeIf { it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList() ?: mutableListOf()
+)
+
+private fun ResponseExercise.toModel() = ExerciseModel(
+    title = title ?: "",
+    description = description ?: "",
+    targetMuscleGroup = targetMuscleGroup?.toMutableList() ?: mutableListOf(),
+    synergisticMuscleGroup = synergisticMuscleGroup?.toMutableList() ?: mutableListOf(),
+    executionTechnique = executionTechnique ?: "",
+    idExercise = ExerciseIdModel(id ?: "")
+)
+
+private fun OneSet.toModel() = OneSetModel(
+    performance = performance.takeIf { it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList() ?: mutableListOf(),
+    status = OneSetModel.Status.valueOf(status?.value ?: "PLAN"),
+    modificationExercise = OneSetModel.ModificationExercise.valueOf(modificationExercise?.value ?: "NONE")
+)
+
+private fun Performance.toModel() = PerformanceModel(
+    weight = weight?.takeIf { it > 0.0 } ?: 0.0,
+    measure = PerformanceModel.Measure.valueOf(measure?.name ?: "KG"),
+    repetition = repetition?.takeIf { it > 0 } ?: 0
 )

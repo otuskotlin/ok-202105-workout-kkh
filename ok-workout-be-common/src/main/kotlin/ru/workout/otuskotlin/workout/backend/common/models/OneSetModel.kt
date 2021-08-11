@@ -1,7 +1,7 @@
 package ru.workout.otuskotlin.workout.backend.common.models
 
 data class OneSetModel(
-    var performance: MutableList<Performance> = mutableListOf(),
+    var performance: MutableList<PerformanceModel> = mutableListOf(),
     var status: Status = Status.PLAN,
     var modificationExercise: ModificationExercise = ModificationExercise.NONE
 ) {
