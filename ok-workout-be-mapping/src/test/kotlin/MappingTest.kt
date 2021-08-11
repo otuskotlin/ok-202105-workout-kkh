@@ -21,7 +21,7 @@ class MappingTest {
         beContext.setQuery(searchWorkoutRequest)
         println(beContext)
         assertTrue("date must be $date") {
-            beContext.requestSearchWorkout.date == LocalDate.parse(date)
+            beContext.requestSearchWorkout.date == LocalDate.parse("2021-08-01")
         }
     }
 }

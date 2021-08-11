@@ -4,10 +4,7 @@ import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
-import java.text.SimpleDateFormat
-import java.time.Instant
 import java.time.LocalDate
-import java.util.*
 
 fun BeContext.setQuery(query: InitExerciseRequest) = apply {
     requestId = query.requestId ?: ""
