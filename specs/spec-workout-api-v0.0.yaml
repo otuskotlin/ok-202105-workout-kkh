@@ -264,7 +264,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChainOfExerciseRequest'
+              $ref: '#/components/schemas/ReadWorkoutRequest'
         required: true
       responses:
         200:
@@ -817,9 +817,7 @@ components:
         - type: object
           properties:
             requestedWorkout:
-              type: array
-              items:
-                $ref: '#/components/schemas/CreateWorkoutRequest'
+              $ref: '#/components/schemas/ReadWorkoutRequest'
 
     ChainOfExerciseResponse:
       description: Structure to respond to a request to get a chain of exercise

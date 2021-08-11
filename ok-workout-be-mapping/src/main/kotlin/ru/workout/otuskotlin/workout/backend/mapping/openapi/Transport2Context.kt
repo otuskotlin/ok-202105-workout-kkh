@@ -68,6 +68,11 @@ fun BeContext.setQuery(query: SearchWorkoutRequest) = apply {
     }
 }
 
+fun BeContext.setQuery(query: ChainOfExerciseRequest) = apply {
+    requestId = query.requestId ?: ""
+    requestWorkoutId = WorkoutIdModel(query.requestedWorkout?.readWorkoutId ?: "")
+}
+
 private fun CreatableExercise.toModel() = ExerciseModel(
     title = title ?: "",
     description = description ?: "",

@@ -99,12 +99,20 @@ fun BeContext.toSearchWorkoutResponse() = SearchWorkoutResponse(
     foundWorkouts = foundWorkouts.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
 )
 
+fun BeContext.toChainOfExercises() = ChainOfExerciseResponse(
+    requestId = requestId.takeIf { it.isNotBlank() },
+    result = if (errors.find { it.level == IError.Level.ERROR } == null) ChainOfExerciseResponse.Result.SUCCESS
+    else ChainOfExerciseResponse.Result.ERROR,
+    errors = errors.takeIf { errors.isNotEmpty() }?.map { it.toTransport() },
+    chainOfExercise = responseExercises.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
+)
+
 private fun IError.toTransport() = RequestError(
     message = message.takeIf { it.isNotBlank() },
     field = field.takeIf { it.isNotBlank() }
 )
-private
-fun ExerciseModel.toTransport() = ResponseExercise(
+
+private fun ExerciseModel.toTransport() = ResponseExercise(
     title = title.takeIf { it.isNotBlank() },
     description = description.takeIf { it.isNotBlank() },
     targetMuscleGroup = targetMuscleGroup.takeIf { it.isNotEmpty() },
