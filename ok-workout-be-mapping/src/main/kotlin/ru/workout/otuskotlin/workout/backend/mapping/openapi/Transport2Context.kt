@@ -43,7 +43,7 @@ private fun CreatableExercise.toModel() = ExerciseModel(
 )
 
 private fun UpdatableExercise.toModel() = ExerciseModel(
-    id = ExerciseIdModel(id ?: ""),
+    idExercise = ExerciseIdModel(id ?: ""),
     title = title ?: "",
     description = description ?: "",
     targetMuscleGroup = targetMuscleGroup?.toMutableList() ?: mutableListOf(),

@@ -7,7 +7,9 @@ data class WorkoutModel(
     /* Recovery time between exercises */
     var recoveryTime: Double = 0.0,
     var modificationWorkout: ModificationWorkout = ModificationWorkout.CLASSIC,
-    var exercises: MutableList<ExercisesBlockModel> = mutableListOf()
+    var exercisesBlock: MutableList<ExercisesBlockModel> = mutableListOf(),
+    var idWorkout: WorkoutIdModel = WorkoutIdModel.NONE,
+    var permissions: MutableSet<ExercisePermissions> = mutableSetOf()
 ) {
     enum class ModificationWorkout {
         CLASSIC, CIRCUIT;

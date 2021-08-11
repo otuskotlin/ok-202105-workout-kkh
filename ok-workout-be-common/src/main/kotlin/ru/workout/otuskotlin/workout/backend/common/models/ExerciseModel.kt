@@ -6,6 +6,6 @@ data class ExerciseModel(
     var targetMuscleGroup: MutableList<String> = mutableListOf(),
     var synergisticMuscleGroup: MutableList<String> = mutableListOf(),
     var executionTechnique: String = "",
-    var id: ExerciseIdModel = ExerciseIdModel.NONE,
+    var idExercise: ExerciseIdModel = ExerciseIdModel.NONE,
     var permissions: MutableSet<ExercisePermissions> = mutableSetOf()
 )
