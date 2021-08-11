@@ -253,6 +253,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SearchWorkoutResponse'
+  /workout/chainOfExercise:
+    post:
+      tags:
+        - workout
+      summary: Get exercise sequence
+      operationId: chainOfExercise
+      requestBody:
+        description: The request object to get sequence of exercise
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChainOfExerciseRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChainOfExerciseResponse'
+
 
 components:
   schemas:
@@ -787,3 +808,27 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/ResponseWorkout'
+
+    ChainOfExerciseRequest:
+      description: Structure to request to get a chain of exercise
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            requestedWorkout:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateWorkoutRequest'
+
+    ChainOfExerciseResponse:
+      description: Structure to respond to a request to get a chain of exercise
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            chainOfExercise:
+              type: array
+              items:
+                $ref: '#/components/schemas/ResponseExercise'
