@@ -407,8 +407,7 @@ components:
             - KG
             - LB
         repetition:
-          type: number
-          format: int32
+          type: integer
 
     UpdatableExercise:
       description: Structure for a data about the exercise in request to update
@@ -507,7 +506,7 @@ components:
     CreateWorkoutRequest:
       allOf:
         - $ref: '#/components/schemas/BaseMessage'
-        - $ref: '#/components/schemas/BaseResponse'
+        - $ref: '#/components/schemas/BaseRequest'
         - type: object
           properties:
             createWorkout:
