@@ -346,6 +346,11 @@ components:
           type: number
           format: double
           description: Recovery time between exercises
+        modification:
+          type: string
+          enum:
+            - CLASSIC
+            - CIRCUIT
         exercises:
           $ref: '#/components/schemas/Exercises'
 
@@ -362,13 +367,6 @@ components:
     Performance:
       type: object
       properties:
-        status:
-          type: string
-          enum:
-            - PLAN
-            - ACTIVE
-            - DONE
-            - SKIP
         sets:
           type: array
           items:
@@ -376,12 +374,9 @@ components:
         modification:
           type: string
           enum:
-            - CIRCUIT
-            - CLASSIC
-            - CLUSTER
-            - DROP_SET
-            - SUPER_SET
-            - WITHOUT_LAST
+            - NONE
+            - WITHOUT_LAST_RIGHT
+            - WITHOUT_LAST_LEFT
 
     OneSet:
       type: object
@@ -392,6 +387,21 @@ components:
         repetition:
           type: number
           format: int32
+        status:
+          type: string
+          enum:
+            - PLAN
+            - ACTIVE
+            - DONE
+            - SKIP
+        modification:
+          type: string
+          enum:
+            - NONE
+            - CLUSTER
+            - DROP_SET
+            - SUPER_SET_RIGHT
+            - SUPER_SET_LEFT
 
     UpdatableExercise:
       description: Structure for a data about the exercise in request to update
