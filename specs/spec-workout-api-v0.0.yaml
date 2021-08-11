@@ -262,7 +262,7 @@ components:
       description: Base class to requests and responses
       properties:
         messageType:
-          description: A discriminator contaiting the message class type and used to deserialization
+          description: A discriminator containing the message class type and used to deserialization
           type: string
           title: Discriminator
       discriminator:
@@ -779,7 +779,7 @@ components:
       description: Structure to request a search of an exercise
       allOf:
         - $ref: '#/components/schemas/BaseMessage'
-        - $ref: '#/components/schemas/BaseResponse'
+        - $ref: '#/components/schemas/BaseRequest'
         - type: object
           properties:
             date:
@@ -801,7 +801,7 @@ components:
         - $ref: '#/components/schemas/BaseResponse'
         - type: object
           properties:
-            foundExercises:
+            foundWorkouts:
               type: array
               items:
                 $ref: '#/components/schemas/ResponseWorkout'

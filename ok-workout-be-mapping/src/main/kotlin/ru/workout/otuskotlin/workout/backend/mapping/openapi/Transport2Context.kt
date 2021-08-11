@@ -4,6 +4,9 @@ import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.util.*
 
 fun BeContext.setQuery(query: InitExerciseRequest) = apply {
     requestId = query.requestId ?: ""
@@ -31,7 +34,16 @@ fun BeContext.setQuery(query: DeleteExerciseRequest) = apply {
 
 fun BeContext.setQuery(query: SearchExerciseRequest) = apply {
     requestId = query.requestId ?: ""
-    // TODO: 09.08.2021 дополнить
+    requestSearchExercise = query.search ?: ""
+}
+
+fun BeContext.setQuery(query: SearchWorkoutRequest) = apply {
+    requestId = query.requestId ?: ""
+    requestSearchWorkout.apply {
+        date = SimpleDateFormat("yyyy-MM-dd").parse(query.date) ?: Date.from(Instant.now())
+        searchMuscleGroup = query.searchMuscleGroup ?: ""
+        searchExercise = query.searchExercise ?: ""
+    }
 }
 
 private fun CreatableExercise.toModel() = ExerciseModel(
