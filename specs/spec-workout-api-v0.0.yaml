@@ -346,32 +346,26 @@ components:
           type: number
           format: double
           description: Recovery time between exercises
-        modification:
+        modificationWorkout:
           type: string
           enum:
             - CLASSIC
             - CIRCUIT
         exercises:
-          $ref: '#/components/schemas/Exercises'
+          type: array
+          items:
+            $ref: '#/components/schemas/Exercises'
 
     Exercises:
       type: object
-      additionalProperties:
-        type: object
-        properties:
-          exercise:
-            $ref: '#/components/schemas/CreatableExercise'
-          performance:
-            $ref: '#/components/schemas/Performance'
-
-    Performance:
-      type: object
       properties:
+        exercise:
+          $ref: '#/components/schemas/CreatableExercise'
         sets:
           type: array
           items:
             $ref: '#/components/schemas/OneSet'
-        modification:
+        modificationBlockExercises:
           type: string
           enum:
             - NONE
@@ -381,12 +375,10 @@ components:
     OneSet:
       type: object
       properties:
-        weight:
-          type: number
-          format: double
-        repetition:
-          type: number
-          format: int32
+        performance:
+          type: array
+          items:
+            $ref: '#/components/schemas/Performance'
         status:
           type: string
           enum:
@@ -394,7 +386,7 @@ components:
             - ACTIVE
             - DONE
             - SKIP
-        modification:
+        modificationExercise:
           type: string
           enum:
             - NONE
@@ -402,6 +394,16 @@ components:
             - DROP_SET
             - SUPER_SET_RIGHT
             - SUPER_SET_LEFT
+
+    Performance:
+      type: object
+      properties:
+        weight:
+          type: number
+          format: double
+        repetition:
+          type: number
+          format: int32
 
     UpdatableExercise:
       description: Structure for a data about the exercise in request to update
