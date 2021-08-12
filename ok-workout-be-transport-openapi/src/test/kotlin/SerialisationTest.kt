@@ -6,18 +6,28 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class SerialisationTest {
+
     private val requestId = "id:123"
-    private val exercise1 = CreatableExercise(
+
+    private val exercise = ResponseExercise(
         title = "Приседания со штангой",
         description = "Базовое упражнение",
         targetMuscleGroup = listOf("Квадрицепсы"),
         synergisticMuscleGroup = listOf("Большие ягодичные", "Приводящие бедра", "Камбаловидные"),
         executionTechnique = "При выполнении приседаний можно варьировать положение ног, но обычно рекомендуют ставить носки врозь, а ноги примерно на ширине плеч"
     )
+
     private val createExerciseRequest = CreateExerciseRequest(
         requestId = requestId,
-        createExercise = exercise1
+        createExercise = CreatableExercise(
+            title = "Приседания со штангой",
+            description = "Базовое упражнение",
+            targetMuscleGroup = listOf("Квадрицепсы"),
+            synergisticMuscleGroup = listOf("Большие ягодичные", "Приводящие бедра", "Камбаловидные"),
+            executionTechnique = "При выполнении приседаний можно варьировать положение ног, но обычно рекомендуют ставить носки врозь, а ноги примерно на ширине плеч"
+        )
     )
+
     private val createWorkoutRequest = CreateWorkoutRequest(
         requestId = requestId,
         createWorkout = CreatableWorkout(
@@ -27,7 +37,7 @@ class SerialisationTest {
             modificationWorkout = CreatableWorkout.ModificationWorkout.CLASSIC,
             exercisesBlock = mutableListOf(
                 ExercisesBlock(
-                    exercise = exercise1,
+                    exercise = exercise,
                     sets = mutableListOf(
                         OneSet(
                             performance = mutableListOf(
@@ -83,5 +93,4 @@ class SerialisationTest {
             deserialized.createWorkout?.exercisesBlock?.size == 1
         }
     }
-
 }
