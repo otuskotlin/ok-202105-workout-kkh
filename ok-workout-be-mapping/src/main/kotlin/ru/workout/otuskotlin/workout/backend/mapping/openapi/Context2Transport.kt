@@ -127,7 +127,9 @@ private fun WorkoutModel.toTransport() = ResponseWorkout(
     duration = duration.takeIf { it > 0.0 } ?: 0.0,
     recoveryTime = recoveryTime.takeIf { it > 0.0 } ?: 0.0,
     modificationWorkout = ResponseWorkout.ModificationWorkout.valueOf(modificationWorkout.name),
-    exercisesBlock = exercisesBlock.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
+    exercisesBlock = exercisesBlock.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
+    id = idWorkout.toString(),
+    permissions = permissions.takeIf { it.isNotEmpty() }?.map { Permissions.valueOf(it.name) }?.toSet()
 )
 
 private fun ExercisesBlockModel.toTransport() = ExercisesBlock(
