@@ -1,7 +1,4 @@
-import ru.otus.otuskotlin.workout.openapi.models.InitExerciseResponse
-import ru.otus.otuskotlin.workout.openapi.models.InitWorkoutResponse
-import ru.otus.otuskotlin.workout.openapi.models.ResponseExercise
-import ru.otus.otuskotlin.workout.openapi.models.SearchWorkoutRequest
+import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
@@ -63,6 +60,7 @@ class MappingTest {
         val response = beContext.toCreateExerciseResponse()
         println(response)
         assertEquals("eID:0001", response.createdExercise?.id)
+        response.createdExercise?.permissions?.contains(Permissions.valueOf("READ"))?.let { assertTrue(it) }
     }
 
     @Test

@@ -453,6 +453,7 @@ components:
     Permissions:
       type: string
       enum:
+        - create
         - read
         - update
         - delete
