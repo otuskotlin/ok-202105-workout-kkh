@@ -814,11 +814,22 @@ components:
       description: Structure to request to get a chain of exercise
       allOf:
         - $ref: '#/components/schemas/BaseMessage'
-        - $ref: '#/components/schemas/BaseResponse'
+        - $ref: '#/components/schemas/BaseRequest'
         - type: object
           properties:
-            requestedWorkout:
-              $ref: '#/components/schemas/ReadWorkoutRequest'
+            readWorkoutId:
+              type: string
+            debug:
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - errorDb
 
     ChainOfExerciseResponse:
       description: Structure to respond to a request to get a chain of exercise

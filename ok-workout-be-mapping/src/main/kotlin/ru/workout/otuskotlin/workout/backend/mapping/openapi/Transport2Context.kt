@@ -56,7 +56,7 @@ fun BeContext.setQuery(query: UpdateWorkoutRequest) = apply {
 
 fun BeContext.setQuery(query: DeleteWorkoutRequest) = apply {
     requestId = query.requestId ?: ""
-    requestWorkoutId = WorkoutIdModel(query.requestId ?: "")
+    requestWorkoutId = WorkoutIdModel(query.deleteWorkoutId ?: "")
 }
 
 fun BeContext.setQuery(query: SearchWorkoutRequest) = apply {
@@ -70,7 +70,7 @@ fun BeContext.setQuery(query: SearchWorkoutRequest) = apply {
 
 fun BeContext.setQuery(query: ChainOfExerciseRequest) = apply {
     requestId = query.requestId ?: ""
-    requestWorkoutId = WorkoutIdModel(query.requestedWorkout?.readWorkoutId ?: "")
+    requestWorkoutId = WorkoutIdModel(query.readWorkoutId ?: "")
 }
 
 private fun CreatableExercise.toModel() = ExerciseModel(
@@ -95,13 +95,13 @@ private fun CreatableWorkout.toModel() = WorkoutModel(
     duration = duration?.takeIf { it > 0.0 } ?: 0.0,
     recoveryTime = recoveryTime?.takeIf { it > 0.0 } ?: 0.0,
     modificationWorkout = WorkoutModel.ModificationWorkout.valueOf(modificationWorkout?.name ?: "CLASSIC"),
-    exercisesBlock = exercisesBlock.takeIf { it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList()
+    exercisesBlock = exercisesBlock.takeIf { !it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList()
         ?: mutableListOf()
 )
 
 private fun ExercisesBlock.toModel() = ExercisesBlockModel(
     exercise = exercise?.toModel() ?: ExerciseModel(),
-    sets = sets.takeIf { it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList() ?: mutableListOf()
+    sets = sets.takeIf { !it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList() ?: mutableListOf()
 )
 
 private fun ResponseExercise.toModel() = ExerciseModel(
@@ -130,7 +130,7 @@ private fun UpdatableWorkout.toModel() = WorkoutModel(
     duration = duration?.takeIf { it > 0.0 } ?: 0.0,
     recoveryTime = recoveryTime?.takeIf { it > 0.0 } ?: 0.0,
     modificationWorkout = WorkoutModel.ModificationWorkout.valueOf(modificationWorkout?.name ?: "CLASSIC"),
-    exercisesBlock = exercisesBlock.takeIf { it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList()
+    exercisesBlock = exercisesBlock.takeIf { !it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList()
         ?: mutableListOf(),
     idWorkout = WorkoutIdModel(id ?: "")
 )
