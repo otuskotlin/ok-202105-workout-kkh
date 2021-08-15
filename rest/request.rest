@@ -17,7 +17,21 @@ Content-Type: application/json
     ],
     "executionTechnique": "Выполняющий упражнение приседает и затем встаёт, возвращаясь в положение стоя"
   },
+  "debug": {
+    "mode": "stub",
+    "stub": "success"
+  }
+}
 
+###
+
+POST http://127.0.0.1:8080/exercise/read
+Content-Type: application/json
+
+{
+  "messageType": "ReadExerciseRequest",
+  "requestId": "12345",
+  "readExerciseId": "eID:0001",
   "debug": {
     "mode": "stub",
     "stub": "success"

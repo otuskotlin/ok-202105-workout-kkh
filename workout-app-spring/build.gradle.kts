@@ -21,6 +21,7 @@ dependencies {
     implementation(project(":ok-workout-be-common"))
     implementation(project(":ok-workout-be-mapping"))
     implementation(project(":ok-workout-be-transport-openapi"))
+    implementation(project(":ok-workout-be-stubs"))
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
