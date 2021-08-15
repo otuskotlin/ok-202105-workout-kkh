@@ -3,6 +3,9 @@ plugins {
     kotlin("multiplatform") apply false
     id("org.openapi.generator") apply false
     kotlin("plugin.serialization") apply false
+    id("org.springframework.boot") apply false
+    id("io.spring.dependency-management") apply false
+    kotlin("plugin.spring") apply false
 }
 
 group = "ru.otus.otuskotlin.workout"

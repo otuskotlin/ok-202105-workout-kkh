@@ -10,6 +10,14 @@ pluginManagement {
         kotlin("plugin.serialization") version kotlinVersion
 
         id("org.openapi.generator") version openApiVersion
+
+        val springBootVersion: String by settings
+        val springDependencyVersion: String by settings
+        val springPluginVersion: String by settings
+
+        id("org.springframework.boot") version springBootVersion
+        id("io.spring.dependency-management") version springDependencyVersion
+        kotlin("plugin.spring") version springPluginVersion
     }
 }
 
@@ -21,4 +29,4 @@ include("ok-workout-be-transport-openapi")
 include("ok-workout-be-transport-mp")
 include("ok-workout-be-common")
 include("ok-workout-be-mapping")
-include("ok-workout-be-mapping")
+include("workout-app-spring")
