@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
   "messageType": "CreateExerciseRequest",
-  "requestId": "12345",
+  "requestId": "rID:0001",
   "createExercise": {
     "title": "Приседания со штангой",
     "description": "Базовое упражнение",
@@ -30,7 +30,7 @@ Content-Type: application/json
 
 {
   "messageType": "ReadExerciseRequest",
-  "requestId": "12345",
+  "requestId": "rID:0001",
   "readExerciseId": "eID:0001",
   "debug": {
     "mode": "stub",
@@ -47,6 +47,33 @@ Content-Type: application/json
   "messageType": "ReadExerciseRequest",
   "requestId": "12345",
   "readExerciseId": "eID:0002",
+  "debug": {
+    "mode": "stub",
+    "stub": "success"
+  }
+}
+
+###
+
+POST http://127.0.0.1:8080/exercise/update
+Content-Type: application/json
+
+{
+  "messageType": "UpdateExerciseRequest",
+  "requestId": "rID:0003",
+  "updateExercise": {
+    "title": "Подтягивания",
+    "description": "Базовое упражнение",
+    "targetMuscleGroup": [
+      "Широчайшие мышцы спины"
+    ],
+    "synergisticMuscleGroup": [
+      "Бицепс",
+      "Мышцы предплечья"
+    ],
+    "executionTechnique": "Вися на неподвижной перекладине над головой, нужно постараться подтянуть своё тело вверх до касания грудью (или подбородком) перекладины.",
+    "id": "rID:0008"
+  },
   "debug": {
     "mode": "stub",
     "stub": "success"

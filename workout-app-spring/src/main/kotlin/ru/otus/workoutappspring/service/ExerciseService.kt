@@ -25,4 +25,8 @@ class ExerciseService {
             }
         }
     }
+
+    fun updateExercise(context: BeContext) = context.apply {
+        responseExercise = requestExercise
+    }
 }

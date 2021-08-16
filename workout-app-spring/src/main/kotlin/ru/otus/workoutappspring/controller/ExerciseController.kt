@@ -1,16 +1,16 @@
 package ru.otus.workoutappspring.controller
 
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import ru.otus.otuskotlin.workout.openapi.models.CreateExerciseRequest
 import ru.otus.otuskotlin.workout.openapi.models.ReadExerciseRequest
+import ru.otus.otuskotlin.workout.openapi.models.UpdateExerciseRequest
+import ru.otus.otuskotlin.workout.openapi.models.UpdateExerciseResponse
 import ru.otus.workoutappspring.service.ExerciseService
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.setQuery
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.toCreateExerciseResponse
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.toReadExerciseResponse
+import ru.workout.otuskotlin.workout.backend.mapping.openapi.toUpdateExerciseResponse
 
 @RestController
 @RequestMapping("/exercise")
@@ -29,4 +29,11 @@ class ExerciseController(
         BeContext().setQuery(readExerciseRequest).let {
             exerciseService.readExercise(it)
         }.toReadExerciseResponse()
+
+    @PostMapping("update")
+    fun updateExercise(@RequestBody updateExerciseRequest: UpdateExerciseRequest): UpdateExerciseResponse {
+        return BeContext().setQuery(updateExerciseRequest).let {
+            exerciseService.updateExercise(it)
+        }.toUpdateExerciseResponse()
+    }
 }
