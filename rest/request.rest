@@ -37,3 +37,18 @@ Content-Type: application/json
     "stub": "success"
   }
 }
+
+###
+
+POST http://127.0.0.1:8080/exercise/read
+Content-Type: application/json
+
+{
+  "messageType": "ReadExerciseRequest",
+  "requestId": "12345",
+  "readExerciseId": "eID:0002",
+  "debug": {
+    "mode": "stub",
+    "stub": "success"
+  }
+}

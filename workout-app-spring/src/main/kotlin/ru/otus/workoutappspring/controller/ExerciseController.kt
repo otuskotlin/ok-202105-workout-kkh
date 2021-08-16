@@ -21,12 +21,12 @@ class ExerciseController(
     @PostMapping("create")
     fun createExercise(@RequestBody createExerciseRequest: CreateExerciseRequest) =
         BeContext().setQuery(createExerciseRequest).let {
-            exerciseService.create(it)
+            exerciseService.createExercise(it)
         }.toCreateExerciseResponse()
 
     @PostMapping("read")
     fun readExercise(@RequestBody readExerciseRequest: ReadExerciseRequest) =
         BeContext().setQuery(readExerciseRequest).let {
-            exerciseService.read(it)
+            exerciseService.readExercise(it)
         }.toReadExerciseResponse()
 }
