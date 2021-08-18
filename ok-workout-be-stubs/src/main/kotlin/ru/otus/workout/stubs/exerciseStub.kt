@@ -5,7 +5,7 @@ import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
 
 object Exercise {
     private val stubReady = ExerciseModel(
-        title = "",
+        title = "Приседания со штангой",
         description = "",
         targetMuscleGroup = mutableListOf("Квадрицепсы"),
         synergisticMuscleGroup = mutableListOf(
