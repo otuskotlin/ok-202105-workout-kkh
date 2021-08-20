@@ -53,40 +53,42 @@ Workout, Константин Хан
 
 ### Описание сущности exercise
 
-* title
-* description;
-* targetMuscleGroup;
-* synergisticMuscleGroup;
-* executionTechnique.
+* Название упражнения
+* Описание упражнения;
+* Целевые мышечные группы;
+* Группа мышц-синергистов;
+* Техника выполнения.
 
 ### Описание сущности workout
 
-* date;
-* duration;
-* recoveryTime;
-* exercises Map<Exercise, List\<Performance\>>
+* Дата тренировок;
+* Продолжительность тренировок;
+* Время отдыха;
+* Упражнения в тренировке, включая описание порядка выполнения (модификации)
 
-Performance - подход, выполнение
+Описание порядка выполнения (подход)
 
-* status;
-* sets List<weight, repetition> (Double, Double)
-* modification;
+* Статус;
+* Перечень подходов
+  * Вес отягощения
+  * Повторения
+* Модификация;
 
-status:
+Статусы:
 
-* PLAN
-* ACTIVE
-* DONE
-* SKIP
+* PLAN (запланировано)
+* ACTIVE (активно)
+* DONE (выполнено)
+* SKIP (пропущено)
 
 modification:
 
-* CIRCUIT
-* CLASSIC
-* CLUSTER
-* DROP_SET
-* SUPER_SET
-* WITHOUT_LAST
+* CIRCUIT (круговая)
+* CLASSIC (классическая)
+* CLUSTER (кластеры)
+* DROP_SET (дроп-сеты)
+* SUPER_SET (супер-сеты)
+* WITHOUT_LAST (без последнего)
 
 ### Портрет пользователя:
 
