@@ -17,7 +17,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: './spec-workout-api.yaml#/components/schemas/InitExerciseRequest'
+              $ref: '#/components/schemas/InitExerciseRequest'
         required: true
       responses:
         200:
@@ -26,7 +26,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InitExerciseResponse'
-  /exercise/create:
+  /create:
     post:
       tags:
         - exercise
@@ -37,7 +37,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: './spec-workout-api.yaml#/components/schemas/CreateExerciseRequest'
+              $ref: '#/components/schemas/CreateExerciseRequest'
         required: true
       responses:
         200:
@@ -46,86 +46,86 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateExerciseResponse'
-#    /exercise/read:
-#      post:
-#        tags:
-#          - exercise
-#        summary: Get information about an exercise
-#        operationId: readExercise
-#        requestBody:
-#          description: The request object to obtain an exercise information
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/ReadExerciseRequest'
-#          required: true
-#        responses:
-#          200:
-#            description: All responses
-#            content:
-#              application/json:
-#                schema:
-#                  $ref: '#/components/schemas/ReadExerciseResponse'
-#    /exercise/update:
-#      post:
-#        tags:
-#          - exercise
-#        summary: Update information about an exercise
-#        operationId: updateExercise
-#        requestBody:
-#          description: The request object to update an exercise information
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/UpdateExerciseRequest'
-#          required: true
-#        responses:
-#          200:
-#            description: All responses
-#            content:
-#              application/json:
-#                schema:
-#                  $ref: '#/components/schemas/UpdateExerciseResponse'
-#    /exercise/delete:
-#      post:
-#        tags:
-#          - exercise
-#        summary: Delete an exercise
-#        operationId: deleteExercise
-#        requestBody:
-#          description: The request object to delete an exercise
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/DeleteExerciseRequest'
-#          required: true
-#        responses:
-#          200:
-#            description: All responses
-#            content:
-#              application/json:
-#                schema:
-#                  $ref: '#/components/schemas/DeleteExerciseResponse'
-#    /exercise/search:
-#      post:
-#        tags:
-#          - exercise
-#        summary: Search the exercises
-#        operationId: searchExercise
-#        requestBody:
-#          description: The request object to search the exercises
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/SearchExerciseRequest'
-#          required: true
-#        responses:
-#          200:
-#            description: All responses
-#            content:
-#              application/json:
-#                schema:
-#                  $ref: '#/components/schemas/SearchExerciseResponse'
+  /read:
+    post:
+      tags:
+        - exercise
+      summary: Get information about an exercise
+      operationId: readExercise
+      requestBody:
+        description: The request object to obtain an exercise information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadExerciseRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadExerciseResponse'
+  /update:
+    post:
+      tags:
+        - exercise
+      summary: Update information about an exercise
+      operationId: updateExercise
+      requestBody:
+        description: The request object to update an exercise information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExerciseRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateExerciseResponse'
+  /delete:
+    post:
+      tags:
+        - exercise
+      summary: Delete an exercise
+      operationId: deleteExercise
+      requestBody:
+        description: The request object to delete an exercise
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteExerciseRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteExerciseResponse'
+  /search:
+    post:
+      tags:
+        - exercise
+      summary: Search the exercises
+      operationId: searchExercise
+      requestBody:
+        description: The request object to search the exercises
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchExerciseRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchExerciseResponse'
 
 components:
   schemas:
@@ -177,11 +177,11 @@ components:
     CreateExerciseRequest:
       allOf:
         - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
-        - $ref: './spec-workout-api.yaml#/components/schemas/BaseResponse'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseRequest'
         - type: object
           properties:
             createExercise:
-              $ref: './spec-workout-api.yaml#/components/schemas/CreatableExercise'
+              $ref: '#/components/schemas/CreatableExercise'
             debug:
               allOf:
                 - $ref: './spec-workout-api.yaml#/components/schemas/BaseDebugRequest'
@@ -215,117 +215,117 @@ components:
               uniqueItems: true
               items:
                 $ref: './spec-workout-api.yaml#/components/schemas/Permissions'
-#
-#      ReadExerciseRequest:
-#        description: The structure to get exercise
-#        allOf:
-#          - $ref: '#/components/schemas/BaseMessage'
-#          - $ref: '#/components/schemas/BaseRequest'
-#          - type: object
-#            properties:
-#              readExerciseId:
-#                type: string
-#              debug:
-#                allOf:
-#                  - $ref: '#/components/schemas/BaseDebugRequest'
-#                  - type: object
-#                    properties:
-#                      stub:
-#                        type: string
-#                        enum:
-#                          - success
-#                          - emptyId
-#                          - errorDb
-#      ReadExerciseResponse:
-#        description: The structure to respond to a request with an exercise information
-#        allOf:
-#          - $ref: '#/components/schemas/BaseMessage'
-#          - $ref: '#/components/schemas/BaseResponse'
-#          - type: object
-#            properties:
-#              readExercise:
-#                $ref: '#/components/schemas/ResponseExercise'
-#
-#      UpdateExerciseRequest:
-#        description: Structure for request an update to an existing exercise
-#        allOf:
-#          - $ref: '#/components/schemas/BaseMessage'
-#          - $ref: '#/components/schemas/BaseRequest'
-#          - type: object
-#            properties:
-#              updateExercise:
-#                $ref: '#/components/schemas/UpdatableExercise'
-#              debug:
-#                allOf:
-#                  - $ref: '#/components/schemas/BaseDebugRequest'
-#                  - type: object
-#                    properties:
-#                      stub:
-#                        type: string
-#                        enum:
-#                          - success
-#                          - emptyTitle
-#                          - errorDb
-#
-#      UpdateExerciseResponse:
-#        description: The structure to respond to a request with an exercise information
-#        allOf:
-#          - $ref: '#/components/schemas/BaseMessage'
-#          - $ref: '#/components/schemas/BaseResponse'
-#          - type: object
-#            properties:
-#              updateExercise:
-#                $ref: '#/components/schemas/ResponseExercise'
-#
-#      DeleteExerciseRequest:
-#        description: The structure to request to delete an exercise
-#        allOf:
-#          - $ref: '#/components/schemas/BaseMessage'
-#          - $ref: '#/components/schemas/BaseRequest'
-#          - type: object
-#            properties:
-#              deleteExerciseId:
-#                type: string
-#              debug:
-#                allOf:
-#                  - $ref: '#/components/schemas/BaseDebugRequest'
-#                  - type: object
-#                    properties:
-#                      stub:
-#                        type: string
-#                        enum:
-#                          - success
-#                          - emptyId
-#                          - errorDb
-#
-#      DeleteExerciseResponse:
-#        description: Structure to respond to a request to delete an exercise
-#        allOf:
-#          - $ref: '#/components/schemas/BaseMessage'
-#          - $ref: '#/components/schemas/BaseResponse'
-#          - type: object
-#            properties:
-#              deleteExercise:
-#                $ref: '#/components/schemas/ResponseExercise'
-#
-#      SearchExerciseRequest:
-#        description: Structure to request a search of an exercise
-#        allOf:
-#          - $ref: '#/components/schemas/BaseMessage'
-#          - $ref: '#/components/schemas/BaseRequest'
-#          - type: object
-#            properties:
-#              search:
-#                type: string
-#
-#        SearchExerciseResponse:
-#          description: Structure to respond to a request search of exercise
-#          allOf:
-#            - $ref: '#/components/schemas/BaseMessage'
-#            - $ref: '#/components/schemas/BaseResponse'
-#            - type: object
-#              properties:
-#                foundExercises:
-#                  type: array
-#                  items:
-#                    $ref: '#/components/schemas/ResponseExercise'
+
+    ReadExerciseRequest:
+      description: The structure to get exercise
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            readExerciseId:
+              type: string
+            debug:
+              allOf:
+                - $ref: './spec-workout-api.yaml#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - errorDb
+    ReadExerciseResponse:
+      description: The structure to respond to a request with an exercise information
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            readExercise:
+              $ref: '#/components/schemas/ResponseExercise'
+
+    UpdateExerciseRequest:
+      description: Structure for request an update to an existing exercise
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            updateExercise:
+              $ref: '#/components/schemas/UpdatableExercise'
+            debug:
+              allOf:
+                - $ref: './spec-workout-api.yaml#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyTitle
+                        - errorDb
+
+    UpdateExerciseResponse:
+      description: The structure to respond to a request with an exercise information
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            updateExercise:
+              $ref: '#/components/schemas/ResponseExercise'
+
+    DeleteExerciseRequest:
+      description: The structure to request to delete an exercise
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            deleteExerciseId:
+              type: string
+            debug:
+              allOf:
+                - $ref: './spec-workout-api.yaml#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - errorDb
+
+    DeleteExerciseResponse:
+      description: Structure to respond to a request to delete an exercise
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            deleteExercise:
+              $ref: '#/components/schemas/ResponseExercise'
+
+    SearchExerciseRequest:
+      description: Structure to request a search of an exercise
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            search:
+              type: string
+
+    SearchExerciseResponse:
+      description: Structure to respond to a request search of exercise
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            foundExercises:
+              type: array
+              items:
+                $ref: '#/components/schemas/ResponseExercise'

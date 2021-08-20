@@ -287,18 +287,6 @@ class MappingTest {
     }
 
     @Test
-    fun chainOfExerciseRequest() {
-        beContext.setQuery(
-            ChainOfExerciseRequest(
-                requestId = "rID:0001",
-                readWorkoutId = "wID:0001"
-            )
-        )
-        assertEquals("rID:0001", beContext.requestId)
-        assertEquals(WorkoutIdModel("wID:0001"), beContext.requestWorkoutId)
-    }
-
-    @Test
     fun initExerciseResponseTest() {
         val response = beContext.toInitExerciseResponse()
         println(response)

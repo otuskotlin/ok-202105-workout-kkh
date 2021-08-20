@@ -15,9 +15,30 @@ tags:
 paths:
   /exercise/init:
     $ref: './spec-workout-api-exercise.yaml#/paths/~1init'
-
+  /exercise/create:
+    $ref: './spec-workout-api-exercise.yaml#/paths/~1create'
+  /exercise/read:
+    $ref: './spec-workout-api-exercise.yaml#/paths/~1read'
+  /exercise/update:
+    $ref: './spec-workout-api-exercise.yaml#/paths/~1update'
+  /exercise/delete:
+    $ref: './spec-workout-api-exercise.yaml#/paths/~1delete'
+  /exercise/search:
+    $ref: './spec-workout-api-exercise.yaml#/paths/~1search'
   /workout/init:
     $ref: './spec-workout-api-workout.yaml#/paths/~1init'
+  /workout/create:
+    $ref: './spec-workout-api-workout.yaml#/paths/~1create'
+  /workout/read:
+    $ref: './spec-workout-api-workout.yaml#/paths/~1read'
+  /workout/update:
+    $ref: './spec-workout-api-workout.yaml#/paths/~1update'
+  /workout/delete:
+    $ref: './spec-workout-api-workout.yaml#/paths/~1delete'
+  /workout/search:
+    $ref: './spec-workout-api-workout.yaml#/paths/~1search'
+  /workout/chainOfExercise:
+    $ref: './spec-workout-api-workout.yaml#/paths/~1chainOfExercise'
 
 components:
   schemas:
@@ -87,32 +108,3 @@ components:
         - update
         - delete
         - send
-
-    CreatableExercise:
-      allOf:
-        - $ref: './spec-workout-api-exercise.yaml#/components/schemas/CreatableExercise'
-
-    InitExerciseRequest:
-      allOf:
-        - $ref: './spec-workout-api-exercise.yaml#/components/schemas/InitExerciseRequest'
-        - type: object
-
-    CreateExerciseRequest:
-      allOf:
-        - $ref: './spec-workout-api-exercise.yaml#/components/schemas/CreateExerciseRequest'
-        - type: object
-
-    CreateExerciseResponse:
-      allOf:
-        - $ref: './spec-workout-api-exercise.yaml#/components/schemas/CreateExerciseResponse'
-        - type: object
-
-    InitWorkoutRequest:
-      allOf:
-        - $ref: './spec-workout-api-workout.yaml#/components/schemas/InitWorkoutRequest'
-        - type: object
-
-    InitWorkoutResponse:
-      allOf:
-        - $ref: './spec-workout-api-workout.yaml#/components/schemas/InitWorkoutRequest'
-        - type: object

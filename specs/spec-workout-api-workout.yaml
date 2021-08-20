@@ -25,219 +25,219 @@ paths:
           content:
             application/json:
               schema:
-                $ref: './spec-workout-api.yaml#/components/schemas/InitWorkoutResponse'
-    #  /workout/create:
-    #    post:
-    #      tags:
-    #        - workout
-    #      summary: Create a new workout
-    #      operationId: createWorkout
-    #      requestBody:
-    #        description: The request object to create a new workout
-    #        content:
-    #          application/json:
-    #            schema:
-    #              $ref: '#/components/schemas/CreateWorkoutRequest'
-    #        required: true
-    #      responses:
-    #        200:
-    #          description: All responses
-    #          content:
-    #            application/json:
-    #              schema:
-    #                $ref: '#/components/schemas/CreateWorkoutResponse'
-    #  /workout/read:
-    #    post:
-    #      tags:
-    #        - workout
-    #      summary: Get information about a workout
-    #      operationId: readWorkout
-    #      requestBody:
-    #        description: The request object to obtain a workout information
-    #        content:
-    #          application/json:
-    #            schema:
-    #              $ref: '#/components/schemas/ReadWorkoutRequest'
-    #        required: true
-    #      responses:
-    #        200:
-    #          description: All responses
-    #          content:
-    #            application/json:
-    #              schema:
-    #                $ref: '#/components/schemas/ReadWorkoutResponse'
-    #  /workout/update:
-    #    post:
-    #      tags:
-    #        - workout
-    #      summary: Update information about a workout
-    #      operationId: updateWorkout
-    #      requestBody:
-    #        description: The request object to update a workout information
-    #        content:
-    #          application/json:
-    #            schema:
-    #              $ref: '#/components/schemas/UpdateWorkoutRequest'
-    #        required: true
-    #      responses:
-    #        200:
-    #          description: All responses
-    #          content:
-    #            application/json:
-    #              schema:
-    #                $ref: '#/components/schemas/UpdateWorkoutResponse'
-    #  /workout/delete:
-    #    post:
-    #      tags:
-    #        - workout
-    #      summary: Delete a workout
-    #      operationId: deleteWorkout
-    #      requestBody:
-    #        description: The request object to delete a workout
-    #        content:
-    #          application/json:
-    #            schema:
-    #              $ref: '#/components/schemas/DeleteWorkoutRequest'
-    #        required: true
-    #      responses:
-    #        200:
-    #          description: All responses
-    #          content:
-    #            application/json:
-    #              schema:
-    #                $ref: '#/components/schemas/DeleteWorkoutResponse'
-    #  /workout/search:
-    #    post:
-    #      tags:
-    #        - workout
-    #      summary: Search the workout
-    #      operationId: searchWorkout
-    #      requestBody:
-    #        description: The request object to search the workout
-    #        content:
-    #          application/json:
-    #            schema:
-    #              $ref: '#/components/schemas/SearchWorkoutRequest'
-    #        required: true
-    #      responses:
-    #        200:
-    #          description: All responses
-    #          content:
-    #            application/json:
-    #              schema:
-    #                $ref: '#/components/schemas/SearchWorkoutResponse'
-    #  /workout/chainOfExercise:
-    #    post:
-    #      tags:
-    #        - workout
-    #      summary: Get exercise sequence
-    #      operationId: chainOfExercise
-    #      requestBody:
-    #        description: The request object to get sequence of exercise
-    #        content:
-    #          application/json:
-    #            schema:
-    #              $ref: '#/components/schemas/ReadWorkoutRequest'
-    #        required: true
-    #      responses:
-    #        200:
-    #          description: All responses
-    #          content:
-    #            application/json:
-    #              schema:
-    #                $ref: '#/components/schemas/ChainOfExerciseResponse'
-    #
+                $ref: '#/components/schemas/InitWorkoutResponse'
+  /create:
+    post:
+      tags:
+        - workout
+      summary: Create a new workout
+      operationId: createWorkout
+      requestBody:
+        description: The request object to create a new workout
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkoutRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkoutResponse'
+  /read:
+    post:
+      tags:
+        - workout
+      summary: Get information about a workout
+      operationId: readWorkout
+      requestBody:
+        description: The request object to obtain a workout information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadWorkoutRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadWorkoutResponse'
+  /update:
+    post:
+      tags:
+        - workout
+      summary: Update information about a workout
+      operationId: updateWorkout
+      requestBody:
+        description: The request object to update a workout information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkoutRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkoutResponse'
+  /delete:
+    post:
+      tags:
+        - workout
+      summary: Delete a workout
+      operationId: deleteWorkout
+      requestBody:
+        description: The request object to delete a workout
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteWorkoutRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorkoutResponse'
+  /search:
+    post:
+      tags:
+        - workout
+      summary: Search the workout
+      operationId: searchWorkout
+      requestBody:
+        description: The request object to search the workout
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchWorkoutRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchWorkoutResponse'
+  /chainOfExercise:
+    post:
+      tags:
+        - workout
+      summary: Get exercise sequence
+      operationId: chainOfExercise
+      requestBody:
+        description: The request object to get sequence of exercise
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadWorkoutRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChainOfExerciseResponse'
+
 components:
   schemas:
-    #
-    #    CreatableWorkout:
-    #      description: The structure with data about the workout to request about creation
-    #      type: object
-    #      properties:
-    #        date:
-    #          type: string
-    #          format: date
-    #          description: Date of workout
-    #          example: 2021-08-04
-    #        duration:
-    #          type: number
-    #          format: double
-    #          description: Duration of workout
-    #        recoveryTime:
-    #          type: number
-    #          format: double
-    #          description: Recovery time between exercises
-    #        modificationWorkout:
-    #          type: string
-    #          enum:
-    #            - CLASSIC
-    #            - CIRCUIT
-    #        exercisesBlock:
-    #          type: array
-    #          items:
-    #            $ref: '#/components/schemas/ExercisesBlock'
-    #
-    #    ExercisesBlock:
-    #      type: object
-    #      properties:
-    #        #        exercise:
-    #        #          $ref: './spec-workout-api-exercise.yaml#/components/schemas/ResponseExercise'
-    #        sets:
-    #          type: array
-    #          items:
-    #            $ref: '#/components/schemas/OneSet'
-    #        modificationBlockExercises:
-    #          type: string
-    #          enum:
-    #            - NONE
-    #            - WITHOUT_LAST_RIGHT
-    #            - WITHOUT_LAST_LEFT
-    #
-    #    OneSet:
-    #      type: object
-    #      properties:
-    #        performance:
-    #          type: array
-    #          items:
-    #            $ref: '#/components/schemas/Performance'
-    #        status:
-    #          type: string
-    #          enum:
-    #            - PLAN
-    #            - ACTIVE
-    #            - DONE
-    #            - SKIP
-    #        modificationExercise:
-    #          type: string
-    #          enum:
-    #            - NONE
-    #            - CLUSTER
-    #            - DROP_SET
-    #            - SUPER_SET_RIGHT
-    #            - SUPER_SET_LEFT
-    #
-    #    Performance:
-    #      type: object
-    #      properties:
-    #        weight:
-    #          type: number
-    #          format: double
-    #        measure:
-    #          type: string
-    #          enum:
-    #            - KG
-    #            - LB
-    #        repetition:
-    #          type: integer
-    #
-    #    UpdatableWorkout:
-    #      description: Structure for a data about the workout in request to update
-    #      allOf:
-    #        - $ref: '#/components/schemas/CreatableWorkout'
-    #        - type: object
-    #          properties:
-    #            id:
-    #              type: string
+
+    CreatableWorkout:
+      description: The structure with data about the workout to request about creation
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date of workout
+          example: 2021-08-04
+        duration:
+          type: number
+          format: double
+          description: Duration of workout
+        recoveryTime:
+          type: number
+          format: double
+          description: Recovery time between exercises
+        modificationWorkout:
+          type: string
+          enum:
+            - CLASSIC
+            - CIRCUIT
+        exercisesBlock:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExercisesBlock'
+
+    ExercisesBlock:
+      type: object
+      properties:
+        exercise:
+          $ref: './spec-workout-api-exercise.yaml#/components/schemas/ResponseExercise'
+        sets:
+          type: array
+          items:
+            $ref: '#/components/schemas/OneSet'
+        modificationBlockExercises:
+          type: string
+          enum:
+            - NONE
+            - WITHOUT_LAST_RIGHT
+            - WITHOUT_LAST_LEFT
+
+    OneSet:
+      type: object
+      properties:
+        performance:
+          type: array
+          items:
+            $ref: '#/components/schemas/Performance'
+        status:
+          type: string
+          enum:
+            - PLAN
+            - ACTIVE
+            - DONE
+            - SKIP
+        modificationExercise:
+          type: string
+          enum:
+            - NONE
+            - CLUSTER
+            - DROP_SET
+            - SUPER_SET_RIGHT
+            - SUPER_SET_LEFT
+
+    Performance:
+      type: object
+      properties:
+        weight:
+          type: number
+          format: double
+        measure:
+          type: string
+          enum:
+            - KG
+            - LB
+        repetition:
+          type: integer
+
+    UpdatableWorkout:
+      description: Structure for a data about the workout in request to update
+      allOf:
+        - $ref: '#/components/schemas/CreatableWorkout'
+        - type: object
+          properties:
+            id:
+              type: string
     #
     InitWorkoutRequest:
       description: Structure to request the initial state when starting the web client
@@ -245,208 +245,187 @@ components:
         - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
         - $ref: './spec-workout-api.yaml#/components/schemas/BaseRequest'
         - type: object
-#
-#    InitWorkoutResponse:
-#      description: Structure to respond with the initial state when starting the web client
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseResponse'
-#        - type: object
-#
-#    CreateWorkoutRequest:
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseRequest'
-#        - type: object
-#          properties:
-#            createWorkout:
-#              $ref: '#/components/schemas/CreatableWorkout'
-#            debug:
-#              allOf:
-#                - $ref: '#/components/schemas/BaseDebugRequest'
-#                - type: object
-#                  properties:
-#                    stub:
-#                      type: string
-#                      enum:
-#                        - success
-#                        - nameEmpty
-#                        - errorDb
-#
-#    CreateWorkoutResponse:
-#      description: The structure to respond to a request about the declaration a workout
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseResponse'
-#        - type: object
-#          properties:
-#            createdWorkout:
-#              $ref: '#/components/schemas/ResponseWorkout'
-#
-#    ResponseWorkout:
-#      description: The structure describing the workout in the response
-#      allOf:
-#        - $ref: '#/components/schemas/UpdatableWorkout'
-#        - type: object
-#          properties:
-#            permissions:
-#              type: array
-#              uniqueItems: true
-#              items:
-#                $ref: '#/components/schemas/Permissions'
-#
-#    ReadWorkoutRequest:
-#      description: The structure to get workout
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseRequest'
-#        - type: object
-#          properties:
-#            readWorkoutId:
-#              type: string
-#            debug:
-#              allOf:
-#                - $ref: '#/components/schemas/BaseDebugRequest'
-#                - type: object
-#                  properties:
-#                    stub:
-#                      type: string
-#                      enum:
-#                        - success
-#                        - emptyId
-#                        - errorDb
-#
-#    ReadWorkoutResponse:
-#      description: The structure to respond to a request with a workout information
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseResponse'
-#        - type: object
-#          properties:
-#            readWorkout:
-#              $ref: '#/components/schemas/ResponseWorkout'
-#
-#    UpdateWorkoutRequest:
-#      description: Structure for request an update to an existing workout
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseRequest'
-#        - type: object
-#          properties:
-#            updateWorkout:
-#              $ref: '#/components/schemas/UpdatableWorkout'
-#            debug:
-#              allOf:
-#                - $ref: '#/components/schemas/BaseDebugRequest'
-#                - type: object
-#                  properties:
-#                    stub:
-#                      type: string
-#                      enum:
-#                        - success
-#                        - emptyTitle
-#                        - errorDb
-#
-#    UpdateWorkoutResponse:
-#      description: The structure to respond to a request with a workout information
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseResponse'
-#        - type: object
-#          properties:
-#            updateWorkout:
-#              $ref: '#/components/schemas/ResponseWorkout'
-#
-#    DeleteWorkoutRequest:
-#      description: The structure to request to delete a workout
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseRequest'
-#        - type: object
-#          properties:
-#            deleteWorkoutId:
-#              type: string
-#            debug:
-#              allOf:
-#                - $ref: '#/components/schemas/BaseDebugRequest'
-#                - type: object
-#                  properties:
-#                    stub:
-#                      type: string
-#                      enum:
-#                        - success
-#                        - emptyId
-#                        - errorDb
-#    DeleteWorkoutResponse:
-#      description: Structure to respond to a request to delete a workout
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseResponse'
-#        - type: object
-#          properties:
-#            deleteWorkout:
-#              $ref: '#/components/schemas/ResponseWorkout'
-#
-#    SearchWorkoutRequest:
-#      description: Structure to request a search of an exercise
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseRequest'
-#        - type: object
-#          properties:
-#            date:
-#              type: string
-#              format: date
-#              description: Date of workout
-#              example: 2021-08-04
-#            searchMuscleGroup:
-#              type: string
-#              description: Text of search of a muscle group
-#            searchExercise:
-#              type: string
-#              description: Text of search of an exercise in workouts
-#
-#    SearchWorkoutResponse:
-#      description: Structure to respond to a request search of workout
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseResponse'
-#        - type: object
-#          properties:
-#            foundWorkouts:
-#              type: array
-#              items:
-#                $ref: '#/components/schemas/ResponseWorkout'
-#
-#    ChainOfExerciseRequest:
-#      description: Structure to request to get a chain of exercise
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseRequest'
-#        - type: object
-#          properties:
-#            readWorkoutId:
-#              type: string
-#            debug:
-#              allOf:
-#                - $ref: '#/components/schemas/BaseDebugRequest'
-#                - type: object
-#                  properties:
-#                    stub:
-#                      type: string
-#                      enum:
-#                        - success
-#                        - emptyId
-#                        - errorDb
-#
-#    ChainOfExerciseResponse:
-#      description: Structure to respond to a request to get a chain of exercise
-#      allOf:
-#        - $ref: '#/components/schemas/BaseMessage'
-#        - $ref: '#/components/schemas/BaseResponse'
-#        - type: object
-#        #          properties:
-#        #            chainOfExercise:
-#        #              type: array
-#        #              items:
-#        #                $ref: '#/components/schemas/ResponseExercise'
+
+    InitWorkoutResponse:
+      description: Structure to respond with the initial state when starting the web client
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseResponse'
+        - type: object
+
+    CreateWorkoutRequest:
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            createWorkout:
+              $ref: '#/components/schemas/CreatableWorkout'
+            debug:
+              allOf:
+                - $ref: './spec-workout-api.yaml#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - nameEmpty
+                        - errorDb
+
+    CreateWorkoutResponse:
+      description: The structure to respond to a request about the declaration a workout
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            createdWorkout:
+              $ref: '#/components/schemas/ResponseWorkout'
+
+    ResponseWorkout:
+      description: The structure describing the workout in the response
+      allOf:
+        - $ref: '#/components/schemas/UpdatableWorkout'
+        - type: object
+          properties:
+            permissions:
+              type: array
+              uniqueItems: true
+              items:
+                $ref: './spec-workout-api.yaml#/components/schemas/Permissions'
+
+    ReadWorkoutRequest:
+      description: The structure to get workout
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            readWorkoutId:
+              type: string
+            debug:
+              allOf:
+                - $ref: './spec-workout-api.yaml#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - errorDb
+
+    ReadWorkoutResponse:
+      description: The structure to respond to a request with a workout information
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            readWorkout:
+              $ref: '#/components/schemas/ResponseWorkout'
+
+    UpdateWorkoutRequest:
+      description: Structure for request an update to an existing workout
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            updateWorkout:
+              $ref: '#/components/schemas/UpdatableWorkout'
+            debug:
+              allOf:
+                - $ref: './spec-workout-api.yaml#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyTitle
+                        - errorDb
+
+    UpdateWorkoutResponse:
+      description: The structure to respond to a request with a workout information
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            updateWorkout:
+              $ref: '#/components/schemas/ResponseWorkout'
+
+    DeleteWorkoutRequest:
+      description: The structure to request to delete a workout
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            deleteWorkoutId:
+              type: string
+            debug:
+              allOf:
+                - $ref: './spec-workout-api.yaml#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - errorDb
+    DeleteWorkoutResponse:
+      description: Structure to respond to a request to delete a workout
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            deleteWorkout:
+              $ref: '#/components/schemas/ResponseWorkout'
+
+    SearchWorkoutRequest:
+      description: Structure to request a search of an exercise
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            date:
+              type: string
+              format: date
+              description: Date of workout
+              example: 2021-08-04
+            searchMuscleGroup:
+              type: string
+              description: Text of search of a muscle group
+            searchExercise:
+              type: string
+              description: Text of search of an exercise in workouts
+
+    SearchWorkoutResponse:
+      description: Structure to respond to a request search of workout
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            foundWorkouts:
+              type: array
+              items:
+                $ref: '#/components/schemas/ResponseWorkout'
+
+    ChainOfExerciseResponse:
+      description: Structure to respond to a request to get a chain of exercise
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            chainOfExercise:
+              type: array
+              items:
+                $ref: './spec-workout-api-exercise.yaml#/components/schemas/ResponseExercise'
