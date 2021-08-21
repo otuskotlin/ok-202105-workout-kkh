@@ -123,7 +123,7 @@ private fun ExerciseModel.toTransport() = ResponseExercise(
 )
 
 private fun WorkoutModel.toTransport() = ResponseWorkout(
-    date = date.takeIf { date.isNotBlank() },
+    date = workoutDate,
     duration = duration.takeIf { it > 0.0 } ?: 0.0,
     recoveryTime = recoveryTime.takeIf { it > 0.0 } ?: 0.0,
     modificationWorkout = ResponseWorkout.ModificationWorkout.valueOf(modificationWorkout.name),

@@ -1,7 +1,7 @@
 package ru.workout.otuskotlin.workout.backend.common.models
 
 data class WorkoutModel(
-    var date: String = "",
+    var workoutDate: String = "",
     /* Duration of workout */
     var duration: Double = 0.0,
     /* Recovery time between exercises */

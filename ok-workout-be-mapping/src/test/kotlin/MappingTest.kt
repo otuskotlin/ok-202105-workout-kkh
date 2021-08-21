@@ -3,14 +3,13 @@ import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.models.*
 import ru.workout.otuskotlin.workout.backend.common.models.ExercisePermissions
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
-import java.time.LocalDate
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class MappingTest {
 
-    private val date: String = "2021-08-01"
+    private val workoutDate: String = "2021-08-01"
 
     private val exercise = ExerciseModel(
         title = "Приседания со штангой",
@@ -41,7 +40,7 @@ class MappingTest {
     )
 
     private val workout = WorkoutModel(
-        date = "2021-08-02",
+        workoutDate = "2021-08-02",
         duration = 100.0,
         recoveryTime = 90.0,
         modificationWorkout = WorkoutModel.ModificationWorkout.CLASSIC,
@@ -201,7 +200,7 @@ class MappingTest {
             )
         )
         println(beContext)
-        assertEquals("2021-09-09", beContext.requestWorkout.date)
+        assertEquals("2021-09-09", beContext.requestWorkout.workoutDate)
         assertTrue(beContext.requestWorkout.duration > 0)
         assertTrue(beContext.requestWorkout.recoveryTime > 0)
         assertEquals(WorkoutModel.ModificationWorkout.CLASSIC, beContext.requestWorkout.modificationWorkout)
@@ -275,14 +274,14 @@ class MappingTest {
     fun searchWorkoutRequest() {
         beContext.setQuery(
             SearchWorkoutRequest(
-                date = date,
+                date = workoutDate,
                 searchMuscleGroup = "Квадрицепсы",
                 searchExercise = "Приседания",
             )
         )
-        println(beContext)
-        assertTrue("date must be $date") {
-            beContext.requestSearchWorkout.date == LocalDate.parse("2021-08-01")
+
+        assertTrue("date must be $workoutDate") {
+            beContext.requestSearchWorkout.workoutDate == workoutDate
         }
     }
 
