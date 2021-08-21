@@ -118,7 +118,7 @@ private fun ExerciseModel.toTransport() = ResponseExercise(
     targetMuscleGroup = targetMuscleGroup.takeIf { it.isNotEmpty() },
     synergisticMuscleGroup = synergisticMuscleGroup.takeIf { it.isNotEmpty() },
     executionTechnique = executionTechnique.takeIf { it.isNotBlank() },
-    id = idExercise.takeIf { it != ExerciseIdModel.NONE }?.toString(),
+    id = idExercise.takeIf { it != ExerciseIdModel.NONE }?.asString(),
     permissions = permissions.takeIf { it.isNotEmpty() }?.map { Permissions.valueOf(it.name) }?.toSet()
 )
 
@@ -128,7 +128,7 @@ private fun WorkoutModel.toTransport() = ResponseWorkout(
     recoveryTime = recoveryTime.takeIf { it > 0.0 } ?: 0.0,
     modificationWorkout = ResponseWorkout.ModificationWorkout.valueOf(modificationWorkout.name),
     exercisesBlock = exercisesBlock.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
-    id = idWorkout.toString(),
+    id = idWorkout.asString(),
     permissions = permissions.takeIf { it.isNotEmpty() }?.map { Permissions.valueOf(it.name) }?.toSet()
 )
 
