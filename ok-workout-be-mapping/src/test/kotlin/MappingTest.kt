@@ -1,7 +1,7 @@
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.models.*
-import ru.workout.otuskotlin.workout.backend.common.toInstant
+import ru.workout.otuskotlin.workout.backend.common.convertToInstant
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -40,7 +40,7 @@ class MappingTest {
     )
 
     private val workout = WorkoutModel(
-        workoutDate = "2021-08-02 14:10 +05".toInstant(),
+        workoutDate = "2021-08-02 14:10 +05".convertToInstant(),
         duration = 100.0,
         recoveryTime = 90.0,
         modificationWorkout = WorkoutModel.ModificationWorkout.CLASSIC,
@@ -200,7 +200,7 @@ class MappingTest {
             )
         )
         println(beContext)
-        assertEquals("2021-09-09 15:40 +05".toInstant(), beContext.requestWorkout.workoutDate)
+        assertEquals("2021-09-09 15:40 +05".convertToInstant(), beContext.requestWorkout.workoutDate)
         assertTrue(beContext.requestWorkout.duration > 0)
         assertTrue(beContext.requestWorkout.recoveryTime > 0)
         assertEquals(WorkoutModel.ModificationWorkout.CLASSIC, beContext.requestWorkout.modificationWorkout)
@@ -280,7 +280,7 @@ class MappingTest {
             )
         )
 
-        assertEquals(beContext.requestSearchWorkout.workoutDate, workoutDate.toInstant())
+        assertEquals(beContext.requestSearchWorkout.workoutDate, workoutDate.convertToInstant())
     }
 
     @Test
