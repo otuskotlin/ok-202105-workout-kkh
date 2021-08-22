@@ -10,7 +10,7 @@ openApiGenerate {
     apiPackage.set("$openapiGroup.api")
     modelPackage.set("$openapiGroup.models")
     invokerPackage.set("$openapiGroup.invoker")
-    inputSpec.set("$rootDir/specs/spec-workout-api-v0.0.yaml")
+    inputSpec.set("$rootDir/specs/spec-workout-api.yaml")
 
     globalProperties.apply {
         put("models", "")

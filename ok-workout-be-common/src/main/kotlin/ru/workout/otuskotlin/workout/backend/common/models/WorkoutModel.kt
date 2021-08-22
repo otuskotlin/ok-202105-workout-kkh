@@ -1,7 +1,9 @@
 package ru.workout.otuskotlin.workout.backend.common.models
 
+import java.time.Instant
+
 data class WorkoutModel(
-    var date: String = "",
+    var workoutDate: Instant = Instant.now(),
     /* Duration of workout */
     var duration: Double = 0.0,
     /* Recovery time between exercises */

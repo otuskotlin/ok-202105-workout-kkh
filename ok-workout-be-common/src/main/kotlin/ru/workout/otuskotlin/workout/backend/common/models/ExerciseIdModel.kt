@@ -6,5 +6,7 @@ value class ExerciseIdModel(private val id: String) {
         val NONE = ExerciseIdModel("")
     }
 
+    fun asString() = toString()
+
     override fun toString(): String = id
 }
