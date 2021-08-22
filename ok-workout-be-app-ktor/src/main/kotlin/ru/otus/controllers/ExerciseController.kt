@@ -6,9 +6,7 @@ import io.ktor.response.*
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.otus.services.ExerciseService
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.mapping.openapi.setQuery
-import ru.workout.otuskotlin.workout.backend.mapping.openapi.toCreateExerciseResponse
-import ru.workout.otuskotlin.workout.backend.mapping.openapi.toReadExerciseResponse
+import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 
 suspend fun ApplicationCall.createExercise(exerciseService: ExerciseService) {
     val createExerciseRequest = receive<CreateExerciseRequest>()
@@ -34,7 +32,7 @@ suspend fun ApplicationCall.updateExercise(exerciseService: ExerciseService) {
     respond(
         BeContext().setQuery(updateExerciseRequest).let {
             exerciseService.updateExercise(it)
-        }
+        }.toUpdateExerciseResponse()
     )
 }
 
@@ -43,7 +41,7 @@ suspend fun ApplicationCall.deleteExercise(exerciseService: ExerciseService) {
     respond(
         BeContext().setQuery(deleteExerciseRequest).let {
             exerciseService.deleteExercise(it)
-        }
+        }.toUpdateExerciseResponse()
     )
 }
 
@@ -52,6 +50,6 @@ suspend fun ApplicationCall.searchExercise(exerciseService: ExerciseService) {
     respond(
         BeContext().setQuery(searchExerciseRequest).let {
             exerciseService.searchExercise(it)
-        }
+        }.toSearchExerciseResponse()
     )
 }
