@@ -8,8 +8,6 @@ plugins {
     kotlin("jvm")
 }
 
-group = "ru.otus"
-version = "0.0.1"
 application {
     mainClass.set("io.ktor.server.netty.EngineMain")
 }

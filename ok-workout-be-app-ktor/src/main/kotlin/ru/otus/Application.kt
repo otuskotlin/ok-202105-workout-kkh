@@ -19,8 +19,7 @@ fun Application.module(testing: Boolean = false) {
 
     val exerciseService = ExerciseService()
 
-    install(Routing)
-
+//    install(Routing)
 //    install(DefaultHeaders)
 //    install(CORS) {
 //        method(HttpMethod.Options)
@@ -31,7 +30,6 @@ fun Application.module(testing: Boolean = false) {
 //        header("MyCustomHeader")
 //        allowCredentials = true
 //    }
-
     install(ContentNegotiation) {
         jackson {
             disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
@@ -43,7 +41,6 @@ fun Application.module(testing: Boolean = false) {
 
 //    install(AutoHeadResponse)
 
-//    install(Routing)
     routing {
         get("/") {
             call.respondText("Hello, world!")
