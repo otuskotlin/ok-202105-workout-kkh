@@ -8,6 +8,7 @@ import io.ktor.http.*
 import io.ktor.jackson.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import ru.otus.services.ExerciseService
 
 fun main(args: Array<String>): Unit =
     io.ktor.server.netty.EngineMain.main(args)
@@ -16,16 +17,20 @@ fun main(args: Array<String>): Unit =
 @JvmOverloads
 fun Application.module(testing: Boolean = false) {
 
-    install(DefaultHeaders)
-    install(CORS) {
-        method(HttpMethod.Options)
-        method(HttpMethod.Put)
-        method(HttpMethod.Delete)
-        method(HttpMethod.Patch)
-        header(HttpHeaders.Authorization)
-        header("MyCustomHeader")
-        allowCredentials = true
-    }
+    val exerciseService = ExerciseService()
+
+    install(Routing)
+
+//    install(DefaultHeaders)
+//    install(CORS) {
+//        method(HttpMethod.Options)
+//        method(HttpMethod.Put)
+//        method(HttpMethod.Delete)
+//        method(HttpMethod.Patch)
+//        header(HttpHeaders.Authorization)
+//        header("MyCustomHeader")
+//        allowCredentials = true
+//    }
 
     install(ContentNegotiation) {
         jackson {
@@ -36,12 +41,13 @@ fun Application.module(testing: Boolean = false) {
         }
     }
 
-    install(AutoHeadResponse)
+//    install(AutoHeadResponse)
 
-    install(Routing)
+//    install(Routing)
     routing {
         get("/") {
             call.respondText("Hello, world!")
         }
+        exercise(exerciseService)
     }
 }
