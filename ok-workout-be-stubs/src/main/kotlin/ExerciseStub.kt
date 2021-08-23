@@ -2,7 +2,7 @@ import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
 
 object ExerciseStub {
-    private val stubReady = ExerciseModel(
+    private val exerciseStubReady = ExerciseModel(
         title = "Приседания со штангой",
         description = "",
         targetMuscleGroup = mutableListOf("Квадрицепсы"),
@@ -15,5 +15,5 @@ object ExerciseStub {
         idExercise = ExerciseIdModel(id = "eID:0001")
     )
 
-    fun getModelExercise() = stubReady
+    fun getModelExercise() = exerciseStubReady
 }

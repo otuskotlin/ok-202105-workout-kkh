@@ -25,5 +25,7 @@ fun Routing.exercise(exerciseService: ExerciseService) = route("exercise") {
 }
 
 fun Routing.workout(workoutService: WorkoutService) = route("workout") {
-
+    post("create") {
+        call.createWorkout(workoutService)
+    }
 }
