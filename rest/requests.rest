@@ -79,3 +79,13 @@ Content-Type: application/json
     "stub": "success"
   }
 }
+
+###
+
+POST http://127.0.0.1:8080/workout/create
+Content-Type: application/json
+
+{
+"messageType":"CreateWorkoutRequest",
+"requestId":"id:123",
+"createWorkout":{"date":"2021-08-11 14:00 +03","duration":0.0,"recoveryTime":60.0,"modificationWorkout":"CLASSIC","exercisesBlock":[{"exercise":{"title":"Приседания со штангой","description":"Базовое упражнение","targetMuscleGroup":["Квадрицепсы"],"synergisticMuscleGroup":["Большие ягодичные","Приводящие бедра","Камбаловидные"],"executionTechnique":"При выполнении приседаний можно варьировать положение ног, но обычно рекомендуют ставить носки врозь, а ноги примерно на ширине плеч","id":null,"permissions":null},"sets":[{"performance":[{"weight":80.0,"measure":"KG","repetition":10}],"status":"PLAN","modificationExercise":"NONE"}],"modificationBlockExercises":"NONE"}]},"debug":null}
