@@ -1,11 +1,11 @@
 package ru.otus.plugins
 
+import ExerciseService
+import WorkoutService
 import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import ru.otus.exercise
-import ru.otus.services.ExerciseService
-import ru.otus.services.WorkoutService
 import ru.otus.workout
 
 fun Application.configRouting() {

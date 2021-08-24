@@ -1,10 +1,10 @@
 package ru.otus
 
+import ExerciseService
+import WorkoutService
 import io.ktor.application.*
 import io.ktor.routing.*
 import ru.otus.controllers.*
-import ru.otus.services.ExerciseService
-import ru.otus.services.WorkoutService
 
 fun Routing.exercise(exerciseService: ExerciseService) = route("exercise") {
     post("create") {

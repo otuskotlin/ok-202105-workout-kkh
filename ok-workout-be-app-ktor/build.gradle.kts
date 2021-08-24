@@ -27,9 +27,11 @@ dependencies {
 
     implementation("io.ktor:ktor-jackson:$ktorVersion")
 
-
+    // transport
     implementation(project(":ok-workout-be-common"))
     implementation(project(":ok-workout-be-mapping"))
-    implementation(project(":ok-workout-be-stubs"))
     implementation(project(":ok-workout-be-transport-openapi"))
+
+    // service
+    implementation(project(":ok-workout-be-service-openapi"))
 }
