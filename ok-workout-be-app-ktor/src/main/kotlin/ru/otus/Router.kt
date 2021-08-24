@@ -28,4 +28,16 @@ fun Routing.workout(workoutService: WorkoutService) = route("workout") {
     post("create") {
         call.createWorkout(workoutService)
     }
+    post("read") {
+        call.readWorkout(workoutService)
+    }
+    post("update") {
+        call.updateWorkout(workoutService)
+    }
+    post("delete") {
+        call.deleteWorkout(workoutService)
+    }
+    post("search") {
+        call.searchWorkout(workoutService)
+    }
 }

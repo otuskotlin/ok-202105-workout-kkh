@@ -8,4 +8,24 @@ class WorkoutService {
             responseWorkout = WorkoutStub.getModelWorkout()
         }
     }
+    fun readWorkout(beContext: BeContext): BeContext {
+        return beContext.apply {
+            responseWorkout = WorkoutStub.getModelWorkout()
+        }
+    }
+    fun updateWorkout(beContext: BeContext): BeContext {
+        return beContext.apply {
+            responseWorkout = WorkoutStub.getModelWorkout()
+        }
+    } fun deleteWorkout(beContext: BeContext): BeContext {
+        return beContext.apply {
+            responseWorkout = WorkoutStub.getModelWorkout()
+        }
+    }
+    fun searchWorkout(beContext: BeContext): BeContext {
+        return beContext.apply {
+            responseWorkout = WorkoutStub.getModelWorkout()
+        }
+    }
+
 }
