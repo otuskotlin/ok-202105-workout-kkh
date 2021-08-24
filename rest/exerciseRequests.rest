@@ -30,8 +30,8 @@ Content-Type: application/json
 
 {
   "messageType": "ReadExerciseRequest",
-  "requestId": "rID:0001",
-  "readExerciseId": "eID:0001",
+  "requestId": "rID:0002",
+  "readExerciseId": "eID:00011",
   "debug": {
     "mode": "stub",
     "stub": "success"
@@ -45,8 +45,8 @@ Content-Type: application/json
 
 {
   "messageType": "ReadExerciseRequest",
-  "requestId": "12345",
-  "readExerciseId": "eID:0002",
+  "requestId": "rID:0003",
+  "readExerciseId": "eID:00012",
   "debug": {
     "mode": "stub",
     "stub": "success"
@@ -60,7 +60,7 @@ Content-Type: application/json
 
 {
   "messageType": "UpdateExerciseRequest",
-  "requestId": "rID:0003",
+  "requestId": "rID:0004",
   "updateExercise": {
     "title": "Подтягивания",
     "description": "Базовое упражнение",
@@ -82,10 +82,30 @@ Content-Type: application/json
 
 ###
 
-POST http://127.0.0.1:8080/workout/create
+POST http://127.0.0.1:8080/exercise/delete
 Content-Type: application/json
 
 {
-"messageType":"CreateWorkoutRequest",
-"requestId":"id:123",
-"createWorkout":{"date":"2021-08-11 14:00 +03","duration":0.0,"recoveryTime":60.0,"modificationWorkout":"CLASSIC","exercisesBlock":[{"exercise":{"title":"Приседания со штангой","description":"Базовое упражнение","targetMuscleGroup":["Квадрицепсы"],"synergisticMuscleGroup":["Большие ягодичные","Приводящие бедра","Камбаловидные"],"executionTechnique":"При выполнении приседаний можно варьировать положение ног, но обычно рекомендуют ставить носки врозь, а ноги примерно на ширине плеч","id":null,"permissions":null},"sets":[{"performance":[{"weight":80.0,"measure":"KG","repetition":10}],"status":"PLAN","modificationExercise":"NONE"}],"modificationBlockExercises":"NONE"}]},"debug":null}
+  "messageType": "DeleteExerciseRequest",
+  "requestId": "rID:0005",
+  "deleteExerciseId": "eID:0001",
+  "debug": {
+    "mode": "stub",
+    "stub": "success"
+  }
+}
+
+###
+
+POST http://127.0.0.1:8080/exercise/search
+Content-Type: application/json
+
+{
+  "messageType": "SearchExerciseRequest",
+  "requestId": "rID:0006",
+  "search": "Приседания",
+  "debug": {
+    "mode": "stub",
+    "stub": "success"
+  }
+}

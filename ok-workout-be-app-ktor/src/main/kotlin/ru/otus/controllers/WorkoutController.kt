@@ -1,10 +1,10 @@
 package ru.otus.controllers
 
+import WorkoutService
 import io.ktor.application.*
 import io.ktor.request.*
 import io.ktor.response.*
 import ru.otus.otuskotlin.workout.openapi.models.*
-import ru.otus.services.WorkoutService
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 
