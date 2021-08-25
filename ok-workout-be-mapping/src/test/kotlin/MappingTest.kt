@@ -518,7 +518,7 @@ class MappingTest {
         val response = beContext.toChainOfExercises()
         println(response)
         assertEquals("rID:0001", response.requestId)
-        assertEquals(ChainOfExerciseResponse.Result.SUCCESS, response.result)
+        assertEquals(ChainOfExercisesResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
         assertTrue(response.chainOfExercise?.isNotEmpty() ?: false)
     }

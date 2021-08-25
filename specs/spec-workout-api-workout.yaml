@@ -126,12 +126,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SearchWorkoutResponse'
-  /chainOfExercise:
+  /chainOfExercises:
     post:
       tags:
         - workout
       summary: Get exercise sequence
-      operationId: chainOfExercise
+      operationId: chainOfExercises
       requestBody:
         description: The request object to get sequence of exercise
         content:
@@ -145,7 +145,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ChainOfExerciseResponse'
+                $ref: '#/components/schemas/ChainOfExercisesResponse'
 
 components:
   schemas:
@@ -418,7 +418,7 @@ components:
               items:
                 $ref: '#/components/schemas/ResponseWorkout'
 
-    ChainOfExerciseResponse:
+    ChainOfExercisesResponse:
       description: Structure to respond to a request to get a chain of exercise
       allOf:
         - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
