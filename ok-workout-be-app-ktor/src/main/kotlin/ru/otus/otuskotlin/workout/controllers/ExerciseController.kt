@@ -8,6 +8,20 @@ import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import java.time.Instant
 
+suspend fun ApplicationCall.initExercise(exerciseService: ExerciseService) {
+    val initExerciseRequest = receive<InitExerciseRequest>()
+    val context = BeContext(
+        startTime = Instant.now()
+    )
+
+    val result = try {
+        exerciseService.initExercise(context, initExerciseRequest)
+    } catch (e: Exception) {
+        exerciseService.errorExercise(context, e) as InitExerciseResponse
+    }
+    respond(result)
+}
+
 suspend fun ApplicationCall.createExercise(exerciseService: ExerciseService) {
     val createExerciseRequest = receive<CreateExerciseRequest>()
     val context = BeContext(
