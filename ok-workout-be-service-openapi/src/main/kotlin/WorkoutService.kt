@@ -1,10 +1,16 @@
+import ru.otus.otuskotlin.workout.openapi.models.BaseMessage
+import ru.otus.otuskotlin.workout.openapi.models.CreateWorkoutRequest
+import ru.otus.otuskotlin.workout.openapi.models.CreateWorkoutResponse
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
+import ru.workout.otuskotlin.workout.backend.mapping.openapi.setQuery
+import ru.workout.otuskotlin.workout.backend.mapping.openapi.toCreateWorkoutResponse
+import ru.workout.otuskotlin.workout.backend.mapping.openapi.toReadWorkoutResponse
+import java.time.Instant
 
 class WorkoutService {
-    fun createWorkout(beContext: BeContext): BeContext {
-        return beContext.apply {
-            responseWorkout = WorkoutStub.getModelWorkout()
-        }
+    fun createWorkout(context: BeContext, request: CreateWorkoutRequest): CreateWorkoutResponse {
+        context.setQuery(request)
+        return context.toCreateWorkoutResponse()
     }
 
     fun readWorkout(beContext: BeContext): BeContext {
@@ -37,4 +43,10 @@ class WorkoutService {
         }
     }
 
+    fun errorWorkout(context: BeContext, e: Throwable): BaseMessage {
+        context.addError {
+            from(e)
+        }
+        return context.toReadWorkoutResponse()
+    }
 }

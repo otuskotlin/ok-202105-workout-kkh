@@ -7,15 +7,21 @@ import io.ktor.response.*
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
+import java.time.Instant
 
 suspend fun ApplicationCall.createWorkout(workoutService: WorkoutService) {
     val createWorkoutRequest = receive<CreateWorkoutRequest>()
-
-    respond(
-        BeContext().setQuery(createWorkoutRequest).let {
-            workoutService.createWorkout(it)
-        }.toCreateWorkoutResponse()
+    val context = BeContext(
+        startTime = Instant.now()
     )
+
+    val result = try {
+        workoutService.createWorkout(context, createWorkoutRequest)
+    } catch (e: Throwable) {
+        workoutService.errorWorkout(context, e) as CreateWorkoutResponse
+    }
+
+    respond(result)
 }
 
 suspend fun ApplicationCall.readWorkout(workoutService: WorkoutService) {
