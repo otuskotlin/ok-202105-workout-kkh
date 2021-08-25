@@ -15,7 +15,7 @@ fun Application.configRouting() {
 
     routing {
         get("/") {
-            call.respondText("Hello, world!")
+            call.respondText("Hello, Ktor!")
         }
         exercise(exerciseService)
         workout(workoutService)

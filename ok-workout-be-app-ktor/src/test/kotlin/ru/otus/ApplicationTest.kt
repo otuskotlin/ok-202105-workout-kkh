@@ -10,4 +10,13 @@ import io.ktor.server.testing.*
 import ru.otus.plugins.*
 
 class ApplicationTest {
+    @Test
+    fun `root endpoint`() {
+        withTestApplication(Application::module) {
+            handleRequest(HttpMethod.Get, "/").apply {
+                assertEquals(HttpStatusCode.OK, response.status())
+                assertEquals("Hello, Ktor!", response.content)
+            }
+        }
+    }
 }
