@@ -24,10 +24,9 @@ class WorkoutService {
         return context.toDeleteWorkoutResponse()
     }
 
-    fun searchWorkout(beContext: BeContext): BeContext {
-        return beContext.apply {
-            responseWorkout = WorkoutStub.getModelWorkout()
-        }
+    fun searchWorkout(context: BeContext, request: SearchWorkoutRequest): SearchWorkoutResponse {
+        context.setQuery(request)
+        return context.toSearchWorkoutResponse()
     }
 
     fun chainOfExercises(beContext: BeContext): BeContext {
