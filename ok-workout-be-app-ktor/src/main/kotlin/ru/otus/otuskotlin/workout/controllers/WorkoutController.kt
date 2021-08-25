@@ -40,12 +40,16 @@ suspend fun ApplicationCall.readWorkout(workoutService: WorkoutService) {
 
 suspend fun ApplicationCall.updateWorkout(workoutService: WorkoutService) {
     val updateWorkoutRequest = receive<UpdateWorkoutRequest>()
-
-    respond(
-        BeContext().setQuery(updateWorkoutRequest).let {
-            workoutService.updateWorkout(it)
-        }.toUpdateWorkoutResponse()
+    val context = BeContext(
+        startTime = Instant.now()
     )
+    val result = try {
+        workoutService.updateWorkout(context, updateWorkoutRequest)
+    } catch (e: Throwable) {
+        workoutService.errorWorkout(context, e) as UpdateWorkoutResponse
+    }
+
+    respond(result)
 }
 
 suspend fun ApplicationCall.deleteWorkout(workoutService: WorkoutService) {
