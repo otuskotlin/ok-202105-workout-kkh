@@ -31,4 +31,10 @@ class WorkoutService {
         }
     }
 
+    fun chainOfExercises(beContext: BeContext): BeContext {
+        return beContext.apply {
+            responseExercises = ExerciseStub.getModelExercises()
+        }
+    }
+
 }

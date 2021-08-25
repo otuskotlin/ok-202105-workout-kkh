@@ -57,3 +57,13 @@ suspend fun ApplicationCall.searchWorkout(workoutService: WorkoutService) {
         }.toSearchWorkoutResponse()
     )
 }
+
+suspend fun ApplicationCall.chainOfExercises(workoutService: WorkoutService) {
+    val readWorkoutRequest = receive<ReadWorkoutRequest>()
+
+    respond(
+        BeContext().setQuery(readWorkoutRequest).let {
+            workoutService.chainOfExercises(it)
+        }.toChainOfExercises()
+    )
+}

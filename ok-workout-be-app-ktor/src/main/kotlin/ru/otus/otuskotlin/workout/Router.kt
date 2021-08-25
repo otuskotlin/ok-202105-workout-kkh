@@ -40,4 +40,7 @@ fun Routing.workout(workoutService: WorkoutService) = route("workout") {
     post("search") {
         call.searchWorkout(workoutService)
     }
+    post("chainOfExercises") {
+        call.chainOfExercises(workoutService)
+    }
 }
