@@ -28,10 +28,10 @@ class ExerciseService {
         return context.toDeleteExerciseResponse()
     }
 
-    fun searchExercise(beContext: BeContext): BeContext {
-        return beContext.apply {
-            foundExercises = ExerciseStub.getModelExercises()
-        }
+    fun searchExercise(context: BeContext, request: SearchExerciseRequest): SearchExerciseResponse {
+        context.setQuery(request)
+        context.foundExercises = ExerciseStub.getModelExercises()
+        return context.toSearchExerciseResponse()
     }
 
     fun errorExercise(context: BeContext, e: Throwable): BaseMessage {
