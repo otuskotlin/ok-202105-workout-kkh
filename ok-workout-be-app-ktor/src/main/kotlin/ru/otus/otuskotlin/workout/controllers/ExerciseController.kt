@@ -41,7 +41,7 @@ suspend fun ApplicationCall.deleteExercise(exerciseService: ExerciseService) {
     respond(
         BeContext().setQuery(deleteExerciseRequest).let {
             exerciseService.deleteExercise(it)
-        }.toUpdateExerciseResponse()
+        }.toDeleteExerciseResponse()
     )
 }
 
