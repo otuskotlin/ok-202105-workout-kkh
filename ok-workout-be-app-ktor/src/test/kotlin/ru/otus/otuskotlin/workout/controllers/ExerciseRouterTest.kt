@@ -63,7 +63,7 @@ class ExerciseRouterTest : RouterTest() {
             assertEquals(SearchExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
             assertNotNull(foundExercises)
-//            assertEquals(foundExercises!!.map { it.id }, ExerciseStubs {})
+            assertEquals(2, foundExercises?.size)
         }
     }
 }

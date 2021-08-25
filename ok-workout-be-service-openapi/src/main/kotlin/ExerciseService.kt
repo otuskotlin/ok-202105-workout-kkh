@@ -28,7 +28,7 @@ class ExerciseService {
 
     fun searchExercise(beContext: BeContext): BeContext {
         return beContext.apply {
-            responseExercise = ExerciseStub.getModelExercise()
+            foundExercises = ExerciseStub.getModelExercises()
         }
     }
 
