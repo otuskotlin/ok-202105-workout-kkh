@@ -32,6 +32,8 @@ dependencies {
     implementation(project(":ok-workout-be-mapping"))
     implementation(project(":ok-workout-be-transport-openapi"))
 
+    implementation(project(":ok-workout-be-stubs"))
+
     // service
     implementation(project(":ok-workout-be-service-openapi"))
 }
