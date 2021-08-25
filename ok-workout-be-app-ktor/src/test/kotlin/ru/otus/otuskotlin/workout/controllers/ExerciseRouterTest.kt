@@ -40,7 +40,6 @@ class ExerciseRouterTest : RouterTest() {
             assertEquals(UpdateExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
             assertEquals(Utils.stubResponseExercise, updateExercise)
-//            assertEquals(Utils.stubResponseExercise.copy(permissions = null), updateExercise)
         }
     }
 
