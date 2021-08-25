@@ -18,5 +18,15 @@ data class BeContext(
     var requestSearchWorkout: SearchWorkoutModel = SearchWorkoutModel(),
     var errors: MutableList<IError> = mutableListOf(),
     var foundExercises: MutableList<ExerciseModel> = mutableListOf(),
-    var foundWorkouts: MutableList<WorkoutModel> = mutableListOf()
-)
+    var foundWorkouts: MutableList<WorkoutModel> = mutableListOf(),
+    var status: CorStatus = CorStatus.STARTED
+) {
+    fun addError(failingStatus: Boolean = true, lambda: CommonErrorModel.() -> Unit) = apply {
+        if (failingStatus) status = CorStatus.FAILING
+        errors.add(
+            CommonErrorModel(
+                field = "_", level = IError.Level.ERROR
+            ).apply(lambda)
+        )
+    }
+}
