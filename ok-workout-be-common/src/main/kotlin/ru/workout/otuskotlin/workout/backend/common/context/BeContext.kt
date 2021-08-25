@@ -1,8 +1,10 @@
 package ru.workout.otuskotlin.workout.backend.common.context
 
 import ru.workout.otuskotlin.workout.backend.common.models.*
+import java.time.Instant
 
 data class BeContext(
+    var startTime: Instant = Instant.MIN,
     var requestId: String = "",
     var requestExerciseId: ExerciseIdModel = ExerciseIdModel.NONE,
     var requestExercise: ExerciseModel = ExerciseModel(),
