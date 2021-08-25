@@ -20,17 +20,20 @@ suspend fun ApplicationCall.createExercise(exerciseService: ExerciseService) {
     } catch (e: Throwable) {
         exerciseService.errorExercise(context, e) as CreateExerciseResponse
     }
-
     respond(result)
 }
 
 suspend fun ApplicationCall.readExercise(exerciseService: ExerciseService) {
     val readExerciseRequest = receive<ReadExerciseRequest>()
-    respond(
-        BeContext().setQuery(readExerciseRequest).let {
-            exerciseService.readExercise(it)
-        }.toReadExerciseResponse()
+    val context = BeContext(
+        startTime = Instant.now()
     )
+    val result = try {
+        exerciseService.readExercise(context, readExerciseRequest)
+    } catch (e: Throwable) {
+        exerciseService.errorExercise(context, e) as ReadExerciseResponse
+    }
+    respond(result)
 }
 
 suspend fun ApplicationCall.updateExercise(exerciseService: ExerciseService) {
