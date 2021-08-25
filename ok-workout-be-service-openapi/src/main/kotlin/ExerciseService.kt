@@ -3,6 +3,7 @@ import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.setQuery
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.toCreateExerciseResponse
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.toReadExerciseResponse
+import ru.workout.otuskotlin.workout.backend.mapping.openapi.toUpdateExerciseResponse
 
 class ExerciseService {
 
@@ -18,10 +19,10 @@ class ExerciseService {
         return context.toReadExerciseResponse()
     }
 
-    fun updateExercise(beContext: BeContext): BeContext {
-        return beContext.apply {
-            responseExercise = ExerciseStub.getModelExercise()
-        }
+    fun updateExercise(context: BeContext, request: UpdateExerciseRequest): UpdateExerciseResponse {
+        context.setQuery(request)
+        context.responseExercise = ExerciseStub.getModelExercise()
+        return context.toUpdateExerciseResponse()
     }
 
     fun deleteExercise(beContext: BeContext): BeContext {
