@@ -6,7 +6,6 @@ import io.ktor.request.*
 import io.ktor.response.*
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 import java.time.Instant
 
 suspend fun ApplicationCall.createExercise(exerciseService: ExerciseService) {
