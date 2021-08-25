@@ -1,4 +1,4 @@
-package ru.otus.controllers
+package ru.otus.otuskotlin.workout.controllers
 
 import ExerciseService
 import io.ktor.application.*

@@ -1,13 +1,10 @@
-package ru.otus
+package ru.otus.otuskotlin.workout
 
-import io.ktor.routing.*
 import io.ktor.http.*
 import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.request.*
 import kotlin.test.*
 import io.ktor.server.testing.*
-import ru.otus.plugins.*
+import ru.otus.module
 
 class ApplicationTest {
     @Test

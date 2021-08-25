@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.jackson.*
-import ru.otus.plugins.configRouting
+import ru.otus.otuskotlin.workout.plugins.configRouting
 
 fun main(args: Array<String>): Unit =
     io.ktor.server.netty.EngineMain.main(args)
