@@ -1,9 +1,9 @@
 package ru.workout.otuskotlin.workout.backend.common.models
 
 interface IError {
-    var field: String
-    var level: Level
-    var message: String
+    val field: String
+    val level: Level
+    val message: String
 
     enum class Level {
         ERROR,
