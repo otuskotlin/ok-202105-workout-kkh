@@ -8,6 +8,17 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 class ExerciseRouterTest : RouterTest() {
+
+    @Test
+    fun testPostExerciseInit() {
+        val data = InitExerciseRequest(
+            requestId = "rID:0000"
+        )
+        testPostRequest<InitExerciseResponse>(data, "exercise/init") {
+            assertEquals(data.requestId, requestId)
+        }
+    }
+
     @Test
     fun testPostExerciseCreate() {
         val data = CreateExerciseRequest(
@@ -16,6 +27,7 @@ class ExerciseRouterTest : RouterTest() {
         )
 
         testPostRequest<CreateExerciseResponse>(data, "exercise/create") {
+            assertEquals(data.requestId, requestId)
             assertEquals(CreateExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
             assertEquals(Utils.stubResponseExercise, createdExercise)
@@ -26,10 +38,11 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseRead() {
         val data = ReadExerciseRequest(
             requestId = "rID:0002",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebug,
         )
 
         testPostRequest<ReadExerciseResponse>(data, "exercise/read") {
+            assertEquals(data.requestId, requestId)
             assertEquals(ReadExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
             assertEquals(Utils.stubResponseExercise, readExercise)
@@ -44,6 +57,7 @@ class ExerciseRouterTest : RouterTest() {
         )
 
         testPostRequest<UpdateExerciseResponse>(data, "exercise/update") {
+            assertEquals(data.requestId, requestId)
             assertEquals(UpdateExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
             assertEquals(Utils.stubResponseExercise, updateExercise)
@@ -58,6 +72,7 @@ class ExerciseRouterTest : RouterTest() {
         )
 
         testPostRequest<DeleteExerciseResponse>(data, "exercise/delete") {
+            assertEquals(data.requestId, requestId)
             assertEquals(DeleteExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
             assertEquals(Utils.stubResponseExercise, deleteExercise)
@@ -72,6 +87,7 @@ class ExerciseRouterTest : RouterTest() {
         )
 
         testPostRequest<SearchExerciseResponse>(data, "exercise/search") {
+            assertEquals(data.requestId, requestId)
             assertEquals(SearchExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
             assertNotNull(foundExercises)
