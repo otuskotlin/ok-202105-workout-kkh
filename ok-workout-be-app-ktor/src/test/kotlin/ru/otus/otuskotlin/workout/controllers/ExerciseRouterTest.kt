@@ -10,7 +10,10 @@ import kotlin.test.assertNull
 class ExerciseRouterTest : RouterTest() {
     @Test
     fun testPostExerciseCreate() {
-        val data = CreateExerciseRequest(debug = Utils.stubDebug)
+        val data = CreateExerciseRequest(
+            requestId = "rID:0001",
+            debug = Utils.stubDebug
+        )
 
         testPostRequest<CreateExerciseResponse>(data, "exercise/create") {
             assertEquals(CreateExerciseResponse.Result.SUCCESS, result)
@@ -22,6 +25,7 @@ class ExerciseRouterTest : RouterTest() {
     @Test
     fun testPostExerciseRead() {
         val data = ReadExerciseRequest(
+            requestId = "rID:0002",
             debug = Utils.stubDebug
         )
 
@@ -34,7 +38,10 @@ class ExerciseRouterTest : RouterTest() {
 
     @Test
     fun testPostExerciseUpdate() {
-        val data = UpdateExerciseRequest(debug = Utils.stubDebug)
+        val data = UpdateExerciseRequest(
+            requestId = "rID:0003",
+            debug = Utils.stubDebug
+        )
 
         testPostRequest<UpdateExerciseResponse>(data, "exercise/update") {
             assertEquals(UpdateExerciseResponse.Result.SUCCESS, result)
@@ -45,7 +52,10 @@ class ExerciseRouterTest : RouterTest() {
 
     @Test
     fun testPostExerciseDelete() {
-        val data = DeleteExerciseRequest(debug = Utils.stubDebug)
+        val data = DeleteExerciseRequest(
+            requestId = "rID:0004",
+            debug = Utils.stubDebug
+        )
 
         testPostRequest<DeleteExerciseResponse>(data, "exercise/delete") {
             assertEquals(DeleteExerciseResponse.Result.SUCCESS, result)
@@ -56,7 +66,10 @@ class ExerciseRouterTest : RouterTest() {
 
     @Test
     fun testPostExerciseSearch() {
-        val data = SearchExerciseRequest()
+        val data = SearchExerciseRequest(
+            requestId = "rID:0005",
+            debug = Utils.stubDebug
+        )
 
         testPostRequest<SearchExerciseResponse>(data, "exercise/search") {
             assertEquals(SearchExerciseResponse.Result.SUCCESS, result)
