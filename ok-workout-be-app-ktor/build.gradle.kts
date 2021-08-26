@@ -9,6 +9,22 @@ plugins {
     id("com.bmuschko.docker-java-application")
 }
 
+docker {
+    javaApplication {
+        mainClassName.set(application.mainClass)
+        baseImage.set("adoptopenjdk/openjdk11:alpine-jre")
+        ports.set(listOf(8080))
+        val imageName = project.name
+        images.set(
+            listOf(
+                "$imageName:${project.version}",
+                "$imageName:latest"
+            )
+        )
+        jvmArgs.set(listOf("-Xms256m", "-Xmx512m"))
+    }
+}
+
 application {
     mainClass.set("io.ktor.server.netty.EngineMain")
 }
