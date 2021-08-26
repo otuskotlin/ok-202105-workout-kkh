@@ -100,7 +100,7 @@ fun BeContext.toSearchWorkoutResponse() = SearchWorkoutResponse(
     foundWorkouts = foundWorkouts.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
 )
 
-fun BeContext.toChainOfExercises() = ChainOfExercisesResponse(
+fun BeContext.toChainOfExercisesResponse() = ChainOfExercisesResponse(
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) ChainOfExercisesResponse.Result.SUCCESS
     else ChainOfExercisesResponse.Result.ERROR,

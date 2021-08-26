@@ -29,10 +29,9 @@ class WorkoutService {
         return context.toSearchWorkoutResponse()
     }
 
-    fun chainOfExercises(beContext: BeContext): BeContext {
-        return beContext.apply {
-            responseExercises = ExerciseStub.getModelExercises()
-        }
+    fun chainOfExercises(context: BeContext, request: ReadWorkoutRequest): ChainOfExercisesResponse {
+        context.setQuery(request)
+        return context.toChainOfExercisesResponse()
     }
 
     fun errorWorkout(context: BeContext, e: Throwable): BaseMessage {

@@ -82,10 +82,14 @@ suspend fun ApplicationCall.searchWorkout(workoutService: WorkoutService) {
 
 suspend fun ApplicationCall.chainOfExercises(workoutService: WorkoutService) {
     val readWorkoutRequest = receive<ReadWorkoutRequest>()
-
-    respond(
-        BeContext().setQuery(readWorkoutRequest).let {
-            workoutService.chainOfExercises(it)
-        }.toChainOfExercises()
+    val context = BeContext(
+        startTime = Instant.now()
     )
+    val result = try {
+        workoutService.chainOfExercises(context, readWorkoutRequest)
+    } catch (e: Exception) {
+        workoutService.errorWorkout(context, e) as ChainOfExercisesResponse
+    }
+
+    respond(result)
 }
