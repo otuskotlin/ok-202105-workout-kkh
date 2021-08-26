@@ -428,4 +428,4 @@ components:
             chainOfExercise:
               type: array
               items:
-                $ref: './spec-workout-api-exercise.yaml#/components/schemas/ResponseExercise'
+                $ref: '#/components/schemas/ExercisesBlock'

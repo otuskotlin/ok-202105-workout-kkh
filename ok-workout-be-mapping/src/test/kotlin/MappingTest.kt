@@ -55,7 +55,7 @@ class MappingTest {
         responseWorkout = workout,
         foundExercises = mutableListOf(exercise),
         foundWorkouts = mutableListOf(workout),
-        responseExercises = mutableListOf(exercise)
+        responseExercises = mutableListOf(exercisesBlock)
     )
 
     private val readExerciseRequest = ReadExerciseRequest(

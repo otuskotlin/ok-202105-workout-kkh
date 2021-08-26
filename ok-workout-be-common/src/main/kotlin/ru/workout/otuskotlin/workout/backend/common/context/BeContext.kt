@@ -9,7 +9,7 @@ data class BeContext(
     var requestExerciseId: ExerciseIdModel = ExerciseIdModel.NONE,
     var requestExercise: ExerciseModel = ExerciseModel(),
     var responseExercise: ExerciseModel = ExerciseModel(),
-    var responseExercises: MutableList<ExerciseModel> = mutableListOf(),
+    var responseExercises: MutableList<ExercisesBlockModel> = mutableListOf(),
     var requestSearchExercise: String = "",
     var requestWorkoutId: WorkoutIdModel = WorkoutIdModel.NONE,
     var requestWorkout: WorkoutModel = WorkoutModel(),

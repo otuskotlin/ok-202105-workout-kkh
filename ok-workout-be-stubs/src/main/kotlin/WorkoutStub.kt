@@ -2,7 +2,7 @@ import ru.workout.otuskotlin.workout.backend.common.convertToInstant
 import ru.workout.otuskotlin.workout.backend.common.models.*
 
 object WorkoutStub {
-    private val workoutStubReady = WorkoutModel(
+    private val workoutModelStub = WorkoutModel(
         workoutDate = "2021-08-23 14:00 +03".convertToInstant(),
         recoveryTime = 120.0,
         exercisesBlock = mutableListOf(
@@ -22,5 +22,5 @@ object WorkoutStub {
         )
     )
 
-    fun getModelWorkout() = workoutStubReady
+    fun getModelWorkout() = workoutModelStub
 }
