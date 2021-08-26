@@ -6,6 +6,7 @@ val kotlinVersion: String by project
 plugins {
     application
     kotlin("jvm")
+    id("com.bmuschko.docker-java-application")
 }
 
 application {
