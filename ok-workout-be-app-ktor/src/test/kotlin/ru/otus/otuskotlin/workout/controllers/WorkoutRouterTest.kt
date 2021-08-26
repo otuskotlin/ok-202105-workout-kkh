@@ -10,10 +10,11 @@ class WorkoutRouterTest : RouterTest() {
     @Test
     fun testPostWorkoutCreate() {
         val data = CreateWorkoutRequest(
-
+            requestId = "rID:0001"
         )
         testPostRequest<CreateWorkoutResponse>(data, "workout/create") {
             assertEquals(CreateWorkoutResponse.Result.SUCCESS, result)
+            assertEquals(data.requestId, requestId)
             assertNull(errors)
         }
     }

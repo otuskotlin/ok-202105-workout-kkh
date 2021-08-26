@@ -6,7 +6,6 @@ import io.ktor.request.*
 import io.ktor.response.*
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 import java.time.Instant
 
 suspend fun ApplicationCall.createWorkout(workoutService: WorkoutService) {
@@ -14,13 +13,11 @@ suspend fun ApplicationCall.createWorkout(workoutService: WorkoutService) {
     val context = BeContext(
         startTime = Instant.now()
     )
-
     val result = try {
         workoutService.createWorkout(context, createWorkoutRequest)
     } catch (e: Throwable) {
         workoutService.errorWorkout(context, e) as CreateWorkoutResponse
     }
-
     respond(result)
 }
 
@@ -34,7 +31,6 @@ suspend fun ApplicationCall.readWorkout(workoutService: WorkoutService) {
     } catch (e: Throwable) {
         workoutService.errorWorkout(context, e) as ReadWorkoutResponse
     }
-
     respond(result)
 }
 
@@ -48,7 +44,6 @@ suspend fun ApplicationCall.updateWorkout(workoutService: WorkoutService) {
     } catch (e: Throwable) {
         workoutService.errorWorkout(context, e) as UpdateWorkoutResponse
     }
-
     respond(result)
 }
 
@@ -62,7 +57,6 @@ suspend fun ApplicationCall.deleteWorkout(workoutService: WorkoutService) {
     } catch (e: Throwable) {
         workoutService.errorWorkout(context, e) as DeleteExerciseResponse
     }
-
     respond(result)
 }
 
@@ -76,7 +70,6 @@ suspend fun ApplicationCall.searchWorkout(workoutService: WorkoutService) {
     } catch (e: Throwable) {
         workoutService.errorWorkout(context, e) as SearchWorkoutResponse
     }
-
     respond(result)
 }
 
@@ -90,6 +83,5 @@ suspend fun ApplicationCall.chainOfExercises(workoutService: WorkoutService) {
     } catch (e: Exception) {
         workoutService.errorWorkout(context, e) as ChainOfExercisesResponse
     }
-
     respond(result)
 }
