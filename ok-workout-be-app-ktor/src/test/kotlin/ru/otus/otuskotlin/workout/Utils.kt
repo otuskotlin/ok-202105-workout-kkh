@@ -23,7 +23,9 @@ object Utils {
         date = WorkoutStub.getModelWorkout().workoutDate.convertToString(),
         duration = WorkoutStub.getModelWorkout().duration,
         recoveryTime = WorkoutStub.getModelWorkout().recoveryTime,
-        modificationWorkout = ResponseWorkout.ModificationWorkout.valueOf(WorkoutStub.getModelWorkout().modificationWorkout.name),
+        modificationWorkout = ResponseWorkout.ModificationWorkout.valueOf(
+            WorkoutStub.getModelWorkout().modificationWorkout.name
+        ),
         exercisesBlock = WorkoutStub.getModelWorkout().exercisesBlock.map { exercisesBlockModel ->
             ExercisesBlock(
                 exercise = ResponseExercise(
@@ -62,4 +64,6 @@ object Utils {
             ?.map { permission -> Permissions.valueOf(permission.name) }
             ?.toSet()
     )
+
+    val stubResponseSearchWorkout = listOf(stubResponseWorkout)
 }

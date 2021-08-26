@@ -35,7 +35,7 @@ class WorkoutService {
 
     fun searchWorkout(context: BeContext, request: SearchWorkoutRequest): SearchWorkoutResponse {
         context.setQuery(request)
-        context.responseWorkout = WorkoutStub.getModelWorkout()
+        context.foundWorkouts = mutableListOf(WorkoutStub.getModelWorkout())
         return context.toSearchWorkoutResponse()
     }
 

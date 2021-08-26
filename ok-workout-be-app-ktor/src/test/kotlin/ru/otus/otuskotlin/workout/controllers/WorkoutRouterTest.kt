@@ -41,8 +41,10 @@ class WorkoutRouterTest : RouterTest() {
             debug = Utils.stubDebug
         )
         testPostRequest<ReadWorkoutResponse>(data, "workout/read") {
+            assertEquals(data.requestId, requestId)
             assertEquals(ReadWorkoutResponse.Result.SUCCESS, result)
             assertNull(errors)
+            assertEquals(Utils.stubResponseWorkout, readWorkout)
         }
     }
 
@@ -53,8 +55,10 @@ class WorkoutRouterTest : RouterTest() {
             debug = Utils.stubDebug
         )
         testPostRequest<UpdateWorkoutResponse>(data, "workout/update") {
+            assertEquals(data.requestId, requestId)
             assertEquals(UpdateWorkoutResponse.Result.SUCCESS, result)
             assertNull(errors)
+            assertEquals(Utils.stubResponseWorkout, updateWorkout)
         }
     }
 
@@ -65,8 +69,10 @@ class WorkoutRouterTest : RouterTest() {
             debug = Utils.stubDebug
         )
         testPostRequest<DeleteWorkoutResponse>(data, "workout/delete") {
+            assertEquals(data.requestId, requestId)
             assertEquals(DeleteWorkoutResponse.Result.SUCCESS, result)
             assertNull(errors)
+            assertEquals(Utils.stubResponseWorkout, deleteWorkout)
         }
     }
 
@@ -77,7 +83,10 @@ class WorkoutRouterTest : RouterTest() {
             debug = Utils.stubDebug
         )
         testPostRequest<SearchWorkoutResponse>(data, "workout/search") {
-
+            assertEquals(data.requestId, requestId)
+            assertEquals(SearchWorkoutResponse.Result.SUCCESS, result)
+            assertNull(errors)
+            assertEquals(Utils.stubResponseSearchWorkout, foundWorkouts)
         }
     }
 
@@ -88,8 +97,10 @@ class WorkoutRouterTest : RouterTest() {
             debug = Utils.stubDebug
         )
         testPostRequest<ChainOfExercisesResponse>(data, "workout/chainOfExercises") {
+            assertEquals(data.requestId, requestId)
             assertEquals(ChainOfExercisesResponse.Result.SUCCESS, result)
             assertNull(errors)
+            assertEquals(Utils.stubResponseWorkout.exercisesBlock, chainOfExercise)
         }
     }
 }
