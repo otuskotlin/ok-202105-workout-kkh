@@ -30,6 +30,7 @@ class WorkoutRouterTest : RouterTest() {
             assertEquals(data.requestId, requestId)
             assertEquals(CreateWorkoutResponse.Result.SUCCESS, result)
             assertNull(errors)
+            assertEquals(Utils.stubResponseWorkout, createdWorkout)
         }
     }
 
