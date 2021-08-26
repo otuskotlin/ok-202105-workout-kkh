@@ -47,7 +47,10 @@ class WorkoutRouterTest : RouterTest() {
 
     @Test
     fun testPostWorkoutUpdate() {
-        val data = UpdateWorkoutRequest()
+        val data = UpdateWorkoutRequest(
+            requestId = "rID:0008",
+            debug = Utils.stubDebug
+        )
         testPostRequest<UpdateWorkoutResponse>(data, "workout/update") {
             assertEquals(UpdateWorkoutResponse.Result.SUCCESS, result)
             assertNull(errors)
@@ -56,7 +59,10 @@ class WorkoutRouterTest : RouterTest() {
 
     @Test
     fun testPostWorkoutDelete() {
-        val data = DeleteWorkoutRequest()
+        val data = DeleteWorkoutRequest(
+            requestId = "rID:0008",
+            debug = Utils.stubDebug
+        )
         testPostRequest<DeleteWorkoutResponse>(data, "workout/delete") {
             assertEquals(DeleteWorkoutResponse.Result.SUCCESS, result)
             assertNull(errors)
@@ -65,7 +71,10 @@ class WorkoutRouterTest : RouterTest() {
 
     @Test
     fun testPostWorkoutSearch() {
-        val data = SearchWorkoutRequest()
+        val data = SearchWorkoutRequest(
+            requestId = "rID:0008",
+            debug = Utils.stubDebug
+        )
         testPostRequest<SearchWorkoutResponse>(data, "workout/search") {
 
         }
@@ -73,7 +82,10 @@ class WorkoutRouterTest : RouterTest() {
 
     @Test
     fun testPostWorkoutChainOfExercises() {
-        val data = ReadWorkoutRequest()
+        val data = ReadWorkoutRequest(
+            requestId = "rID:0008",
+            debug = Utils.stubDebug
+        )
         testPostRequest<ChainOfExercisesResponse>(data, "workout/chainOfExercises") {
             assertEquals(ChainOfExercisesResponse.Result.SUCCESS, result)
             assertNull(errors)

@@ -405,6 +405,17 @@ components:
             searchExercise:
               type: string
               description: Text of search of an exercise in workouts
+            debug:
+              allOf:
+                - $ref: './spec-workout-api.yaml#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - errorDb
 
     SearchWorkoutResponse:
       description: Structure to respond to a request search of workout
