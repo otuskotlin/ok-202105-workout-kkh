@@ -39,11 +39,27 @@ object Utils {
                         )
                     }
                         .toSet()
+                ),
+                sets = exercisesBlockModel.sets.map { set ->
+                    OneSet(
+                        performance = set.performance.map { performance ->
+                            Performance(
+                                weight = performance.weight,
+                                measure = Performance.Measure.valueOf(performance.measure.name),
+                                repetition = performance.repetition
+
+                            )
+                        }
+                    )
+                },
+                modificationBlockExercises = ExercisesBlock.ModificationBlockExercises.valueOf(
+                    exercisesBlockModel.modificationBlockExercises.name
                 )
             )
         },
         id = WorkoutStub.getModelWorkout().idWorkout.asString(),
-        permissions = WorkoutStub.getModelWorkout().permissions.map { permission -> Permissions.valueOf(permission.name) }
-            .toSet()
+        permissions = WorkoutStub.getModelWorkout().permissions.takeIf { it.isNotEmpty() }
+            ?.map { permission -> Permissions.valueOf(permission.name) }
+            ?.toSet()
     )
 }
