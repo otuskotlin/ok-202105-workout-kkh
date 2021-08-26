@@ -3,6 +3,12 @@ import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 
 class WorkoutService {
+
+    fun initWorkout(context: BeContext, request: InitWorkoutRequest): InitWorkoutResponse {
+        context.setQuery(request)
+        return context.toInitWorkoutResponse()
+    }
+
     fun createWorkout(context: BeContext, request: CreateWorkoutRequest): CreateWorkoutResponse {
         context.setQuery(request)
         context.responseWorkout = WorkoutStub.getModelWorkout()

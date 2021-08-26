@@ -16,6 +16,8 @@ class ExerciseRouterTest : RouterTest() {
         )
         testPostRequest<InitExerciseResponse>(data, "exercise/init") {
             assertEquals(data.requestId, requestId)
+            assertEquals(InitExerciseResponse.Result.SUCCESS, result)
+            assertNull(errors)
         }
     }
 

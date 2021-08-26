@@ -7,6 +7,9 @@ import io.ktor.routing.*
 import ru.otus.otuskotlin.workout.controllers.*
 
 fun Routing.exercise(exerciseService: ExerciseService) = route("exercise") {
+    post("init") {
+        call.initExercise(exerciseService)
+    }
     post("create") {
         call.createExercise(exerciseService)
     }
@@ -25,6 +28,9 @@ fun Routing.exercise(exerciseService: ExerciseService) = route("exercise") {
 }
 
 fun Routing.workout(workoutService: WorkoutService) = route("workout") {
+    post("init") {
+        call.initWorkout(workoutService)
+    }
     post("create") {
         call.createWorkout(workoutService)
     }

@@ -8,6 +8,19 @@ import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import java.time.Instant
 
+suspend fun ApplicationCall.initWorkout(workoutService: WorkoutService) {
+    val initWorkoutRequest = receive<InitWorkoutRequest>()
+    val context = BeContext(
+        startTime = Instant.now()
+    )
+    val result = try {
+        workoutService.initWorkout(context, initWorkoutRequest)
+    } catch (e: Throwable) {
+        workoutService.errorWorkout(context, e) as InitWorkoutResponse
+    }
+    respond(result)
+}
+
 suspend fun ApplicationCall.createWorkout(workoutService: WorkoutService) {
     val createWorkoutRequest = receive<CreateWorkoutRequest>()
     val context = BeContext(
