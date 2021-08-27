@@ -113,7 +113,7 @@ private fun IError.toTransport() = RequestError(
     field = field.takeIf { it.isNotBlank() }
 )
 
-private fun ExerciseModel.toTransport() = ResponseExercise(
+fun ExerciseModel.toTransport() = ResponseExercise(
     title = title.takeIf { it.isNotBlank() },
     description = description.takeIf { it.isNotBlank() },
     targetMuscleGroup = targetMuscleGroup.takeIf { it.isNotEmpty() },
@@ -123,7 +123,7 @@ private fun ExerciseModel.toTransport() = ResponseExercise(
     permissions = permissions.takeIf { it.isNotEmpty() }?.map { Permissions.valueOf(it.name) }?.toSet()
 )
 
-private fun WorkoutModel.toTransport() = ResponseWorkout(
+fun WorkoutModel.toTransport() = ResponseWorkout(
     date = workoutDate.convertToString(),
     duration = duration.takeIf { it > 0.0 } ?: 0.0,
     recoveryTime = recoveryTime.takeIf { it > 0.0 } ?: 0.0,

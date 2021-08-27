@@ -2,68 +2,14 @@ package ru.otus.otuskotlin.workout
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import ru.otus.otuskotlin.workout.openapi.models.*
-import ru.workout.otuskotlin.workout.backend.common.convertToString
+import ru.workout.otuskotlin.workout.backend.mapping.openapi.toTransport
 
 object Utils {
     val mapper = jacksonObjectMapper()
     val stubDebug = BaseDebugRequest(mode = BaseDebugRequest.Mode.STUB)
 
-    val stubResponseExercise = ResponseExercise(
-        title = ExerciseStub.getModelExercise().title,
-        description = ExerciseStub.getModelExercise().description,
-        targetMuscleGroup = ExerciseStub.getModelExercise().targetMuscleGroup,
-        synergisticMuscleGroup = ExerciseStub.getModelExercise().synergisticMuscleGroup,
-        executionTechnique = ExerciseStub.getModelExercise().executionTechnique,
-        id = ExerciseStub.getModelExercise().idExercise.asString(),
-        permissions = ExerciseStub.getModelExercise().permissions.takeIf { it.isNotEmpty() }
-            ?.map { Permissions.valueOf(it.toString()) }?.toSet()
-    )
-
-    val stubResponseWorkout: ResponseWorkout = ResponseWorkout(
-        date = WorkoutStub.getModelWorkout().workoutDate.convertToString(),
-        duration = WorkoutStub.getModelWorkout().duration,
-        recoveryTime = WorkoutStub.getModelWorkout().recoveryTime,
-        modificationWorkout = ResponseWorkout.ModificationWorkout.valueOf(
-            WorkoutStub.getModelWorkout().modificationWorkout.name
-        ),
-        exercisesBlock = WorkoutStub.getModelWorkout().exercisesBlock.map { exercisesBlockModel ->
-            ExercisesBlock(
-                exercise = ResponseExercise(
-                    title = exercisesBlockModel.exercise.title,
-                    description = exercisesBlockModel.exercise.description,
-                    targetMuscleGroup = exercisesBlockModel.exercise.targetMuscleGroup,
-                    synergisticMuscleGroup = exercisesBlockModel.exercise.synergisticMuscleGroup,
-                    executionTechnique = exercisesBlockModel.exercise.executionTechnique,
-                    id = exercisesBlockModel.exercise.idExercise.asString(),
-                    permissions = exercisesBlockModel.exercise.permissions.map { permission ->
-                        Permissions.valueOf(
-                            permission.name
-                        )
-                    }
-                        .toSet()
-                ),
-                sets = exercisesBlockModel.sets.map { set ->
-                    OneSet(
-                        performance = set.performance.map { performance ->
-                            Performance(
-                                weight = performance.weight,
-                                measure = Performance.Measure.valueOf(performance.measure.name),
-                                repetition = performance.repetition
-
-                            )
-                        }
-                    )
-                },
-                modificationBlockExercises = ExercisesBlock.ModificationBlockExercises.valueOf(
-                    exercisesBlockModel.modificationBlockExercises.name
-                )
-            )
-        },
-        id = WorkoutStub.getModelWorkout().idWorkout.asString(),
-        permissions = WorkoutStub.getModelWorkout().permissions.takeIf { it.isNotEmpty() }
-            ?.map { permission -> Permissions.valueOf(permission.name) }
-            ?.toSet()
-    )
+    val stubResponseExercise = ExerciseStub.getModelExercise().toTransport()
+    val stubResponseWorkout = WorkoutStub.getModelWorkout().toTransport()
 
     val stubResponseSearchWorkout = listOf(stubResponseWorkout)
 }
