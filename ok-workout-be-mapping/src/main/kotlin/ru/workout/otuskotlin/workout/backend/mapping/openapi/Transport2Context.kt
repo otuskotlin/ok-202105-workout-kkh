@@ -4,7 +4,6 @@ import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.otus.otuskotlin.workout.openapi.models.Performance
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.models.*
-import ru.workout.otuskotlin.workout.backend.common.convertToInstant
 import java.time.Instant
 
 fun BeContext.setQuery(query: InitExerciseRequest) = apply {
@@ -62,11 +61,14 @@ fun BeContext.setQuery(query: DeleteWorkoutRequest) = apply {
 
 fun BeContext.setQuery(query: SearchWorkoutRequest) = apply {
     requestId = query.requestId ?: ""
+    println(requestSearchWorkout)
     requestSearchWorkout.apply {
-        workoutDate = query.date?.convertToInstant() ?: Instant.now()
+        println(query.date)
+        workoutDate = Instant.parse(query.date) ?: Instant.now()
         searchMuscleGroup = query.searchMuscleGroup ?: ""
         searchExercise = query.searchExercise ?: ""
     }
+    println("03")
 }
 
 private fun CreatableExercise.toModel() = ExerciseModel(
@@ -87,7 +89,7 @@ private fun UpdatableExercise.toModel() = ExerciseModel(
 )
 
 private fun CreatableWorkout.toModel() = WorkoutModel(
-    workoutDate = date?.convertToInstant() ?: Instant.now(),
+    workoutDate = Instant.parse(date) ?: Instant.now(),
     duration = duration?.takeIf { it > 0.0 } ?: 0.0,
     recoveryTime = recoveryTime?.takeIf { it > 0.0 } ?: 0.0,
     modificationWorkout = WorkoutModel.ModificationWorkout.valueOf(modificationWorkout?.name ?: "CLASSIC"),
@@ -122,7 +124,7 @@ private fun Performance.toModel() = PerformanceModel(
 )
 
 private fun UpdatableWorkout.toModel() = WorkoutModel(
-    workoutDate = date?.convertToInstant() ?: Instant.now(),
+    workoutDate = Instant.parse(date) ?: Instant.now(),
     duration = duration?.takeIf { it > 0.0 } ?: 0.0,
     recoveryTime = recoveryTime?.takeIf { it > 0.0 } ?: 0.0,
     modificationWorkout = WorkoutModel.ModificationWorkout.valueOf(modificationWorkout?.name ?: "CLASSIC"),

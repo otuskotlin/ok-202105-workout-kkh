@@ -40,9 +40,7 @@ class ExerciseService {
     }
 
     fun errorExercise(context: BeContext, e: Throwable): BaseMessage {
-        context.addError {
-            from(e)
-        }
+        context.addError(e)
         return context.toReadExerciseResponse()
     }
 }

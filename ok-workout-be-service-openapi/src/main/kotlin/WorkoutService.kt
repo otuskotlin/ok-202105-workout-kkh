@@ -46,9 +46,7 @@ class WorkoutService {
     }
 
     fun errorWorkout(context: BeContext, e: Throwable): BaseMessage {
-        context.addError {
-            from(e)
-        }
+        context.addError(e)
         return context.toReadWorkoutResponse()
     }
 }

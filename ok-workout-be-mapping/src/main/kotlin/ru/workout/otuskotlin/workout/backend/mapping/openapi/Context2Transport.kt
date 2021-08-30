@@ -4,7 +4,6 @@ import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.otus.otuskotlin.workout.openapi.models.Performance
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.models.*
-import ru.workout.otuskotlin.workout.backend.common.convertToString
 
 fun BeContext.toInitExerciseResponse() = InitExerciseResponse(
     requestId = requestId.takeIf { it.isNotBlank() },
@@ -124,7 +123,7 @@ fun ExerciseModel.toTransport() = ResponseExercise(
 )
 
 fun WorkoutModel.toTransport() = ResponseWorkout(
-    date = workoutDate.convertToString(),
+    date = workoutDate.toString(),
     duration = duration.takeIf { it > 0.0 } ?: 0.0,
     recoveryTime = recoveryTime.takeIf { it > 0.0 } ?: 0.0,
     modificationWorkout = ResponseWorkout.ModificationWorkout.valueOf(modificationWorkout.name),

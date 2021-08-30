@@ -79,6 +79,7 @@ class WorkoutRouterTest : RouterTest() {
     @Test
     fun testPostWorkoutSearch() {
         val data = SearchWorkoutRequest(
+            date = "2021-08-23T14:00:00.0Z",
             requestId = "rID:0008",
             debug = Utils.stubDebug
         )

@@ -20,12 +20,17 @@ data class BeContext(
     var foundWorkouts: MutableList<WorkoutModel> = mutableListOf(),
     var status: CorStatus = CorStatus.STARTED
 ) {
-    fun addError(failingStatus: Boolean = true, lambda: CommonErrorModel.() -> Unit) = apply {
-        if (failingStatus) status = CorStatus.FAILING
-        errors.add(
-            CommonErrorModel(
-                field = "_", level = IError.Level.ERROR
-            ).apply(lambda)
-        )
+    private fun addError(error: IError, failingsStatus: Boolean = true) = apply {
+        if (failingsStatus) status = CorStatus.FAILING
+        errors.add(error)
+    }
+
+    fun addError(
+        e: Throwable,
+        level: IError.Level = IError.Level.ERROR,
+        field: String = "",
+        failingsStatus: Boolean = true
+    ) {
+        addError(CommonErrorModel(e, field = field, level = level), failingsStatus)
     }
 }

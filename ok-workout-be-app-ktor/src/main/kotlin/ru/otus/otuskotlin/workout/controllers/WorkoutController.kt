@@ -78,9 +78,11 @@ suspend fun ApplicationCall.searchWorkout(workoutService: WorkoutService) {
     val context = BeContext(
         startTime = Instant.now()
     )
+    println(context.requestSearchWorkout)
     val result = try {
         workoutService.searchWorkout(context, searchWorkoutRequest)
     } catch (e: Throwable) {
+        println("Trouble: $e")
         workoutService.errorWorkout(context, e) as SearchWorkoutResponse
     }
     respond(result)
@@ -94,6 +96,7 @@ suspend fun ApplicationCall.chainOfExercises(workoutService: WorkoutService) {
     val result = try {
         workoutService.chainOfExercises(context, readWorkoutRequest)
     } catch (e: Exception) {
+        println("Ошибка: ${e.message}")
         workoutService.errorWorkout(context, e) as ChainOfExercisesResponse
     }
     respond(result)
