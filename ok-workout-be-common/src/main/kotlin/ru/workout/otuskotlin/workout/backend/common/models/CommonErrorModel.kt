@@ -1,7 +1,17 @@
 package ru.workout.otuskotlin.workout.backend.common.models
 
+import ru.workout.otuskotlin.workout.backend.common.exceptions.NoneException
+
 class CommonErrorModel(
     override var field: String = "",
     override var level: IError.Level = IError.Level.ERROR,
-    override var message: String = ""
-) : IError
+    override var message: String = "",
+    override var exception: Throwable = NoneException
+) : IError {
+    constructor(e: Throwable, level: IError.Level = IError.Level.ERROR, field: String = "") : this(
+        field = field,
+        level = level,
+        message = e.message ?: "",
+        exception = e
+    )
+}

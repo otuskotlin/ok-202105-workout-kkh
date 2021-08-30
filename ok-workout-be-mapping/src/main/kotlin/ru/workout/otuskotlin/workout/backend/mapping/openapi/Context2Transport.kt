@@ -4,7 +4,6 @@ import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.otus.otuskotlin.workout.openapi.models.Performance
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.models.*
-import ru.workout.otuskotlin.workout.backend.common.convertToString
 
 fun BeContext.toInitExerciseResponse() = InitExerciseResponse(
     requestId = requestId.takeIf { it.isNotBlank() },
@@ -100,10 +99,10 @@ fun BeContext.toSearchWorkoutResponse() = SearchWorkoutResponse(
     foundWorkouts = foundWorkouts.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
 )
 
-fun BeContext.toChainOfExercises() = ChainOfExerciseResponse(
+fun BeContext.toChainOfExercisesResponse() = ChainOfExercisesResponse(
     requestId = requestId.takeIf { it.isNotBlank() },
-    result = if (errors.find { it.level == IError.Level.ERROR } == null) ChainOfExerciseResponse.Result.SUCCESS
-    else ChainOfExerciseResponse.Result.ERROR,
+    result = if (errors.find { it.level == IError.Level.ERROR } == null) ChainOfExercisesResponse.Result.SUCCESS
+    else ChainOfExercisesResponse.Result.ERROR,
     errors = errors.takeIf { errors.isNotEmpty() }?.map { it.toTransport() },
     chainOfExercise = responseExercises.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
 )
@@ -113,7 +112,7 @@ private fun IError.toTransport() = RequestError(
     field = field.takeIf { it.isNotBlank() }
 )
 
-private fun ExerciseModel.toTransport() = ResponseExercise(
+fun ExerciseModel.toTransport() = ResponseExercise(
     title = title.takeIf { it.isNotBlank() },
     description = description.takeIf { it.isNotBlank() },
     targetMuscleGroup = targetMuscleGroup.takeIf { it.isNotEmpty() },
@@ -123,8 +122,8 @@ private fun ExerciseModel.toTransport() = ResponseExercise(
     permissions = permissions.takeIf { it.isNotEmpty() }?.map { Permissions.valueOf(it.name) }?.toSet()
 )
 
-private fun WorkoutModel.toTransport() = ResponseWorkout(
-    date = workoutDate.convertToString(),
+fun WorkoutModel.toTransport() = ResponseWorkout(
+    date = workoutDate.toString(),
     duration = duration.takeIf { it > 0.0 } ?: 0.0,
     recoveryTime = recoveryTime.takeIf { it > 0.0 } ?: 0.0,
     modificationWorkout = ResponseWorkout.ModificationWorkout.valueOf(modificationWorkout.name),

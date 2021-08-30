@@ -37,8 +37,8 @@ paths:
     $ref: './spec-workout-api-workout.yaml#/paths/~1delete'
   /workout/search:
     $ref: './spec-workout-api-workout.yaml#/paths/~1search'
-  /workout/chainOfExercise:
-    $ref: './spec-workout-api-workout.yaml#/paths/~1chainOfExercise'
+  /workout/chainOfExercises:
+    $ref: './spec-workout-api-workout.yaml#/paths/~1chainOfExercises'
 
 components:
   schemas:
