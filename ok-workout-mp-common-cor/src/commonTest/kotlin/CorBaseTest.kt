@@ -1,4 +1,6 @@
-import kotlin.test.Test
+import handlers.worker
+import handlers.chain
+import handlers.parallel
 
 class CorBaseTest {
 
@@ -25,21 +27,21 @@ class CorBaseTest {
             }
 
             parallel {
-                on { some > 15 }
+                on { some < 15 }
 
                 worker(title = "Increment some") {
                     handle { some += 10 }
                 }
             }
 
-            printResult(title = "Печать результата")
+//            printResult(title = "Печать результата")
 
         }.build()
     }
 }
 
 data class TestContext(
-    var some: Int = 0
+    var some: Int = 1
 ) {
 
 }

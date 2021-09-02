@@ -1,5 +1,6 @@
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class CorJvmTest {
     @Test
@@ -10,5 +11,6 @@ class CorJvmTest {
         runBlocking {
             chain.exec(context)
         }
+        assertEquals(22, context.some)
     }
 }
