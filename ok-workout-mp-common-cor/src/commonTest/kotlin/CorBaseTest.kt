@@ -30,7 +30,7 @@ class CorBaseTest {
                 on { some < 15 }
 
                 worker(title = "Increment some") {
-                    handle { some += 10 }
+                    some += 10
                 }
             }
 

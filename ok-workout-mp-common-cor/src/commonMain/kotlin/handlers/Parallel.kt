@@ -1,5 +1,6 @@
 package handlers
 
+import CorComponentDsl
 import ICorChainDsl
 import ICorExec
 import ICorExecDsl
@@ -15,24 +16,9 @@ class CorParallelDsl<T>(
     private val workers: MutableList<ICorExecDsl<T>> = mutableListOf(),
     override var title: String = "",
     override var description: String = "",
-    private var blockOn: T.() -> Boolean = { true },
-    private var blockHandle: T.() -> Unit = {},
-    private var blockExcept: T.(e: Throwable) -> Unit = {}
-) : ICorChainDsl<T> {
+) : CorComponentDsl<T>(), ICorChainDsl<T> {
     override fun add(worker: ICorExecDsl<T>) {
         workers.add(worker)
-    }
-
-    override fun on(function: T.() -> Boolean) {
-        blockOn = function
-    }
-
-    override fun handle(function: T.() -> Unit) {
-        blockHandle = function
-    }
-
-    override fun except(function: T.(e: Throwable) -> Unit) {
-        blockExcept = function
     }
 
     override fun build(): ICorExec<T> = CorParallel<T>(
@@ -53,7 +39,6 @@ class CorParallel<T>(
 ) : ICorWorker<T> {
     override suspend fun on(context: T): Boolean = blockOn(context)
     override suspend fun handle(context: T): Unit = coroutineScope {
-        println(context)
         execs
             .map { launch { it.exec(context) } }
             .toList()

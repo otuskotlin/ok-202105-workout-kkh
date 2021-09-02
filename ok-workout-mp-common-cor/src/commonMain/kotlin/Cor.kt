@@ -2,17 +2,16 @@ import handlers.CorChainDsl
 
 fun <T> chain(function: CorChainDsl<T>.() -> Unit) = CorChainDsl<T>().apply(function)
 
-interface ICorChainDsl<T> : ICorExecDsl<T>, ICorHandlerDsl<T> {
+interface ICorChainDsl<T> {
     fun add(worker: ICorExecDsl<T>)
 }
 
-interface ICorWorkerDsl<T> : ICorExecDsl<T>, ICorHandlerDsl<T> {
-
+interface ICorWorkerDsl<T> {
+    fun handle(function: T.() -> Unit)
 }
 
 interface ICorHandlerDsl<T> {
     fun on(function: T.() -> Boolean)
-    fun handle(function: T.() -> Unit)
     fun except(function: T.(e: Throwable) -> Unit)
 }
 
@@ -41,5 +40,19 @@ interface ICorWorker<T> : ICorExec<T> {
         } catch (e: Throwable) {
             except(context, e)
         }
+    }
+}
+
+abstract class CorComponentDsl<T>(
+    var blockOn: T.() -> Boolean = { true },
+    var blockExcept: T.(e: Throwable) -> Unit = {}
+) : ICorExecDsl<T>, ICorHandlerDsl<T> {
+
+    override fun on(function: T.() -> Boolean) {
+        blockOn = function
+    }
+
+    override fun except(function: T.(e: Throwable) -> Unit) {
+        blockExcept = function
     }
 }

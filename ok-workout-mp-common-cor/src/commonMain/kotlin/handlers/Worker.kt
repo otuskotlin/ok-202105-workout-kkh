@@ -1,5 +1,6 @@
 package handlers
 
+import CorComponentDsl
 import ICorChainDsl
 import ICorExec
 import ICorWorker
@@ -26,11 +27,8 @@ fun <T> ICorChainDsl<T>.worker(
 class CorWorkerDsl<T>(
     override var title: String = "",
     override var description: String = "",
-    private var blockOn: T.() -> Boolean = { true },
     private var blockHandle: T.() -> Unit = {},
-    private var blockExcept: T.(e: Throwable) -> Unit = {}
-
-) : ICorWorkerDsl<T> {
+) : CorComponentDsl<T>(), ICorWorkerDsl<T> {
     override fun build(): ICorExec<T> = CorWorker<T>(
         title = title,
         description = description,
@@ -39,18 +37,9 @@ class CorWorkerDsl<T>(
         blockExcept = blockExcept
     )
 
-    override fun on(function: T.() -> Boolean) {
-        blockOn = function
-    }
-
     override fun handle(function: T.() -> Unit) {
         blockHandle = function
     }
-
-    override fun except(function: T.(e: Throwable) -> Unit) {
-        blockExcept = function
-    }
-
 }
 
 class CorWorker<T>(
