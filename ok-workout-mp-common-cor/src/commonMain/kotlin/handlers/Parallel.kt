@@ -1,10 +1,10 @@
 package handlers
 
+import AbstractWorker
 import CorComponentDsl
 import ICorChainDsl
 import ICorExec
 import ICorExecDsl
-import ICorWorker
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
@@ -34,16 +34,13 @@ class CorParallel<T>(
     private val execs: List<ICorExec<T>>,
     override val title: String,
     override val description: String,
-    val blockOn: T.() -> Boolean,
-    val blockExcept: T.(e: Throwable) -> Unit
-) : ICorWorker<T> {
-    override suspend fun on(context: T): Boolean = blockOn(context)
+    override val blockOn: T.() -> Boolean,
+    override val blockExcept: T.(e: Throwable) -> Unit
+) : AbstractWorker<T>(blockOn, blockExcept) {
     override suspend fun handle(context: T): Unit = coroutineScope {
         execs
             .map { launch { it.exec(context) } }
             .toList()
             .forEach { it.join() }
     }
-
-    override suspend fun except(context: T, e: Throwable) = blockExcept(context, e)
 }

@@ -1,10 +1,10 @@
 package handlers
 
+import AbstractWorker
 import CorComponentDsl
 import ICorChainDsl
 import ICorExec
 import ICorExecDsl
-import ICorWorker
 
 fun <T> ICorChainDsl<T>.chain(function: CorChainDsl<T>.() -> Unit) {
     add(CorChainDsl<T>().apply(function))
@@ -33,15 +33,12 @@ class CorChain<T>(
     private val execs: List<ICorExec<T>>,
     override val title: String,
     override val description: String,
-    private val blockOn: T.() -> Boolean,
-    private val blockExcept: T.(e: Throwable) -> Unit
+    override val blockOn: T.() -> Boolean,
+    override val blockExcept: T.(e: Throwable) -> Unit
 
-) : ICorWorker<T> {
-    override suspend fun on(context: T): Boolean = blockOn(context)
+) : AbstractWorker<T>(blockOn, blockExcept) {
 
     override suspend fun handle(context: T) {
         execs.forEach { it.exec(context) }
     }
-
-    override suspend fun except(context: T, e: Throwable) = blockExcept(context, e)
 }

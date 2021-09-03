@@ -1,9 +1,9 @@
 package handlers
 
+import AbstractWorker
 import CorComponentDsl
 import ICorChainDsl
 import ICorExec
-import ICorWorker
 import ICorWorkerDsl
 
 fun <T> ICorChainDsl<T>.worker(function: CorWorkerDsl<T>.() -> Unit) {
@@ -43,13 +43,14 @@ class CorWorkerDsl<T>(
 }
 
 class CorWorker<T>(
-    override var title: String,
-    override var description: String,
-    val blockOn: T.() -> Boolean,
-    val blockHandle: T.() -> Unit,
-    val blockExcept: T.(e: Throwable) -> Unit
-) : ICorWorker<T> {
-    override suspend fun on(context: T): Boolean = blockOn(context)
-    override suspend fun handle(context: T) = blockHandle(context)
-    override suspend fun except(context: T, e: Throwable) = blockExcept(context, e)
+    override val title: String,
+    override val description: String,
+    override val blockOn: T.() -> Boolean,
+    private val blockHandle: T.() -> Unit,
+    override val blockExcept: T.(e: Throwable) -> Unit
+) : AbstractWorker<T>(blockOn, blockExcept) {
+    override suspend fun handle(context: T) {
+        println("$title")
+        blockHandle(context)
+    }
 }
