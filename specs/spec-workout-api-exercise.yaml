@@ -317,6 +317,17 @@ components:
           properties:
             search:
               type: string
+            debug:
+              allOf:
+                - $ref: './spec-workout-api.yaml#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - errorDb
 
     SearchExerciseResponse:
       description: Structure to respond to a request search of exercise

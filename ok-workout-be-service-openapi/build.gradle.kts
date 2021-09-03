@@ -4,11 +4,10 @@ plugins {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation(project(":ok-workout-be-common"))
-    implementation(project(":ok-workout-be-transport-openapi"))
-    testImplementation(kotlin("test-junit5"))
-}
 
-tasks.withType<Test>().configureEach {
-    useJUnitPlatform()
+    implementation(project(":ok-workout-be-common"))
+    implementation(project(":ok-workout-be-mapping"))
+    implementation(project(":ok-workout-be-transport-openapi"))
+    implementation(project(":ok-workout-be-stubs"))
+
 }

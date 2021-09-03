@@ -1,15 +1,15 @@
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.models.*
-import ru.workout.otuskotlin.workout.backend.common.convertToInstant
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
+import java.time.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class MappingTest {
 
-    private val workoutDate: String = "2021-08-01 15:00 +05"
+    private val workoutDate: String = "2021-08-01T15:00:00.0Z"
 
     private val exercise = ExerciseModel(
         title = "Приседания со штангой",
@@ -40,7 +40,7 @@ class MappingTest {
     )
 
     private val workout = WorkoutModel(
-        workoutDate = "2021-08-02 14:10 +05".convertToInstant(),
+        workoutDate = Instant.parse("2021-08-02T14:10:00Z"),
         duration = 100.0,
         recoveryTime = 90.0,
         modificationWorkout = WorkoutModel.ModificationWorkout.CLASSIC,
@@ -55,7 +55,7 @@ class MappingTest {
         responseWorkout = workout,
         foundExercises = mutableListOf(exercise),
         foundWorkouts = mutableListOf(workout),
-        responseExercises = mutableListOf(exercise)
+        responseExercises = mutableListOf(exercisesBlock)
     )
 
     private val readExerciseRequest = ReadExerciseRequest(
@@ -175,7 +175,7 @@ class MappingTest {
             CreateWorkoutRequest(
                 requestId = "rID:0001",
                 createWorkout = CreatableWorkout(
-                    date = "2021-09-09 15:40 +05",
+                    date = "2021-09-09T15:40:00.0Z",
                     duration = 120.0,
                     recoveryTime = 90.0,
                     modificationWorkout = CreatableWorkout.ModificationWorkout.CLASSIC,
@@ -200,7 +200,7 @@ class MappingTest {
             )
         )
         println(beContext)
-        assertEquals("2021-09-09 15:40 +05".convertToInstant(), beContext.requestWorkout.workoutDate)
+        assertEquals(Instant.parse("2021-09-09T15:40:00.0Z"), beContext.requestWorkout.workoutDate)
         assertTrue(beContext.requestWorkout.duration > 0)
         assertTrue(beContext.requestWorkout.recoveryTime > 0)
         assertEquals(WorkoutModel.ModificationWorkout.CLASSIC, beContext.requestWorkout.modificationWorkout)
@@ -226,7 +226,7 @@ class MappingTest {
             UpdateWorkoutRequest(
                 requestId = "rID:0001",
                 updateWorkout = UpdatableWorkout(
-                    date = "2021-09-09 16:00 +05",
+                    date = "2021-09-09T16:00:00.0Z",
                     duration = 120.0,
                     recoveryTime = 90.0,
                     modificationWorkout = UpdatableWorkout.ModificationWorkout.CLASSIC,
@@ -280,7 +280,7 @@ class MappingTest {
             )
         )
 
-        assertEquals(beContext.requestSearchWorkout.workoutDate, workoutDate.convertToInstant())
+        assertEquals(beContext.requestSearchWorkout.workoutDate, Instant.parse(workoutDate))
     }
 
     @Test
@@ -386,7 +386,7 @@ class MappingTest {
         assertEquals("rID:0001", response.requestId)
         assertEquals(CreateWorkoutResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
-        assertEquals("2021-08-02 09:10 UTC", response.createdWorkout?.date)
+        assertEquals("2021-08-02T14:10:00Z", response.createdWorkout?.date)
         assertEquals(100.0, response.createdWorkout?.duration)
         assertEquals(90.0, response.createdWorkout?.recoveryTime)
         assertEquals(ResponseWorkout.ModificationWorkout.CLASSIC, response.createdWorkout?.modificationWorkout)
@@ -418,7 +418,7 @@ class MappingTest {
         assertEquals("rID:0001", response.requestId)
         assertEquals(ReadWorkoutResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
-        assertEquals("2021-08-02 09:10 UTC", response.readWorkout?.date)
+        assertEquals("2021-08-02T14:10:00Z", response.readWorkout?.date)
         assertEquals(100.0, response.readWorkout?.duration)
         assertEquals(90.0, response.readWorkout?.recoveryTime)
         assertEquals(ResponseWorkout.ModificationWorkout.CLASSIC, response.readWorkout?.modificationWorkout)
@@ -450,7 +450,7 @@ class MappingTest {
         assertEquals("rID:0001", response.requestId)
         assertEquals(UpdateWorkoutResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
-        assertEquals("2021-08-02 09:10 UTC", response.updateWorkout?.date)
+        assertEquals("2021-08-02T14:10:00Z", response.updateWorkout?.date)
         assertEquals(100.0, response.updateWorkout?.duration)
         assertEquals(90.0, response.updateWorkout?.recoveryTime)
         assertEquals(ResponseWorkout.ModificationWorkout.CLASSIC, response.updateWorkout?.modificationWorkout)
@@ -480,7 +480,7 @@ class MappingTest {
         assertEquals("rID:0001", response.requestId)
         assertEquals(DeleteWorkoutResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
-        assertEquals("2021-08-02 09:10 UTC", response.deleteWorkout?.date)
+        assertEquals("2021-08-02T14:10:00Z", response.deleteWorkout?.date)
         assertEquals(100.0, response.deleteWorkout?.duration)
         assertEquals(90.0, response.deleteWorkout?.recoveryTime)
         assertEquals(ResponseWorkout.ModificationWorkout.CLASSIC, response.deleteWorkout?.modificationWorkout)
@@ -515,10 +515,10 @@ class MappingTest {
 
     @Test
     fun chainOfExercise() {
-        val response = beContext.toChainOfExercises()
+        val response = beContext.toChainOfExercisesResponse()
         println(response)
         assertEquals("rID:0001", response.requestId)
-        assertEquals(ChainOfExerciseResponse.Result.SUCCESS, response.result)
+        assertEquals(ChainOfExercisesResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
         assertTrue(response.chainOfExercise?.isNotEmpty() ?: false)
     }
