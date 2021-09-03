@@ -10,10 +10,10 @@ interface ICorWorkerDsl<T> {
     fun handle(function: T.() -> Unit)
 }
 
-interface ICorHandlerDsl<T> {
-    fun on(function: T.() -> Boolean)
-    fun except(function: T.(e: Throwable) -> Unit)
-}
+//interface ICorHandlerDsl<T> {
+//    fun on(function: T.() -> Boolean)
+//    fun except(function: T.(e: Throwable) -> Unit)
+//}
 
 interface ICorExecDsl<T> {
     val title: String
@@ -46,13 +46,13 @@ interface ICorWorker<T> : ICorExec<T> {
 abstract class CorComponentDsl<T>(
     var blockOn: T.() -> Boolean = { true },
     var blockExcept: T.(e: Throwable) -> Unit = {}
-) : ICorExecDsl<T>, ICorHandlerDsl<T> {
+) : ICorExecDsl<T> {
 
-    override fun on(function: T.() -> Boolean) {
+    fun on(function: T.() -> Boolean) {
         blockOn = function
     }
 
-    override fun except(function: T.(e: Throwable) -> Unit) {
+    fun except(function: T.(e: Throwable) -> Unit) {
         blockExcept = function
     }
 }

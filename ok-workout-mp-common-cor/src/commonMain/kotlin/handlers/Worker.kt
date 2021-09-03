@@ -5,6 +5,7 @@ import CorComponentDsl
 import ICorChainDsl
 import ICorExec
 import ICorWorkerDsl
+import kotlinx.coroutines.delay
 
 fun <T> ICorChainDsl<T>.worker(function: CorWorkerDsl<T>.() -> Unit) {
     add(CorWorkerDsl<T>().apply(function))
@@ -50,7 +51,6 @@ class CorWorker<T>(
     override val blockExcept: T.(e: Throwable) -> Unit
 ) : AbstractWorker<T>(blockOn, blockExcept) {
     override suspend fun handle(context: T) {
-        println("$title")
         blockHandle(context)
     }
 }

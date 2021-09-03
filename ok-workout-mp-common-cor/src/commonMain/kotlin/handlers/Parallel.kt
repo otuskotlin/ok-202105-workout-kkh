@@ -39,8 +39,15 @@ class CorParallel<T>(
 ) : AbstractWorker<T>(blockOn, blockExcept) {
     override suspend fun handle(context: T): Unit = coroutineScope {
         execs
-            .map { launch { it.exec(context) } }
+            .map {
+                launch {
+                    it.exec(context)
+                }
+            }
             .toList()
-            .forEach { it.join() }
+            .forEach {
+                it.join()
+            }
+
     }
 }
