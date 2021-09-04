@@ -1,8 +1,10 @@
 package ru.workout.otuskotlin.workout.backend.common.context
 
 enum class CorStatus {
-    STARTED,
-    FINISHED,
+    NONE,
+    RUNNING,
+    FINISHING,
     SUCCESS,
-    FAILING
+    FAILING,
+    ERROR;
 }

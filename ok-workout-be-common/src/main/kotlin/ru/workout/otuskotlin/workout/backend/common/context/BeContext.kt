@@ -5,6 +5,9 @@ import java.time.Instant
 
 data class BeContext(
     var startTime: Instant = Instant.MIN,
+    var operation: MpOperations = MpOperations.NONE,
+    var stubCase: MpStubCases = MpStubCases.NONE,
+
     var requestId: String = "",
     var requestExerciseId: ExerciseIdModel = ExerciseIdModel.NONE,
     var requestExercise: ExerciseModel = ExerciseModel(),
@@ -18,8 +21,20 @@ data class BeContext(
     var errors: MutableList<IError> = mutableListOf(),
     var foundExercises: MutableList<ExerciseModel> = mutableListOf(),
     var foundWorkouts: MutableList<WorkoutModel> = mutableListOf(),
-    var status: CorStatus = CorStatus.STARTED
+    var status: CorStatus = CorStatus.NONE
 ) {
+
+    enum class MpOperations {
+        NONE,
+        INIT,
+        CREATE,
+        READ,
+        UPDATE,
+        DELETE,
+        SEARCH,
+        OFFER
+    }
+
     private fun addError(error: IError, failingsStatus: Boolean = true) = apply {
         if (failingsStatus) status = CorStatus.FAILING
         errors.add(error)
