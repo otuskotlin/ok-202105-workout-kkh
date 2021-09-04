@@ -1,17 +1,19 @@
+import ru.otus.otuskotlin.workout.backend.logics.ExerciseCrud
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 
-class ExerciseService {
+class ExerciseService(
+    var crud: ExerciseCrud
+) {
 
     fun initExercise(context: BeContext, request: InitExerciseRequest): InitExerciseResponse {
         context.setQuery(request)
         return context.toInitExerciseResponse()
     }
 
-    fun createExercise(context: BeContext, request: CreateExerciseRequest): CreateExerciseResponse {
-        context.setQuery(request)
-        context.responseExercise = ExerciseStub.getModelExercise()
+    suspend fun createExercise(context: BeContext, request: CreateExerciseRequest): CreateExerciseResponse {
+        crud.create(context.setQuery(request))
         return context.toCreateExerciseResponse()
     }
 

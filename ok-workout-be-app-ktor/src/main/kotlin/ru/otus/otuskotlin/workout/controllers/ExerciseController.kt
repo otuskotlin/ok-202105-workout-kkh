@@ -25,7 +25,8 @@ suspend fun ApplicationCall.initExercise(exerciseService: ExerciseService) {
 suspend fun ApplicationCall.createExercise(exerciseService: ExerciseService) {
     val createExerciseRequest = receive<CreateExerciseRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.CREATE
     )
 
     val result = try {

@@ -17,7 +17,7 @@ fun BeContext.toCreateExerciseResponse() = CreateExerciseResponse(
     result = if (errors.find { it.level == IError.Level.ERROR } == null) CreateExerciseResponse.Result.SUCCESS
     else CreateExerciseResponse.Result.ERROR,
     errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
-    createdExercise = responseExercise.takeIf { it != ExerciseModel() }?.toTransport()
+    createdExercise = responseExercise.takeIf { it != ExerciseModel() }?.toTransport(),
 )
 
 fun BeContext.toReadExerciseResponse() = ReadExerciseResponse(
@@ -119,7 +119,7 @@ fun ExerciseModel.toTransport() = ResponseExercise(
     synergisticMuscleGroup = synergisticMuscleGroup.takeIf { it.isNotEmpty() },
     executionTechnique = executionTechnique.takeIf { it.isNotBlank() },
     id = idExercise.takeIf { it != ExerciseIdModel.NONE }?.asString(),
-    permissions = permissions.takeIf { it.isNotEmpty() }?.map { Permissions.valueOf(it.name) }?.toSet()
+    permissions = permissions.takeIf { it.isNotEmpty() }?.map { Permissions.valueOf(it.name) }?.toSet(),
 )
 
 fun WorkoutModel.toTransport() = ResponseWorkout(

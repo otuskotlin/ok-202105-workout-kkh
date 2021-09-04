@@ -24,5 +24,7 @@ class ExerciseCrud {
 
     }
 
-    private fun BeContext.initSettings() = apply { }
+    private fun BeContext.initSettings() = apply {
+
+    }
 }

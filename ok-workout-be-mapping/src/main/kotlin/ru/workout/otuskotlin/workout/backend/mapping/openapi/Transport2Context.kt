@@ -13,26 +13,31 @@ fun BeContext.setQuery(query: InitExerciseRequest) = apply {
 fun BeContext.setQuery(query: CreateExerciseRequest) = apply {
     requestId = query.requestId ?: ""
     requestExercise = query.createExercise?.toModel() ?: ExerciseModel()
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: ReadExerciseRequest) = apply {
     requestId = query.requestId ?: ""
     requestExerciseId = ExerciseIdModel(query.readExerciseId ?: "")
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: UpdateExerciseRequest) = apply {
     requestId = query.requestId ?: ""
     requestExercise = query.updateExercise?.toModel() ?: ExerciseModel()
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: DeleteExerciseRequest) = apply {
     requestId = query.requestId ?: ""
     requestExerciseId = ExerciseIdModel(query.deleteExerciseId ?: "")
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: SearchExerciseRequest) = apply {
     requestId = query.requestId ?: ""
     requestSearchExercise = query.search ?: ""
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: InitWorkoutRequest) = apply {
@@ -132,3 +137,9 @@ private fun UpdatableWorkout.toModel() = WorkoutModel(
         ?: mutableListOf(),
     idWorkout = WorkoutIdModel(id ?: "")
 )
+
+private fun BaseDebugRequest.StubCase?.toModel(): MpStubCases = when (this) {
+    BaseDebugRequest.StubCase.SUCCESS -> MpStubCases.SUCCESS
+    BaseDebugRequest.StubCase.DATABASE_ERROR -> MpStubCases.DATABASE_ERROR
+    null -> MpStubCases.NONE
+}

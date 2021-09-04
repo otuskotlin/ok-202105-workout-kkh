@@ -24,7 +24,7 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutCreate() {
         val data = CreateWorkoutRequest(
             requestId = "rID:0007",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess
         )
         testPostRequest<CreateWorkoutResponse>(data, "workout/create") {
             assertEquals(data.requestId, requestId)
@@ -38,7 +38,7 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutRead() {
         val data = ReadWorkoutRequest(
             requestId = "rID:0008",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess
         )
         testPostRequest<ReadWorkoutResponse>(data, "workout/read") {
             assertEquals(data.requestId, requestId)
@@ -52,7 +52,7 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutUpdate() {
         val data = UpdateWorkoutRequest(
             requestId = "rID:0008",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess
         )
         testPostRequest<UpdateWorkoutResponse>(data, "workout/update") {
             assertEquals(data.requestId, requestId)
@@ -66,7 +66,7 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutDelete() {
         val data = DeleteWorkoutRequest(
             requestId = "rID:0008",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess
         )
         testPostRequest<DeleteWorkoutResponse>(data, "workout/delete") {
             assertEquals(data.requestId, requestId)
@@ -81,7 +81,7 @@ class WorkoutRouterTest : RouterTest() {
         val data = SearchWorkoutRequest(
             date = "2021-08-23T14:00:00.0Z",
             requestId = "rID:0008",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess
         )
         testPostRequest<SearchWorkoutResponse>(data, "workout/search") {
             assertEquals(data.requestId, requestId)
@@ -95,7 +95,7 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutChainOfExercises() {
         val data = ReadWorkoutRequest(
             requestId = "rID:0008",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess
         )
         testPostRequest<ChainOfExercisesResponse>(data, "workout/chainOfExercises") {
             assertEquals(data.requestId, requestId)

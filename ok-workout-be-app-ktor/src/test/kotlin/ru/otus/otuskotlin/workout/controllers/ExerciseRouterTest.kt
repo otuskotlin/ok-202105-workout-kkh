@@ -2,6 +2,8 @@ package ru.otus.otuskotlin.workout.controllers
 
 import org.junit.Test
 import ru.otus.otuskotlin.workout.Utils
+import ru.otus.otuskotlin.workout.Utils.stubCreatableExercise
+import ru.otus.otuskotlin.workout.Utils.stubResponseExercise
 import ru.otus.otuskotlin.workout.openapi.models.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -25,14 +27,15 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseCreate() {
         val data = CreateExerciseRequest(
             requestId = "rID:0001",
-            debug = Utils.stubDebug
+            createExercise = stubCreatableExercise,
+            debug = Utils.stubDebugSuccess
         )
 
         testPostRequest<CreateExerciseResponse>(data, "exercise/create") {
             assertEquals(data.requestId, requestId)
             assertEquals(CreateExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
-            assertEquals(Utils.stubResponseExercise, createdExercise)
+            assertEquals(stubResponseExercise, createdExercise)
         }
     }
 
@@ -40,7 +43,7 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseRead() {
         val data = ReadExerciseRequest(
             requestId = "rID:0002",
-            debug = Utils.stubDebug,
+            debug = Utils.stubDebugSuccess,
         )
 
         testPostRequest<ReadExerciseResponse>(data, "exercise/read") {
@@ -55,7 +58,7 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseUpdate() {
         val data = UpdateExerciseRequest(
             requestId = "rID:0003",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess
         )
 
         testPostRequest<UpdateExerciseResponse>(data, "exercise/update") {
@@ -70,7 +73,7 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseDelete() {
         val data = DeleteExerciseRequest(
             requestId = "rID:0004",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess
         )
 
         testPostRequest<DeleteExerciseResponse>(data, "exercise/delete") {
@@ -85,7 +88,7 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseSearch() {
         val data = SearchExerciseRequest(
             requestId = "rID:0005",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess
         )
 
         testPostRequest<SearchExerciseResponse>(data, "exercise/search") {
