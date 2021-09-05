@@ -9,7 +9,7 @@ class WorkoutCrud {
     }
 
     suspend fun read(context: BeContext) {
-//        WorkoutRead.exec(context.initSettings())
+        WorkoutRead.exec(context.initSettings())
 
     }
 

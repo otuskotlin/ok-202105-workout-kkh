@@ -1,6 +1,8 @@
 package ru.otus.otuskotlin.workout
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import ru.otus.otuskotlin.workout.Utils.stubCreatableWorkout
+import ru.otus.otuskotlin.workout.Utils.stubResponseWorkout
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.toTransport
 
@@ -31,5 +33,17 @@ object Utils {
         synergisticMuscleGroup = stubResponseExercise.synergisticMuscleGroup,
         executionTechnique = stubResponseExercise.executionTechnique,
         id = stubResponseExercise.id
+    )
+
+    val stubCreatableWorkout = CreatableWorkout(
+        date = stubResponseWorkout.date,
+        duration = stubResponseWorkout.duration,
+        recoveryTime = stubResponseWorkout.recoveryTime,
+        modificationWorkout = stubResponseWorkout.modificationWorkout?.let {
+            CreatableWorkout.ModificationWorkout.valueOf(
+                it.name
+            )
+        },
+        exercisesBlock = stubResponseWorkout.exercisesBlock
     )
 }

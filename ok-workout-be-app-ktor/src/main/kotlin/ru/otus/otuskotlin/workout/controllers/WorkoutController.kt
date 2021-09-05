@@ -6,12 +6,14 @@ import io.ktor.request.*
 import io.ktor.response.*
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
+import ru.workout.otuskotlin.workout.backend.common.models.MpStubCases
 import java.time.Instant
 
 suspend fun ApplicationCall.initWorkout(workoutService: WorkoutService) {
     val initWorkoutRequest = receive<InitWorkoutRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.INIT
     )
     val result = try {
         workoutService.initWorkout(context, initWorkoutRequest)
@@ -24,7 +26,8 @@ suspend fun ApplicationCall.initWorkout(workoutService: WorkoutService) {
 suspend fun ApplicationCall.createWorkout(workoutService: WorkoutService) {
     val createWorkoutRequest = receive<CreateWorkoutRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.CREATE
     )
     val result = try {
         workoutService.createWorkout(context, createWorkoutRequest)
@@ -37,7 +40,8 @@ suspend fun ApplicationCall.createWorkout(workoutService: WorkoutService) {
 suspend fun ApplicationCall.readWorkout(workoutService: WorkoutService) {
     val readWorkoutRequest = receive<ReadWorkoutRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.READ
     )
     val result = try {
         workoutService.readWorkout(context, readWorkoutRequest)
@@ -50,7 +54,8 @@ suspend fun ApplicationCall.readWorkout(workoutService: WorkoutService) {
 suspend fun ApplicationCall.updateWorkout(workoutService: WorkoutService) {
     val updateWorkoutRequest = receive<UpdateWorkoutRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.UPDATE
     )
     val result = try {
         workoutService.updateWorkout(context, updateWorkoutRequest)
@@ -63,7 +68,8 @@ suspend fun ApplicationCall.updateWorkout(workoutService: WorkoutService) {
 suspend fun ApplicationCall.deleteWorkout(workoutService: WorkoutService) {
     val deleteWorkoutRequest = receive<DeleteWorkoutRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.DELETE
     )
     val result = try {
         workoutService.deleteWorkout(context, deleteWorkoutRequest)
@@ -76,7 +82,8 @@ suspend fun ApplicationCall.deleteWorkout(workoutService: WorkoutService) {
 suspend fun ApplicationCall.searchWorkout(workoutService: WorkoutService) {
     val searchWorkoutRequest = receive<SearchWorkoutRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.SEARCH
     )
     println(context.requestSearchWorkout)
     val result = try {
@@ -91,7 +98,8 @@ suspend fun ApplicationCall.searchWorkout(workoutService: WorkoutService) {
 suspend fun ApplicationCall.chainOfExercises(workoutService: WorkoutService) {
     val readWorkoutRequest = receive<ReadWorkoutRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.CHAIN_OF_EXERCISES
     )
     val result = try {
         workoutService.chainOfExercises(context, readWorkoutRequest)

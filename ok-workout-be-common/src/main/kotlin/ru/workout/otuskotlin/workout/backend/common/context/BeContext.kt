@@ -32,7 +32,7 @@ data class BeContext(
         UPDATE,
         DELETE,
         SEARCH,
-        OFFER
+        CHAIN_OF_EXERCISES
     }
 
     private fun addError(error: IError, failingsStatus: Boolean = true) = apply {

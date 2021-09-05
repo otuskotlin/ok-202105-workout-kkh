@@ -4,7 +4,9 @@ import java.time.Instant
 object WorkoutStub {
     private val workoutModelStub = WorkoutModel(
         workoutDate = Instant.parse("2021-08-23T14:00:00.0Z"),
+        duration = 120.0,
         recoveryTime = 120.0,
+        modificationWorkout = WorkoutModel.ModificationWorkout.CIRCUIT,
         exercisesBlock = mutableListOf(
             ExercisesBlockModel(
                 ExerciseStub.getModelExercise(),
@@ -17,7 +19,8 @@ object WorkoutStub {
                             )
                         )
                     )
-                )
+                ),
+                modificationBlockExercises = ModificationBlockExercises.NONE
             )
         ),
         idWorkout = WorkoutIdModel("wID:0001"),
@@ -25,11 +28,4 @@ object WorkoutStub {
     )
 
     fun getModelWorkout() = workoutModelStub
-}
-
-fun main() {
-    println(Instant.now())
-    val date = "2021-08-23T14:00:00.0Z"
-    val inst = Instant.parse(date)
-    println(inst)
 }

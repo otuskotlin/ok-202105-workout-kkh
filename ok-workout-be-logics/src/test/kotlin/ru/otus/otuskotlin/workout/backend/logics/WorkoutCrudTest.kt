@@ -8,6 +8,7 @@ import ru.workout.otuskotlin.workout.backend.common.models.MpStubCases
 import kotlin.test.assertEquals
 
 class WorkoutCrudTest {
+
     @Test
     fun workoutCreateSuccess() {
         val crud = WorkoutCrud()
@@ -18,6 +19,30 @@ class WorkoutCrudTest {
         )
         runBlocking {
             crud.create(context)
+            val expected = WorkoutStub.getModelWorkout()
+            assertEquals(CorStatus.SUCCESS, context.status)
+            with(context.responseWorkout) {
+                assertEquals(expected.workoutDate, workoutDate)
+                assertEquals(expected.duration, duration)
+                assertEquals(expected.recoveryTime, recoveryTime)
+                assertEquals(expected.modificationWorkout, modificationWorkout)
+                assertEquals(expected.exercisesBlock, exercisesBlock)
+                assertEquals(expected.idWorkout, idWorkout)
+                assertEquals(expected.permissions, permissions)
+            }
+        }
+    }
+
+    @Test
+    fun workoutReadSuccess() {
+        val crud = WorkoutCrud()
+        val context = BeContext(
+            requestWorkoutId = WorkoutStub.getModelWorkout().idWorkout,
+            operation = BeContext.MpOperations.READ,
+            stubCase = MpStubCases.SUCCESS
+        )
+        runBlocking {
+            crud.read(context)
             val expected = WorkoutStub.getModelWorkout()
             assertEquals(CorStatus.SUCCESS, context.status)
             with(context.responseWorkout) {

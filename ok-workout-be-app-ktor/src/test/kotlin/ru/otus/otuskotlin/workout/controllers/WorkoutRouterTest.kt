@@ -24,7 +24,8 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutCreate() {
         val data = CreateWorkoutRequest(
             requestId = "rID:0007",
-            debug = Utils.stubDebugSuccess
+            debug = Utils.stubDebugSuccess,
+            createWorkout = Utils.stubCreatableWorkout
         )
         testPostRequest<CreateWorkoutResponse>(data, "workout/create") {
             assertEquals(data.requestId, requestId)
