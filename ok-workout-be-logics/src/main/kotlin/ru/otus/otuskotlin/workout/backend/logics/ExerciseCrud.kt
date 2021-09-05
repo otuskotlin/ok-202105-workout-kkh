@@ -1,6 +1,7 @@
 package ru.otus.otuskotlin.workout.backend.logics
 
 import ru.otus.otuskotlin.workout.backend.logics.chains.exercise.ExerciseCreate
+import ru.otus.otuskotlin.workout.backend.logics.chains.exercise.ExerciseRead
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 
 class ExerciseCrud {
@@ -9,6 +10,7 @@ class ExerciseCrud {
     }
 
     suspend fun read(context: BeContext) {
+        ExerciseRead.exec(context.initSettings())
 
     }
 

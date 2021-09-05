@@ -40,7 +40,8 @@ suspend fun ApplicationCall.createExercise(exerciseService: ExerciseService) {
 suspend fun ApplicationCall.readExercise(exerciseService: ExerciseService) {
     val readExerciseRequest = receive<ReadExerciseRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.READ
     )
     val result = try {
         exerciseService.readExercise(context, readExerciseRequest)

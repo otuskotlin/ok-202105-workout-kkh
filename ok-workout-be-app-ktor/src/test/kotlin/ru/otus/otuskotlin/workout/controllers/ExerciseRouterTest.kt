@@ -44,13 +44,14 @@ class ExerciseRouterTest : RouterTest() {
         val data = ReadExerciseRequest(
             requestId = "rID:0002",
             debug = Utils.stubDebugSuccess,
+            readExerciseId = ExerciseStub.getModelExercise().idExercise.asString()
         )
 
         testPostRequest<ReadExerciseResponse>(data, "exercise/read") {
             assertEquals(data.requestId, requestId)
             assertEquals(ReadExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
-            assertEquals(Utils.stubResponseExercise, readExercise)
+            assertEquals(stubResponseExercise, readExercise)
         }
     }
 
@@ -65,7 +66,7 @@ class ExerciseRouterTest : RouterTest() {
             assertEquals(data.requestId, requestId)
             assertEquals(UpdateExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
-            assertEquals(Utils.stubResponseExercise, updateExercise)
+            assertEquals(stubResponseExercise, updateExercise)
         }
     }
 
@@ -80,7 +81,7 @@ class ExerciseRouterTest : RouterTest() {
             assertEquals(data.requestId, requestId)
             assertEquals(DeleteExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
-            assertEquals(Utils.stubResponseExercise, deleteExercise)
+            assertEquals(stubResponseExercise, deleteExercise)
         }
     }
 

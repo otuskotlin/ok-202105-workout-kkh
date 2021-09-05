@@ -5,7 +5,7 @@ import handlers.worker
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
 
-internal fun CorChainDsl<BeContext>.checkOperation(title: String, targetOperation: BeContext.MpOperations) =
+internal fun CorChainDsl<BeContext>.checkOperationWorker(title: String, targetOperation: BeContext.MpOperations) =
     worker {
         this.title = title
         this.description = "Проверка, что операция соответствует чейну"

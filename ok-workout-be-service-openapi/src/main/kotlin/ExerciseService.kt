@@ -4,7 +4,7 @@ import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 
 class ExerciseService(
-    var crud: ExerciseCrud
+    private var crud: ExerciseCrud
 ) {
 
     fun initExercise(context: BeContext, request: InitExerciseRequest): InitExerciseResponse {
@@ -17,31 +17,30 @@ class ExerciseService(
         return context.toCreateExerciseResponse()
     }
 
-    fun readExercise(context: BeContext, request: ReadExerciseRequest): ReadExerciseResponse {
-        context.setQuery(request)
-        context.responseExercise = ExerciseStub.getModelExercise()
+    suspend fun readExercise(context: BeContext, request: ReadExerciseRequest): ReadExerciseResponse {
+        crud.read(context.setQuery(request))
         return context.toReadExerciseResponse()
     }
 
-    fun updateExercise(context: BeContext, request: UpdateExerciseRequest): UpdateExerciseResponse {
+    suspend fun updateExercise(context: BeContext, request: UpdateExerciseRequest): UpdateExerciseResponse {
         context.setQuery(request)
         context.responseExercise = ExerciseStub.getModelExercise()
         return context.toUpdateExerciseResponse()
     }
 
-    fun deleteExercise(context: BeContext, request: DeleteExerciseRequest): DeleteExerciseResponse {
+    suspend fun deleteExercise(context: BeContext, request: DeleteExerciseRequest): DeleteExerciseResponse {
         context.setQuery(request)
         context.responseExercise = ExerciseStub.getModelExercise()
         return context.toDeleteExerciseResponse()
     }
 
-    fun searchExercise(context: BeContext, request: SearchExerciseRequest): SearchExerciseResponse {
+    suspend fun searchExercise(context: BeContext, request: SearchExerciseRequest): SearchExerciseResponse {
         context.setQuery(request)
         context.foundExercises = ExerciseStub.getModelExercises()
         return context.toSearchExerciseResponse()
     }
 
-    fun errorExercise(context: BeContext, e: Throwable): BaseMessage {
+    suspend fun errorExercise(context: BeContext, e: Throwable): BaseMessage {
         context.addError(e)
         return context.toReadExerciseResponse()
     }

@@ -3,22 +3,22 @@ package ru.otus.otuskotlin.workout.backend.logics.chains.exercise
 import ICorExec
 import chain
 import ru.otus.otuskotlin.workout.backend.logics.chains.stubs.excercise.exerciseCreateStub
-import ru.otus.otuskotlin.workout.backend.logics.workers.chainInit
-import ru.otus.otuskotlin.workout.backend.logics.workers.checkOperation
+import ru.otus.otuskotlin.workout.backend.logics.workers.chainInitWorker
+import ru.otus.otuskotlin.workout.backend.logics.workers.checkOperationWorker
 import ru.otus.otuskotlin.workout.backend.logics.workers.prepareAnswer
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 
 object ExerciseCreate : ICorExec<BeContext> by chain<BeContext>({
-    checkOperation(
+    checkOperationWorker(
         title = "Проверка, что операция соответствует чейну",
         targetOperation = BeContext.MpOperations.CREATE
     )
 
-    chainInit("Инициализация чейна")
+    chainInitWorker("Инициализация чейна")
 
     // validation
 
-    exerciseCreateStub(title = "Обработка стабкейсов")
+    exerciseCreateStub(title = "Обработка стабкейса для CREATE")
 
     // db working
 

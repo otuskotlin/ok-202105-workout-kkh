@@ -14,7 +14,7 @@ internal fun CorChainDsl<BeContext>.exerciseCreateStub(title: String) = chain {
                 stubCase != MpStubCases.NONE
     }
     worker {
-        this.title = "SUCCESS stubcase worker"
+        this.title = "Successful stubCase for CREATE"
         on {
             stubCase == MpStubCases.SUCCESS
         }
