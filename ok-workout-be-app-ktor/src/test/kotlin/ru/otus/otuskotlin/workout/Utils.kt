@@ -22,6 +22,14 @@ object Utils {
         description = stubResponseExercise.description,
         targetMuscleGroup = stubResponseExercise.targetMuscleGroup,
         synergisticMuscleGroup = stubResponseExercise.synergisticMuscleGroup,
-        executionTechnique = stubResponseExercise.executionTechnique
+        executionTechnique = stubResponseExercise.executionTechnique,
+    )
+    val stubUpdatableExercise = UpdatableExercise(
+        title = stubResponseExercise.title,
+        description = stubResponseExercise.description,
+        targetMuscleGroup = stubResponseExercise.targetMuscleGroup,
+        synergisticMuscleGroup = stubResponseExercise.synergisticMuscleGroup,
+        executionTechnique = stubResponseExercise.executionTechnique,
+        id = stubResponseExercise.id
     )
 }

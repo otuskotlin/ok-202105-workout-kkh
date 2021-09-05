@@ -23,8 +23,7 @@ class ExerciseService(
     }
 
     suspend fun updateExercise(context: BeContext, request: UpdateExerciseRequest): UpdateExerciseResponse {
-        context.setQuery(request)
-        context.responseExercise = ExerciseStub.getModelExercise()
+        crud.update(context.setQuery(request))
         return context.toUpdateExerciseResponse()
     }
 

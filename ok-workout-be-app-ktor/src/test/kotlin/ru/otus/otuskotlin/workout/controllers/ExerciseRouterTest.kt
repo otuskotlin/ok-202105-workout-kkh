@@ -4,6 +4,7 @@ import org.junit.Test
 import ru.otus.otuskotlin.workout.Utils
 import ru.otus.otuskotlin.workout.Utils.stubCreatableExercise
 import ru.otus.otuskotlin.workout.Utils.stubResponseExercise
+import ru.otus.otuskotlin.workout.Utils.stubUpdatableExercise
 import ru.otus.otuskotlin.workout.openapi.models.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -59,7 +60,8 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseUpdate() {
         val data = UpdateExerciseRequest(
             requestId = "rID:0003",
-            debug = Utils.stubDebugSuccess
+            debug = Utils.stubDebugSuccess,
+            updateExercise = stubUpdatableExercise
         )
 
         testPostRequest<UpdateExerciseResponse>(data, "exercise/update") {

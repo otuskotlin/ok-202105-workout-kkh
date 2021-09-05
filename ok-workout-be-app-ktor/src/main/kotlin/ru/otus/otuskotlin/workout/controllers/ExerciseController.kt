@@ -11,7 +11,8 @@ import java.time.Instant
 suspend fun ApplicationCall.initExercise(exerciseService: ExerciseService) {
     val initExerciseRequest = receive<InitExerciseRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.INIT
     )
 
     val result = try {
@@ -55,7 +56,7 @@ suspend fun ApplicationCall.updateExercise(exerciseService: ExerciseService) {
     val updateExerciseRequest = receive<UpdateExerciseRequest>()
     val context = BeContext(
         startTime = Instant.now(),
-        operation = BeContext.MpOperations.UPDATE
+        operation = BeContext.MpOperations.SEARCH
     )
     val result = try {
         exerciseService.updateExercise(context, updateExerciseRequest)
