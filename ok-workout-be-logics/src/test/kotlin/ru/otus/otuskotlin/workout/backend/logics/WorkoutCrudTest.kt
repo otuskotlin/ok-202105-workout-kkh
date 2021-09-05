@@ -121,4 +121,20 @@ class WorkoutCrudTest {
             assertTrue(expected.size == 2)
         }
     }
+
+    @Test
+    fun workoutChainOfExercisesSuccess() {
+        val crud = WorkoutCrud()
+        val context = BeContext(
+            operation = BeContext.MpOperations.CHAIN_OF_EXERCISES,
+            stubCase = MpStubCases.SUCCESS,
+            responseExercises = WorkoutStub.getChainOfExercises()
+        )
+        runBlocking {
+            crud.chainOfExercises(context)
+            val expected = WorkoutStub.getChainOfExercises()
+            assertEquals(CorStatus.SUCCESS, context.status)
+            assertTrue(expected.size == 1)
+        }
+    }
 }

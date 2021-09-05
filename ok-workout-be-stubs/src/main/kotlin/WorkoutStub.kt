@@ -57,4 +57,6 @@ object WorkoutStub {
 
     fun getWorkouts() = mutableListOf(workoutModelStub, workoutModelStubTwo)
 
+    fun getChainOfExercises() = workoutModelStub.exercisesBlock
+
 }

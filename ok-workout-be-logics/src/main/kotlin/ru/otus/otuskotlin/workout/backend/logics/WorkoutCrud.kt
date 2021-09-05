@@ -26,7 +26,7 @@ class WorkoutCrud {
     }
 
     suspend fun chainOfExercises(context: BeContext) {
-//        WorkoutChainOfExercises.exec(context.initSettings())
+        WorkoutChainOfExercises.exec(context.initSettings())
 
     }
 
