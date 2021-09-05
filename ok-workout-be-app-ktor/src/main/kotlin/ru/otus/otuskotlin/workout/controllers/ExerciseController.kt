@@ -54,7 +54,8 @@ suspend fun ApplicationCall.readExercise(exerciseService: ExerciseService) {
 suspend fun ApplicationCall.updateExercise(exerciseService: ExerciseService) {
     val updateExerciseRequest = receive<UpdateExerciseRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.UPDATE
     )
     val result = try {
         exerciseService.updateExercise(context, updateExerciseRequest)
@@ -67,7 +68,8 @@ suspend fun ApplicationCall.updateExercise(exerciseService: ExerciseService) {
 suspend fun ApplicationCall.deleteExercise(exerciseService: ExerciseService) {
     val deleteExerciseRequest = receive<DeleteExerciseRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.DELETE
     )
     val result = try {
         exerciseService.deleteExercise(context, deleteExerciseRequest)

@@ -74,7 +74,8 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseDelete() {
         val data = DeleteExerciseRequest(
             requestId = "rID:0004",
-            debug = Utils.stubDebugSuccess
+            debug = Utils.stubDebugSuccess,
+            deleteExerciseId = ExerciseStub.getModelExercise().idExercise.asString()
         )
 
         testPostRequest<DeleteExerciseResponse>(data, "exercise/delete") {

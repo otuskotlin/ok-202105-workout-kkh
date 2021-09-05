@@ -56,4 +56,28 @@ class ExerciseCrudTest {
             }
         }
     }
+
+    @Test
+    fun exerciseDeleteSuccess() {
+        val crud = ExerciseCrud()
+        val context = BeContext(
+            requestExerciseId = ExerciseStub.getModelExercise().idExercise,
+            operation = BeContext.MpOperations.DELETE,
+            stubCase = MpStubCases.SUCCESS
+        )
+        runBlocking {
+            crud.delete(context)
+            val expected = ExerciseStub.getModelExercise()
+            assertEquals(CorStatus.SUCCESS, context.status)
+            with(context.responseExercise) {
+                assertEquals(expected.title, title)
+                assertEquals(expected.description, description)
+                assertEquals(expected.targetMuscleGroup, targetMuscleGroup)
+                assertEquals(expected.synergisticMuscleGroup, synergisticMuscleGroup)
+                assertEquals(expected.executionTechnique, executionTechnique)
+                assertEquals(expected.idExercise, idExercise)
+                assertEquals(expected.permissions, permissions)
+            }
+        }
+    }
 }

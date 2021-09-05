@@ -29,8 +29,7 @@ class ExerciseService(
     }
 
     suspend fun deleteExercise(context: BeContext, request: DeleteExerciseRequest): DeleteExerciseResponse {
-        context.setQuery(request)
-        context.responseExercise = ExerciseStub.getModelExercise()
+        crud.delete(context.setQuery(request))
         return context.toDeleteExerciseResponse()
     }
 
