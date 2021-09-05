@@ -59,6 +59,30 @@ class ExerciseCrudTest {
     }
 
     @Test
+    fun exerciseUpdateSuccess() {
+        val crud = ExerciseCrud()
+        val context = BeContext(
+            requestExercise = ExerciseStub.getModelExercise(),
+            operation = BeContext.MpOperations.SEARCH,
+            stubCase = MpStubCases.SUCCESS
+        )
+        runBlocking {
+            crud.update(context)
+            val expected = ExerciseStub.getModelExercise()
+            assertEquals(CorStatus.SUCCESS, context.status)
+            with(context.responseExercise) {
+                assertEquals(expected.title, title)
+                assertEquals(expected.description, description)
+                assertEquals(expected.targetMuscleGroup, targetMuscleGroup)
+                assertEquals(expected.synergisticMuscleGroup, synergisticMuscleGroup)
+                assertEquals(expected.executionTechnique, executionTechnique)
+                assertEquals(expected.idExercise, idExercise)
+                assertEquals(expected.permissions, permissions)
+            }
+        }
+    }
+
+    @Test
     fun exerciseDeleteSuccess() {
         val crud = ExerciseCrud()
         val context = BeContext(
@@ -94,30 +118,6 @@ class ExerciseCrudTest {
             val expected = ExerciseStub.getModelExercises()
             assertEquals(CorStatus.SUCCESS, context.status)
             assertTrue(expected.size == 2)
-        }
-    }
-
-    @Test
-    fun exerciseUpdateSuccess() {
-        val crud = ExerciseCrud()
-        val context = BeContext(
-            requestExercise = ExerciseStub.getModelExercise(),
-            operation = BeContext.MpOperations.SEARCH,
-            stubCase = MpStubCases.SUCCESS
-        )
-        runBlocking {
-            crud.update(context)
-            val expected = ExerciseStub.getModelExercise()
-            assertEquals(CorStatus.SUCCESS, context.status)
-            with(context.responseExercise) {
-                assertEquals(expected.title, title)
-                assertEquals(expected.description, description)
-                assertEquals(expected.targetMuscleGroup, targetMuscleGroup)
-                assertEquals(expected.synergisticMuscleGroup, synergisticMuscleGroup)
-                assertEquals(expected.executionTechnique, executionTechnique)
-                assertEquals(expected.idExercise, idExercise)
-                assertEquals(expected.permissions, permissions)
-            }
         }
     }
 }

@@ -19,7 +19,9 @@ object WorkoutStub {
                     )
                 )
             )
-        )
+        ),
+        idWorkout = WorkoutIdModel("wID:0001"),
+        permissions = mutableSetOf(ExercisePermissions.READ)
     )
 
     fun getModelWorkout() = workoutModelStub
