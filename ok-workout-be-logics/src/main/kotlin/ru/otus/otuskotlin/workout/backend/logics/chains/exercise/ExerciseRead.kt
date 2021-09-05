@@ -16,7 +16,11 @@ object ExerciseRead : ICorExec<BeContext> by chain<BeContext>({
 
     chainInitWorker("Инициализация чейна")
 
+    // validation
+
     exerciseReadStub(title = "Обработка стабкейса для READ")
+
+    // db working
 
     prepareAnswer("Подготовка ответа")
 }).build()

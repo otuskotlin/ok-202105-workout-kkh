@@ -82,7 +82,8 @@ suspend fun ApplicationCall.deleteExercise(exerciseService: ExerciseService) {
 suspend fun ApplicationCall.searchExercise(exerciseService: ExerciseService) {
     val searchExerciseRequest = receive<SearchExerciseRequest>()
     val context = BeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = BeContext.MpOperations.SEARCH
     )
     val result = try {
         exerciseService.searchExercise(context, searchExerciseRequest)

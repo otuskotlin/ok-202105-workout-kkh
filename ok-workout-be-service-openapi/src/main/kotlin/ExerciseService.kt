@@ -34,8 +34,7 @@ class ExerciseService(
     }
 
     suspend fun searchExercise(context: BeContext, request: SearchExerciseRequest): SearchExerciseResponse {
-        context.setQuery(request)
-        context.foundExercises = ExerciseStub.getModelExercises()
+        crud.search(context.setQuery(request))
         return context.toSearchExerciseResponse()
     }
 
