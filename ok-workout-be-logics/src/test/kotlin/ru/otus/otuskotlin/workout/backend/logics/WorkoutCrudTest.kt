@@ -80,4 +80,28 @@ class WorkoutCrudTest {
             }
         }
     }
+
+    @Test
+    fun workoutDeleteSuccess() {
+        val crud = WorkoutCrud()
+        val context = BeContext(
+            operation = BeContext.MpOperations.DELETE,
+            stubCase = MpStubCases.SUCCESS,
+            requestWorkoutId = WorkoutStub.getModelWorkout().idWorkout
+        )
+        runBlocking {
+            crud.delete(context)
+            val expected = WorkoutStub.getModelWorkout()
+            assertEquals(CorStatus.SUCCESS, context.status)
+            with(context.responseWorkout) {
+                assertEquals(expected.workoutDate, workoutDate)
+                assertEquals(expected.duration, duration)
+                assertEquals(expected.recoveryTime, recoveryTime)
+                assertEquals(expected.modificationWorkout, modificationWorkout)
+                assertEquals(expected.exercisesBlock, exercisesBlock)
+                assertEquals(expected.idWorkout, idWorkout)
+                assertEquals(expected.permissions, permissions)
+            }
+        }
+    }
 }

@@ -70,7 +70,8 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutDelete() {
         val data = DeleteWorkoutRequest(
             requestId = "rID:0008",
-            debug = Utils.stubDebugSuccess
+            debug = Utils.stubDebugSuccess,
+            deleteWorkoutId = WorkoutStub.getModelWorkout().idWorkout.asString()
         )
         testPostRequest<DeleteWorkoutResponse>(data, "workout/delete") {
             assertEquals(data.requestId, requestId)

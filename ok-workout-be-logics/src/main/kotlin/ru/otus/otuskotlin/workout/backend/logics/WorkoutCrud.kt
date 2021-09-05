@@ -10,16 +10,14 @@ class WorkoutCrud {
 
     suspend fun read(context: BeContext) {
         WorkoutRead.exec(context.initSettings())
-
     }
 
     suspend fun update(context: BeContext) {
         WorkoutUpdate.exec(context.initSettings())
-
     }
 
     suspend fun delete(context: BeContext) {
-//        WorkoutDelete.exec(context.initSettings())
+        WorkoutDelete.exec(context.initSettings())
     }
 
     suspend fun search(context: BeContext) {
