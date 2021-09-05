@@ -56,4 +56,28 @@ class WorkoutCrudTest {
             }
         }
     }
+
+    @Test
+    fun workoutUpdateSuccess() {
+        val crud = WorkoutCrud()
+        val context = BeContext(
+            operation = BeContext.MpOperations.READ,
+            stubCase = MpStubCases.SUCCESS,
+            requestWorkout = WorkoutStub.getModelWorkout(),
+        )
+        runBlocking {
+            crud.read(context)
+            val expected = WorkoutStub.getModelWorkout()
+            assertEquals(CorStatus.SUCCESS, context.status)
+            with(context.responseWorkout) {
+                assertEquals(expected.workoutDate, workoutDate)
+                assertEquals(expected.duration, duration)
+                assertEquals(expected.recoveryTime, recoveryTime)
+                assertEquals(expected.modificationWorkout, modificationWorkout)
+                assertEquals(expected.exercisesBlock, exercisesBlock)
+                assertEquals(expected.idWorkout, context.requestWorkout.idWorkout)
+                assertEquals(expected.permissions, permissions)
+            }
+        }
+    }
 }

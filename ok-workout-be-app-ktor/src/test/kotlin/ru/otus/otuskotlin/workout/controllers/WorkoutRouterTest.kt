@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.workout.controllers
 
 import org.junit.Test
 import ru.otus.otuskotlin.workout.Utils
+import ru.otus.otuskotlin.workout.Utils.stubUpdatableWorkout
 import ru.otus.otuskotlin.workout.openapi.models.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -54,7 +55,8 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutUpdate() {
         val data = UpdateWorkoutRequest(
             requestId = "rID:0008",
-            debug = Utils.stubDebugSuccess
+            debug = Utils.stubDebugSuccess,
+            updateWorkout = stubUpdatableWorkout
         )
         testPostRequest<UpdateWorkoutResponse>(data, "workout/update") {
             assertEquals(data.requestId, requestId)

@@ -92,7 +92,7 @@ private fun UpdatableExercise.toModel() = ExerciseModel(
     targetMuscleGroup = targetMuscleGroup?.toMutableList() ?: mutableListOf(),
     synergisticMuscleGroup = synergisticMuscleGroup?.toMutableList() ?: mutableListOf(),
     executionTechnique = executionTechnique ?: "",
-    idExercise = ExerciseIdModel(id ?: "")
+    idExercise = ExerciseIdModel(id ?: ""),
 )
 
 private fun CreatableWorkout.toModel() = WorkoutModel(
@@ -106,7 +106,8 @@ private fun CreatableWorkout.toModel() = WorkoutModel(
 
 private fun ExercisesBlock.toModel() = ExercisesBlockModel(
     exercise = exercise?.toModel() ?: ExerciseModel(),
-    sets = sets.takeIf { !it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList() ?: mutableListOf()
+    sets = sets.takeIf { !it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList() ?: mutableListOf(),
+    modificationBlockExercises = ModificationBlockExercises.valueOf(modificationBlockExercises?.name ?: "NONE")
 )
 
 private fun ResponseExercise.toModel() = ExerciseModel(
@@ -115,11 +116,13 @@ private fun ResponseExercise.toModel() = ExerciseModel(
     targetMuscleGroup = targetMuscleGroup?.toMutableList() ?: mutableListOf(),
     synergisticMuscleGroup = synergisticMuscleGroup?.toMutableList() ?: mutableListOf(),
     executionTechnique = executionTechnique ?: "",
-    idExercise = ExerciseIdModel(id ?: "")
+    idExercise = ExerciseIdModel(id ?: ""),
+    permissions = permissions?.map { ExercisePermissions.valueOf(it.name) }?.toMutableSet() ?: mutableSetOf()
 )
 
 private fun OneSet.toModel() = OneSetModel(
-    performance = performance.takeIf { it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList() ?: mutableListOf(),
+    performance = performance.takeIf { it?.isNotEmpty() ?: false }?.map { it.toModel() }?.toMutableList()
+        ?: mutableListOf(),
     status = OneSetModel.Status.valueOf(status?.value ?: "PLAN"),
     modificationExercise = OneSetModel.ModificationExercise.valueOf(modificationExercise?.value ?: "NONE")
 )

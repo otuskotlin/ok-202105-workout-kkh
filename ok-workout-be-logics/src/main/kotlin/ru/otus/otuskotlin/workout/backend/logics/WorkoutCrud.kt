@@ -14,7 +14,7 @@ class WorkoutCrud {
     }
 
     suspend fun update(context: BeContext) {
-//        WorkoutUpdate.exec(context.initSettings())
+        WorkoutUpdate.exec(context.initSettings())
 
     }
 

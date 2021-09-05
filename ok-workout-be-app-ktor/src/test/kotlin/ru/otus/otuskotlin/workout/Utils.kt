@@ -46,4 +46,16 @@ object Utils {
         },
         exercisesBlock = stubResponseWorkout.exercisesBlock
     )
+
+    val stubUpdatableWorkout = UpdatableWorkout(
+        date = stubResponseWorkout.date,
+        duration = stubResponseWorkout.duration,
+        recoveryTime = stubResponseWorkout.recoveryTime,
+        modificationWorkout = stubResponseWorkout.modificationWorkout?.let {
+            UpdatableWorkout.ModificationWorkout.valueOf(
+                it.name
+            )
+        },
+        exercisesBlock = stubResponseWorkout.exercisesBlock
+    )
 }
