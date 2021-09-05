@@ -21,7 +21,7 @@ class WorkoutCrud {
     }
 
     suspend fun search(context: BeContext) {
-//        WorkoutSearch.exec(context.initSettings())
+        WorkoutSearch.exec(context.initSettings())
 
     }
 

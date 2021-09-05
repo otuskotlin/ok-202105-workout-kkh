@@ -6,6 +6,7 @@ import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
 import ru.workout.otuskotlin.workout.backend.common.models.MpStubCases
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class WorkoutCrudTest {
 
@@ -102,6 +103,22 @@ class WorkoutCrudTest {
                 assertEquals(expected.idWorkout, idWorkout)
                 assertEquals(expected.permissions, permissions)
             }
+        }
+    }
+
+    @Test
+    fun workoutSearchSuccess() {
+        val crud = WorkoutCrud()
+        val context = BeContext(
+            operation = BeContext.MpOperations.SEARCH,
+            stubCase = MpStubCases.SUCCESS,
+            foundWorkouts = WorkoutStub.getWorkouts()
+        )
+        runBlocking {
+            crud.search(context)
+            val expected = WorkoutStub.getWorkouts()
+            assertEquals(CorStatus.SUCCESS, context.status)
+            assertTrue(expected.size == 2)
         }
     }
 }

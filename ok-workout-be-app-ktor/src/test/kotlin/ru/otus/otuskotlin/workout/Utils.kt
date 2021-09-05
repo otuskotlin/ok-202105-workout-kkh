@@ -16,8 +16,9 @@ object Utils {
 
     val stubResponseExercise = ExerciseStub.getModelExercise().toTransport()
     val stubResponseWorkout = WorkoutStub.getModelWorkout().toTransport()
+    val stubResponseWorkoutTwo = WorkoutStub.getModelWorkoutTwo().toTransport()
 
-    val stubResponseSearchWorkout = listOf(stubResponseWorkout)
+    val stubResponseSearchWorkout = listOf(stubResponseWorkout, stubResponseWorkoutTwo)
 
     val stubCreatableExercise = CreatableExercise(
         title = stubResponseExercise.title,

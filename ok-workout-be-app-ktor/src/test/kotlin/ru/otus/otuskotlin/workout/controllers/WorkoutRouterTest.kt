@@ -100,7 +100,7 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutChainOfExercises() {
         val data = ReadWorkoutRequest(
             requestId = "rID:0008",
-            debug = Utils.stubDebugSuccess
+            debug = Utils.stubDebugSuccess,
         )
         testPostRequest<ChainOfExercisesResponse>(data, "workout/chainOfExercises") {
             assertEquals(data.requestId, requestId)
