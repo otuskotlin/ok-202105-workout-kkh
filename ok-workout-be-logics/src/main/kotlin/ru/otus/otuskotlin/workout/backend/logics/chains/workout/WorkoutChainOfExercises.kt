@@ -3,7 +3,6 @@ package ru.otus.otuskotlin.workout.backend.logics.chains.workout
 import ICorExec
 import chain
 import ru.otus.otuskotlin.workout.backend.logics.chains.stubs.workout.workoutChainOfExerciseStub
-import ru.otus.otuskotlin.workout.backend.logics.chains.stubs.workout.workoutCreateStub
 import ru.otus.otuskotlin.workout.backend.logics.workers.chainInitWorker
 import ru.otus.otuskotlin.workout.backend.logics.workers.checkOperationWorker
 import ru.otus.otuskotlin.workout.backend.logics.workers.prepareAnswer
