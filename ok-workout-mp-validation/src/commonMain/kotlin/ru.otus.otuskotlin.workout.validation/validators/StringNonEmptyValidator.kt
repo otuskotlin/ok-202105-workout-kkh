@@ -6,7 +6,7 @@ import ru.otus.otuskotlin.workout.validation.ValidationResult
 
 class StringNonEmptyValidator(
     private val field: String = "",
-    private val message: String = "String must not be empty"
+    private val message: String = "String must not be empty or null"
 ) : IValidator<String?> {
     override fun validate(sample: String?): ValidationResult {
         return if (sample.isNullOrBlank()) {

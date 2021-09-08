@@ -1,3 +1,4 @@
+import ru.otus.otuskotlin.workout.validation.ValidationFieldError
 import ru.otus.otuskotlin.workout.validation.validators.StringNonEmptyValidator
 import kotlin.test.Test
 import kotlin.test.assertNotNull
@@ -21,6 +22,10 @@ class ValidationTest {
     fun stringTestValidationError() {
         val validator = StringNonEmptyValidator()
         val result = validator validate emptyData
+
+        println(result.errors.forEach {
+            println("error: \"${it.message}\" because field: \"${(it as ValidationFieldError).field}\"")
+        })
 
         assertTrue(result.errors.isNotEmpty())
         assertNotNull(result.errors.find { it.message.contains("empty") })
