@@ -1,5 +1,7 @@
+import org.junit.Test
 import ru.otus.otuskotlin.workout.validation.IValidationError
-import kotlin.test.Test
+import ru.otus.otuskotlin.workout.validation.ValidationResult
+import workers.validation
 import kotlin.test.assertEquals
 
 class SimpleValidationTest {
@@ -8,7 +10,7 @@ class SimpleValidationTest {
     fun pipelineValidation() {
         val chain = chain<TestContext> {
             validation {
-                errorHandler { validationResult ->
+                errorHandler { validationResult: ValidationResult ->
                     if (!validationResult.isSuccess) {
                         errors.addAll(validationResult.errors)
                     }
