@@ -1,3 +1,4 @@
+import ru.otus.otuskotlin.workout.validation.IValidationError
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

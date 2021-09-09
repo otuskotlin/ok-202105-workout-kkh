@@ -14,6 +14,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
+                implementation(project(":ok-workout-mp-validation"))
+                implementation(project(":ok-workout-mp-common-cor"))
             }
         }
         val commonTest by getting {
