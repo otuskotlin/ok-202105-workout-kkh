@@ -10,10 +10,15 @@ kotlin {
         nodejs()
     }
 
+    val coroutinesVersion: String by project
+
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
+
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+
                 implementation(project(":ok-workout-mp-validation"))
                 implementation(project(":ok-workout-mp-common-cor"))
             }
