@@ -8,6 +8,8 @@ dependencies {
     implementation(kotlin("stdlib"))
 
     implementation(project(":ok-workout-mp-common-cor"))
+    implementation(project(":ok-workout-mp-cor-validation"))
+    implementation(project(":ok-workout-mp-validation"))
     implementation(project(":ok-workout-be-common"))
     implementation(project(":ok-workout-be-stubs"))
 
