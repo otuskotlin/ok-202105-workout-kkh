@@ -1,4 +1,5 @@
 import ru.otus.otuskotlin.workout.validation.IValidator
+import workers.DefaultValidationOperation
 
 class ValidationOperationBuilder<C, T> {
 
@@ -10,7 +11,7 @@ class ValidationOperationBuilder<C, T> {
 
     }
 
-    fun build() {
+    fun build() = DefaultValidationOperation<C, T>(
 
-    }
+    )
 }
