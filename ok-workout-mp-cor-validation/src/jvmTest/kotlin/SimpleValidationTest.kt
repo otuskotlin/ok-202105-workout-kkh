@@ -1,6 +1,7 @@
 import org.junit.Test
 import ru.otus.otuskotlin.workout.validation.IValidationError
 import ru.otus.otuskotlin.workout.validation.ValidationResult
+import ru.otus.otuskotlin.workout.validation.validators.StringNonEmptyValidator
 import kotlin.test.assertEquals
 
 class SimpleValidationTest {
@@ -14,8 +15,8 @@ class SimpleValidationTest {
                         errors.addAll(validationResult.errors)
                     }
                 }
-                validate<String?> { validator(ValidatorStringNonEmpty()); on { x } }
-                validate<String?> { validator(ValidatorStringNonEmpty()); on { y } }
+                validate<String?> { validator(StringNonEmptyValidator()); on { x } }
+                validate<String?> { validator(StringNonEmptyValidator()); on { y } }
             }
         }
         val c = TestContext()
