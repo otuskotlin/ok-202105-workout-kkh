@@ -8,7 +8,6 @@ import ru.otus.otuskotlin.workout.backend.logics.workers.checkOperationWorker
 import ru.otus.otuskotlin.workout.backend.logics.workers.prepareAnswer
 import ru.otus.otuskotlin.workout.validation.IValidationFieldError
 import ru.otus.otuskotlin.workout.validation.validators.StringNonEmptyValidator
-import ru.otus.otuskotlin.workout.validation.validators.TestValidator
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.models.CommonErrorModel
 import workers.validation
