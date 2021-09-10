@@ -1,7 +1,6 @@
 import org.junit.Test
 import ru.otus.otuskotlin.workout.validation.IValidationError
 import ru.otus.otuskotlin.workout.validation.ValidationResult
-import workers.validation
 import kotlin.test.assertEquals
 
 class SimpleValidationTest {
