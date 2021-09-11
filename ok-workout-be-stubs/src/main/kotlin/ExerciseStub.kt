@@ -29,6 +29,10 @@ object ExerciseStub {
 
     fun getModelExercise() = squatsStub
 
+    fun getModelExercise(model: (ExerciseModel.() -> Unit)? = null) = squatsStub.also { stub ->
+        model?.let { stub.apply(it) }
+    }
+
     fun getModelExercises() = mutableListOf(squatsStub, pullUpsStub)
 
 
