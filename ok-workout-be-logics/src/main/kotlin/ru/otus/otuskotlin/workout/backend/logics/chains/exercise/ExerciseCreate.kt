@@ -22,12 +22,10 @@ object ExerciseCreate : ICorExec<BeContext> by chain<BeContext>({
     exerciseCreateStub(title = "Обработка стабкейса для CREATE")
 
     validationLogics {
-
         validate<String?> {
             on { requestId }
             validator(StringNonEmptyValidator(field = "requestId"))
         }
-
         validate<String?> {
             on { requestExercise.title }
             validator(StringNonEmptyValidator(field = "title"))
@@ -45,8 +43,8 @@ object ExerciseCreate : ICorExec<BeContext> by chain<BeContext>({
             validator(ListNonEmptyValidator(field = "synergeticMuscleGroup"))
         }
         validate<String?> {
-            on { requestExercise.description }
-            validator(StringNonEmptyValidator(field = "idExercise"))
+            on { requestExercise.executionTechnique }
+            validator(StringNonEmptyValidator(field = "executionTechnique"))
         }
     }
 
