@@ -7,6 +7,7 @@ import ru.otus.otuskotlin.workout.backend.logics.helpers.validationLogics
 import ru.otus.otuskotlin.workout.backend.logics.workers.chainInitWorker
 import ru.otus.otuskotlin.workout.backend.logics.workers.checkOperationWorker
 import ru.otus.otuskotlin.workout.backend.logics.workers.prepareAnswer
+import ru.otus.otuskotlin.workout.validation.validators.ListNonEmptyValidator
 import ru.otus.otuskotlin.workout.validation.validators.StringNonEmptyValidator
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 
@@ -21,6 +22,7 @@ object ExerciseCreate : ICorExec<BeContext> by chain<BeContext>({
     exerciseCreateStub(title = "Обработка стабкейса для CREATE")
 
     validationLogics {
+
         validate<String?> {
             on { requestExercise.title }
             validator(StringNonEmptyValidator(field = "title"))
@@ -28,6 +30,18 @@ object ExerciseCreate : ICorExec<BeContext> by chain<BeContext>({
         validate<String?> {
             on { requestExercise.description }
             validator(StringNonEmptyValidator(field = "description"))
+        }
+        validate<List<*>?> {
+            on { requestExercise.targetMuscleGroup }
+            validator(ListNonEmptyValidator(field = "targetMuscleGroup"))
+        }
+        validate<List<*>?> {
+            on { requestExercise.synergisticMuscleGroup }
+            validator(ListNonEmptyValidator(field = "synergeticMuscleGroup"))
+        }
+        validate<String?> {
+            on { requestExercise.description }
+            validator(StringNonEmptyValidator(field = "idExercise"))
         }
     }
 
