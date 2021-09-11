@@ -12,8 +12,9 @@ fun CorChainDsl<BeContext>.validationLogics(block: ValidationBuilder<BeContext>.
     errorHandler { validationResult ->
         if (validationResult.isSuccess) return@errorHandler
         val errors = validationResult.errors.map {
+
             CommonErrorModel(
-                message = title,
+                message = it.message,
                 field = if (it is IValidationFieldError) it.field else ""
             )
         }
