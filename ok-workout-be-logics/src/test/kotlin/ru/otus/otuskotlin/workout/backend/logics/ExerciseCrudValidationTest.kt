@@ -140,4 +140,36 @@ class ExerciseCrudValidationTest {
         assertEquals(CorStatus.ERROR, context.status)
         assertEquals(7, context.errors.size)
     }
+
+    @Test
+    fun deleteExerciseSuccess() {
+        val crud = ExerciseCrud()
+        val context = BeContext(
+            requestId = "rID:00111",
+            requestExerciseId = ExerciseIdModel("eID:00011"),
+            stubCase = MpStubCases.SUCCESS,
+            requestExercise = ExerciseStub.getModelExercise(),
+            operation = BeContext.MpOperations.DELETE
+        )
+
+        runBlocking { crud.delete(context) }
+
+        assertEquals(CorStatus.SUCCESS, context.status)
+        assertTrue(context.errors.isEmpty())
+    }
+
+    @Test
+    fun deleteExerciseFailing() {
+        val crud = ExerciseCrud()
+        val context = BeContext(
+            requestId = "",
+            stubCase = MpStubCases.SUCCESS,
+            requestExercise = ExerciseStub.getModelExercise(),
+            operation = BeContext.MpOperations.DELETE
+        )
+        runBlocking { crud.delete(context) }
+
+        assertEquals(CorStatus.ERROR, context.status)
+        assertEquals(2, context.errors.size)
+    }
 }
