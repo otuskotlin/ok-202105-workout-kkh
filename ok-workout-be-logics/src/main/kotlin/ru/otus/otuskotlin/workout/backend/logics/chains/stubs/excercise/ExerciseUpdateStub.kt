@@ -20,7 +20,14 @@ internal fun CorChainDsl<BeContext>.exerciseUpdateStub(title: String) = chain {
             stubCase == MpStubCases.SUCCESS
         }
         handle {
-            responseExercise = ExerciseStub.getModelExercise().copy(idExercise = requestExercise.idExercise)
+            responseExercise = ExerciseStub.getModelExercise().copy(
+                title = requestExercise.title,
+                description = requestExercise.description,
+                targetMuscleGroup = requestExercise.targetMuscleGroup,
+                synergisticMuscleGroup = requestExercise.synergisticMuscleGroup,
+                executionTechnique = requestExercise.executionTechnique,
+                idExercise = requestExercise.idExercise
+            )
             status = CorStatus.FINISHING
         }
     }
