@@ -5,7 +5,7 @@ Content-Type: application/json
   "messageType": "CreateWorkoutRequest",
   "requestId": "id:123",
   "createWorkout": {
-    "date": "2021-08-11 14:00 +03",
+    "date": "2021-08-11T14:00:00.0Z",
     "duration": 0.0,
     "recoveryTime": 60.0,
     "modificationWorkout": "CLASSIC",
@@ -43,7 +43,10 @@ Content-Type: application/json
       }
     ]
   },
-  "debug": null
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
 }
 
 ###
@@ -55,7 +58,10 @@ Content-Type: application/json
   "messageType": "ReadWorkoutRequest",
   "requestId": "id:1234",
   "readWorkoutId": "wID:0001",
-  "debug": null
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
 }
 
 ###
@@ -105,7 +111,10 @@ Content-Type: application/json
       }
     ]
   },
-  "debug": null
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
 }
 
 ###
@@ -117,7 +126,10 @@ Content-Type: application/json
   "messageType": "DeleteWorkoutRequest",
   "requestId": "id:1234",
   "deleteWorkoutId": "wID:0001",
-  "debug": null
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
 }
 
 ###
@@ -129,7 +141,10 @@ Content-Type: application/json
   "messageType": "SearchWorkoutRequest",
   "requestId": "id:1234",
   "search": "Приседания",
-  "debug": null
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
 }
 
 ###
@@ -141,5 +156,8 @@ Content-Type: application/json
   "messageType": "ReadWorkoutRequest",
   "requestId": "id:1234",
   "readWorkoutId": "wID:0001",
-  "debug": null
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
 }

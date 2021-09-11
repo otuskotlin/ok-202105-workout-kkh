@@ -33,8 +33,6 @@ class ExerciseCrudValidationTest {
 
         runBlocking { crud.create(context) }
 
-        println(context.requestExercise)
-
         assertEquals(CorStatus.SUCCESS, context.status)
         assertTrue(context.errors.isEmpty())
     }
