@@ -11,18 +11,29 @@ import kotlin.test.assertTrue
 
 class ExerciseCrudValidationTest {
 
-    private val crud = ExerciseCrud()
-
     @Test
     fun createExerciseSuccess() {
+        val crud = ExerciseCrud()
         val context = BeContext(
             requestId = "rID:00111",
             stubCase = MpStubCases.SUCCESS,
-            requestExercise = ExerciseStub.getModelExercise(),
+            requestExercise = ExerciseStub.getModelExercise() {
+                title = "Приседания со штангой"
+                description = "Базовое упражнение"
+                targetMuscleGroup = mutableListOf("Квадрицепсы")
+                synergisticMuscleGroup = mutableListOf(
+                    "Большие ягодичные",
+                    "Приводящие бедра",
+                    "Камбаловидные"
+                )
+                executionTechnique = "Выполняющий упражнение приседает и затем встаёт, возвращаясь в положение стоя"
+            },
             operation = BeContext.MpOperations.CREATE
         )
 
         runBlocking { crud.create(context) }
+
+        println(context.requestExercise)
 
         assertEquals(CorStatus.SUCCESS, context.status)
         assertTrue(context.errors.isEmpty())
@@ -30,15 +41,16 @@ class ExerciseCrudValidationTest {
 
     @Test
     fun createExerciseFailing() {
-
+        val crud = ExerciseCrud()
         val context = BeContext(
+            requestId = "",
             stubCase = MpStubCases.SUCCESS,
             requestExercise = ExerciseStub.getModelExercise() {
                 title = ""
                 description = ""
                 targetMuscleGroup = mutableListOf()
                 synergisticMuscleGroup = mutableListOf()
-                description = ""
+                executionTechnique = ""
             },
             operation = BeContext.MpOperations.CREATE
         )
@@ -50,6 +62,7 @@ class ExerciseCrudValidationTest {
 
     @Test
     fun readExerciseSuccess() {
+        val crud = ExerciseCrud()
         val context = BeContext(
             requestId = "rID:00111",
             requestExerciseId = ExerciseIdModel("eID:00011"),
@@ -66,8 +79,9 @@ class ExerciseCrudValidationTest {
 
     @Test
     fun readExerciseFailing() {
-
+        val crud = ExerciseCrud()
         val context = BeContext(
+            requestId = "",
             stubCase = MpStubCases.SUCCESS,
             requestExercise = ExerciseStub.getModelExercise(),
             operation = BeContext.MpOperations.READ
@@ -76,5 +90,54 @@ class ExerciseCrudValidationTest {
 
         assertEquals(CorStatus.ERROR, context.status)
         assertEquals(2, context.errors.size)
+    }
+
+    @Test
+    fun updateExerciseSuccess() {
+        val crud = ExerciseCrud()
+        val context = BeContext(
+            requestId = "rID:00111",
+            stubCase = MpStubCases.SUCCESS,
+            requestExercise = ExerciseStub.getModelExercise() {
+                title = "Приседания со штангой"
+                description = "Базовое упражнение"
+                targetMuscleGroup = mutableListOf("Квадрицепсы")
+                synergisticMuscleGroup = mutableListOf(
+                    "Большие ягодичные",
+                    "Приводящие бедра",
+                    "Камбаловидные"
+                )
+                executionTechnique = "Выполняющий упражнение приседает и затем встаёт, возвращаясь в положение стоя"
+                idExercise = ExerciseIdModel("eID:000111")
+            },
+            operation = BeContext.MpOperations.UPDATE
+        )
+
+        runBlocking { crud.update(context) }
+
+        assertEquals(CorStatus.SUCCESS, context.status)
+        assertTrue(context.errors.isEmpty())
+    }
+
+    @Test
+    fun updateExerciseFailing() {
+        val crud = ExerciseCrud()
+        val context = BeContext(
+            requestId = "",
+            stubCase = MpStubCases.SUCCESS,
+            requestExercise = ExerciseStub.getModelExercise() {
+                title = ""
+                description = ""
+                targetMuscleGroup = mutableListOf()
+                synergisticMuscleGroup = mutableListOf()
+                executionTechnique = ""
+                idExercise = ExerciseIdModel("")
+            },
+            operation = BeContext.MpOperations.UPDATE
+        )
+        runBlocking { crud.update(context) }
+
+        assertEquals(CorStatus.ERROR, context.status)
+        assertEquals(7, context.errors.size)
     }
 }
