@@ -19,7 +19,7 @@ Content-Type: application/json
   },
   "debug": {
     "mode": "stub",
-    "stub": "success"
+    "stubCase": "success"
   }
 }
 
