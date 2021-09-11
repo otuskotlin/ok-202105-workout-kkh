@@ -18,6 +18,8 @@ object ExerciseRead : ICorExec<BeContext> by chain<BeContext>({
 
     chainInitWorker("Инициализация чейна")
 
+    exerciseReadStub(title = "Обработка стабкейса для READ")
+
     // validation
     validationLogics {
         validate<String?> {
@@ -30,7 +32,7 @@ object ExerciseRead : ICorExec<BeContext> by chain<BeContext>({
         }
     }
 
-    exerciseReadStub(title = "Обработка стабкейса для READ")
+
 
     // db working
 
