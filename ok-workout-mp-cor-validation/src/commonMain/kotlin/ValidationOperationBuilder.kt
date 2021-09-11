@@ -1,6 +1,5 @@
 import ru.otus.otuskotlin.workout.validation.IValidator
 import ru.otus.otuskotlin.workout.validation.ValidationResult
-import ru.otus.otuskotlin.workout.validation.validators.StringNonEmptyValidator
 
 class ValidationOperationBuilder<C, T>(
     private var errorHandler: C.(ValidationResult) -> Unit = {}
