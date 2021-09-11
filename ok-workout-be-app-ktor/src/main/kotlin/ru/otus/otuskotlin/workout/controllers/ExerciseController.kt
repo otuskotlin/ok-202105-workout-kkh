@@ -56,7 +56,7 @@ suspend fun ApplicationCall.updateExercise(exerciseService: ExerciseService) {
     val updateExerciseRequest = receive<UpdateExerciseRequest>()
     val context = BeContext(
         startTime = Instant.now(),
-        operation = BeContext.MpOperations.SEARCH
+        operation = BeContext.MpOperations.UPDATE
     )
     val result = try {
         exerciseService.updateExercise(context, updateExerciseRequest)
