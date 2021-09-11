@@ -5,7 +5,7 @@ Content-Type: application/json
   "messageType": "CreateExerciseRequest",
   "requestId": "rID:0001",
   "createExercise": {
-    "title": "Приседания со штангой",
+    "title": "Глубокие приседания со штангой",
     "description": "Базовое упражнение",
     "targetMuscleGroup": [
       "Квадрицепсы"
