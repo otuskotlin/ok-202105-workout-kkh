@@ -172,4 +172,36 @@ class ExerciseCrudValidationTest {
         assertEquals(CorStatus.ERROR, context.status)
         assertEquals(2, context.errors.size)
     }
+
+    @Test
+    fun searchExerciseSuccess() {
+        val crud = ExerciseCrud()
+        val context = BeContext(
+            requestId = "rID:00111",
+            requestSearchExercise = "Подтягивания",
+            stubCase = MpStubCases.SUCCESS,
+            requestExercise = ExerciseStub.getModelExercise(),
+            operation = BeContext.MpOperations.SEARCH
+        )
+
+        runBlocking { crud.search(context) }
+
+        assertEquals(CorStatus.SUCCESS, context.status)
+        assertTrue(context.errors.isEmpty())
+    }
+
+    @Test
+    fun searchExerciseFailing() {
+        val crud = ExerciseCrud()
+        val context = BeContext(
+            requestId = "",
+            stubCase = MpStubCases.SUCCESS,
+            requestExercise = ExerciseStub.getModelExercise(),
+            operation = BeContext.MpOperations.SEARCH
+        )
+        runBlocking { crud.search(context) }
+
+        assertEquals(CorStatus.ERROR, context.status)
+        assertEquals(2, context.errors.size)
+    }
 }
