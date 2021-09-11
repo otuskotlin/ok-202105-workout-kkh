@@ -9,7 +9,9 @@ class StringNonEmptyValidator(
     private val message: String = "String must not be empty or null"
 ) : IValidator<String?> {
     override fun validate(sample: String?): ValidationResult {
+        println("Start validate. Sample is $sample")
         return if (sample.isNullOrBlank()) {
+            println("error")
             ValidationResult(
                 listOf(
                     ValidationFieldError(
