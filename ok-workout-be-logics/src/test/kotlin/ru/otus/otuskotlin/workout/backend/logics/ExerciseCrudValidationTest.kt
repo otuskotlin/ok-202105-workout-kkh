@@ -29,6 +29,7 @@ class ExerciseCrudValidationTest {
     fun createExerciseFailing() {
 
         val context = BeContext(
+            requestId = "",
             stubCase = MpStubCases.SUCCESS,
             requestExercise = ExerciseStub.getModelExercise() {
                 title = ""
@@ -42,7 +43,7 @@ class ExerciseCrudValidationTest {
         runBlocking { crud.create(context) }
 
         assertEquals(CorStatus.ERROR, context.status)
-        assertEquals(5, context.errors.size)
+        assertEquals(6, context.errors.size)
 
     }
 }

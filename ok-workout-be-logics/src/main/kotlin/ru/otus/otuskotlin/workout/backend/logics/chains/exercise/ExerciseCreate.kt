@@ -24,6 +24,11 @@ object ExerciseCreate : ICorExec<BeContext> by chain<BeContext>({
     validationLogics {
 
         validate<String?> {
+            on { requestId }
+            validator(StringNonEmptyValidator(field = "requestId"))
+        }
+
+        validate<String?> {
             on { requestExercise.title }
             validator(StringNonEmptyValidator(field = "title"))
         }
