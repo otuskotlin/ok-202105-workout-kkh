@@ -3,9 +3,11 @@ package ru.otus.otuskotlin.workout.backend.logics.chains.exercise
 import ICorExec
 import chain
 import ru.otus.otuskotlin.workout.backend.logics.chains.stubs.excercise.exerciseReadStub
+import ru.otus.otuskotlin.workout.backend.logics.helpers.validationLogics
 import ru.otus.otuskotlin.workout.backend.logics.workers.chainInitWorker
 import ru.otus.otuskotlin.workout.backend.logics.workers.checkOperationWorker
 import ru.otus.otuskotlin.workout.backend.logics.workers.prepareAnswer
+import ru.otus.otuskotlin.workout.validation.validators.StringNonEmptyValidator
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 
 object ExerciseRead : ICorExec<BeContext> by chain<BeContext>({
@@ -17,6 +19,16 @@ object ExerciseRead : ICorExec<BeContext> by chain<BeContext>({
     chainInitWorker("Инициализация чейна")
 
     // validation
+    validationLogics {
+        validate<String?> {
+            on { requestId }
+            validator(StringNonEmptyValidator(field = "requestId"))
+        }
+        validate<String?> {
+            on { requestExerciseId.asString() }
+            validator(StringNonEmptyValidator(field = "requestId"))
+        }
+    }
 
     exerciseReadStub(title = "Обработка стабкейса для READ")
 
