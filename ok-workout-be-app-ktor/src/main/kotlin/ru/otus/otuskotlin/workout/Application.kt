@@ -1,12 +1,10 @@
 package ru.otus
 
-import ExerciseService
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.jackson.*
-import ru.otus.otuskotlin.workout.backend.logics.ExerciseCrud
 import ru.otus.otuskotlin.workout.plugins.configRouting
 
 fun main(args: Array<String>): Unit =
