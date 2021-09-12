@@ -6,7 +6,6 @@ import io.ktor.request.*
 import io.ktor.response.*
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.common.models.MpStubCases
 import java.time.Instant
 
 suspend fun ApplicationCall.initWorkout(workoutService: WorkoutService) {
@@ -85,11 +84,9 @@ suspend fun ApplicationCall.searchWorkout(workoutService: WorkoutService) {
         startTime = Instant.now(),
         operation = BeContext.MpOperations.SEARCH
     )
-    println(context.requestSearchWorkout)
     val result = try {
         workoutService.searchWorkout(context, searchWorkoutRequest)
     } catch (e: Throwable) {
-        println("Trouble: $e")
         workoutService.errorWorkout(context, e) as SearchWorkoutResponse
     }
     respond(result)
@@ -104,7 +101,6 @@ suspend fun ApplicationCall.chainOfExercises(workoutService: WorkoutService) {
     val result = try {
         workoutService.chainOfExercises(context, readWorkoutRequest)
     } catch (e: Exception) {
-        println("Ошибка: ${e.message}")
         workoutService.errorWorkout(context, e) as ChainOfExercisesResponse
     }
     respond(result)
