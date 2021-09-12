@@ -20,7 +20,15 @@ fun CorChainDsl<BeContext>.workoutSearchStub(title: String) = chain {
             stubCase == MpStubCases.SUCCESS
         }
         handle {
-            foundWorkouts = WorkoutStub.getWorkouts()
+            foundWorkouts = WorkoutStub.getWorkouts().also { workouts ->
+                workouts.first().also { workout ->
+                    workout.exercisesBlock.first().also { exercisesBlock ->
+                        exercisesBlock.exercise.targetMuscleGroup =
+                            mutableListOf(requestSearchWorkout.searchMuscleGroup)
+                    }
+                    workout.workoutDate = requestSearchWorkout.workoutDate
+                }
+            }
             status = CorStatus.FINISHING
         }
     }
