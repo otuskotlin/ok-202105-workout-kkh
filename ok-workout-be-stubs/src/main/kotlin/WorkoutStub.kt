@@ -34,7 +34,7 @@ object WorkoutStub {
         modificationWorkout = WorkoutModel.ModificationWorkout.CIRCUIT,
         exercisesBlock = mutableListOf(
             ExercisesBlockModel(
-                ExerciseStub.getModelExercise(),
+                ExerciseStub.getModelExerciseTwo(),
                 sets = mutableListOf(
                     OneSetModel(
                         performance = mutableListOf(
