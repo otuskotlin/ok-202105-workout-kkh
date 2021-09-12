@@ -166,4 +166,35 @@ class WorkoutCrudValidationTest {
         assertEquals(CorStatus.ERROR, context.status)
         assertEquals(1, context.errors.size)
     }
+
+    @Test
+    fun chainOfExercisesWorkoutSuccess() {
+        val crud = WorkoutCrud()
+        val context = BeContext(
+            requestId = "rID:00111",
+            stubCase = MpStubCases.SUCCESS,
+            requestWorkout = WorkoutStub.getModelWorkout(),
+            operation = BeContext.MpOperations.CHAIN_OF_EXERCISES
+        )
+
+        runBlocking { crud.chainOfExercises(context) }
+
+        assertEquals(CorStatus.SUCCESS, context.status)
+        assertTrue(context.errors.isEmpty())
+    }
+
+    @Test
+    fun chainOfExercisesWorkoutFailing() {
+        val crud = WorkoutCrud()
+        val context = BeContext(
+            requestId = "",
+            stubCase = MpStubCases.SUCCESS,
+            operation = BeContext.MpOperations.CHAIN_OF_EXERCISES
+        )
+
+        runBlocking { crud.chainOfExercises(context) }
+
+        assertEquals(CorStatus.ERROR, context.status)
+        assertEquals(2, context.errors.size)
+    }
 }
