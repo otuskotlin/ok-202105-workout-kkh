@@ -63,7 +63,6 @@ class ExerciseCrudValidationTest {
         val crud = ExerciseCrud()
         val context = BeContext(
             requestId = "rID:00111",
-            requestExerciseId = ExerciseIdModel("eID:00011"),
             stubCase = MpStubCases.SUCCESS,
             requestExercise = ExerciseStub.getModelExercise(),
             operation = BeContext.MpOperations.READ
