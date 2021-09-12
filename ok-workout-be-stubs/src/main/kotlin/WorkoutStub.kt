@@ -52,7 +52,10 @@ object WorkoutStub {
         permissions = mutableSetOf(ExercisePermissions.READ)
     )
 
-    fun getModelWorkout() = workoutModelStub
+    fun getModelWorkout(model: (WorkoutModel.() -> Unit)? = null) = workoutModelStub.also { stub ->
+        model?.let { stub.apply(it) }
+    }
+
     fun getModelWorkoutTwo() = workoutModelStubTwo
 
     fun getWorkouts() = mutableListOf(workoutModelStub, workoutModelStubTwo)
