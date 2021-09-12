@@ -23,8 +23,10 @@ Content-Type: application/json
             "Камбаловидные"
           ],
           "executionTechnique": "При выполнении приседаний можно варьировать положение ног, но обычно рекомендуют ставить носки врозь, а ноги примерно на ширине плеч",
-          "id": null,
-          "permissions": null
+          "id": "eID:00001",
+          "permissions": [
+            "READ"
+          ]
         },
         "sets": [
           {
