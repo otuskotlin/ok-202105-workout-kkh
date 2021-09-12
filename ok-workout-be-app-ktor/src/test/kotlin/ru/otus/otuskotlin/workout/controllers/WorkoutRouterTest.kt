@@ -86,7 +86,8 @@ class WorkoutRouterTest : RouterTest() {
         val data = SearchWorkoutRequest(
             date = "2021-08-23T14:00:00.0Z",
             requestId = "rID:0008",
-            debug = Utils.stubDebugSuccess
+            debug = Utils.stubDebugSuccess,
+            searchMuscleGroup = "Квадрицепсы"
         )
         testPostRequest<SearchWorkoutResponse>(data, "workout/search") {
             assertEquals(data.requestId, requestId)
@@ -101,6 +102,7 @@ class WorkoutRouterTest : RouterTest() {
         val data = ReadWorkoutRequest(
             requestId = "rID:0008",
             debug = Utils.stubDebugSuccess,
+            readWorkoutId = WorkoutStub.getModelWorkout().idWorkout.asString()
         )
         testPostRequest<ChainOfExercisesResponse>(data, "workout/chainOfExercises") {
             assertEquals(data.requestId, requestId)

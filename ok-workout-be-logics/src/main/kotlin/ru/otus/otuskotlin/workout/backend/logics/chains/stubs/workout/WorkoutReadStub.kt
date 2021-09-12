@@ -20,7 +20,6 @@ internal fun CorChainDsl<BeContext>.workoutReadStub(title: String) = chain {
             stubCase == MpStubCases.SUCCESS
         }
         handle {
-            requestWorkoutId = WorkoutStub.getModelWorkout().idWorkout
             responseWorkout = WorkoutStub.getModelWorkout().copy(idWorkout = requestWorkoutId)
             status = CorStatus.FINISHING
         }

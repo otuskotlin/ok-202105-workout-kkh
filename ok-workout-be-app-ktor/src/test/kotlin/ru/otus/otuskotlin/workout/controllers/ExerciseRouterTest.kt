@@ -92,7 +92,8 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseSearch() {
         val data = SearchExerciseRequest(
             requestId = "rID:0005",
-            debug = Utils.stubDebugSuccess
+            debug = Utils.stubDebugSuccess,
+            search = "Приседания"
         )
 
         testPostRequest<SearchExerciseResponse>(data, "exercise/search") {

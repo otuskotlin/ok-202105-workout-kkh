@@ -65,6 +65,7 @@ class ExerciseCrudValidationTest {
             requestId = "rID:00111",
             stubCase = MpStubCases.SUCCESS,
             requestExercise = ExerciseStub.getModelExercise(),
+            requestExerciseId = ExerciseIdModel("eID:00022"),
             operation = BeContext.MpOperations.READ
         )
 
@@ -132,7 +133,11 @@ class ExerciseCrudValidationTest {
             },
             operation = BeContext.MpOperations.UPDATE
         )
+
+        println("--" + context.requestExerciseId)
         runBlocking { crud.update(context) }
+
+        println("--" + context.requestExerciseId)
 
         assertEquals(CorStatus.ERROR, context.status)
         assertEquals(7, context.errors.size)

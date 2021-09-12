@@ -14,6 +14,7 @@ class ExerciseCrudTest {
     fun exerciseCreateSuccess() {
         val crud = ExerciseCrud()
         val context = BeContext(
+            requestId = "rID:0001",
             requestExercise = ExerciseStub.getModelExercise(),
             operation = BeContext.MpOperations.CREATE,
             stubCase = MpStubCases.SUCCESS
@@ -38,6 +39,7 @@ class ExerciseCrudTest {
     fun exerciseReadSuccess() {
         val crud = ExerciseCrud()
         val context = BeContext(
+            requestId = "rID:0001",
             requestExerciseId = ExerciseStub.getModelExercise().idExercise,
             operation = BeContext.MpOperations.READ,
             stubCase = MpStubCases.SUCCESS
@@ -62,8 +64,9 @@ class ExerciseCrudTest {
     fun exerciseUpdateSuccess() {
         val crud = ExerciseCrud()
         val context = BeContext(
+            requestId = "rID:0001",
             requestExercise = ExerciseStub.getModelExercise(),
-            operation = BeContext.MpOperations.SEARCH,
+            operation = BeContext.MpOperations.UPDATE,
             stubCase = MpStubCases.SUCCESS
         )
         runBlocking {
@@ -86,6 +89,7 @@ class ExerciseCrudTest {
     fun exerciseDeleteSuccess() {
         val crud = ExerciseCrud()
         val context = BeContext(
+            requestId = "rID:0001",
             requestExerciseId = ExerciseStub.getModelExercise().idExercise,
             operation = BeContext.MpOperations.DELETE,
             stubCase = MpStubCases.SUCCESS
@@ -110,8 +114,10 @@ class ExerciseCrudTest {
     fun exerciseSearchSuccess() {
         val crud = ExerciseCrud()
         val context = BeContext(
+            requestId = "rID:0001",
             operation = BeContext.MpOperations.SEARCH,
-            stubCase = MpStubCases.SUCCESS
+            stubCase = MpStubCases.SUCCESS,
+            requestSearchExercise = "Приседания"
         )
         runBlocking {
             crud.search(context)

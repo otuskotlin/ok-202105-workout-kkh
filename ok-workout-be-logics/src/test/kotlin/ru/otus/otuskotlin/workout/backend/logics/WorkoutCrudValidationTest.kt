@@ -1,5 +1,6 @@
 package ru.otus.otuskotlin.workout.backend.logics
 
+import WorkoutStub
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
@@ -46,6 +47,7 @@ class WorkoutCrudValidationTest {
         val crud = WorkoutCrud()
         val context = BeContext(
             requestId = "rID:00111",
+            requestWorkoutId = WorkoutStub.getModelWorkout().idWorkout,
             stubCase = MpStubCases.SUCCESS,
             requestWorkout = WorkoutStub.getModelWorkout(),
             operation = BeContext.MpOperations.READ
@@ -110,6 +112,7 @@ class WorkoutCrudValidationTest {
             requestId = "rID:00111",
             stubCase = MpStubCases.SUCCESS,
             requestWorkout = WorkoutStub.getModelWorkout(),
+            requestWorkoutId = WorkoutStub.getModelWorkout().idWorkout,
             operation = BeContext.MpOperations.DELETE
         )
 
@@ -174,6 +177,7 @@ class WorkoutCrudValidationTest {
             requestId = "rID:00111",
             stubCase = MpStubCases.SUCCESS,
             requestWorkout = WorkoutStub.getModelWorkout(),
+            requestWorkoutId = WorkoutStub.getModelWorkout().idWorkout,
             operation = BeContext.MpOperations.CHAIN_OF_EXERCISES
         )
 

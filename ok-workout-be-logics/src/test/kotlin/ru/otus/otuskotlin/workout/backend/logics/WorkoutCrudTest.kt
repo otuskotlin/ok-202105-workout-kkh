@@ -14,6 +14,7 @@ class WorkoutCrudTest {
     fun workoutCreateSuccess() {
         val crud = WorkoutCrud()
         val context = BeContext(
+            requestId = "rID:00011",
             requestWorkout = WorkoutStub.getModelWorkout(),
             operation = BeContext.MpOperations.CREATE,
             stubCase = MpStubCases.SUCCESS
@@ -38,6 +39,7 @@ class WorkoutCrudTest {
     fun workoutReadSuccess() {
         val crud = WorkoutCrud()
         val context = BeContext(
+            requestId = "rID:00011",
             requestWorkoutId = WorkoutStub.getModelWorkout().idWorkout,
             operation = BeContext.MpOperations.READ,
             stubCase = MpStubCases.SUCCESS
@@ -62,6 +64,8 @@ class WorkoutCrudTest {
     fun workoutUpdateSuccess() {
         val crud = WorkoutCrud()
         val context = BeContext(
+            requestId = "rID:00011",
+            requestWorkoutId = WorkoutStub.getModelWorkout().idWorkout,
             operation = BeContext.MpOperations.READ,
             stubCase = MpStubCases.SUCCESS,
             requestWorkout = WorkoutStub.getModelWorkout(),
@@ -86,6 +90,7 @@ class WorkoutCrudTest {
     fun workoutDeleteSuccess() {
         val crud = WorkoutCrud()
         val context = BeContext(
+            requestId = "rID:00011",
             operation = BeContext.MpOperations.DELETE,
             stubCase = MpStubCases.SUCCESS,
             requestWorkoutId = WorkoutStub.getModelWorkout().idWorkout
@@ -110,6 +115,7 @@ class WorkoutCrudTest {
     fun workoutSearchSuccess() {
         val crud = WorkoutCrud()
         val context = BeContext(
+            requestId = "rID:00011",
             operation = BeContext.MpOperations.SEARCH,
             stubCase = MpStubCases.SUCCESS,
             foundWorkouts = WorkoutStub.getWorkouts()
@@ -126,6 +132,8 @@ class WorkoutCrudTest {
     fun workoutChainOfExercisesSuccess() {
         val crud = WorkoutCrud()
         val context = BeContext(
+            requestId = "rID:00011",
+            requestWorkoutId = WorkoutStub.getModelWorkout().idWorkout,
             operation = BeContext.MpOperations.CHAIN_OF_EXERCISES,
             stubCase = MpStubCases.SUCCESS,
             responseExercises = WorkoutStub.getChainOfExercises()

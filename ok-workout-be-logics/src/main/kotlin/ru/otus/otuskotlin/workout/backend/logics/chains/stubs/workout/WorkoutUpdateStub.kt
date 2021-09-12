@@ -21,7 +21,7 @@ internal fun CorChainDsl<BeContext>.workoutUpdateStub(title: String) = chain {
         }
         handle {
             requestWorkoutId = requestWorkout.idWorkout
-            responseWorkout = requestWorkout
+            responseWorkout = requestWorkout.copy(permissions = WorkoutStub.getModelWorkout().permissions)
             status = CorStatus.FINISHING
         }
     }
