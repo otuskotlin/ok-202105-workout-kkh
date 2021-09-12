@@ -95,7 +95,7 @@ Content-Type: application/json
           "executionTechnique": "При выполнении приседаний можно варьировать положение ног, но обычно рекомендуют ставить носки врозь, а ноги примерно на ширине плеч",
           "id": "eID:00001",
           "permissions": [
-            "READ"
+            "read"
           ]
         },
         "sets": [
@@ -145,7 +145,39 @@ Content-Type: application/json
 {
   "messageType": "SearchWorkoutRequest",
   "requestId": "id:1234",
-  "search": "Приседания",
+  "date": "2021-08-11T10:00:00.0Z",
+  "searchExercise": "Приседания",
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
+}
+
+###
+
+POST http://127.0.0.1:8080/workout/search
+Content-Type: application/json
+
+{
+  "messageType": "SearchWorkoutRequest",
+  "requestId": "id:1234",
+  "date": "2021-08-11T11:00:00.0Z",
+  "searchMuscleGroup": "Квадрицепсы",
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
+}
+
+###
+
+POST http://127.0.0.1:8080/workout/search
+Content-Type: application/json
+
+{
+  "messageType": "SearchWorkoutRequest",
+  "requestId": "id:1234",
+  "date": "2021-08-11T12:00:00.0Z",
   "debug": {
     "mode": "stub",
     "stubCase": "success"
