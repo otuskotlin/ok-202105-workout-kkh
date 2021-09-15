@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.workout.controllers
 
 import org.junit.Test
 import ru.otus.otuskotlin.workout.Utils
+import ru.otus.otuskotlin.workout.Utils.stubUpdatableWorkout
 import ru.otus.otuskotlin.workout.openapi.models.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -24,7 +25,8 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutCreate() {
         val data = CreateWorkoutRequest(
             requestId = "rID:0007",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess,
+            createWorkout = Utils.stubCreatableWorkout
         )
         testPostRequest<CreateWorkoutResponse>(data, "workout/create") {
             assertEquals(data.requestId, requestId)
@@ -38,7 +40,8 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutRead() {
         val data = ReadWorkoutRequest(
             requestId = "rID:0008",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess,
+            readWorkoutId = WorkoutStub.getModelWorkout().idWorkout.asString()
         )
         testPostRequest<ReadWorkoutResponse>(data, "workout/read") {
             assertEquals(data.requestId, requestId)
@@ -52,7 +55,8 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutUpdate() {
         val data = UpdateWorkoutRequest(
             requestId = "rID:0008",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess,
+            updateWorkout = stubUpdatableWorkout
         )
         testPostRequest<UpdateWorkoutResponse>(data, "workout/update") {
             assertEquals(data.requestId, requestId)
@@ -66,7 +70,8 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutDelete() {
         val data = DeleteWorkoutRequest(
             requestId = "rID:0008",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess,
+            deleteWorkoutId = WorkoutStub.getModelWorkout().idWorkout.asString()
         )
         testPostRequest<DeleteWorkoutResponse>(data, "workout/delete") {
             assertEquals(data.requestId, requestId)
@@ -81,7 +86,8 @@ class WorkoutRouterTest : RouterTest() {
         val data = SearchWorkoutRequest(
             date = "2021-08-23T14:00:00.0Z",
             requestId = "rID:0008",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess,
+            searchMuscleGroup = "Квадрицепсы"
         )
         testPostRequest<SearchWorkoutResponse>(data, "workout/search") {
             assertEquals(data.requestId, requestId)
@@ -95,7 +101,8 @@ class WorkoutRouterTest : RouterTest() {
     fun testPostWorkoutChainOfExercises() {
         val data = ReadWorkoutRequest(
             requestId = "rID:0008",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess,
+            readWorkoutId = WorkoutStub.getModelWorkout().idWorkout.asString()
         )
         testPostRequest<ChainOfExercisesResponse>(data, "workout/chainOfExercises") {
             assertEquals(data.requestId, requestId)

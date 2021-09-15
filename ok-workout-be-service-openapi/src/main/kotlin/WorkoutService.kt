@@ -1,51 +1,48 @@
+import ru.otus.otuskotlin.workout.backend.logics.WorkoutCrud
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 
-class WorkoutService {
+class WorkoutService(
+    private val crud: WorkoutCrud
+) {
 
-    fun initWorkout(context: BeContext, request: InitWorkoutRequest): InitWorkoutResponse {
+    suspend fun initWorkout(context: BeContext, request: InitWorkoutRequest): InitWorkoutResponse {
         context.setQuery(request)
         return context.toInitWorkoutResponse()
     }
 
-    fun createWorkout(context: BeContext, request: CreateWorkoutRequest): CreateWorkoutResponse {
-        context.setQuery(request)
-        context.responseWorkout = WorkoutStub.getModelWorkout()
+    suspend fun createWorkout(context: BeContext, request: CreateWorkoutRequest): CreateWorkoutResponse {
+        crud.create(context.setQuery(request))
         return context.toCreateWorkoutResponse()
     }
 
-    fun readWorkout(context: BeContext, request: ReadWorkoutRequest): ReadWorkoutResponse {
-        context.setQuery(request)
-        context.responseWorkout = WorkoutStub.getModelWorkout()
+    suspend fun readWorkout(context: BeContext, request: ReadWorkoutRequest): ReadWorkoutResponse {
+        crud.read(context.setQuery(request))
         return context.toReadWorkoutResponse()
     }
 
-    fun updateWorkout(context: BeContext, request: UpdateWorkoutRequest): UpdateWorkoutResponse {
-        context.responseWorkout = WorkoutStub.getModelWorkout()
-        context.setQuery(request)
+    suspend fun updateWorkout(context: BeContext, request: UpdateWorkoutRequest): UpdateWorkoutResponse {
+        crud.update(context.setQuery(request))
         return context.toUpdateWorkoutResponse()
     }
 
-    fun deleteWorkout(context: BeContext, request: DeleteWorkoutRequest): DeleteWorkoutResponse {
-        context.setQuery(request)
-        context.responseWorkout = WorkoutStub.getModelWorkout()
+    suspend fun deleteWorkout(context: BeContext, request: DeleteWorkoutRequest): DeleteWorkoutResponse {
+        crud.delete(context.setQuery(request))
         return context.toDeleteWorkoutResponse()
     }
 
-    fun searchWorkout(context: BeContext, request: SearchWorkoutRequest): SearchWorkoutResponse {
-        context.setQuery(request)
-        context.foundWorkouts = mutableListOf(WorkoutStub.getModelWorkout())
+    suspend fun searchWorkout(context: BeContext, request: SearchWorkoutRequest): SearchWorkoutResponse {
+        crud.search(context.setQuery(request))
         return context.toSearchWorkoutResponse()
     }
 
-    fun chainOfExercises(context: BeContext, request: ReadWorkoutRequest): ChainOfExercisesResponse {
-        context.setQuery(request)
-        context.responseExercises = WorkoutStub.getModelWorkout().exercisesBlock
+    suspend fun chainOfExercises(context: BeContext, request: ReadWorkoutRequest): ChainOfExercisesResponse {
+        crud.chainOfExercises(context.setQuery(request))
         return context.toChainOfExercisesResponse()
     }
 
-    fun errorWorkout(context: BeContext, e: Throwable): BaseMessage {
+    suspend fun errorWorkout(context: BeContext, e: Throwable): BaseMessage {
         context.addError(e)
         return context.toReadWorkoutResponse()
     }

@@ -2,6 +2,9 @@ package ru.otus.otuskotlin.workout.controllers
 
 import org.junit.Test
 import ru.otus.otuskotlin.workout.Utils
+import ru.otus.otuskotlin.workout.Utils.stubCreatableExercise
+import ru.otus.otuskotlin.workout.Utils.stubResponseExercise
+import ru.otus.otuskotlin.workout.Utils.stubUpdatableExercise
 import ru.otus.otuskotlin.workout.openapi.models.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -25,14 +28,15 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseCreate() {
         val data = CreateExerciseRequest(
             requestId = "rID:0001",
-            debug = Utils.stubDebug
+            createExercise = stubCreatableExercise,
+            debug = Utils.stubDebugSuccess
         )
 
         testPostRequest<CreateExerciseResponse>(data, "exercise/create") {
             assertEquals(data.requestId, requestId)
             assertEquals(CreateExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
-            assertEquals(Utils.stubResponseExercise, createdExercise)
+            assertEquals(stubResponseExercise, createdExercise)
         }
     }
 
@@ -40,14 +44,15 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseRead() {
         val data = ReadExerciseRequest(
             requestId = "rID:0002",
-            debug = Utils.stubDebug,
+            debug = Utils.stubDebugSuccess,
+            readExerciseId = ExerciseStub.getModelExercise().idExercise.asString()
         )
 
         testPostRequest<ReadExerciseResponse>(data, "exercise/read") {
             assertEquals(data.requestId, requestId)
             assertEquals(ReadExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
-            assertEquals(Utils.stubResponseExercise, readExercise)
+            assertEquals(stubResponseExercise, readExercise)
         }
     }
 
@@ -55,14 +60,15 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseUpdate() {
         val data = UpdateExerciseRequest(
             requestId = "rID:0003",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess,
+            updateExercise = stubUpdatableExercise
         )
 
         testPostRequest<UpdateExerciseResponse>(data, "exercise/update") {
             assertEquals(data.requestId, requestId)
             assertEquals(UpdateExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
-            assertEquals(Utils.stubResponseExercise, updateExercise)
+            assertEquals(stubResponseExercise, updateExercise)
         }
     }
 
@@ -70,14 +76,15 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseDelete() {
         val data = DeleteExerciseRequest(
             requestId = "rID:0004",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess,
+            deleteExerciseId = ExerciseStub.getModelExercise().idExercise.asString()
         )
 
         testPostRequest<DeleteExerciseResponse>(data, "exercise/delete") {
             assertEquals(data.requestId, requestId)
             assertEquals(DeleteExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
-            assertEquals(Utils.stubResponseExercise, deleteExercise)
+            assertEquals(stubResponseExercise, deleteExercise)
         }
     }
 
@@ -85,7 +92,8 @@ class ExerciseRouterTest : RouterTest() {
     fun testPostExerciseSearch() {
         val data = SearchExerciseRequest(
             requestId = "rID:0005",
-            debug = Utils.stubDebug
+            debug = Utils.stubDebugSuccess,
+            search = "Приседания"
         )
 
         testPostRequest<SearchExerciseResponse>(data, "exercise/search") {

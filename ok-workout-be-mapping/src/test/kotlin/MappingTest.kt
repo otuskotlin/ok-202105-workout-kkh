@@ -1,9 +1,9 @@
+import org.junit.jupiter.api.Test
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.models.*
 import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 import java.time.Instant
-import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 

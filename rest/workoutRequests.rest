@@ -5,14 +5,14 @@ Content-Type: application/json
   "messageType": "CreateWorkoutRequest",
   "requestId": "id:123",
   "createWorkout": {
-    "date": "2021-08-11 14:00 +03",
+    "date": "2021-08-11T14:00:00.0Z",
     "duration": 0.0,
     "recoveryTime": 60.0,
     "modificationWorkout": "CLASSIC",
     "exercisesBlock": [
       {
         "exercise": {
-          "title": "Приседания со штангой",
+          "title": "Глубокие приседания со штангой",
           "description": "Базовое упражнение",
           "targetMuscleGroup": [
             "Квадрицепсы"
@@ -23,8 +23,10 @@ Content-Type: application/json
             "Камбаловидные"
           ],
           "executionTechnique": "При выполнении приседаний можно варьировать положение ног, но обычно рекомендуют ставить носки врозь, а ноги примерно на ширине плеч",
-          "id": null,
-          "permissions": null
+          "id": "eID:00001",
+          "permissions": [
+            "read"
+          ]
         },
         "sets": [
           {
@@ -43,7 +45,10 @@ Content-Type: application/json
       }
     ]
   },
-  "debug": null
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
 }
 
 ###
@@ -55,7 +60,10 @@ Content-Type: application/json
   "messageType": "ReadWorkoutRequest",
   "requestId": "id:1234",
   "readWorkoutId": "wID:0001",
-  "debug": null
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
 }
 
 ###
@@ -67,7 +75,7 @@ Content-Type: application/json
   "messageType": "UpdateWorkoutRequest",
   "requestId": "id:123",
   "updateWorkout": {
-    "date": "2021-08-11 14:00 +03",
+    "date": "2021-08-11T14:00:00.0Z",
     "duration": 0.0,
     "recoveryTime": 60.0,
     "modificationWorkout": "CLASSIC",
@@ -85,8 +93,10 @@ Content-Type: application/json
             "Камбаловидные"
           ],
           "executionTechnique": "При выполнении приседаний можно варьировать положение ног, но обычно рекомендуют ставить носки врозь, а ноги примерно на ширине плеч",
-          "id": null,
-          "permissions": null
+          "id": "eID:00001",
+          "permissions": [
+            "read"
+          ]
         },
         "sets": [
           {
@@ -103,9 +113,13 @@ Content-Type: application/json
         ],
         "modificationBlockExercises": "NONE"
       }
-    ]
+    ],
+    "id": "wID:00001"
   },
-  "debug": null
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
 }
 
 ###
@@ -117,7 +131,10 @@ Content-Type: application/json
   "messageType": "DeleteWorkoutRequest",
   "requestId": "id:1234",
   "deleteWorkoutId": "wID:0001",
-  "debug": null
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
 }
 
 ###
@@ -128,8 +145,43 @@ Content-Type: application/json
 {
   "messageType": "SearchWorkoutRequest",
   "requestId": "id:1234",
-  "search": "Приседания",
-  "debug": null
+  "date": "2021-08-11T10:00:00.0Z",
+  "searchExercise": "Приседания",
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
+}
+
+###
+
+POST http://127.0.0.1:8080/workout/search
+Content-Type: application/json
+
+{
+  "messageType": "SearchWorkoutRequest",
+  "requestId": "id:1234",
+  "date": "2021-08-11T11:00:00.0Z",
+  "searchMuscleGroup": "Квадрицепсы",
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
+}
+
+###
+
+POST http://127.0.0.1:8080/workout/search
+Content-Type: application/json
+
+{
+  "messageType": "SearchWorkoutRequest",
+  "requestId": "id:1234",
+  "date": "2021-08-11T12:00:00.0Z",
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
 }
 
 ###
@@ -141,5 +193,8 @@ Content-Type: application/json
   "messageType": "ReadWorkoutRequest",
   "requestId": "id:1234",
   "readWorkoutId": "wID:0001",
-  "debug": null
+  "debug": {
+    "mode": "stub",
+    "stubCase": "success"
+  }
 }

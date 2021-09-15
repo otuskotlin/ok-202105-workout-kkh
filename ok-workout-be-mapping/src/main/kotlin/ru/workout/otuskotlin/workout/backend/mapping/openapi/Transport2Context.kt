@@ -13,26 +13,31 @@ fun BeContext.setQuery(query: InitExerciseRequest) = apply {
 fun BeContext.setQuery(query: CreateExerciseRequest) = apply {
     requestId = query.requestId ?: ""
     requestExercise = query.createExercise?.toModel() ?: ExerciseModel()
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: ReadExerciseRequest) = apply {
     requestId = query.requestId ?: ""
     requestExerciseId = ExerciseIdModel(query.readExerciseId ?: "")
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: UpdateExerciseRequest) = apply {
     requestId = query.requestId ?: ""
     requestExercise = query.updateExercise?.toModel() ?: ExerciseModel()
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: DeleteExerciseRequest) = apply {
     requestId = query.requestId ?: ""
     requestExerciseId = ExerciseIdModel(query.deleteExerciseId ?: "")
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: SearchExerciseRequest) = apply {
     requestId = query.requestId ?: ""
     requestSearchExercise = query.search ?: ""
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: InitWorkoutRequest) = apply {
@@ -42,33 +47,35 @@ fun BeContext.setQuery(query: InitWorkoutRequest) = apply {
 fun BeContext.setQuery(query: CreateWorkoutRequest) = apply {
     requestId = query.requestId ?: ""
     requestWorkout = query.createWorkout?.toModel() ?: WorkoutModel()
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: ReadWorkoutRequest) = apply {
     requestId = query.requestId ?: ""
     requestWorkoutId = WorkoutIdModel(query.readWorkoutId ?: "")
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: UpdateWorkoutRequest) = apply {
     requestId = query.requestId ?: ""
     requestWorkout = query.updateWorkout?.toModel() ?: WorkoutModel()
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: DeleteWorkoutRequest) = apply {
     requestId = query.requestId ?: ""
     requestWorkoutId = WorkoutIdModel(query.deleteWorkoutId ?: "")
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: SearchWorkoutRequest) = apply {
     requestId = query.requestId ?: ""
-    println(requestSearchWorkout)
     requestSearchWorkout.apply {
-        println(query.date)
         workoutDate = Instant.parse(query.date) ?: Instant.now()
         searchMuscleGroup = query.searchMuscleGroup ?: ""
         searchExercise = query.searchExercise ?: ""
     }
-    println("03")
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 private fun CreatableExercise.toModel() = ExerciseModel(
@@ -85,7 +92,7 @@ private fun UpdatableExercise.toModel() = ExerciseModel(
     targetMuscleGroup = targetMuscleGroup?.toMutableList() ?: mutableListOf(),
     synergisticMuscleGroup = synergisticMuscleGroup?.toMutableList() ?: mutableListOf(),
     executionTechnique = executionTechnique ?: "",
-    idExercise = ExerciseIdModel(id ?: "")
+    idExercise = ExerciseIdModel(id ?: ""),
 )
 
 private fun CreatableWorkout.toModel() = WorkoutModel(
@@ -94,12 +101,13 @@ private fun CreatableWorkout.toModel() = WorkoutModel(
     recoveryTime = recoveryTime?.takeIf { it > 0.0 } ?: 0.0,
     modificationWorkout = WorkoutModel.ModificationWorkout.valueOf(modificationWorkout?.name ?: "CLASSIC"),
     exercisesBlock = exercisesBlock.takeIf { !it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList()
-        ?: mutableListOf()
+        ?: mutableListOf(),
 )
 
 private fun ExercisesBlock.toModel() = ExercisesBlockModel(
     exercise = exercise?.toModel() ?: ExerciseModel(),
-    sets = sets.takeIf { !it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList() ?: mutableListOf()
+    sets = sets.takeIf { !it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList() ?: mutableListOf(),
+    modificationBlockExercises = ModificationBlockExercises.valueOf(modificationBlockExercises?.name ?: "NONE")
 )
 
 private fun ResponseExercise.toModel() = ExerciseModel(
@@ -108,11 +116,13 @@ private fun ResponseExercise.toModel() = ExerciseModel(
     targetMuscleGroup = targetMuscleGroup?.toMutableList() ?: mutableListOf(),
     synergisticMuscleGroup = synergisticMuscleGroup?.toMutableList() ?: mutableListOf(),
     executionTechnique = executionTechnique ?: "",
-    idExercise = ExerciseIdModel(id ?: "")
+    idExercise = ExerciseIdModel(id ?: ""),
+    permissions = permissions?.map { ExercisePermissions.valueOf(it.name) }?.toMutableSet() ?: mutableSetOf()
 )
 
 private fun OneSet.toModel() = OneSetModel(
-    performance = performance.takeIf { it.isNullOrEmpty() }?.map { it.toModel() }?.toMutableList() ?: mutableListOf(),
+    performance = performance.takeIf { it?.isNotEmpty() ?: false }?.map { it.toModel() }?.toMutableList()
+        ?: mutableListOf(),
     status = OneSetModel.Status.valueOf(status?.value ?: "PLAN"),
     modificationExercise = OneSetModel.ModificationExercise.valueOf(modificationExercise?.value ?: "NONE")
 )
@@ -132,3 +142,9 @@ private fun UpdatableWorkout.toModel() = WorkoutModel(
         ?: mutableListOf(),
     idWorkout = WorkoutIdModel(id ?: "")
 )
+
+private fun BaseDebugRequest.StubCase?.toModel(): MpStubCases = when (this) {
+    BaseDebugRequest.StubCase.SUCCESS -> MpStubCases.SUCCESS
+    BaseDebugRequest.StubCase.DATABASE_ERROR -> MpStubCases.DATABASE_ERROR
+    null -> MpStubCases.NONE
+}
