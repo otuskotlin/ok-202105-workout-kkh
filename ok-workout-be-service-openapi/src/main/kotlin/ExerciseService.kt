@@ -36,9 +36,4 @@ class ExerciseService(
         crud.search(context.setQuery(request))
         return context.toSearchExerciseResponse()
     }
-
-    suspend fun errorExercise(context: BeContext, e: Throwable): BaseMessage {
-        context.addError(e)
-        return context.toReadExerciseResponse()
-    }
 }
