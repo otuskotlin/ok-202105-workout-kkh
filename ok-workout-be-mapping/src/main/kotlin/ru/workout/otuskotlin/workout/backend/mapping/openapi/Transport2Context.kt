@@ -11,6 +11,7 @@ fun BeContext.setQuery(query: InitExerciseRequest) = apply {
 }
 
 fun BeContext.setQuery(query: CreateExerciseRequest) = apply {
+    operation = BeContext.MpOperations.CREATE
     requestId = query.requestId ?: ""
     requestExercise = query.createExercise?.toModel() ?: ExerciseModel()
     stubCase = query.debug?.stubCase.toModel()
