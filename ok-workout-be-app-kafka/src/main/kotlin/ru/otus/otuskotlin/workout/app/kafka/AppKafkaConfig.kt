@@ -11,7 +11,7 @@ import org.apache.kafka.common.serialization.StringDeserializer
 import ru.otus.otuskotlin.workout.backend.logics.ExerciseCrud
 import java.util.*
 
-class AppKafkaConfig(
+data class AppKafkaConfig(
     val kafkaHosts: List<String> = KAFKA_HOSTS,
     val kafkaTopicIn: String = KAFKA_TOPIC_IN,
     val kafkaTopicOut: String = KAFKA_TOPIC_OUT,
