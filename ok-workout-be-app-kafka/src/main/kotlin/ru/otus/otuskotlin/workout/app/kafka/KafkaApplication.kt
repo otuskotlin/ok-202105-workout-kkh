@@ -16,7 +16,7 @@ import java.time.Instant
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 
-class AppKafkaConsumer(private val config: AppKafkaConfig) {
+class KafkaApplication(private val config: AppKafkaConfig) {
     private val consumer = config.kafkaConsumer
     private val producer = config.kafkaProducer
     private val service = config.service
