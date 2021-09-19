@@ -7,7 +7,7 @@ import org.apache.kafka.common.TopicPartition
 import org.apache.kafka.common.serialization.StringSerializer
 import org.junit.Test
 import ru.otus.otuskotlin.workout.app.kafka.AppKafkaConfig
-import ru.otus.otuskotlin.workout.app.kafka.AppKafkaConsumer
+import ru.otus.otuskotlin.workout.app.kafka.KafkaApplication
 import ru.otus.otuskotlin.workout.openapi.models.*
 import java.util.*
 import kotlin.test.assertEquals
@@ -21,7 +21,7 @@ class KafkaControllerTest {
             kafkaConsumer = consumer,
             kafkaProducer = producer
         )
-        val app = AppKafkaConsumer(config)
+        val app = KafkaApplication(config)
         consumer.schedulePollTask {
             consumer.rebalance(Collections.singletonList(TopicPartition(config.kafkaTopicIn, 0)))
             consumer.addRecord(
