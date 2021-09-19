@@ -8,6 +8,7 @@ import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.common.serialization.StringDeserializer
+import org.apache.kafka.common.serialization.StringSerializer
 import ru.otus.otuskotlin.workout.backend.logics.ExerciseCrud
 import java.util.*
 
@@ -27,8 +28,8 @@ data class AppKafkaConfig(
         const val KAFKA_GROUP_ID_VAR = "KAFKA_GROUP_ID"
 
         val KAFKA_HOSTS by lazy { (System.getenv(KAFKA_HOST_VAR) ?: "").split("\\s*[,;]\\s*") }
-        val KAFKA_TOPIC_IN by lazy { System.getenv(KAFKA_TOPIC_IN_VAR) ?: "workout-exercise-in" }
-        val KAFKA_TOPIC_OUT by lazy { System.getenv(KAFKA_TOPIC_OUT_VAR) ?: "workout-exercise-out" }
+        val KAFKA_TOPIC_IN by lazy { System.getenv(KAFKA_TOPIC_IN_VAR) ?: "workout-exercises-in" }
+        val KAFKA_TOPIC_OUT by lazy { System.getenv(KAFKA_TOPIC_OUT_VAR) ?: "workout-exercises-out" }
         val KAFKA_GROUP_ID by lazy { System.getenv(KAFKA_GROUP_ID_VAR) ?: "workout" }
 
         fun kafkaConsumer(hosts: List<String>, groupId: String): KafkaConsumer<String, String> {
@@ -44,8 +45,8 @@ data class AppKafkaConfig(
         fun kafkaProducer(hosts: List<String>): KafkaProducer<String, String> {
             val props = Properties().apply {
                 put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, hosts)
-                put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringDeserializer::class.java)
-                put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringDeserializer::class.java)
+                put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer::class.java)
+                put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer::class.java)
             }
             return KafkaProducer<String, String>(props)
         }
