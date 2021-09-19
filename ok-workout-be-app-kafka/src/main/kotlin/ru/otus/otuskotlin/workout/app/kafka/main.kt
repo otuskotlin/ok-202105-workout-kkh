@@ -2,6 +2,6 @@ package ru.otus.otuskotlin.workout.app.kafka
 
 fun main() {
     val config = AppKafkaConfig()
-    val consumer = AppKafkaConsumer(config)
-    consumer.run()
+    val application = KafkaApplication(config)
+    application.run()
 }
