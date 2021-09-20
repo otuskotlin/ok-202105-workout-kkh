@@ -57,6 +57,7 @@ class KafkaApplication(private val config: AppKafkaConfig) {
     }
 
     private suspend fun sendResponse(response: BaseMessage) {
+
         val json = withContext(Dispatchers.IO) {
             om.writeValueAsString(response)
         }

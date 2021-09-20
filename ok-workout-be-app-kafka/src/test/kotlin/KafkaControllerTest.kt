@@ -14,7 +14,7 @@ import kotlin.test.assertEquals
 
 class KafkaControllerTest {
     @Test
-    fun funKafka() {
+    fun kafkaCreateExercise() {
         val consumer = MockConsumer<String, String>(OffsetResetStrategy.EARLIEST)
         val producer = MockProducer<String, String>(true, StringSerializer(), StringSerializer())
         val config = AppKafkaConfig(
@@ -29,15 +29,15 @@ class KafkaControllerTest {
                     config.kafkaTopicIn,
                     PARTITION,
                     0L,
-                    "test-1",
+                    "create-exercise",
                     CreateExerciseRequest(
-                        requestId = "123",
+                        requestId = "rId:0101",
                         createExercise = CreatableExercise(
-                            title = "Some exercise",
-                            description = "Some description",
-                            targetMuscleGroup = listOf("Some muscle group"),
-                            synergisticMuscleGroup = listOf("Some muscle group"),
-                            executionTechnique = "Some technique"
+                            title = "Жим штанги лёжа",
+                            description = "Базовое упражнение, выполняется на горизонтальной скамье",
+                            targetMuscleGroup = listOf("Грудные"),
+                            synergisticMuscleGroup = listOf("Трицепс"),
+                            executionTechnique = "Подконтрольно опускаем на уровень груди, выжимаем вертикально вверх"
                         ),
                         debug = BaseDebugRequest(
                             mode = BaseDebugRequest.Mode.STUB,
@@ -46,6 +46,47 @@ class KafkaControllerTest {
                     ).toJson()
                 )
             )
+
+            consumer.addRecord(
+                ConsumerRecord(
+                    config.kafkaTopicIn,
+                    PARTITION,
+                    1L,
+                    "create-exercise-2",
+                    CreateExerciseRequest(
+                        requestId = "rId:0102",
+                        createExercise = CreatableExercise(
+                            title = "Жим штанги лёжа на наклонной скамье",
+                            description = "Базовое упражнение, выполняется на наклонной скамье",
+                            targetMuscleGroup = listOf("Грудные"),
+                            synergisticMuscleGroup = listOf("Трицепс"),
+                            executionTechnique = "Подконтрольно опускаем на уровень груди, выжимаем вертикально вверх"
+                        ),
+                        debug = BaseDebugRequest(
+                            mode = BaseDebugRequest.Mode.STUB,
+                            stubCase = BaseDebugRequest.StubCase.SUCCESS
+                        )
+                    ).toJson()
+                )
+            )
+
+            consumer.addRecord(
+                ConsumerRecord(
+                    config.kafkaTopicIn,
+                    PARTITION,
+                    2L,
+                    "create-exercise-2",
+                    ReadExerciseRequest(
+                        requestId = "rId:0102",
+                        readExerciseId = "eId:0201",
+                        debug = BaseDebugRequest(
+                            mode = BaseDebugRequest.Mode.STUB,
+                            stubCase = BaseDebugRequest.StubCase.SUCCESS
+                        )
+                    ).toJson()
+                )
+            )
+
             app.stop()
         }
 
@@ -57,12 +98,23 @@ class KafkaControllerTest {
 
         app.run()
 
-        val message = producer.history().first()
-        println("message: $message")
-        val result = message.value().fromJson<CreateExerciseResponse>()
-        println(result)
-        assertEquals("123", result.requestId)
-        assertEquals("Some exercise", result.createdExercise?.title)
+        val messageOne = producer.history().first()
+        val messageTwo = producer.history()[1]
+        val messageThree = producer.history()[2]
+
+        val resultOne = messageOne.value().fromJson<CreateExerciseResponse>()
+        val resultTwo = messageTwo.value().fromJson<CreateExerciseResponse>()
+        val resultThree = messageThree.value().fromJson<ReadExerciseResponse>()
+
+        println(resultThree)
+
+        assertEquals("rId:0101", resultOne.requestId)
+        assertEquals("Жим штанги лёжа", resultOne.createdExercise?.title)
+
+        assertEquals("rId:0102", resultTwo.requestId)
+        assertEquals("Жим штанги лёжа на наклонной скамье", resultTwo.createdExercise?.title)
+
+        assertEquals(producer.history().size, 3)
     }
 
     companion object {
