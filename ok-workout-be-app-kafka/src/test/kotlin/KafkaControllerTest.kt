@@ -29,7 +29,7 @@ class KafkaControllerTest {
                     config.kafkaTopicIn,
                     PARTITION,
                     0L,
-                    "create-exercise",
+                    "create-exercise-1",
                     CreateExerciseRequest(
                         requestId = "rId:0101",
                         createExercise = CreatableExercise(
@@ -75,7 +75,7 @@ class KafkaControllerTest {
                     config.kafkaTopicIn,
                     PARTITION,
                     2L,
-                    "create-exercise-2",
+                    "create-exercise-3",
                     ReadExerciseRequest(
                         requestId = "rId:0103",
                         readExerciseId = "eId:0201",
