@@ -106,8 +106,6 @@ class KafkaControllerTest {
         val resultTwo = messageTwo.value().fromJson<CreateExerciseResponse>()
         val resultThree = messageThree.value().fromJson<ReadExerciseResponse>()
 
-        println(resultThree)
-
         assertEquals("rId:0101", resultOne.requestId)
         assertEquals("Жим штанги лёжа", resultOne.createdExercise?.title)
 
