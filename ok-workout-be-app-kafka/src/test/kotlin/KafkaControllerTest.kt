@@ -77,7 +77,7 @@ class KafkaControllerTest {
                     2L,
                     "create-exercise-2",
                     ReadExerciseRequest(
-                        requestId = "rId:0102",
+                        requestId = "rId:0103",
                         readExerciseId = "eId:0201",
                         debug = BaseDebugRequest(
                             mode = BaseDebugRequest.Mode.STUB,
@@ -111,6 +111,9 @@ class KafkaControllerTest {
 
         assertEquals("rId:0102", resultTwo.requestId)
         assertEquals("Жим штанги лёжа на наклонной скамье", resultTwo.createdExercise?.title)
+
+        assertEquals("rId:0103", resultThree.requestId)
+        assertEquals("Приседания со штангой", resultThree.readExercise?.title)
 
         assertEquals(producer.history().size, 3)
     }
