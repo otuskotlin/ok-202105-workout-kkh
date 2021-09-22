@@ -20,7 +20,7 @@ class WorkoutService(
             else -> throw DataNotAllowedException("Request is not allowed", request)
         }
     } catch (e: Throwable) {
-        errorWorkout(context, e)
+        handleError(context, e)
     }
 
     suspend fun initWorkout(context: BeContext, request: InitWorkoutRequest): InitWorkoutResponse {
@@ -58,7 +58,7 @@ class WorkoutService(
         return context.toChainOfExercisesResponse()
     }
 
-    suspend fun errorWorkout(context: BeContext, e: Throwable): BaseMessage {
+    override suspend fun handleError(context: BeContext, e: Throwable): BaseMessage {
         context.addError(e)
         return context.toReadWorkoutResponse()
     }

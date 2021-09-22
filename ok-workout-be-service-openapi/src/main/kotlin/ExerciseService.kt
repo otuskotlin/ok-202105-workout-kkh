@@ -6,7 +6,7 @@ import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 
 class ExerciseService(
     private var crud: ExerciseCrud
-): IHandlerRequests {
+) : IHandlerRequests {
 
     override suspend fun handleRequest(context: BeContext, request: BaseMessage) = try {
         when (request) {
@@ -19,7 +19,7 @@ class ExerciseService(
             else -> throw DataNotAllowedException("Request is not allowed", request)
         }
     } catch (e: Throwable) {
-        errorExercise(context, e)
+        handleError(context, e)
     }
 
     fun initExercise(context: BeContext, request: InitExerciseRequest): InitExerciseResponse {
@@ -52,7 +52,7 @@ class ExerciseService(
         return context.toSearchExerciseResponse()
     }
 
-    suspend fun errorExercise(context: BeContext, e: Throwable): BaseMessage {
+    override suspend fun handleError(context: BeContext, e: Throwable): BaseMessage {
         context.addError(e)
         return context.toReadExerciseResponse()
     }
