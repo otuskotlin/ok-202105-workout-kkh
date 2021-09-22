@@ -1,5 +1,6 @@
 package ru.otus.otuskotlin.workout.app.kafka
 
+import IHandlerRequests
 import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable
@@ -19,13 +20,13 @@ import java.util.concurrent.atomic.AtomicBoolean
 class KafkaApplication(private val config: AppKafkaConfig) {
     private val consumer = config.kafkaConsumer
     private val producer = config.kafkaProducer
-    private val service = config.service
+    private val services = config.services
     private val om = ObjectMapper()
     private val process = AtomicBoolean(true)
 
     fun run() = runBlocking {
         try {
-            consumer.subscribe(listOf(config.kafkaTopicIn))
+            consumer.subscribe(config.kafkaTopicsIn)
             while (process.get()) {
                 val context = BeContext(
                     startTime = Instant.now()
@@ -33,6 +34,12 @@ class KafkaApplication(private val config: AppKafkaConfig) {
                 try {
                     val records: ConsumerRecords<String, String> = consumer.poll(Duration.ofSeconds(1))
                     records.forEach { record: ConsumerRecord<String, String> ->
+                        println("record: $record")
+                        val service = if (record.value().contains("ExerciseRequest")) {
+                            services[0]
+                        } else {
+                            services[1]
+                        }
                         val request =
                             withContext(Dispatchers.IO) {
                                 om.readValue(record.value(), BaseMessage::class.java)
@@ -40,11 +47,11 @@ class KafkaApplication(private val config: AppKafkaConfig) {
                         sendResponse(service.handleRequest(context, request))
                     }
                 } catch (e: Throwable) {
-                    sendResponse(service.errorExercise(context, e))
+                    println(e.message)
+                    sendResponse(services[0].handleError(context, e))
                 }
             }
         } catch (ex: WakeupException) {
-
         } catch (ex: RuntimeException) {
             withContext(NonCancellable) {
                 throw ex

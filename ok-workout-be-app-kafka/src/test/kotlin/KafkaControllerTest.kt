@@ -8,6 +8,8 @@ import org.apache.kafka.common.serialization.StringSerializer
 import org.junit.Test
 import ru.otus.otuskotlin.workout.app.kafka.AppKafkaConfig
 import ru.otus.otuskotlin.workout.app.kafka.KafkaApplication
+import ru.otus.otuskotlin.workout.backend.logics.ExerciseCrud
+import ru.otus.otuskotlin.workout.backend.logics.WorkoutCrud
 import ru.otus.otuskotlin.workout.openapi.models.*
 import java.util.*
 import kotlin.test.assertEquals
@@ -16,17 +18,24 @@ class KafkaControllerTest {
     @Test
     fun kafkaCreateExercise() {
         val consumer = MockConsumer<String, String>(OffsetResetStrategy.EARLIEST)
-        val producer = MockProducer<String, String>(true, StringSerializer(), StringSerializer())
+        val producer = MockProducer(true, StringSerializer(), StringSerializer())
         val config = AppKafkaConfig(
             kafkaConsumer = consumer,
             kafkaProducer = producer
         )
         val app = KafkaApplication(config)
+
         consumer.schedulePollTask {
-            consumer.rebalance(Collections.singletonList(TopicPartition(config.kafkaTopicIn, 0)))
+            consumer.rebalance(
+                listOf(
+                    TopicPartition(config.kafkaTopicsIn[0], 0),
+                    TopicPartition(config.kafkaTopicsIn[1], 0)
+                )
+            )
+
             consumer.addRecord(
                 ConsumerRecord(
-                    config.kafkaTopicIn,
+                    config.kafkaTopicsIn[0],
                     PARTITION,
                     0L,
                     "create-exercise-1",
@@ -49,7 +58,7 @@ class KafkaControllerTest {
 
             consumer.addRecord(
                 ConsumerRecord(
-                    config.kafkaTopicIn,
+                    config.kafkaTopicsIn[0],
                     PARTITION,
                     1L,
                     "create-exercise-2",
@@ -72,13 +81,47 @@ class KafkaControllerTest {
 
             consumer.addRecord(
                 ConsumerRecord(
-                    config.kafkaTopicIn,
+                    config.kafkaTopicsIn[0],
                     PARTITION,
                     2L,
-                    "create-exercise-3",
+                    "read-exercise-1",
                     ReadExerciseRequest(
                         requestId = "rId:0103",
                         readExerciseId = "eId:0201",
+                        debug = BaseDebugRequest(
+                            mode = BaseDebugRequest.Mode.STUB,
+                            stubCase = BaseDebugRequest.StubCase.SUCCESS
+                        )
+                    ).toJson()
+                )
+            )
+
+            consumer.addRecord(
+                ConsumerRecord(
+                    config.kafkaTopicsIn[1],
+                    PARTITION,
+                    0L,
+                    "read-workout-1",
+                    ReadWorkoutRequest(
+                        requestId = "rId:0104",
+                        readWorkoutId = "wId:0201",
+                        debug = BaseDebugRequest(
+                            mode = BaseDebugRequest.Mode.STUB,
+                            stubCase = BaseDebugRequest.StubCase.SUCCESS
+                        )
+                    ).toJson()
+                )
+            )
+
+            consumer.addRecord(
+                ConsumerRecord(
+                    config.kafkaTopicsIn[1],
+                    PARTITION,
+                    1L,
+                    "read-workout-2",
+                    ReadWorkoutRequest(
+                        requestId = "rId:0105",
+                        readWorkoutId = "wId:0201",
                         debug = BaseDebugRequest(
                             mode = BaseDebugRequest.Mode.STUB,
                             stubCase = BaseDebugRequest.StubCase.SUCCESS
@@ -92,15 +135,30 @@ class KafkaControllerTest {
 
         val startOffsets: MutableMap<TopicPartition, Long> = mutableMapOf()
 
-        val tp = TopicPartition(config.kafkaTopicIn, PARTITION)
-        startOffsets[tp] = 0L
+
+        val tpExercise = TopicPartition(config.kafkaTopicsIn[0], PARTITION)
+        startOffsets[tpExercise] = 0L
         consumer.updateBeginningOffsets(startOffsets)
+
+        val tpWorkout = TopicPartition(config.kafkaTopicsIn[1], PARTITION)
+        startOffsets[tpWorkout] = 0L
+        consumer.updateBeginningOffsets(startOffsets)
+
+        println("startOffsets: $startOffsets")
 
         app.run()
 
-        val messageOne = producer.history().first()
+        val messageOne = producer.history()[0]
         val messageTwo = producer.history()[1]
         val messageThree = producer.history()[2]
+        val messageFour = producer.history()[3]
+        val messageFive = producer.history()[4]
+
+        println(messageOne)
+        println(messageTwo)
+        println(messageThree)
+        println(messageFour)
+        println(messageFive)
 
         val resultOne = messageOne.value().fromJson<CreateExerciseResponse>()
         val resultTwo = messageTwo.value().fromJson<CreateExerciseResponse>()
@@ -115,7 +173,7 @@ class KafkaControllerTest {
         assertEquals("rId:0103", resultThree.requestId)
         assertEquals("Приседания со штангой", resultThree.readExercise?.title)
 
-        assertEquals(producer.history().size, 3)
+        assertEquals(producer.history().size, 5)
     }
 
     companion object {
@@ -125,4 +183,4 @@ class KafkaControllerTest {
 
 private val om = ObjectMapper()
 private fun BaseMessage.toJson(): String = om.writeValueAsString(this)
-private inline fun <reified T : BaseMessage> String.fromJson() = om.readValue<T>(this, T::class.java)
+private inline fun <reified T : BaseMessage> String.fromJson() = om.readValue(this, T::class.java)
