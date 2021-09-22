@@ -56,7 +56,7 @@ suspend fun ApplicationCall.searchWorkout(workoutService: WorkoutService) {
 
 suspend fun ApplicationCall.chainOfExercises(workoutService: WorkoutService) {
 
-    handleRoute<ReadWorkoutRequest, ChainOfExercisesResponse> { request ->
+    handleRoute<ChainOfExercisesRequest, ChainOfExercisesResponse> { request ->
         this.operation = BeContext.MpOperations.CHAIN_OF_EXERCISES
         workoutService.chainOfExercises(this, request)
     }
