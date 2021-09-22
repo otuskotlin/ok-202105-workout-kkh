@@ -24,7 +24,6 @@ class KafkaApplication(private val config: AppKafkaConfig) {
     private val process = AtomicBoolean(true)
 
     fun run() = runBlocking {
-        println(consumer.groupMetadata())
         try {
             consumer.subscribe(config.kafkaTopicsIn)
             while (process.get()) {
@@ -33,7 +32,6 @@ class KafkaApplication(private val config: AppKafkaConfig) {
                 )
                 try {
                     val records: ConsumerRecords<String, String> = consumer.poll(Duration.ofSeconds(1))
-                    println(consumer.subscription())
                     records.forEach { record: ConsumerRecord<String, String> ->
                         println("record: ${record.value()}")
                         val service = if (record.value().contains("ExerciseRequest")) {

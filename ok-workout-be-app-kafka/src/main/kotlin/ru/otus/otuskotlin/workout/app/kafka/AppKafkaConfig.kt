@@ -61,6 +61,7 @@ data class AppKafkaConfig(
         }
 
         fun kafkaProducer(hosts: List<String>): KafkaProducer<String, String> {
+            println(hosts)
             val props = Properties().apply {
                 put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, hosts)
                 put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer::class.java)
