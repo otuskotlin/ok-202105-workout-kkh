@@ -37,7 +37,7 @@ class KafkaApplication(private val config: AppKafkaConfig) {
                             withContext(Dispatchers.IO) {
                                 om.readValue(record.value(), BaseMessage::class.java)
                             }
-                        sendResponse(service.handleExercises(context, request))
+                        sendResponse(service.handleRequest(context, request))
                     }
                 } catch (e: Throwable) {
                     sendResponse(service.errorExercise(context, e))
