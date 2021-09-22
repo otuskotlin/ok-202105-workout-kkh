@@ -19,7 +19,8 @@ data class AppKafkaConfig(
     val kafkaHosts: List<String> = KAFKA_HOSTS,
 //    val kafkaTopicIn: String = KAFKA_TOPIC_IN,
     val kafkaTopicsIn: List<String> = KAFKA_TOPICS_IN,
-    val kafkaTopicOut: String = KAFKA_TOPIC_OUT,
+//    val kafkaTopicOut: String = KAFKA_TOPIC_OUT,
+    val kafkaTopicsOut: List<String> = KAFKA_TOPICS_OUT,
     val kafkaGroupId: String = KAFKA_GROUP_ID,
 //    val service: ExerciseService = ExerciseService(crud = ExerciseCrud()),
     val services: List<IHandlerRequests> = listOf(ExerciseService(ExerciseCrud()), WorkoutService(WorkoutCrud())),
@@ -31,16 +32,22 @@ data class AppKafkaConfig(
 
         //        const val KAFKA_TOPIC_IN_VAR = "KAFKA_TOPIC_IN"
         const val KAFKA_TOPICS_IN_VAR = "KAFKA_TOPICS_IN"
-        const val KAFKA_TOPIC_OUT_VAR = "KAFKA_TOPIC_OUT"
+
+        //        const val KAFKA_TOPIC_OUT_VAR = "KAFKA_TOPIC_OUT"
+        const val KAFKA_TOPICS_OUT_VAR = "KAFKA_TOPICS_OUT"
         const val KAFKA_GROUP_ID_VAR = "KAFKA_GROUP_ID"
 
-        val KAFKA_HOSTS by lazy { (System.getenv(KAFKA_HOST_VAR) ?: "").split("\\s*[,;]\\s*".toRegex()) }
+        val KAFKA_HOSTS by lazy { (System.getenv(KAFKA_HOST_VAR) ?: "localhost:9094").split("\\s*[,;]\\s*".toRegex()) }
 
         //        val KAFKA_TOPIC_IN by lazy { System.getenv(KAFKA_TOPIC_IN_VAR) ?: "workout-exercises-in" }
         val KAFKA_TOPICS_IN by lazy {
             (System.getenv(KAFKA_TOPICS_IN_VAR) ?: "exercise-in;workout-in").split("\\s*[,;]\\s*".toRegex())
         }
-        val KAFKA_TOPIC_OUT by lazy { System.getenv(KAFKA_TOPIC_OUT_VAR) ?: "workout-exercises-out" }
+
+        //        val KAFKA_TOPIC_OUT by lazy { System.getenv(KAFKA_TOPIC_OUT_VAR) ?: "workout-exercises-out" }
+        val KAFKA_TOPICS_OUT by lazy {
+            (System.getenv(KAFKA_TOPICS_OUT_VAR) ?: "exercise-out;workout-out").split("\\s*[,;]\\s*".toRegex())
+        }
         val KAFKA_GROUP_ID by lazy { System.getenv(KAFKA_GROUP_ID_VAR) ?: "workout" }
 
         fun kafkaConsumer(hosts: List<String>, groupId: String): KafkaConsumer<String, String> {

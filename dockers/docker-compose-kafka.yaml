@@ -31,5 +31,5 @@ services:
       - kafka
     environment:
       KAFKA_HOSTS: kafka:9092
-      KAFKA_TOPIC_IN: workout-exercises-in
-      KAFKA_TOPIC_OUT: workout-exercises-out
+      KAFKA_TOPICS_IN: exercise-in;workout-in
+      KAFKA_TOPICS_OUT: exercise-out;workout-out

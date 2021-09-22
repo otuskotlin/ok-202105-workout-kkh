@@ -1,6 +1,5 @@
 package ru.otus.otuskotlin.workout.app.kafka
 
-import IHandlerRequests
 import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable
@@ -25,6 +24,7 @@ class KafkaApplication(private val config: AppKafkaConfig) {
     private val process = AtomicBoolean(true)
 
     fun run() = runBlocking {
+        println(consumer.groupMetadata())
         try {
             consumer.subscribe(config.kafkaTopicsIn)
             while (process.get()) {
@@ -33,8 +33,9 @@ class KafkaApplication(private val config: AppKafkaConfig) {
                 )
                 try {
                     val records: ConsumerRecords<String, String> = consumer.poll(Duration.ofSeconds(1))
+                    println(consumer.subscription())
                     records.forEach { record: ConsumerRecord<String, String> ->
-                        println("record: $record")
+                        println("record: ${record.value()}")
                         val service = if (record.value().contains("ExerciseRequest")) {
                             services[0]
                         } else {
@@ -68,8 +69,15 @@ class KafkaApplication(private val config: AppKafkaConfig) {
         val json = withContext(Dispatchers.IO) {
             om.writeValueAsString(response)
         }
+
+        val topic = if (json.contains("ExerciseResponse")) {
+            config.kafkaTopicsOut[0]
+        } else {
+            config.kafkaTopicsOut[1]
+        }
+
         val resRecord = ProducerRecord(
-            config.kafkaTopicOut,
+            topic,
             UUID.randomUUID().toString(),
             json
         )
