@@ -6,9 +6,9 @@ import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 
 class ExerciseService(
     private var crud: ExerciseCrud
-) {
+): IHandlerRequests {
 
-    suspend fun handleExercises(context: BeContext, request: BaseMessage) = try {
+    override suspend fun handleRequest(context: BeContext, request: BaseMessage) = try {
         when (request) {
             is InitExerciseRequest -> initExercise(context, request)
             is CreateExerciseRequest -> createExercise(context, request)

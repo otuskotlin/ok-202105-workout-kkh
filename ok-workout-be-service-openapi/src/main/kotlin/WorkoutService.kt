@@ -1,3 +1,4 @@
+import exceptions.DataNotAllowedException
 import ru.otus.otuskotlin.workout.backend.logics.WorkoutCrud
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
@@ -5,7 +6,22 @@ import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
 
 class WorkoutService(
     private val crud: WorkoutCrud
-) {
+) : IHandlerRequests {
+
+    override suspend fun handleRequest(context: BeContext, request: BaseMessage): BaseMessage = try {
+        when (request) {
+            is InitWorkoutRequest -> initWorkout(context, request)
+            is CreateWorkoutRequest -> createWorkout(context, request)
+            is ReadWorkoutRequest -> readWorkout(context, request)
+            is UpdateWorkoutRequest -> updateWorkout(context, request)
+            is DeleteWorkoutRequest -> deleteWorkout(context, request)
+            is SearchWorkoutRequest -> searchWorkout(context, request)
+            is ChainOfExercisesRequest -> chainOfExercises(context, request) //
+            else -> throw DataNotAllowedException("Request is not allowed", request)
+        }
+    } catch (e: Throwable) {
+        errorWorkout(context, e)
+    }
 
     suspend fun initWorkout(context: BeContext, request: InitWorkoutRequest): InitWorkoutResponse {
         context.setQuery(request)
@@ -37,7 +53,7 @@ class WorkoutService(
         return context.toSearchWorkoutResponse()
     }
 
-    suspend fun chainOfExercises(context: BeContext, request: ReadWorkoutRequest): ChainOfExercisesResponse {
+    suspend fun chainOfExercises(context: BeContext, request: ChainOfExercisesRequest): ChainOfExercisesResponse {
         crud.chainOfExercises(context.setQuery(request))
         return context.toChainOfExercisesResponse()
     }
