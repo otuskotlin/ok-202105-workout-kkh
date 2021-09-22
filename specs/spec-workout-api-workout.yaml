@@ -137,7 +137,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReadWorkoutRequest'
+              $ref: '#/components/schemas/ChainOfExercisesRequest'
         required: true
       responses:
         200:
@@ -296,6 +296,27 @@ components:
                 $ref: './spec-workout-api.yaml#/components/schemas/Permissions'
 
     ReadWorkoutRequest:
+      description: The structure to get workout
+      allOf:
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-workout-api.yaml#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            readWorkoutId:
+              type: string
+            debug:
+              allOf:
+                - $ref: './spec-workout-api.yaml#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - errorDb
+
+    ChainOfExercisesRequest:
       description: The structure to get workout
       allOf:
         - $ref: './spec-workout-api.yaml#/components/schemas/BaseMessage'

@@ -90,6 +90,13 @@ fun BeContext.setQuery(query: SearchWorkoutRequest) = apply {
     stubCase = query.debug?.stubCase.toModel()
 }
 
+fun BeContext.setQuery(query: ChainOfExercisesRequest) = apply {
+    operation = BeContext.MpOperations.CHAIN_OF_EXERCISES
+    requestId = query.requestId ?: ""
+    requestWorkoutId = WorkoutIdModel(query.readWorkoutId ?: "")
+    stubCase = query.debug?.stubCase.toModel()
+}
+
 private fun CreatableExercise.toModel() = ExerciseModel(
     title = title ?: "",
     description = description ?: "",
