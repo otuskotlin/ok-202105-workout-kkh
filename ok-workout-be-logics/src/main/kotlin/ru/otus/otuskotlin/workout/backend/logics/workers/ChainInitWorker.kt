@@ -8,8 +8,7 @@ import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
 internal fun CorChainDsl<BeContext>.chainInitWorker(title: String) = worker {
     this.title = title
     on {
-        status == CorStatus.NONE ||
-                status == CorStatus.SUCCESS // добавил для обновления контекста при многократной отправке записей.
+        status == CorStatus.NONE
     }
     handle {
         status = CorStatus.RUNNING
