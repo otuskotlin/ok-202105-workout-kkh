@@ -78,29 +78,12 @@ class KafkaControllerTest {
 
             consumer.addRecord(
                 ConsumerRecord(
-                    config.kafkaTopicsIn[0],
-                    PARTITION,
-                    2L,
-                    "read-exercise-1",
-                    ReadExerciseRequest(
-                        requestId = "rId:0103",
-                        readExerciseId = "eId:0201",
-                        debug = BaseDebugRequest(
-                            mode = BaseDebugRequest.Mode.STUB,
-                            stubCase = BaseDebugRequest.StubCase.SUCCESS
-                        )
-                    ).toJson()
-                )
-            )
-
-            consumer.addRecord(
-                ConsumerRecord(
                     config.kafkaTopicsIn[1],
                     PARTITION,
                     0L,
                     "read-workout-1",
                     ReadWorkoutRequest(
-                        requestId = "rId:0104",
+                        requestId = "rId:0103",
                         readWorkoutId = "wId:0201",
                         debug = BaseDebugRequest(
                             mode = BaseDebugRequest.Mode.STUB,
@@ -117,7 +100,7 @@ class KafkaControllerTest {
                     1L,
                     "read-workout-2",
                     ReadWorkoutRequest(
-                        requestId = "rId:0105",
+                        requestId = "rId:0104",
                         readWorkoutId = "wId:0201",
                         debug = BaseDebugRequest(
                             mode = BaseDebugRequest.Mode.STUB,
@@ -132,7 +115,6 @@ class KafkaControllerTest {
 
         val startOffsets: MutableMap<TopicPartition, Long> = mutableMapOf()
 
-
         val tpExercise = TopicPartition(config.kafkaTopicsIn[0], PARTITION)
         startOffsets[tpExercise] = 0L
         consumer.updateBeginningOffsets(startOffsets)
@@ -143,32 +125,32 @@ class KafkaControllerTest {
 
         app.run()
 
+        assertEquals(2, producer.history().filter { it.topic().equals("exercise-out") }.size)
+        assertEquals(2, producer.history().filter { it.topic().equals("workout-out") }.size)
+
         val messageOne = producer.history()[0]
         val messageTwo = producer.history()[1]
         val messageThree = producer.history()[2]
         val messageFour = producer.history()[3]
-        val messageFive = producer.history()[4]
 
-        println(messageOne)
-        println(messageTwo)
-        println(messageThree)
-        println(messageFour)
-        println(messageFive)
+        val resultOne = messageOne.value().fromJson<ReadWorkoutResponse>()
+        val resultTwo = messageTwo.value().fromJson<ReadWorkoutResponse>()
+        val resultThree = messageThree.value().fromJson<CreateExerciseResponse>()
+        val resultFour = messageFour.value().fromJson<CreateExerciseResponse>()
 
-//        val resultOne = messageOne.value().fromJson<CreateExerciseResponse>()
-//        val resultTwo = messageTwo.value().fromJson<CreateExerciseResponse>()
-//        val resultThree = messageThree.value().fromJson<ReadExerciseResponse>()
+        assertEquals("rId:0101", resultThree.requestId)
+        assertEquals("Жим штанги лёжа", resultThree.createdExercise?.title)
 
-//        assertEquals("rId:0101", resultOne.requestId)
-//        assertEquals("Жим штанги лёжа", resultOne.createdExercise?.title)
-//
-//        assertEquals("rId:0102", resultTwo.requestId)
-//        assertEquals("Жим штанги лёжа на наклонной скамье", resultTwo.createdExercise?.title)
-//
-//        assertEquals("rId:0103", resultThree.requestId)
-//        assertEquals("Приседания со штангой", resultThree.readExercise?.title)
+        assertEquals("rId:0102", resultFour.requestId)
+        assertEquals("Жим штанги лёжа на наклонной скамье", resultFour.createdExercise?.title)
 
-        assertEquals(producer.history().size, 5)
+        assertEquals("rId:0103", resultOne.requestId)
+        assertEquals("2021-08-23T14:00:00Z", resultOne.readWorkout?.date)
+
+        assertEquals("rId:0104", resultTwo.requestId)
+        assertEquals(1, resultTwo.readWorkout?.exercisesBlock?.size)
+
+        assertEquals(4, producer.history().size)
     }
 
     companion object {
