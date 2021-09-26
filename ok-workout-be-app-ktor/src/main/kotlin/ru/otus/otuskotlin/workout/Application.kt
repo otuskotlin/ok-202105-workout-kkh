@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.jackson.*
+import io.ktor.websocket.*
 import ru.otus.otuskotlin.workout.plugins.configRouting
 
 fun main(args: Array<String>): Unit =
@@ -15,6 +16,8 @@ fun main(args: Array<String>): Unit =
 fun Application.module(testing: Boolean = false) {
 
     configRouting()
+
+    install(WebSockets)
 
     install(ContentNegotiation) {
         jackson {
