@@ -1,10 +1,11 @@
-package ru.otus
+package ru.otus.otuskotlin.workout
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.jackson.*
+import io.ktor.routing.*
 import io.ktor.websocket.*
 import ru.otus.otuskotlin.workout.plugins.configRouting
 
@@ -15,9 +16,6 @@ fun main(args: Array<String>): Unit =
 @JvmOverloads
 fun Application.module(testing: Boolean = false) {
 
-    configRouting()
-
-    install(WebSockets)
 
     install(ContentNegotiation) {
         jackson {
@@ -27,4 +25,6 @@ fun Application.module(testing: Boolean = false) {
             writerWithDefaultPrettyPrinter()
         }
     }
+    install(WebSockets)
+    configRouting()
 }
