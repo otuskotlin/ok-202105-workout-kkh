@@ -18,8 +18,8 @@ class ExerciseService(
             is SearchExerciseRequest -> searchExercise(context, request)
             else -> throw DataNotAllowedException("Request is not allowed", request)
         }
-    } catch (e: Throwable) {
-        handleError(context, e)
+    } catch (t: Throwable) {
+        handleError(context, t)
     }
 
     fun initExercise(context: BeContext, request: InitExerciseRequest): InitExerciseResponse {
