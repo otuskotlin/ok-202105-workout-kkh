@@ -17,34 +17,25 @@ import java.util.*
 
 data class AppKafkaConfig(
     val kafkaHosts: List<String> = KAFKA_HOSTS,
-//    val kafkaTopicIn: String = KAFKA_TOPIC_IN,
     val kafkaTopicsIn: List<String> = KAFKA_TOPICS_IN,
-//    val kafkaTopicOut: String = KAFKA_TOPIC_OUT,
     val kafkaTopicsOut: List<String> = KAFKA_TOPICS_OUT,
     val kafkaGroupId: String = KAFKA_GROUP_ID,
-//    val service: ExerciseService = ExerciseService(crud = ExerciseCrud()),
     val services: List<IHandlerRequests> = listOf(ExerciseService(ExerciseCrud()), WorkoutService(WorkoutCrud())),
     val kafkaConsumer: Consumer<String, String> = kafkaConsumer(kafkaHosts, kafkaGroupId),
     val kafkaProducer: Producer<String, String> = kafkaProducer(kafkaHosts)
 ) {
     companion object {
         const val KAFKA_HOST_VAR = "KAFKA_HOSTS"
-
-        //        const val KAFKA_TOPIC_IN_VAR = "KAFKA_TOPIC_IN"
         const val KAFKA_TOPICS_IN_VAR = "KAFKA_TOPICS_IN"
-
-        //        const val KAFKA_TOPIC_OUT_VAR = "KAFKA_TOPIC_OUT"
         const val KAFKA_TOPICS_OUT_VAR = "KAFKA_TOPICS_OUT"
         const val KAFKA_GROUP_ID_VAR = "KAFKA_GROUP_ID"
 
         val KAFKA_HOSTS by lazy { (System.getenv(KAFKA_HOST_VAR) ?: "localhost:9094").split("\\s*[,;]\\s*".toRegex()) }
 
-        //        val KAFKA_TOPIC_IN by lazy { System.getenv(KAFKA_TOPIC_IN_VAR) ?: "workout-exercises-in" }
         val KAFKA_TOPICS_IN by lazy {
             (System.getenv(KAFKA_TOPICS_IN_VAR) ?: "exercise-in;workout-in").split("\\s*[,;]\\s*".toRegex())
         }
 
-        //        val KAFKA_TOPIC_OUT by lazy { System.getenv(KAFKA_TOPIC_OUT_VAR) ?: "workout-exercises-out" }
         val KAFKA_TOPICS_OUT by lazy {
             (System.getenv(KAFKA_TOPICS_OUT_VAR) ?: "exercise-out;workout-out").split("\\s*[,;]\\s*".toRegex())
         }
@@ -61,7 +52,6 @@ data class AppKafkaConfig(
         }
 
         fun kafkaProducer(hosts: List<String>): KafkaProducer<String, String> {
-            println(hosts)
             val props = Properties().apply {
                 put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, hosts)
                 put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer::class.java)
