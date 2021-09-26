@@ -6,6 +6,7 @@ import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.models.*
 
 fun BeContext.toInitExerciseResponse() = InitExerciseResponse(
+    messageType = "InitExerciseResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) InitExerciseResponse.Result.SUCCESS
     else InitExerciseResponse.Result.ERROR,
@@ -13,6 +14,7 @@ fun BeContext.toInitExerciseResponse() = InitExerciseResponse(
 )
 
 fun BeContext.toCreateExerciseResponse() = CreateExerciseResponse(
+    messageType = "CreateExerciseResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) CreateExerciseResponse.Result.SUCCESS
     else CreateExerciseResponse.Result.ERROR,
@@ -21,6 +23,7 @@ fun BeContext.toCreateExerciseResponse() = CreateExerciseResponse(
 )
 
 fun BeContext.toReadExerciseResponse() = ReadExerciseResponse(
+    messageType = "ReadExerciseResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) ReadExerciseResponse.Result.SUCCESS
     else ReadExerciseResponse.Result.ERROR,
@@ -29,6 +32,7 @@ fun BeContext.toReadExerciseResponse() = ReadExerciseResponse(
 )
 
 fun BeContext.toUpdateExerciseResponse() = UpdateExerciseResponse(
+    messageType = "UpdateExerciseResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) UpdateExerciseResponse.Result.SUCCESS
     else UpdateExerciseResponse.Result.ERROR,
@@ -37,6 +41,7 @@ fun BeContext.toUpdateExerciseResponse() = UpdateExerciseResponse(
 )
 
 fun BeContext.toDeleteExerciseResponse() = DeleteExerciseResponse(
+    messageType = "DeleteExerciseResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) DeleteExerciseResponse.Result.SUCCESS
     else DeleteExerciseResponse.Result.ERROR,
@@ -45,6 +50,7 @@ fun BeContext.toDeleteExerciseResponse() = DeleteExerciseResponse(
 )
 
 fun BeContext.toSearchExerciseResponse() = SearchExerciseResponse(
+    messageType = "SearchExerciseResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) SearchExerciseResponse.Result.SUCCESS
     else SearchExerciseResponse.Result.ERROR,
@@ -53,6 +59,7 @@ fun BeContext.toSearchExerciseResponse() = SearchExerciseResponse(
 )
 
 fun BeContext.toInitWorkoutResponse() = InitWorkoutResponse(
+    messageType = "InitWorkoutResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) InitWorkoutResponse.Result.SUCCESS
     else InitWorkoutResponse.Result.ERROR,
@@ -60,6 +67,7 @@ fun BeContext.toInitWorkoutResponse() = InitWorkoutResponse(
 )
 
 fun BeContext.toCreateWorkoutResponse() = CreateWorkoutResponse(
+    messageType = "CreateWorkoutResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) CreateWorkoutResponse.Result.SUCCESS
     else CreateWorkoutResponse.Result.ERROR,
@@ -68,6 +76,7 @@ fun BeContext.toCreateWorkoutResponse() = CreateWorkoutResponse(
 )
 
 fun BeContext.toReadWorkoutResponse() = ReadWorkoutResponse(
+    messageType = "ReadWorkoutResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) ReadWorkoutResponse.Result.SUCCESS
     else ReadWorkoutResponse.Result.ERROR,
@@ -76,6 +85,7 @@ fun BeContext.toReadWorkoutResponse() = ReadWorkoutResponse(
 )
 
 fun BeContext.toUpdateWorkoutResponse() = UpdateWorkoutResponse(
+    messageType = "UpdateWorkoutResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) UpdateWorkoutResponse.Result.SUCCESS
     else UpdateWorkoutResponse.Result.ERROR,
@@ -84,6 +94,7 @@ fun BeContext.toUpdateWorkoutResponse() = UpdateWorkoutResponse(
 )
 
 fun BeContext.toDeleteWorkoutResponse() = DeleteWorkoutResponse(
+    messageType = "DeleteWorkoutResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) DeleteWorkoutResponse.Result.SUCCESS
     else DeleteWorkoutResponse.Result.ERROR,
@@ -92,6 +103,7 @@ fun BeContext.toDeleteWorkoutResponse() = DeleteWorkoutResponse(
 )
 
 fun BeContext.toSearchWorkoutResponse() = SearchWorkoutResponse(
+    messageType = "SearchWorkoutResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) SearchWorkoutResponse.Result.SUCCESS
     else SearchWorkoutResponse.Result.ERROR,
@@ -100,6 +112,7 @@ fun BeContext.toSearchWorkoutResponse() = SearchWorkoutResponse(
 )
 
 fun BeContext.toChainOfExercisesResponse() = ChainOfExercisesResponse(
+    messageType = "ChainOfExercisesResponse",
     requestId = requestId.takeIf { it.isNotBlank() },
     result = if (errors.find { it.level == IError.Level.ERROR } == null) ChainOfExercisesResponse.Result.SUCCESS
     else ChainOfExercisesResponse.Result.ERROR,
