@@ -71,14 +71,16 @@ class KafkaApplication(private val config: AppKafkaConfig) {
 
     private suspend fun sendResponse(response: BaseMessage) {
 
-        val json = withContext(Dispatchers.IO) {
-            om.writeValueAsString(response)
+        val topic = with(response.messageType) {
+            when {
+                this?.contains("Exercise") == true -> config.kafkaTopicsOut[0]
+                this?.contains("Workout") == true -> config.kafkaTopicsOut[1]
+                else -> throw Exception("Unknown messageType")
+            }
         }
 
-        val topic = if (json.contains("ExerciseResponse")) {
-            config.kafkaTopicsOut[0]
-        } else {
-            config.kafkaTopicsOut[1]
+        val json = withContext(Dispatchers.IO) {
+            om.writeValueAsString(response)
         }
 
         val resRecord = ProducerRecord(
