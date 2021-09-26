@@ -56,4 +56,11 @@ class ExerciseService(
         context.addError(e)
         return context.toReadExerciseResponse()
     }
+
+    override suspend fun userConnected(context: BeContext): InitExerciseResponse {
+        return context.toInitExerciseResponse()
+    }
+
+    fun userDisconnected(context: BeContext) {
+    }
 }
