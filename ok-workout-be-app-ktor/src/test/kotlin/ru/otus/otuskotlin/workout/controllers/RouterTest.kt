@@ -3,7 +3,7 @@ package ru.otus.otuskotlin.workout.controllers
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
-import ru.otus.module
+import ru.otus.otuskotlin.workout.module
 import ru.otus.otuskotlin.workout.Utils
 import ru.otus.otuskotlin.workout.openapi.models.BaseMessage
 import kotlin.test.assertEquals
