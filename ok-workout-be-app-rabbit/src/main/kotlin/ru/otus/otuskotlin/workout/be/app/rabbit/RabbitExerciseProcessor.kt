@@ -1,7 +1,6 @@
 package ru.otus.otuskotlin.workout.be.app.rabbit
 
 import ExerciseService
-import WorkoutService
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.rabbitmq.client.CancelCallback
 import com.rabbitmq.client.Channel
@@ -12,14 +11,13 @@ import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
 import java.time.Instant
 
-class RabbitDirectProcessor(
+class RabbitExerciseProcessor(
     config: RabbitConfig,
     consumerTag: String,
     private val keyIn: String,
     private val keyOut: String,
     private val exchange: String,
-    private val exerciseService: ExerciseService,
-    private val workoutService: WorkoutService,
+    private val exerciseService: ExerciseService
 ) : RabbitProcessor(config, consumerTag) {
     private val objectMapper = ObjectMapper()
     override fun Channel.getDeliverCallback(): DeliverCallback {
@@ -80,7 +78,7 @@ class RabbitDirectProcessor(
 
     override fun Channel.listen(deliverCallback: DeliverCallback, cancelCallback: CancelCallback) {
         val channel = this
-        channel.exchangeDeclare(exchange, "direct")
+        channel.exchangeDeclare(exchange, "exercise")
         val queue = channel.queueDeclare().queue
         channel.queueBind(queue, exchange, keyIn)
         channel.basicConsume(queue, true, deliverCallback, cancelCallback)
