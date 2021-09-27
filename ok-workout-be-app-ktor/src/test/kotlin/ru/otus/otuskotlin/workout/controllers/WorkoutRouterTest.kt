@@ -99,7 +99,7 @@ class WorkoutRouterTest : RouterTest() {
 
     @Test
     fun testPostWorkoutChainOfExercises() {
-        val data = ReadWorkoutRequest(
+        val data = ChainOfExercisesRequest(
             requestId = "rID:0008",
             debug = Utils.stubDebugSuccess,
             readWorkoutId = WorkoutStub.getModelWorkout().idWorkout.asString()
