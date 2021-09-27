@@ -17,6 +17,7 @@ class RabbitWorkoutProcessor(
     private val keyIn: String,
     private val keyOut: String,
     private val exchange: String,
+    private val queue: String,
     private val workoutService: WorkoutService
 ) : RabbitProcessor(config, consumerTag) {
     private val objectMapper = ObjectMapper()
@@ -76,15 +77,28 @@ class RabbitWorkoutProcessor(
         }
     }
 
-    override fun Channel.getCancelCallback(): CancelCallback {
-        TODO("Not yet implemented")
+    override fun Channel.getCancelCallback(): CancelCallback = CancelCallback {
+        println("$it was cancelled")
     }
 
     override fun Channel.listen(deliverCallback: DeliverCallback, cancelCallback: CancelCallback) {
-        val channel = this
-        channel.exchangeDeclare(exchange, "workout")
-        val queue = channel.queueDeclare().queue
-        channel.queueBind(queue, exchange, keyIn)
-        channel.basicConsume(queue, true, deliverCallback, cancelCallback)
+        // Объявляем обменник типа "direct" (сообщения передаются в те очереди, где ключ совпадает)
+        exchangeDeclare(exchange, "direct")
+        // Объявляем очередь (не сохраняется при перезагрузке сервера; неэксклюзивна - доступна другим соединениям;
+        // не удаляется, если не используется)
+        queueDeclare(queue, false, false, false, null)
+        // связываем обменник с очередью по ключу (сообщения будут поступать в данную очередь
+        // с данного обменника при совпадении ключа)
+        queueBind(queue, exchange, keyIn)
+        // запуск консьюмера с автоотправкой подтверждение при получении сообщения
+        basicConsume(queue, true, deliverCallback, cancelCallback)
+        while (isOpen) {
+            try {
+                Thread.sleep(100)
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+        }
+        println("Channel for $consumerTag was closed.")
     }
 }
