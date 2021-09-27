@@ -7,9 +7,7 @@ import com.rabbitmq.client.CancelCallback
 import com.rabbitmq.client.Channel
 import com.rabbitmq.client.DeliverCallback
 import kotlinx.coroutines.runBlocking
-import ru.otus.otuskotlin.workout.openapi.models.BaseMessage
-import ru.otus.otuskotlin.workout.openapi.models.CreateExerciseRequest
-import ru.otus.otuskotlin.workout.openapi.models.InitExerciseRequest
+import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
 import java.time.Instant
@@ -30,11 +28,37 @@ class RabbitDirectProcessor(
             runBlocking {
                 try {
                     when (val query = objectMapper.readValue(message.body, BaseMessage::class.java)) {
+                        is InitExerciseRequest -> {
+                            val context = BeContext(startTime = Instant.now())
+                            val response = exerciseService.initExercise(context, query)
+                            objectMapper.writeValueAsBytes(response)
+                        }
                         is CreateExerciseRequest -> {
                             val context = BeContext(startTime = Instant.now())
                             val response = exerciseService.createExercise(context, query)
                             objectMapper.writeValueAsBytes(response)
                         }
+                        is ReadExerciseRequest -> {
+                            val context = BeContext(startTime = Instant.now())
+                            val response = exerciseService.readExercise(context, query)
+                            objectMapper.writeValueAsBytes(response)
+                        }
+                        is UpdateExerciseRequest -> {
+                            val context = BeContext(startTime = Instant.now())
+                            val response = exerciseService.updateExercise(context, query)
+                            objectMapper.writeValueAsBytes(response)
+                        }
+                        is DeleteExerciseRequest -> {
+                            val context = BeContext(startTime = Instant.now())
+                            val response = exerciseService.deleteExercise(context, query)
+                            objectMapper.writeValueAsBytes(response)
+                        }
+                        is SearchExerciseRequest -> {
+                            val context = BeContext(startTime = Instant.now())
+                            val response = exerciseService.searchExercise(context, query)
+                            objectMapper.writeValueAsBytes(response)
+                        }
+
                         else -> null
                     }?.also {
                         channel.basicPublish(exchange, keyOut, null, it)
