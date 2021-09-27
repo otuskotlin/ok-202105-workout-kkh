@@ -20,6 +20,7 @@ dependencies {
     implementation(project(":ok-workout-be-service-openapi"))
     implementation(project(":ok-workout-be-transport-openapi"))
     implementation(project(":ok-workout-be-mapping"))
+    implementation(project(":ok-workout-be-logics"))
 
     implementation("org.slf4j:slf4j-simple:$slf4jVersion")
 
