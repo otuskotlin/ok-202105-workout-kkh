@@ -184,27 +184,30 @@ internal class RabbitMqTest {
         CreateWorkoutRequest(
             createWorkout = CreatableWorkout(
                 date = "2021-08-23T14:00:00.0Z",
-                duration = 90.0,
-                recoveryTime = 90.0,
+                duration = 120.0,
+                recoveryTime = 120.0,
                 modificationWorkout = CreatableWorkout.ModificationWorkout.CLASSIC,
                 exercisesBlock = listOf(
                     ExercisesBlock(
                         exercise = ResponseExercise(
-                            title = "Разведение гантелей",
-                            description = "Упражнение для развития дельтовидных мышц",
-                            targetMuscleGroup = listOf("Дельты"),
-                            synergisticMuscleGroup = listOf(),
-                            executionTechnique = "Разводить руки с гантелями",
-                            id = "eID:00012",
-                            permissions = setOf(Permissions.READ)
+                            title = "Приседания со штангой",
+                            description = "Базовое упражнение",
+                            targetMuscleGroup = mutableListOf("Квадрицепсы"),
+                            synergisticMuscleGroup = mutableListOf(
+                                "Большие ягодичные",
+                                "Приводящие бедра",
+                                "Камбаловидные"
+                            ),
+                            executionTechnique = "Выполняющий упражнение приседает и затем встаёт, возвращаясь в положение стоя",
+                            id = "eID:0001",
+                            permissions = mutableSetOf(Permissions.READ)
                         ),
                         sets = listOf(
                             OneSet(
                                 performance = listOf(
                                     Performance(
-                                        weight = 10.0,
-                                        measure = Performance.Measure.KG,
-                                        repetition = 15
+                                        weight = 100.0,
+                                        repetition = 10
                                     )
                                 ),
                                 status = OneSet.Status.PLAN,
