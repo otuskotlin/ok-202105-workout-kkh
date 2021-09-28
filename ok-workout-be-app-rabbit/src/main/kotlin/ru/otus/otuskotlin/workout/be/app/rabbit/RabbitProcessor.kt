@@ -23,9 +23,6 @@ abstract class RabbitProcessor(
                     val deliverCallback = channel.getDeliverCallback()
                     val cancelCallback = channel.getCancelCallback()
                     channel.listen(deliverCallback, cancelCallback)
-                    while (channel.isOpen) {
-
-                    }
                 }
             }
         }
