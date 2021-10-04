@@ -13,7 +13,7 @@ class WsControllerTest {
     @Test
     fun wsExerciseTest() {
         withTestApplication({ module(testing = true) }) {
-            handleWebSocketConversation("/ws-exercise") { incoming, outgoing ->
+            handleWebSocketConversation("exercise/ws") { incoming, outgoing ->
                 run {
                     val responseFrame = incoming.receive()
                     val response = Utils.mapper.readValue<BaseMessage>(responseFrame.readBytes())
@@ -39,7 +39,7 @@ class WsControllerTest {
     @Test
     fun wsWorkoutTest() {
         withTestApplication({ module(testing = true) }) {
-            handleWebSocketConversation("ws-workout") { incoming, outgoing ->
+            handleWebSocketConversation("workout/ws") { incoming, outgoing ->
                 run {
                     val responseFrame = incoming.receive()
                     val response = Utils.mapper.readValue<BaseMessage>(responseFrame.readBytes())
