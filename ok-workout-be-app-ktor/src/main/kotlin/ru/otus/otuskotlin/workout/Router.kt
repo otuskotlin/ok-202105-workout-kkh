@@ -57,13 +57,13 @@ fun Routing.workout(workoutService: WorkoutService) = route("workout") {
 }
 
 fun Routing.websocketExercise(objectMapper: ObjectMapper, exerciseService: ExerciseService) {
-    webSocket("ws-exercise") {
+    webSocket("exercise/ws") {
         handleSessionOfExercise(objectMapper, exerciseService)
     }
 }
 
 fun Routing.websocketWorkout(objectMapper: ObjectMapper, workoutService: WorkoutService) {
-    webSocket("ws-workout") {
+    webSocket("workout/ws") {
         handleSessionOfWorkout(objectMapper, workoutService)
     }
 }
