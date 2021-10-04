@@ -25,45 +25,15 @@ class RabbitExerciseProcessor(
         val channel = this
         return DeliverCallback { consumerTag, message ->
             runBlocking {
+                val context = BeContext(startTime = Instant.now())
                 try {
-                    when (val query = objectMapper.readValue(message.body, BaseMessage::class.java)) {
-                        is InitExerciseRequest -> {
-                            val context = BeContext(startTime = Instant.now())
-                            val response = exerciseService.initExercise(context, query)
-                            objectMapper.writeValueAsBytes(response)
-                        }
-                        is CreateExerciseRequest -> {
-                            val context = BeContext(startTime = Instant.now())
-                            val response = exerciseService.createExercise(context, query)
-                            objectMapper.writeValueAsBytes(response)
-                        }
-                        is ReadExerciseRequest -> {
-                            val context = BeContext(startTime = Instant.now())
-                            val response = exerciseService.readExercise(context, query)
-                            objectMapper.writeValueAsBytes(response)
-                        }
-                        is UpdateExerciseRequest -> {
-                            val context = BeContext(startTime = Instant.now())
-                            val response = exerciseService.updateExercise(context, query)
-                            objectMapper.writeValueAsBytes(response)
-                        }
-                        is DeleteExerciseRequest -> {
-                            val context = BeContext(startTime = Instant.now())
-                            val response = exerciseService.deleteExercise(context, query)
-                            objectMapper.writeValueAsBytes(response)
-                        }
-                        is SearchExerciseRequest -> {
-                            val context = BeContext(startTime = Instant.now())
-                            val response = exerciseService.searchExercise(context, query)
-                            objectMapper.writeValueAsBytes(response)
-                        }
-
-                        else -> null
-                    }?.also {
+                    val query = objectMapper.readValue(message.body, BaseMessage::class.java)
+                    val response = exerciseService.handleRequest(context, query)
+                    objectMapper.writeValueAsBytes(response).also {
                         channel.basicPublish(exchange, keyOut, null, it)
                     }
                 } catch (t: Throwable) {
-                    val context = BeContext(startTime = Instant.now(), status = CorStatus.ERROR)
+                    context.status = CorStatus.ERROR
                     context.addError(t)
                     val response =
                         objectMapper.writeValueAsBytes(exerciseService.initExercise(context, InitExerciseRequest()))
