@@ -35,8 +35,8 @@ class KafkaApplication(private val config: AppKafkaConfig) {
                         )
 
                         val service = when (record.topic()) {
-                            "exercise-in" -> services[0]
-                            "workout-in" -> services[1]
+                            config.kafkaTopicsIn[0] -> services[0]
+                            config.kafkaTopicsIn[1] -> services[1]
                             else -> {
                                 throw Exception("Service does not exist")
                             }
@@ -47,9 +47,9 @@ class KafkaApplication(private val config: AppKafkaConfig) {
                                 withContext(Dispatchers.IO) {
                                     om.readValue(record.value(), BaseMessage::class.java)
                                 }
-                            sendResponse(service.handleRequest(context, request))
+                            sendResponse(record.topic(), service.handleRequest(context, request))
                         } catch (t: Throwable) {
-                            sendResponse(service.handleError(context, t))
+                            sendResponse(record.topic(), service.handleError(context, t))
                         }
                     }
                 } catch (t: Throwable) {
@@ -69,14 +69,12 @@ class KafkaApplication(private val config: AppKafkaConfig) {
         }
     }
 
-    private suspend fun sendResponse(response: BaseMessage) {
+    private suspend fun sendResponse(topicIn: String, response: BaseMessage) {
 
-        val topic = with(response.messageType) {
-            when {
-                this?.contains("Exercise") == true -> config.kafkaTopicsOut[0]
-                this?.contains("Workout") == true -> config.kafkaTopicsOut[1]
-                else -> throw Exception("Unknown messageType")
-            }
+        val topicOut = when (topicIn) {
+            config.kafkaTopicsIn[0] -> config.kafkaTopicsOut[0]
+            config.kafkaTopicsIn[1] -> config.kafkaTopicsOut[1]
+            else -> throw Exception("Unknown messageType")
         }
 
         val json = withContext(Dispatchers.IO) {
@@ -84,7 +82,7 @@ class KafkaApplication(private val config: AppKafkaConfig) {
         }
 
         val resRecord = ProducerRecord(
-            topic,
+            topicOut,
             UUID.randomUUID().toString(),
             json
         )
