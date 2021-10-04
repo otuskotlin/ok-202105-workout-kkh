@@ -6,8 +6,10 @@ import WorkoutService
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.http.cio.websocket.*
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.channels.ClosedReceiveChannelException
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.otus.otuskotlin.workout.objectMapper
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
@@ -96,10 +98,14 @@ suspend fun WebSocketSession.handleSessionOfWorkout(
 suspend fun WebSocketSession.connectSession(handleRequest: IHandlerRequests) {
     val context = BeContext(startTime = Instant.now())
     try {
-        val response = handleRequest.userConnected(context)
-        outgoing.send(Frame.Text(objectMapper.writeValueAsString(response)))
+        withContext(NonCancellable) {
+            val response = handleRequest.userConnected(context)
+            outgoing.send(Frame.Text(objectMapper.writeValueAsString(response)))
+        }
     } catch (t: Throwable) {
-        val response = handleRequest.handleError(context, t)
-        outgoing.send(Frame.Text(objectMapper.writeValueAsString(response)))
+        withContext(NonCancellable) {
+            val response = handleRequest.handleError(context, t)
+            outgoing.send(Frame.Text(objectMapper.writeValueAsString(response)))
+        }
     }
 }
