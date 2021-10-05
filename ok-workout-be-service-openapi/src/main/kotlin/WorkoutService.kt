@@ -63,8 +63,8 @@ class WorkoutService(
         return context.toReadWorkoutResponse()
     }
 
-    override suspend fun userConnected(context: BeContext): InitWorkoutResponse {
-        return context.toInitWorkoutResponse()
+    override suspend fun finish(context: BeContext) {
+        TODO("Not yet implemented")
     }
 
     fun userDisconnected(context: BeContext) {}

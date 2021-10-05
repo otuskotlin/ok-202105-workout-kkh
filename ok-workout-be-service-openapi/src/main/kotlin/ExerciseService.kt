@@ -57,10 +57,11 @@ class ExerciseService(
         return context.toReadExerciseResponse()
     }
 
-    override suspend fun userConnected(context: BeContext): InitExerciseResponse {
-        return context.toInitExerciseResponse()
+    override suspend fun finish(context: BeContext) {
+        TODO("Not yet implemented")
     }
 
     fun userDisconnected(context: BeContext) {
+        TODO("Not yet implemented")
     }
 }
