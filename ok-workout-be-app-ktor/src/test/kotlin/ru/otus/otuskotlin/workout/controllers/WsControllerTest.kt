@@ -28,6 +28,7 @@ class WsControllerTest {
                     )
                     val requestFrame = Frame.Text(Utils.mapper.writeValueAsString(request))
                     outgoing.send(requestFrame)
+
                     val responseFrame = incoming.receive()
                     val response = Utils.mapper.readValue<BaseMessage>(responseFrame.readBytes())
                     assertIs<CreateExerciseResponse>(response)

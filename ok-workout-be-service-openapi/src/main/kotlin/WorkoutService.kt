@@ -64,7 +64,6 @@ class WorkoutService(
     }
 
     override suspend fun finish(context: BeContext) {
-        TODO("Not yet implemented")
     }
 
     fun userDisconnected(context: BeContext) {}

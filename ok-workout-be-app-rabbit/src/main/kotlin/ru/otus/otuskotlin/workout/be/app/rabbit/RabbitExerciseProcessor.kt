@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.rabbitmq.client.CancelCallback
 import com.rabbitmq.client.Channel
 import com.rabbitmq.client.DeliverCallback
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
@@ -27,16 +29,16 @@ class RabbitExerciseProcessor(
             runBlocking {
                 val context = BeContext(startTime = Instant.now())
                 try {
-                    val query = objectMapper.readValue(message.body, BaseMessage::class.java)
+                    val query = objectMapper.safeReadValue(message.body)
                     val response = exerciseService.handleRequest(context, query)
-                    objectMapper.writeValueAsBytes(response).also {
+                    objectMapper.safeWriteValueAsBytes(response).also {
                         channel.basicPublish(exchange, keyOut, null, it)
                     }
                 } catch (t: Throwable) {
                     context.status = CorStatus.ERROR
                     context.addError(t)
                     val response =
-                        objectMapper.writeValueAsBytes(exerciseService.initExercise(context, InitExerciseRequest()))
+                        objectMapper.safeWriteValueAsBytes(exerciseService.initExercise(context, InitExerciseRequest()))
                     channel.basicPublish(exchange, keyOut, null, response)
                 }
             }
@@ -68,3 +70,9 @@ class RabbitExerciseProcessor(
         println("Channel for $consumerTag was closed.")
     }
 }
+
+suspend fun ObjectMapper.safeReadValue(value: ByteArray): BaseMessage =
+    withContext(Dispatchers.IO) { readValue(value, BaseMessage::class.java) }
+
+suspend fun ObjectMapper.safeWriteValueAsBytes(value: BaseMessage): ByteArray =
+    withContext(Dispatchers.IO) { writeValueAsBytes(value) }

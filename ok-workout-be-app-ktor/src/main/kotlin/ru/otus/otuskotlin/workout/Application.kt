@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.jackson.*
-import io.ktor.routing.*
 import io.ktor.websocket.*
 import ru.otus.otuskotlin.workout.plugins.configRouting
 

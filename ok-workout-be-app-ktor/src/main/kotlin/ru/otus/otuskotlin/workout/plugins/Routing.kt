@@ -8,6 +8,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import ru.otus.otuskotlin.workout.backend.logics.ExerciseCrud
 import ru.otus.otuskotlin.workout.backend.logics.WorkoutCrud
+import ru.otus.otuskotlin.workout.controllers.KtorUserSession
 import ru.otus.otuskotlin.workout.exercise
 import ru.otus.otuskotlin.workout.websocketExercise
 import ru.otus.otuskotlin.workout.websocketWorkout
@@ -20,6 +21,8 @@ fun Application.configRouting() {
     val exerciseService = ExerciseService(crudExercise)
     val objectMapper = jacksonObjectMapper()
 
+    val userSessions = mutableSetOf<KtorUserSession>()
+
     val workoutService = WorkoutService(crudWorkout)
 
     routing {
@@ -29,7 +32,7 @@ fun Application.configRouting() {
 
         exercise(exerciseService)
         workout(workoutService)
-        websocketExercise(objectMapper, exerciseService)
-        websocketWorkout(objectMapper, workoutService)
+        websocketExercise(objectMapper, exerciseService, userSessions)
+        websocketWorkout(objectMapper, workoutService, userSessions)
     }
 }
