@@ -7,7 +7,9 @@ import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
 
 internal fun CorChainDsl<BeContext>.chainInitWorker(title: String) = worker {
     this.title = title
-    on { status == CorStatus.NONE }
+    on {
+        status == CorStatus.NONE
+    }
     handle {
         status = CorStatus.RUNNING
     }

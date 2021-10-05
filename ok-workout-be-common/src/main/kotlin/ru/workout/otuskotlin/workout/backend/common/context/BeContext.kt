@@ -8,6 +8,8 @@ data class BeContext(
     var operation: MpOperations = MpOperations.NONE,
     var stubCase: MpStubCases = MpStubCases.NONE,
 
+    val userSession: IUserSession<*> = IUserSession.Companion.EmptySession,
+
     var requestId: String = "",
     var requestExerciseId: ExerciseIdModel = ExerciseIdModel.NONE,
     var requestExercise: ExerciseModel = ExerciseModel(),

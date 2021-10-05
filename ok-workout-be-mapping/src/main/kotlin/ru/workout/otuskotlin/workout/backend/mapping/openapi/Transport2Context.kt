@@ -7,74 +7,93 @@ import ru.workout.otuskotlin.workout.backend.common.models.*
 import java.time.Instant
 
 fun BeContext.setQuery(query: InitExerciseRequest) = apply {
+    operation = BeContext.MpOperations.INIT
     requestId = query.requestId ?: ""
 }
 
 fun BeContext.setQuery(query: CreateExerciseRequest) = apply {
+    operation = BeContext.MpOperations.CREATE
     requestId = query.requestId ?: ""
     requestExercise = query.createExercise?.toModel() ?: ExerciseModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: ReadExerciseRequest) = apply {
+    operation = BeContext.MpOperations.READ
     requestId = query.requestId ?: ""
     requestExerciseId = ExerciseIdModel(query.readExerciseId ?: "")
     stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: UpdateExerciseRequest) = apply {
+    operation = BeContext.MpOperations.UPDATE
     requestId = query.requestId ?: ""
     requestExercise = query.updateExercise?.toModel() ?: ExerciseModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: DeleteExerciseRequest) = apply {
+    operation = BeContext.MpOperations.DELETE
     requestId = query.requestId ?: ""
     requestExerciseId = ExerciseIdModel(query.deleteExerciseId ?: "")
     stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: SearchExerciseRequest) = apply {
+    operation = BeContext.MpOperations.SEARCH
     requestId = query.requestId ?: ""
     requestSearchExercise = query.search ?: ""
     stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: InitWorkoutRequest) = apply {
+    operation = BeContext.MpOperations.INIT
     requestId = query.requestId ?: ""
 }
 
 fun BeContext.setQuery(query: CreateWorkoutRequest) = apply {
+    operation = BeContext.MpOperations.CREATE
     requestId = query.requestId ?: ""
     requestWorkout = query.createWorkout?.toModel() ?: WorkoutModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: ReadWorkoutRequest) = apply {
+    operation = BeContext.MpOperations.READ
     requestId = query.requestId ?: ""
     requestWorkoutId = WorkoutIdModel(query.readWorkoutId ?: "")
     stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: UpdateWorkoutRequest) = apply {
+    operation = BeContext.MpOperations.UPDATE
     requestId = query.requestId ?: ""
     requestWorkout = query.updateWorkout?.toModel() ?: WorkoutModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: DeleteWorkoutRequest) = apply {
+    operation = BeContext.MpOperations.DELETE
     requestId = query.requestId ?: ""
     requestWorkoutId = WorkoutIdModel(query.deleteWorkoutId ?: "")
     stubCase = query.debug?.stubCase.toModel()
 }
 
 fun BeContext.setQuery(query: SearchWorkoutRequest) = apply {
+    operation = BeContext.MpOperations.SEARCH
     requestId = query.requestId ?: ""
     requestSearchWorkout.apply {
         workoutDate = Instant.parse(query.date) ?: Instant.now()
         searchMuscleGroup = query.searchMuscleGroup ?: ""
         searchExercise = query.searchExercise ?: ""
     }
+    stubCase = query.debug?.stubCase.toModel()
+}
+
+fun BeContext.setQuery(query: ChainOfExercisesRequest) = apply {
+    operation = BeContext.MpOperations.CHAIN_OF_EXERCISES
+    requestId = query.requestId ?: ""
+    requestWorkoutId = WorkoutIdModel(query.readWorkoutId ?: "")
     stubCase = query.debug?.stubCase.toModel()
 }
 

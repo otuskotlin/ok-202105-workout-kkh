@@ -40,8 +40,9 @@ dependencies {
     implementation(kotlin("stdlib"))
     testImplementation(kotlin("test-junit5"))
 
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+    api("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+    api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
 
 }

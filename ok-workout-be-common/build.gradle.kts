@@ -3,5 +3,6 @@ plugins {
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
+    val kotlinStdLibVersion: String by project
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinStdLibVersion")
 }

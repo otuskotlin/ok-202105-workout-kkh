@@ -4,7 +4,6 @@ import io.ktor.http.*
 import io.ktor.application.*
 import kotlin.test.*
 import io.ktor.server.testing.*
-import ru.otus.module
 
 class ApplicationTest {
     @Test

@@ -2,8 +2,10 @@ package ru.otus.otuskotlin.workout
 
 import ExerciseService
 import WorkoutService
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.application.*
 import io.ktor.routing.*
+import io.ktor.websocket.*
 import ru.otus.otuskotlin.workout.controllers.*
 
 fun Routing.exercise(exerciseService: ExerciseService) = route("exercise") {
@@ -50,3 +52,24 @@ fun Routing.workout(workoutService: WorkoutService) = route("workout") {
         call.chainOfExercises(workoutService)
     }
 }
+
+fun Routing.websocketExercise(
+    objectMapper: ObjectMapper,
+    exerciseService: ExerciseService,
+    userSession: MutableSet<KtorUserSession>
+) {
+    webSocket("exercise/ws") {
+        handleSessionOfExercise(objectMapper, exerciseService, userSession)
+    }
+}
+
+fun Routing.websocketWorkout(
+    objectMapper: ObjectMapper,
+    workoutService: WorkoutService,
+    userSession: MutableSet<KtorUserSession>
+) {
+    webSocket("workout/ws") {
+        handleSessionOfWorkout(objectMapper, workoutService, userSession)
+    }
+}
+
