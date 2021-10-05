@@ -5,9 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.rabbitmq.client.CancelCallback
 import com.rabbitmq.client.Channel
 import com.rabbitmq.client.DeliverCallback
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
@@ -70,9 +68,3 @@ class RabbitExerciseProcessor(
         println("Channel for $consumerTag was closed.")
     }
 }
-
-suspend fun ObjectMapper.safeReadValue(value: ByteArray): BaseMessage =
-    withContext(Dispatchers.IO) { readValue(value, BaseMessage::class.java) }
-
-suspend fun ObjectMapper.safeWriteValueAsBytes(value: BaseMessage): ByteArray =
-    withContext(Dispatchers.IO) { writeValueAsBytes(value) }

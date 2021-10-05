@@ -27,16 +27,16 @@ class RabbitWorkoutProcessor(
             runBlocking {
                 val context = BeContext(startTime = Instant.now())
                 try {
-                    val query = objectMapper.readValue(message.body, BaseMessage::class.java)
+                    val query = objectMapper.safeReadValue(message.body)
                     val response = workoutService.handleRequest(context, query)
-                    objectMapper.writeValueAsBytes(response).also {
+                    objectMapper.safeWriteValueAsBytes(response).also {
                         channel.basicPublish(exchange, keyOut, null, it)
                     }
                 } catch (t: Throwable) {
                     context.status = CorStatus.ERROR
                     context.addError(t)
                     val response =
-                        objectMapper.writeValueAsBytes(workoutService.initWorkout(context, InitWorkoutRequest()))
+                        objectMapper.safeWriteValueAsBytes(workoutService.initWorkout(context, InitWorkoutRequest()))
                     channel.basicPublish(exchange, keyOut, null, response)
                 }
             }
