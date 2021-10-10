@@ -1,5 +1,6 @@
-package ru.otus.otuskotlin.workout.be.repo.test
+package ru.otus.otuskotlin.workout.be.repo.test.exercise
 
+import ru.otus.otuskotlin.workout.be.repo.test.IInitObjects
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExercisePermissions

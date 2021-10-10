@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.workout.be.repo.test
+package ru.otus.otuskotlin.workout.be.repo.test.exercise
 
 import kotlinx.coroutines.runBlocking
 import ru.workout.otuskotlin.workout.backend.common.models.CommonErrorModel
