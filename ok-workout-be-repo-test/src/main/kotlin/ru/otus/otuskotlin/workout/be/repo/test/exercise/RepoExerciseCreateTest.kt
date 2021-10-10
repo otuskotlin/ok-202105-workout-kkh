@@ -5,8 +5,8 @@ import org.junit.Test
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExercisePermissions
-import ru.workout.otuskotlin.workout.backend.common.repo.exercise.DbExerciseModelRequest
-import ru.workout.otuskotlin.workout.backend.common.repo.exercise.IRepoExercise
+import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.DbExerciseModelRequest
+import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
 import java.util.*
 import kotlin.test.assertEquals
 

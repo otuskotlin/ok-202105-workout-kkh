@@ -4,8 +4,8 @@ import kotlinx.coroutines.runBlocking
 import ru.workout.otuskotlin.workout.backend.common.models.CommonErrorModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
-import ru.workout.otuskotlin.workout.backend.common.repo.exercise.DbExerciseIdRequest
-import ru.workout.otuskotlin.workout.backend.common.repo.exercise.IRepoExercise
+import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.DbExerciseIdRequest
+import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
 import java.util.*
 import kotlin.test.Test
 import kotlin.test.assertEquals

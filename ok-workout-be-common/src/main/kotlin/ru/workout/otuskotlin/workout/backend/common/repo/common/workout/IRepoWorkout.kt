@@ -1,4 +1,4 @@
-package ru.workout.otuskotlin.workout.backend.common.repo.workout
+package ru.workout.otuskotlin.workout.backend.common.repo.common.workout
 
 interface IRepoWorkout {
     suspend fun create(req: DdWorkoutModelRequest): DbWorkoutModelResponse
