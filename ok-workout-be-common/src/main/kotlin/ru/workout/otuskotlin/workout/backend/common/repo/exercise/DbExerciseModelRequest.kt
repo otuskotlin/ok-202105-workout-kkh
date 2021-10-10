@@ -5,4 +5,4 @@ import ru.workout.otuskotlin.workout.backend.common.repo.IDbRequest
 
 class DbExerciseModelRequest(
     val exercise: ExerciseModel
-): IDbRequest
+) : IDbRequest
