@@ -4,10 +4,8 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
-import ru.workout.otuskotlin.workout.backend.common.models.ExercisePermissions
 import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.DbExerciseModelRequest
 import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
-import java.util.*
 import kotlin.test.assertEquals
 
 abstract class RepoExerciseCreateTest {
@@ -26,9 +24,7 @@ abstract class RepoExerciseCreateTest {
             description = "create object description",
             targetMuscleGroup = mutableListOf("create object target muscle group"),
             synergisticMuscleGroup = mutableListOf("create object synergistic muscle group"),
-            executionTechnique = "create object execution technique",
-            idExercise = ExerciseIdModel(UUID.randomUUID()),
-            permissions = mutableSetOf(ExercisePermissions.READ)
+            executionTechnique = "create object execution technique"
         )
 
         override val initObjects: List<ExerciseModel> = emptyList()
