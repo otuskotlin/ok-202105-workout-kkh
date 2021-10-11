@@ -7,9 +7,11 @@ import org.ehcache.config.builders.CacheManagerBuilder
 import org.ehcache.config.builders.ExpiryPolicyBuilder
 import org.ehcache.config.builders.ResourcePoolsBuilder
 import ru.workout.otuskotlin.workout.backend.common.models.CommonErrorModel
+import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
 import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.*
 import java.time.Duration
+import java.util.*
 
 class RepoExerciseInMemory(
     private val initObjects: List<ExerciseModel>,
@@ -63,9 +65,13 @@ class RepoExerciseInMemory(
         )
     }
 
-    override suspend fun create(req: DbExerciseModelRequest): DbExerciseResponse {
-        TODO("Not yet implemented")
-    }
+    override suspend fun create(req: DbExerciseModelRequest): DbExerciseResponse = save(
+        req.exercise.copy(
+            idExercise = ExerciseIdModel(
+                UUID.randomUUID().toString()
+            )
+        )
+    )
 
     override suspend fun read(req: DbExerciseIdRequest): DbExerciseResponse {
         TODO("Not yet implemented")
