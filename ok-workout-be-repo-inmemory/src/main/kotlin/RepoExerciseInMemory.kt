@@ -73,9 +73,21 @@ class RepoExerciseInMemory(
         )
     )
 
-    override suspend fun read(req: DbExerciseIdRequest): DbExerciseResponse {
-        TODO("Not yet implemented")
-    }
+    override suspend fun read(req: DbExerciseIdRequest): DbExerciseResponse = cache.get(req.id.asString())?.let {
+        DbExerciseResponse(
+            isSuccess = true,
+            result = it.toInternal()
+        )
+    } ?: DbExerciseResponse(
+        isSuccess = false,
+        errors = listOf(
+            CommonErrorModel(
+                field = "id",
+                message = "Not Found"
+            )
+        ),
+        result = null
+    )
 
     override suspend fun update(req: DbExerciseModelRequest): DbExerciseResponse {
         TODO("Not yet implemented")

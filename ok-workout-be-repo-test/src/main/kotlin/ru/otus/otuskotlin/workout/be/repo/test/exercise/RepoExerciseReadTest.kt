@@ -26,7 +26,10 @@ abstract class RepoExerciseReadTest {
         val result = runBlocking { repo.read(DbExerciseIdRequest(notFoundId)) }
         assertEquals(false, result.isSuccess)
         assertEquals(null, result.result)
-        assertEquals(listOf(CommonErrorModel(field = "id", message = "Not Found")), result.errors)
+        assertEquals(
+            listOf(CommonErrorModel(field = "id", message = "Not Found")),
+            result.errors
+        )
     }
 
     companion object : BaseInitExercise() {
