@@ -16,6 +16,5 @@ abstract class BaseInitExercise : IInitObjects<ExerciseModel> {
         synergisticMuscleGroup = mutableListOf("$suf stub synergistic muscle group"),
         executionTechnique = "$suf stub execution technique",
         idExercise = ExerciseIdModel(UUID.randomUUID()),
-        permissions = mutableSetOf(ExercisePermissions.READ)
     )
 }
