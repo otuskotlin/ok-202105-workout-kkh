@@ -1,3 +1,7 @@
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import models.ExerciseRow
 import org.ehcache.Cache
@@ -156,7 +160,16 @@ class RepoExerciseInMemory(
     }
 
     override suspend fun search(req: DbExerciseFilterRequest): DbExercisesResponse {
-        TODO("Not yet implemented")
+        val results = cache.asFlow()
+            .filter {
+                it.value.title?.lowercase()?.contains(req.searchStr.lowercase()) == true
+                        || it.value.description?.lowercase()?.contains(req.searchStr.lowercase()) == true
+            }
+            .map { it.value.toInternal() }
+            .toList()
+        return DbExercisesResponse(
+            isSuccess = true,
+            result = results
+        )
     }
-
 }
