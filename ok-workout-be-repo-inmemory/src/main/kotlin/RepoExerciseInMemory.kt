@@ -162,8 +162,15 @@ class RepoExerciseInMemory(
     override suspend fun search(req: DbExerciseFilterRequest): DbExercisesResponse {
         val results = cache.asFlow()
             .filter {
-                it.value.title?.lowercase()?.contains(req.searchStr.lowercase()) == true
-                        || it.value.description?.lowercase()?.contains(req.searchStr.lowercase()) == true
+                when (req.mode) {
+                    DbExerciseFilterRequest.SearchMode.NONE ->
+                        it.value.title?.lowercase()?.contains(req.searchStr.lowercase()) == true
+                                || it.value.description?.lowercase()?.contains(req.searchStr.lowercase()) == true
+                    DbExerciseFilterRequest.SearchMode.TITLE ->
+                        it.value.title?.lowercase()?.contains(req.searchStr.lowercase()) == true
+                    DbExerciseFilterRequest.SearchMode.DESCRIPTION ->
+                        it.value.description?.lowercase()?.contains(req.searchStr.lowercase()) == true
+                }
             }
             .map { it.value.toInternal() }
             .toList()
