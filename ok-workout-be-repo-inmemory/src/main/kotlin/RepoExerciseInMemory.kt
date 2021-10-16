@@ -90,7 +90,37 @@ class RepoExerciseInMemory(
     )
 
     override suspend fun update(req: DbExerciseModelRequest): DbExerciseResponse {
-        TODO("Not yet implemented")
+        val key =
+            req.exercise.idExercise.takeIf { it != ExerciseIdModel.NONE }?.asString()
+                ?: return DbExerciseResponse(
+                    isSuccess = false,
+                    errors = listOf(
+                        CommonErrorModel(
+                            field = "id",
+                            message = "Id must not be null or blank"
+                        )
+                    ),
+                    result = null
+                )
+
+        return if (cache.containsKey(key)) {
+            save(req.exercise)
+            DbExerciseResponse(
+                result = req.exercise,
+                isSuccess = true
+            )
+        } else {
+            DbExerciseResponse(
+                isSuccess = false,
+                errors = listOf(
+                    CommonErrorModel(
+                        field = "id",
+                        message = "Not Found"
+                    )
+                ),
+                result = null
+            )
+        }
     }
 
     override suspend fun delete(req: DbExerciseIdRequest): DbExerciseResponse {
