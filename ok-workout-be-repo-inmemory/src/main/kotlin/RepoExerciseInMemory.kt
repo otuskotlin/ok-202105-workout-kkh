@@ -124,7 +124,35 @@ class RepoExerciseInMemory(
     }
 
     override suspend fun delete(req: DbExerciseIdRequest): DbExerciseResponse {
-        TODO("Not yet implemented")
+        val key = req.id.takeIf { it != ExerciseIdModel.NONE }?.asString()
+            ?: return DbExerciseResponse(
+                isSuccess = false,
+                errors = listOf(
+                    CommonErrorModel(
+                        field = "id",
+                        message = "Id must not be null or blank"
+                    )
+                ),
+                result = null
+            )
+
+        val row = cache.get(key)
+            ?: return DbExerciseResponse(
+                isSuccess = false,
+                errors = listOf(
+                    CommonErrorModel(
+                        field = "id",
+                        message = "Not Found",
+                    )
+                ),
+                result = null
+            )
+
+        cache.remove(key)
+        return DbExerciseResponse(
+            isSuccess = true,
+            result = row.toInternal()
+        )
     }
 
     override suspend fun search(req: DbExerciseFilterRequest): DbExercisesResponse {
