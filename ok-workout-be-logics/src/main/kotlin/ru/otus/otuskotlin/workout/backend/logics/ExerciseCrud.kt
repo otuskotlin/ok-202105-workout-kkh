@@ -2,8 +2,9 @@ package ru.otus.otuskotlin.workout.backend.logics
 
 import ru.otus.otuskotlin.workout.backend.logics.chains.exercise.*
 import ru.workout.otuskotlin.workout.backend.common.context.BeContext
+import ru.workout.otuskotlin.workout.backend.common.context.ContextConfig
 
-class ExerciseCrud {
+class ExerciseCrud(val config: ContextConfig = ContextConfig()) {
     suspend fun create(context: BeContext) {
         ExerciseCreate.exec(context.initSettings())
     }
@@ -28,6 +29,6 @@ class ExerciseCrud {
     }
 
     private fun BeContext.initSettings() = apply {
-
+        config = this@ExerciseCrud.config
     }
 }
