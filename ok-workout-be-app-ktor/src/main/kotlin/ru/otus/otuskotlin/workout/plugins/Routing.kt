@@ -1,6 +1,7 @@
 package ru.otus.otuskotlin.workout.plugins
 
 import ExerciseService
+import RepoExerciseInMemory
 import WorkoutService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.application.*
@@ -13,13 +14,28 @@ import ru.otus.otuskotlin.workout.exercise
 import ru.otus.otuskotlin.workout.websocketExercise
 import ru.otus.otuskotlin.workout.websocketWorkout
 import ru.otus.otuskotlin.workout.workout
+import ru.workout.otuskotlin.workout.backend.common.context.ContextConfig
+import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
+import java.time.Duration
 
 fun Application.configRouting() {
 
-    val crudExercise = ExerciseCrud()
+
     val crudWorkout = WorkoutCrud()
-    val exerciseService = ExerciseService(crudExercise)
+
     val objectMapper = jacksonObjectMapper()
+
+    val exerciseRepoTest: IRepoExercise = RepoExerciseInMemory(initObjects = listOf())
+    val exerciseRepoProd: IRepoExercise = RepoExerciseInMemory(initObjects = listOf(), ttl = Duration.ofHours(1))
+
+    val contextConfig = ContextConfig(
+        repoExerciseProd = exerciseRepoProd,
+        repoExerciseTest = exerciseRepoTest
+    )
+
+    val crudExercise = ExerciseCrud(contextConfig)
+
+    val exerciseService = ExerciseService(crudExercise)
 
     val userSessions = mutableSetOf<KtorUserSession>()
 

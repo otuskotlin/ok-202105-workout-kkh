@@ -1,14 +1,19 @@
 package ru.workout.otuskotlin.workout.backend.common.context
 
 import ru.workout.otuskotlin.workout.backend.common.models.*
+import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
 import java.time.Instant
 
 data class BeContext(
     var startTime: Instant = Instant.MIN,
     var operation: MpOperations = MpOperations.NONE,
     var stubCase: MpStubCases = MpStubCases.NONE,
+    var workMode: WorkMode = WorkMode.PROD,
 
     val userSession: IUserSession<*> = IUserSession.Companion.EmptySession,
+
+    var config: ContextConfig = ContextConfig(),
+    var exerciseRepo: IRepoExercise = IRepoExercise.NONE,
 
     var requestId: String = "",
     var requestExerciseId: ExerciseIdModel = ExerciseIdModel.NONE,
@@ -37,7 +42,7 @@ data class BeContext(
         CHAIN_OF_EXERCISES
     }
 
-    private fun addError(error: IError, failingsStatus: Boolean = true) = apply {
+    fun addError(error: IError, failingsStatus: Boolean = true) = apply {
         if (failingsStatus) status = CorStatus.FAILING
         errors.add(error)
     }
