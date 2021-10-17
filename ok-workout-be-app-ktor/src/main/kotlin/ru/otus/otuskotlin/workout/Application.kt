@@ -7,13 +7,16 @@ import io.ktor.features.*
 import io.ktor.jackson.*
 import io.ktor.websocket.*
 import ru.otus.otuskotlin.workout.plugins.configRouting
+import io.ktor.server.netty.EngineMain
 
-fun main(args: Array<String>): Unit =
-    io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 @Suppress("unused")
 @JvmOverloads
-fun Application.module(testing: Boolean = false) {
+fun Application.module(
+    testing: Boolean = false,
+    config: AppKtorConfig = AppKtorConfig()
+) {
     install(ContentNegotiation) {
         jackson {
             disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
@@ -23,5 +26,5 @@ fun Application.module(testing: Boolean = false) {
         }
     }
     install(WebSockets)
-    configRouting()
+    configRouting(config.exerciseService)
 }
