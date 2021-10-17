@@ -1,0 +1,22 @@
+package ru.otus.otuskotlin.workout.backend.logics.workers
+
+import handlers.CorChainDsl
+import handlers.worker
+import ru.workout.otuskotlin.workout.backend.common.context.BeContext
+import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.DbExerciseModelRequest
+
+internal fun CorChainDsl<BeContext>.repoCreate(title: String) = worker {
+    this.title = title
+    description = "Data from request are stored in the DB repository"
+    handle {
+        val result = exerciseRepo.create(DbExerciseModelRequest(exercise = requestExercise))
+        val resultValue = result.result
+        if (result.isSuccess && resultValue != null) {
+            responseExercise = resultValue
+        } else {
+            result.errors.forEach {
+                addError(it)
+            }
+        }
+    }
+}
