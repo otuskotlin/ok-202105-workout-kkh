@@ -20,11 +20,10 @@ fun Application.module(
     install(ContentNegotiation) {
         jackson {
             disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-
             enable(SerializationFeature.INDENT_OUTPUT)
             writerWithDefaultPrettyPrinter()
         }
     }
     install(WebSockets)
-    configRouting(config.exerciseService)
+    configRouting(config.exerciseService, config.objectMapper, config.userSessions)
 }
