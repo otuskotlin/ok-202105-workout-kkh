@@ -28,7 +28,7 @@ data class BeContext(
     var errors: MutableList<IError> = mutableListOf(),
     var foundExercises: MutableList<ExerciseModel> = mutableListOf(),
     var foundWorkouts: MutableList<WorkoutModel> = mutableListOf(),
-    var status: ru.otus.otuskotlin.workout.backend.common.context.CorStatus = ru.otus.otuskotlin.workout.backend.common.context.CorStatus.NONE
+    var status: CorStatus = CorStatus.NONE
 ) {
 
     enum class MpOperations {
@@ -43,7 +43,7 @@ data class BeContext(
     }
 
     fun addError(error: IError, failingsStatus: Boolean = true) = apply {
-        if (failingsStatus) status = ru.otus.otuskotlin.workout.backend.common.context.CorStatus.FAILING
+        if (failingsStatus) status = CorStatus.FAILING
         errors.add(error)
     }
 

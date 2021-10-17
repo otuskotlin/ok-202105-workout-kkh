@@ -19,6 +19,6 @@ data class AppKtorConfig(
         repoExerciseProd = exerciseRepoProd,
         repoExerciseTest = exerciseRepoTest
     ),
-    val exerciseCrud: ExerciseCrud = ExerciseCrud(),
+    val exerciseCrud: ExerciseCrud = ExerciseCrud(contextConfig),
     val exerciseService: ExerciseService = ExerciseService(exerciseCrud)
 )
