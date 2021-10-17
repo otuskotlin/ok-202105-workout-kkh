@@ -1,8 +1,8 @@
 package ru.otus.otuskotlin.workout.controllers
 
-import ExerciseService
-import IHandlerRequests
-import WorkoutService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.ExerciseService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.IHandlerRequests
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.WorkoutService
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.http.cio.websocket.*

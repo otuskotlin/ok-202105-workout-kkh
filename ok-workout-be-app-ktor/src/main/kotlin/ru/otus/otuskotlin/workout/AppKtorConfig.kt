@@ -1,7 +1,7 @@
 package ru.otus.otuskotlin.workout
 
-import ExerciseService
-import RepoExerciseInMemory
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.ExerciseService
+import ru.otus.otuskotlin.workout.be.repo.inmemory.models.RepoExerciseInMemory
 import ru.otus.otuskotlin.workout.backend.logics.ExerciseCrud
 import ru.otus.otuskotlin.workout.backend.common.context.ContextConfig
 import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise

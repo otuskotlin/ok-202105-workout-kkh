@@ -1,4 +1,4 @@
-package exceptions
+package ru.otus.otuskotlin.workout.be.service.openapi.exceptions
 
 import ru.otus.otuskotlin.workout.openapi.models.BaseMessage
 

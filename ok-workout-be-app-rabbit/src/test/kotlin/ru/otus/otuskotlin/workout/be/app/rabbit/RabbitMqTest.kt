@@ -1,8 +1,8 @@
 package ru.otus.otuskotlin.workout.be.app.rabbit
 
-import ExerciseService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.ExerciseService
 import ExerciseStub
-import WorkoutService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.WorkoutService
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.rabbitmq.client.CancelCallback
 import com.rabbitmq.client.ConnectionFactory

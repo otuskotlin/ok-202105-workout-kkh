@@ -1,4 +1,4 @@
-package models
+package ru.otus.otuskotlin.workout.be.repo.inmemory.models
 
 import ru.otus.otuskotlin.workout.backend.common.models.*
 import java.io.Serializable

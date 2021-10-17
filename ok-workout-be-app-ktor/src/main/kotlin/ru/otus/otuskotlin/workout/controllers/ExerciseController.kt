@@ -1,6 +1,6 @@
 package ru.otus.otuskotlin.workout.controllers
 
-import ExerciseService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.ExerciseService
 import io.ktor.application.*
 import ru.otus.otuskotlin.workout.helpers.handleRoute
 import ru.otus.otuskotlin.workout.openapi.models.*

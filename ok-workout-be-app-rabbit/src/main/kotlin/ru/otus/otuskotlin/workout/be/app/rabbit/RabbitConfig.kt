@@ -1,7 +1,7 @@
 package ru.otus.otuskotlin.workout.be.app.rabbit
 
-import ExerciseService
-import WorkoutService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.ExerciseService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.WorkoutService
 import ru.otus.otuskotlin.workout.backend.logics.ExerciseCrud
 import ru.otus.otuskotlin.workout.backend.logics.WorkoutCrud
 

@@ -1,7 +1,7 @@
 package ru.otus.otuskotlin.workout.backend.logics
 
 import ExerciseStub
-import RepoExerciseInMemory
+import ru.otus.otuskotlin.workout.be.repo.inmemory.models.RepoExerciseInMemory
 import kotlinx.coroutines.runBlocking
 import ru.otus.otuskotlin.workout.backend.common.context.BeContext
 import ru.otus.otuskotlin.workout.backend.common.context.ContextConfig

@@ -1,8 +1,8 @@
 package ru.otus.otuskotlin.workout.plugins
 
-import ExerciseService
-import RepoExerciseInMemory
-import WorkoutService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.ExerciseService
+import ru.otus.otuskotlin.workout.be.repo.inmemory.models.RepoExerciseInMemory
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.WorkoutService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.application.*
 import io.ktor.response.*
