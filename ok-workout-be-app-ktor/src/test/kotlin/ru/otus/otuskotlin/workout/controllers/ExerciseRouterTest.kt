@@ -33,10 +33,14 @@ class ExerciseRouterTest : RouterTest() {
         )
 
         testPostRequest<CreateExerciseResponse>(data, "exercise/create") {
+            val expected = stubResponseExercise.copy(
+                id = createdExercise?.id,
+                permissions = null
+            )
             assertEquals(data.requestId, requestId)
             assertEquals(CreateExerciseResponse.Result.SUCCESS, result)
             assertNull(errors)
-            assertEquals(stubResponseExercise, createdExercise)
+            assertEquals(expected, createdExercise)
         }
     }
 
