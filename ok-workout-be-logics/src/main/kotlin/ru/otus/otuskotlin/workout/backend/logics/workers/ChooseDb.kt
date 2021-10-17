@@ -2,10 +2,10 @@ package ru.otus.otuskotlin.workout.backend.logics.workers
 
 import handlers.CorChainDsl
 import handlers.worker
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.common.models.MpStubCases
-import ru.workout.otuskotlin.workout.backend.common.models.WorkMode
-import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.models.MpStubCases
+import ru.otus.otuskotlin.workout.backend.common.models.WorkMode
+import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
 
 internal fun CorChainDsl<BeContext>.chooseDb(title: String) = worker {
     this.title = title

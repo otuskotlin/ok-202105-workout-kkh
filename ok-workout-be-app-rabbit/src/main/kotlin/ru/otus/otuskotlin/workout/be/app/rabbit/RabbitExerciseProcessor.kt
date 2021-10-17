@@ -7,8 +7,8 @@ import com.rabbitmq.client.Channel
 import com.rabbitmq.client.DeliverCallback
 import kotlinx.coroutines.runBlocking
 import ru.otus.otuskotlin.workout.openapi.models.*
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.context.CorStatus
 import java.time.Instant
 
 class RabbitExerciseProcessor(

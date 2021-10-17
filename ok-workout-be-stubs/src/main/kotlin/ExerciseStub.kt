@@ -1,6 +1,6 @@
-import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
-import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
-import ru.workout.otuskotlin.workout.backend.common.models.ExercisePermissions
+import ru.otus.otuskotlin.workout.backend.common.models.ExerciseIdModel
+import ru.otus.otuskotlin.workout.backend.common.models.ExerciseModel
+import ru.otus.otuskotlin.workout.backend.common.models.ExercisePermissions
 
 object ExerciseStub {
     private val squatsStub = ExerciseModel(

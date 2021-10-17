@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.Test
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
 import ru.otus.otuskotlin.workout.openapi.models.*
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.common.models.*
-import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
+import ru.otus.otuskotlin.workout.backend.mapping.openapi.*
+import ru.otus.otuskotlin.workout.backend.common.models.*
 import java.time.Instant
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -92,7 +92,6 @@ class MappingTest {
                 requestId = "rID:0001"
             )
         )
-        println(beContext)
         assertEquals("rID:0001", beContext.requestId)
     }
 
@@ -110,7 +109,6 @@ class MappingTest {
                 )
             )
         )
-        println(beContext)
         assertEquals("rID:0001", beContext.requestId)
         assertTrue(beContext.requestExercise.title.isNotBlank())
         assertTrue(beContext.requestExercise.description.isNotBlank())
@@ -123,7 +121,6 @@ class MappingTest {
     @Test
     fun readExerciseRequest() {
         beContext.setQuery(readExerciseRequest)
-        println(beContext)
         assertEquals("rID:0001", beContext.requestId)
         assertEquals(ExerciseIdModel("eID:0001"), beContext.requestExerciseId)
     }
@@ -131,7 +128,6 @@ class MappingTest {
     @Test
     fun updateExerciseRequest() {
         beContext.setQuery(updateExerciseRequest)
-        println(beContext)
         assertEquals("rID:0001", beContext.requestId)
         assertTrue(beContext.requestExercise.title.isNotBlank())
         assertTrue(beContext.requestExercise.description.isNotBlank())
@@ -145,7 +141,6 @@ class MappingTest {
     @Test
     fun deleteExerciseRequest() {
         beContext.setQuery(deleteExerciseRequest)
-        println(beContext)
         assertEquals("rID:0001", beContext.requestId)
         assertEquals(ExerciseIdModel("eID:0001"), beContext.requestExerciseId)
     }
@@ -153,7 +148,6 @@ class MappingTest {
     @Test
     fun searchExerciseRequest() {
         beContext.setQuery(searchExerciseRequest)
-        println(beContext)
         assertEquals("rID:0001", beContext.requestId)
         assertTrue(beContext.requestSearchExercise.isNotEmpty())
     }
@@ -165,7 +159,6 @@ class MappingTest {
                 requestId = "rID:0001",
             )
         )
-        println(beContext)
         assertEquals("rID:0001", beContext.requestId)
     }
 
@@ -199,7 +192,6 @@ class MappingTest {
                 )
             )
         )
-        println(beContext)
         assertEquals(Instant.parse("2021-09-09T15:40:00.0Z"), beContext.requestWorkout.workoutDate)
         assertTrue(beContext.requestWorkout.duration > 0)
         assertTrue(beContext.requestWorkout.recoveryTime > 0)
@@ -215,7 +207,6 @@ class MappingTest {
                 readWorkoutId = "wID:0001",
             )
         )
-        println(beContext)
         assertEquals("rID:0001", beContext.requestId)
         assertEquals(WorkoutIdModel("wID:0001"), beContext.requestWorkoutId)
     }
@@ -250,7 +241,6 @@ class MappingTest {
                 )
             )
         )
-        println(beContext)
         assertEquals("rID:0001", beContext.requestId)
         assertTrue(beContext.requestWorkout.duration > 0)
         assertTrue(beContext.requestWorkout.recoveryTime > 0)
@@ -286,7 +276,6 @@ class MappingTest {
     @Test
     fun initExerciseResponseTest() {
         val response = beContext.toInitExerciseResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(InitExerciseResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
@@ -295,7 +284,6 @@ class MappingTest {
     @Test
     fun createExerciseResponseTest() {
         val response = beContext.toCreateExerciseResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(CreateExerciseResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
@@ -312,7 +300,6 @@ class MappingTest {
     @Test
     fun readExerciseResponseTest() {
         val response = beContext.toReadExerciseResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(ReadExerciseResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
@@ -329,7 +316,6 @@ class MappingTest {
     @Test
     fun updateExerciseResponseTest() {
         val response = beContext.toUpdateExerciseResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(UpdateExerciseResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
@@ -346,7 +332,6 @@ class MappingTest {
     @Test
     fun deleteExerciseResponseTest() {
         val response = beContext.toDeleteExerciseResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(DeleteExerciseResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
@@ -363,7 +348,6 @@ class MappingTest {
     @Test
     fun searchExerciseResponseTest() {
         val response = beContext.toSearchExerciseResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(SearchExerciseResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
@@ -373,7 +357,6 @@ class MappingTest {
     @Test
     fun initWorkoutResponseTest() {
         val response = beContext.toInitWorkoutResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(InitWorkoutResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
@@ -382,7 +365,6 @@ class MappingTest {
     @Test
     fun createWorkoutResponseTest() {
         val response = beContext.toCreateWorkoutResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(CreateWorkoutResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
@@ -414,7 +396,6 @@ class MappingTest {
     @Test
     fun readWorkoutResponseTest() {
         val response = beContext.toReadWorkoutResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(ReadWorkoutResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
@@ -446,7 +427,6 @@ class MappingTest {
     @Test
     fun updateWorkoutResponseTest() {
         val response = beContext.toUpdateWorkoutResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(UpdateWorkoutResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
@@ -476,7 +456,6 @@ class MappingTest {
     @Test
     fun deleteWorkoutResponseTest() {
         val response = beContext.toDeleteWorkoutResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(DeleteWorkoutResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
@@ -506,7 +485,6 @@ class MappingTest {
     @Test
     fun searchWorkoutResponseTest() {
         val response = beContext.toSearchWorkoutResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(SearchWorkoutResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())
@@ -516,7 +494,6 @@ class MappingTest {
     @Test
     fun chainOfExercise() {
         val response = beContext.toChainOfExercisesResponse()
-        println(response)
         assertEquals("rID:0001", response.requestId)
         assertEquals(ChainOfExercisesResponse.Result.SUCCESS, response.result)
         assertTrue(response.errors.isNullOrEmpty())

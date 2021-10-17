@@ -1,7 +1,7 @@
 package ru.otus.otuskotlin.workout.backend.logics
 
 import ru.otus.otuskotlin.workout.backend.logics.chains.workout.*
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
 
 class WorkoutCrud {
     suspend fun create(context: BeContext) {

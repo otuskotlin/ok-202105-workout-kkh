@@ -2,10 +2,10 @@ package ru.otus.otuskotlin.workout.backend.logics
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
-import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
-import ru.workout.otuskotlin.workout.backend.common.models.MpStubCases
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.context.CorStatus
+import ru.otus.otuskotlin.workout.backend.common.models.ExerciseIdModel
+import ru.otus.otuskotlin.workout.backend.common.models.MpStubCases
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 

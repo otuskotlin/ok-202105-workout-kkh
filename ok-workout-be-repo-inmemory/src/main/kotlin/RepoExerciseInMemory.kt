@@ -10,15 +10,15 @@ import org.ehcache.config.builders.CacheConfigurationBuilder
 import org.ehcache.config.builders.CacheManagerBuilder
 import org.ehcache.config.builders.ExpiryPolicyBuilder
 import org.ehcache.config.builders.ResourcePoolsBuilder
-import ru.workout.otuskotlin.workout.backend.common.models.CommonErrorModel
-import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
-import ru.workout.otuskotlin.workout.backend.common.models.ExerciseModel
-import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.*
+import ru.otus.otuskotlin.workout.backend.common.models.CommonErrorModel
+import ru.otus.otuskotlin.workout.backend.common.models.ExerciseIdModel
+import ru.otus.otuskotlin.workout.backend.common.models.ExerciseModel
+import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.*
 import java.time.Duration
 import java.util.*
 
 class RepoExerciseInMemory(
-    private val initObjects: List<ExerciseModel> = listOf(),
+    private val initObjects: List<ExerciseModel>,
     private val ttl: Duration = Duration.ofMinutes(1)
 ) : IRepoExercise {
 

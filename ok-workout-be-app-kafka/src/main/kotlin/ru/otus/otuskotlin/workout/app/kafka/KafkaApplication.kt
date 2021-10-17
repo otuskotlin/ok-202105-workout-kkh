@@ -10,7 +10,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecords
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.errors.WakeupException
 import ru.otus.otuskotlin.workout.openapi.models.BaseMessage
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
 import java.time.Duration
 import java.time.Instant
 import java.util.*

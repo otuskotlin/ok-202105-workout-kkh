@@ -2,8 +2,8 @@ package ru.otus.otuskotlin.workout.backend.logics.workers
 
 import handlers.CorChainDsl
 import handlers.worker
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.DbExerciseModelRequest
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.DbExerciseModelRequest
 
 internal fun CorChainDsl<BeContext>.repoCreate(title: String) = worker {
     this.title = title

@@ -1,8 +1,8 @@
 import exceptions.DataNotAllowedException
 import ru.otus.otuskotlin.workout.backend.logics.ExerciseCrud
 import ru.otus.otuskotlin.workout.openapi.models.*
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.mapping.openapi.*
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.mapping.openapi.*
 
 class ExerciseService(
     private var crud: ExerciseCrud

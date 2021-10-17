@@ -14,8 +14,6 @@ fun main(args: Array<String>): Unit =
 @Suppress("unused")
 @JvmOverloads
 fun Application.module(testing: Boolean = false) {
-
-
     install(ContentNegotiation) {
         jackson {
             disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)

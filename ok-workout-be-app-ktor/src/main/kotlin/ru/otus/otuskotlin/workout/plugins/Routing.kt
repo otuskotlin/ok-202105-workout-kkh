@@ -14,38 +14,27 @@ import ru.otus.otuskotlin.workout.exercise
 import ru.otus.otuskotlin.workout.websocketExercise
 import ru.otus.otuskotlin.workout.websocketWorkout
 import ru.otus.otuskotlin.workout.workout
-import ru.workout.otuskotlin.workout.backend.common.context.ContextConfig
-import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
+import ru.otus.otuskotlin.workout.backend.common.context.ContextConfig
+import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
 import java.time.Duration
 
 fun Application.configRouting() {
-
-
     val crudWorkout = WorkoutCrud()
-
     val objectMapper = jacksonObjectMapper()
-
     val exerciseRepoTest: IRepoExercise = RepoExerciseInMemory(initObjects = listOf())
     val exerciseRepoProd: IRepoExercise = RepoExerciseInMemory(initObjects = listOf(), ttl = Duration.ofHours(1))
-
     val contextConfig = ContextConfig(
         repoExerciseProd = exerciseRepoProd,
         repoExerciseTest = exerciseRepoTest
     )
-
     val crudExercise = ExerciseCrud(contextConfig)
-
     val exerciseService = ExerciseService(crudExercise)
-
     val userSessions = mutableSetOf<KtorUserSession>()
-
     val workoutService = WorkoutService(crudWorkout)
-
     routing {
         get("/") {
             call.respondText("Hello, Ktor!")
         }
-
         exercise(exerciseService)
         workout(workoutService)
         websocketExercise(objectMapper, exerciseService, userSessions)

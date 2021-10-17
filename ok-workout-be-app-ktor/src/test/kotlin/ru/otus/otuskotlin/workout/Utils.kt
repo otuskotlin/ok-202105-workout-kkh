@@ -3,7 +3,7 @@ package ru.otus.otuskotlin.workout
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import ru.otus.otuskotlin.workout.Utils.stubResponseWorkout
 import ru.otus.otuskotlin.workout.openapi.models.*
-import ru.workout.otuskotlin.workout.backend.mapping.openapi.toTransport
+import ru.otus.otuskotlin.workout.backend.mapping.openapi.toTransport
 
 object Utils {
     val mapper = jacksonObjectMapper()
