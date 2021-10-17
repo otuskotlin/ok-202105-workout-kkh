@@ -3,8 +3,8 @@ package ru.otus.otuskotlin.workout
 import ExerciseService
 import RepoExerciseInMemory
 import ru.otus.otuskotlin.workout.backend.logics.ExerciseCrud
-import ru.workout.otuskotlin.workout.backend.common.context.ContextConfig
-import ru.workout.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
+import ru.otus.otuskotlin.workout.backend.common.context.ContextConfig
+import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
 import java.time.Duration
 
 data class AppKtorConfig(

@@ -1,6 +1,6 @@
 package models
 
-import ru.workout.otuskotlin.workout.backend.common.models.*
+import ru.otus.otuskotlin.workout.backend.common.models.*
 import java.io.Serializable
 import java.time.Instant
 

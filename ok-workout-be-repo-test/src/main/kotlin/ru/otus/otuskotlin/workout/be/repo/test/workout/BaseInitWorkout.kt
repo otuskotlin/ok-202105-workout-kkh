@@ -1,9 +1,9 @@
 package ru.otus.otuskotlin.workout.be.repo.test.workout
 
 import ru.otus.otuskotlin.workout.be.repo.test.IInitObjects
-import ru.workout.otuskotlin.workout.backend.common.models.ExercisePermissions
-import ru.workout.otuskotlin.workout.backend.common.models.WorkoutIdModel
-import ru.workout.otuskotlin.workout.backend.common.models.WorkoutModel
+import ru.otus.otuskotlin.workout.backend.common.models.ExercisePermissions
+import ru.otus.otuskotlin.workout.backend.common.models.WorkoutIdModel
+import ru.otus.otuskotlin.workout.backend.common.models.WorkoutModel
 import java.time.Instant
 import java.util.*
 

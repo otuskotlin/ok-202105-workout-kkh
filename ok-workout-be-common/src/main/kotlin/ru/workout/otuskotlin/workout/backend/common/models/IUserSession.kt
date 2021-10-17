@@ -1,6 +1,6 @@
 package ru.workout.otuskotlin.workout.backend.common.models
 
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
 
 interface IUserSession<T> {
     val fwSession: T
