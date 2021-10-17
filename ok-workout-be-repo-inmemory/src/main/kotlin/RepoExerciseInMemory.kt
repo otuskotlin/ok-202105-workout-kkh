@@ -18,7 +18,7 @@ import java.time.Duration
 import java.util.*
 
 class RepoExerciseInMemory(
-    private val initObjects: List<ExerciseModel>,
+    private val initObjects: List<ExerciseModel> = listOf(),
     private val ttl: Duration = Duration.ofMinutes(1)
 ) : IRepoExercise {
 
