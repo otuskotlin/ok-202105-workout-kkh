@@ -15,6 +15,7 @@ fun BeContext.setQuery(query: CreateExerciseRequest) = apply {
     operation = BeContext.MpOperations.CREATE
     requestId = query.requestId ?: ""
     requestExercise = query.createExercise?.toModel() ?: ExerciseModel()
+    workMode = query.debug?.mode.toModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
@@ -22,6 +23,7 @@ fun BeContext.setQuery(query: ReadExerciseRequest) = apply {
     operation = BeContext.MpOperations.READ
     requestId = query.requestId ?: ""
     requestExerciseId = ExerciseIdModel(query.readExerciseId ?: "")
+    workMode = query.debug?.mode.toModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
@@ -29,6 +31,7 @@ fun BeContext.setQuery(query: UpdateExerciseRequest) = apply {
     operation = BeContext.MpOperations.UPDATE
     requestId = query.requestId ?: ""
     requestExercise = query.updateExercise?.toModel() ?: ExerciseModel()
+    workMode = query.debug?.mode.toModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
@@ -36,6 +39,7 @@ fun BeContext.setQuery(query: DeleteExerciseRequest) = apply {
     operation = BeContext.MpOperations.DELETE
     requestId = query.requestId ?: ""
     requestExerciseId = ExerciseIdModel(query.deleteExerciseId ?: "")
+    workMode = query.debug?.mode.toModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
@@ -43,6 +47,7 @@ fun BeContext.setQuery(query: SearchExerciseRequest) = apply {
     operation = BeContext.MpOperations.SEARCH
     requestId = query.requestId ?: ""
     requestSearchExercise = query.search ?: ""
+    workMode = query.debug?.mode.toModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
@@ -55,6 +60,7 @@ fun BeContext.setQuery(query: CreateWorkoutRequest) = apply {
     operation = BeContext.MpOperations.CREATE
     requestId = query.requestId ?: ""
     requestWorkout = query.createWorkout?.toModel() ?: WorkoutModel()
+    workMode = query.debug?.mode.toModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
@@ -62,6 +68,7 @@ fun BeContext.setQuery(query: ReadWorkoutRequest) = apply {
     operation = BeContext.MpOperations.READ
     requestId = query.requestId ?: ""
     requestWorkoutId = WorkoutIdModel(query.readWorkoutId ?: "")
+    workMode = query.debug?.mode.toModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
@@ -69,6 +76,7 @@ fun BeContext.setQuery(query: UpdateWorkoutRequest) = apply {
     operation = BeContext.MpOperations.UPDATE
     requestId = query.requestId ?: ""
     requestWorkout = query.updateWorkout?.toModel() ?: WorkoutModel()
+    workMode = query.debug?.mode.toModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
@@ -76,6 +84,7 @@ fun BeContext.setQuery(query: DeleteWorkoutRequest) = apply {
     operation = BeContext.MpOperations.DELETE
     requestId = query.requestId ?: ""
     requestWorkoutId = WorkoutIdModel(query.deleteWorkoutId ?: "")
+    workMode = query.debug?.mode.toModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
@@ -87,6 +96,7 @@ fun BeContext.setQuery(query: SearchWorkoutRequest) = apply {
         searchMuscleGroup = query.searchMuscleGroup ?: ""
         searchExercise = query.searchExercise ?: ""
     }
+    workMode = query.debug?.mode.toModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
@@ -94,6 +104,7 @@ fun BeContext.setQuery(query: ChainOfExercisesRequest) = apply {
     operation = BeContext.MpOperations.CHAIN_OF_EXERCISES
     requestId = query.requestId ?: ""
     requestWorkoutId = WorkoutIdModel(query.readWorkoutId ?: "")
+    workMode = query.debug?.mode.toModel()
     stubCase = query.debug?.stubCase.toModel()
 }
 
@@ -166,4 +177,11 @@ private fun BaseDebugRequest.StubCase?.toModel(): MpStubCases = when (this) {
     BaseDebugRequest.StubCase.SUCCESS -> MpStubCases.SUCCESS
     BaseDebugRequest.StubCase.DATABASE_ERROR -> MpStubCases.DATABASE_ERROR
     null -> MpStubCases.NONE
+}
+
+private fun BaseDebugRequest.Mode?.toModel() = when(this) {
+    BaseDebugRequest.Mode.STUB -> WorkMode.STUB
+    BaseDebugRequest.Mode.TEST -> WorkMode.TEST
+    BaseDebugRequest.Mode.PROD -> WorkMode.PROD
+    null -> WorkMode.PROD
 }
