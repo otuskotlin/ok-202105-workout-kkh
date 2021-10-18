@@ -11,12 +11,10 @@ class ExerciseCrud(val config: ContextConfig = ContextConfig()) {
 
     suspend fun read(context: BeContext) {
         ExerciseRead.exec(context.initSettings())
-
     }
 
     suspend fun update(context: BeContext) {
         ExerciseUpdate.exec(context.initSettings())
-
     }
 
     suspend fun delete(context: BeContext) {
@@ -25,7 +23,6 @@ class ExerciseCrud(val config: ContextConfig = ContextConfig()) {
 
     suspend fun search(context: BeContext) {
         ExerciseSearch.exec(context.initSettings())
-
     }
 
     private fun BeContext.initSettings() = apply {
