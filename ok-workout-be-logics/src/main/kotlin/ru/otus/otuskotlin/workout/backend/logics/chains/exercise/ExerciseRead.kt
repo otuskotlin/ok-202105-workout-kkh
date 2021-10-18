@@ -28,7 +28,7 @@ object ExerciseRead : ICorExec<BeContext> by chain<BeContext>({
         }
         validate<String?> {
             on { requestExerciseId.asString() }
-            validator(StringNonEmptyValidator(field = "requestId"))
+            validator(StringNonEmptyValidator(field = "requestExerciseId"))
         }
     }
 
