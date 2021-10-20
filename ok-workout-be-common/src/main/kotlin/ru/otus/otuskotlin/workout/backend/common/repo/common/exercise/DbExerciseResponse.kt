@@ -8,4 +8,8 @@ data class DbExerciseResponse(
     override val isSuccess: Boolean,
     override val errors: List<CommonErrorModel> = emptyList(),
     override val result: ExerciseModel?
-) : IDbResponse<ExerciseModel?>
+) : IDbResponse<ExerciseModel?> {
+    constructor(result: ExerciseModel) : this(true, emptyList(), result)
+    constructor(e: Exception) : this(false, listOf(CommonErrorModel(e)), null)
+    constructor(error: CommonErrorModel) : this(false, listOf(error), null)
+}
