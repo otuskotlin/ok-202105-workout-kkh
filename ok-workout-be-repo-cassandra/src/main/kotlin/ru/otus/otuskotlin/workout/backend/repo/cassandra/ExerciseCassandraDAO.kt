@@ -19,7 +19,7 @@ interface ExerciseCassandraDAO {
     fun delete(dto: ExerciseCassandraDTO): CompletionStage<Unit>
 
     @QueryProvider(
-        providerClass = ExerciseCassandraSearchQueryProvider::class,
+        providerClass = ExerciseCassandraSearchProvider::class,
         entityHelpers = [ExerciseCassandraDTO::class]
     )
     fun search(req: DbExerciseFilterRequest): CompletionStage<Collection<ExerciseCassandraDTO>>
