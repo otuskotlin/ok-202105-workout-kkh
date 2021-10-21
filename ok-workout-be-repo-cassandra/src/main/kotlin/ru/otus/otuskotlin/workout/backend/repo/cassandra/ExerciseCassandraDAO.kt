@@ -10,7 +10,7 @@ interface ExerciseCassandraDAO {
     fun create(dto: ExerciseCassandraDTO): CompletionStage<Unit>
 
     @Select
-    fun read(id: String): CompletionStage<ExerciseCassandraDTO>
+    fun read(id: String): CompletionStage<ExerciseCassandraDTO?>
 
     @Update
     fun update(dto: ExerciseCassandraDTO): CompletionStage<Unit>
