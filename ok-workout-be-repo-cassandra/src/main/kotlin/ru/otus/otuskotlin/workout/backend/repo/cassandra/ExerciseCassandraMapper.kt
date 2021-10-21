@@ -11,5 +11,5 @@ interface ExerciseCassandraMapper {
     fun exerciseCassandraDao(
         @DaoKeyspace keyspace: String,
         @DaoTable tableName: String
-    ): ExerciseCassandraDTO
+    ): ExerciseCassandraDAO
 }

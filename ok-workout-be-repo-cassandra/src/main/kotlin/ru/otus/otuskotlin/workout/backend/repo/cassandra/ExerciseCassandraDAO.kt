@@ -12,7 +12,7 @@ interface ExerciseCassandraDAO {
     @Select
     fun read(id: String): CompletionStage<ExerciseCassandraDTO?>
 
-    @Update
+    @Update(ifExists = true)
     fun update(dto: ExerciseCassandraDTO): CompletionStage<Unit>
 
     @Delete
