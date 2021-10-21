@@ -14,19 +14,27 @@ class RepoExerciseCassandra(
         return try {
             dao.create(ExerciseCassandraDTO(exercise)).await()
             val created = dao.read(exercise.idExercise.asString()).await()
-            DbExerciseResponse(created.toExerciseModel())
+            if (created == null) {
+                DbExerciseResponse(CommonErrorModel(field = "id", message = "Not found"))
+            } else {
+                DbExerciseResponse(created.toExerciseModel())
+            }
         } catch (e: Exception) {
             DbExerciseResponse(e)
         }
     }
 
     override suspend fun read(req: DbExerciseIdRequest): DbExerciseResponse {
-        return if (req.id != ExerciseIdModel.NONE) {
+        return if (req.id == ExerciseIdModel.NONE) {
             DbExerciseResponse(CommonErrorModel(field = "id", message = "Invalid value"))
         } else {
             try {
                 val found = dao.read(req.id.asString()).await()
-                DbExerciseResponse(found.toExerciseModel())
+                if (found == null) {
+                    DbExerciseResponse(CommonErrorModel(field = "id", message = "Not found"))
+                } else {
+                    DbExerciseResponse(found.toExerciseModel())
+                }
             } catch (e: Exception) {
                 DbExerciseResponse(e)
             }
@@ -34,14 +42,47 @@ class RepoExerciseCassandra(
     }
 
     override suspend fun update(req: DbExerciseModelRequest): DbExerciseResponse {
-        TODO("Not yet implemented")
+        return if (req.exercise.idExercise == ExerciseIdModel.NONE) {
+            DbExerciseResponse(CommonErrorModel(field = "idExercise", message = "Invalid value"))
+        } else try {
+            dao.update(ExerciseCassandraDTO(req.exercise)).await()
+            val updated = dao.read(req.exercise.idExercise.asString()).await()
+            if (updated == null) {
+                DbExerciseResponse(CommonErrorModel(field = "id", message = "Not found"))
+            } else {
+                DbExerciseResponse(updated.toExerciseModel())
+            }
+        } catch (e: Exception) {
+            DbExerciseResponse(e)
+        }
     }
 
     override suspend fun delete(req: DbExerciseIdRequest): DbExerciseResponse {
-        TODO("Not yet implemented")
+        return if (req.id == ExerciseIdModel.NONE) {
+            DbExerciseResponse(CommonErrorModel(field = "id", message = "Invalid value"))
+        } else {
+            try {
+                val deleted = dao.read(req.id.asString()).await()?.also {
+                    dao.delete(it)
+                }
+                if (deleted == null) {
+                    DbExerciseResponse(CommonErrorModel(field = "id", message = "Not found"))
+                } else {
+                    DbExerciseResponse(deleted.toExerciseModel())
+                }
+            } catch (e: Exception) {
+                DbExerciseResponse(e)
+            }
+        }
     }
 
     override suspend fun search(req: DbExerciseFilterRequest): DbExercisesResponse {
-        TODO("Not yet implemented")
+        return try {
+            val found = dao.search(req).await().map { it.toExerciseModel() }
+            DbExercisesResponse(true, emptyList(), found)
+        } catch (e: Exception) {
+            DbExercisesResponse(false, listOf(CommonErrorModel(e)), emptyList())
+        }
+
     }
 }
