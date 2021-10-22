@@ -4,14 +4,14 @@ import ru.otus.otuskotlin.workout.backend.common.repo.common.IDbRequest
 
 data class DbExerciseFilterRequest(
     val searchStr: String = "",
-    val mode: SearchMode = SearchMode.NONE
+    val mode: SearchMode = SearchMode.TITLE
 ) : IDbRequest {
-    companion object {
-        val NONE = DbExerciseFilterRequest()
-    }
+//    companion object {
+//        val NONE = DbExerciseFilterRequest()
+//    }
 
     enum class SearchMode {
-        NONE,
+//        NONE,
         TITLE,
         DESCRIPTION
     }

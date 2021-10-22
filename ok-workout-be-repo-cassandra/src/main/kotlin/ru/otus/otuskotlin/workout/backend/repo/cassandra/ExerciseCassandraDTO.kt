@@ -80,7 +80,14 @@ data class ExerciseCassandraDTO(
                 .usingSASI()
                 .onTable(keyspace, tableName)
                 .andColumn(COLUMN_TITLE)
-                .withSASIOptions(mapOf("mode" to "CONTAINS", "tokenization_locale" to locale))
+                .withSASIOptions(
+                    mapOf(
+                        "mode" to "CONTAINS",
+                        "tokenization_locale" to locale,
+                        "analyzer_class" to "org.apache.cassandra.index.sasi.analyzer.NonTokenizingAnalyzer",
+                        "case_sensitive" to "false"
+                    )
+                )
                 .build()
 
         fun descriptionIndex(keyspace: String, tableName: String, locale: String = "en") =
@@ -90,7 +97,14 @@ data class ExerciseCassandraDTO(
                 .usingSASI()
                 .onTable(keyspace, tableName)
                 .andColumn(COLUMN_DESCRIPTION)
-                .withSASIOptions(mapOf("mode" to "CONTAINS", "tokenization_locale" to locale))
+                .withSASIOptions(
+                    mapOf(
+                        "mode" to "CONTAINS",
+                        "tokenization_locale" to locale,
+                        "analyzer_class" to "org.apache.cassandra.index.sasi.analyzer.NonTokenizingAnalyzer",
+                        "case_sensitive" to "false"
+                    )
+                )
                 .build()
     }
 }

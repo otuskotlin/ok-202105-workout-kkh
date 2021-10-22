@@ -164,9 +164,9 @@ class RepoExerciseInMemory(
         val results = cache.asFlow()
             .filter {
                 when (req.mode) {
-                    DbExerciseFilterRequest.SearchMode.NONE ->
-                        it.value.title?.lowercase()?.contains(req.searchStr.lowercase()) == true
-                                || it.value.description?.lowercase()?.contains(req.searchStr.lowercase()) == true
+//                    DbExerciseFilterRequest.SearchMode.NONE ->
+//                        it.value.title?.lowercase()?.contains(req.searchStr.lowercase()) == true
+//                                || it.value.description?.lowercase()?.contains(req.searchStr.lowercase()) == true
                     DbExerciseFilterRequest.SearchMode.TITLE ->
                         it.value.title?.lowercase()?.contains(req.searchStr.lowercase()) == true
                     DbExerciseFilterRequest.SearchMode.DESCRIPTION ->
