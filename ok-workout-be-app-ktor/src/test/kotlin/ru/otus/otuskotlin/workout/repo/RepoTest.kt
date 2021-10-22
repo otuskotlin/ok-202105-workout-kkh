@@ -14,7 +14,7 @@ import ru.otus.otuskotlin.workout.module
 import ru.otus.otuskotlin.workout.openapi.models.*
 import kotlin.test.assertEquals
 
-class RepoReadTest {
+class RepoTest {
 
     @Test
     fun createToDb() {
