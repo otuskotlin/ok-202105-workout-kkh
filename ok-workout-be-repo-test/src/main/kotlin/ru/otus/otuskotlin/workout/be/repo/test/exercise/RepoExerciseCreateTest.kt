@@ -4,8 +4,8 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import ru.otus.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.otus.otuskotlin.workout.backend.common.models.ExerciseModel
-import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.DbExerciseModelRequest
-import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
+import ru.otus.otuskotlin.workout.backend.repo.common.exercise.DbExerciseModelRequest
+import ru.otus.otuskotlin.workout.backend.repo.common.exercise.IRepoExercise
 import kotlin.test.assertEquals
 
 abstract class RepoExerciseCreateTest {

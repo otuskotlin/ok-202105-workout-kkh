@@ -4,7 +4,7 @@ import com.datastax.oss.driver.api.core.cql.AsyncResultSet
 import com.datastax.oss.driver.api.mapper.MapperContext
 import com.datastax.oss.driver.api.mapper.entity.EntityHelper
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder
-import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.DbExerciseFilterRequest
+import ru.otus.otuskotlin.workout.backend.repo.common.exercise.DbExerciseFilterRequest
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CompletionStage
 import java.util.function.BiConsumer

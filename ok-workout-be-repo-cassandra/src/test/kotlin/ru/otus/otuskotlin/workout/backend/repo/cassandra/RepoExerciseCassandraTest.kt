@@ -7,7 +7,7 @@ import com.datastax.oss.driver.internal.core.util.concurrent.CompletableFutures
 import org.testcontainers.containers.CassandraContainer
 import ru.otus.otuskotlin.workout.backend.common.models.ExerciseModel
 import ru.otus.otuskotlin.workout.backend.common.models.ExercisePermissions
-import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
+import ru.otus.otuskotlin.workout.backend.repo.common.exercise.IRepoExercise
 import ru.otus.otuskotlin.workout.be.repo.test.exercise.*
 import java.net.InetSocketAddress
 

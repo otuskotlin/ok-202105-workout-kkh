@@ -1,6 +1,6 @@
-package ru.otus.otuskotlin.workout.backend.common.repo.common.exercise
+package ru.otus.otuskotlin.workout.backend.repo.common.exercise
 
-import ru.otus.otuskotlin.workout.backend.common.repo.common.IDbRequest
+import ru.otus.otuskotlin.workout.backend.repo.common.IDbRequest
 
 data class DbExerciseFilterRequest(
     val searchStr: String = "",

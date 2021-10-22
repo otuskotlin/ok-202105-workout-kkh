@@ -1,7 +1,7 @@
 package ru.otus.otuskotlin.workout.backend.common.context
 
 import ru.otus.otuskotlin.workout.backend.common.models.*
-import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
+import ru.otus.otuskotlin.workout.backend.repo.common.exercise.IRepoExercise
 import java.time.Instant
 
 data class BeContext(

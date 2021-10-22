@@ -1,7 +1,7 @@
 package ru.otus.otuskotlin.workout.backend.repo.cassandra
 
 import com.datastax.oss.driver.api.mapper.annotations.*
-import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.DbExerciseFilterRequest
+import ru.otus.otuskotlin.workout.backend.repo.common.exercise.DbExerciseFilterRequest
 import java.util.concurrent.CompletionStage
 
 @Dao

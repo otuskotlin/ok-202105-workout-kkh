@@ -2,8 +2,8 @@ package ru.otus.otuskotlin.workout.be.repo.test.exercise
 
 import kotlinx.coroutines.runBlocking
 import ru.otus.otuskotlin.workout.backend.common.models.ExerciseModel
-import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.DbExerciseFilterRequest
-import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.IRepoExercise
+import ru.otus.otuskotlin.workout.backend.repo.common.exercise.DbExerciseFilterRequest
+import ru.otus.otuskotlin.workout.backend.repo.common.exercise.IRepoExercise
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

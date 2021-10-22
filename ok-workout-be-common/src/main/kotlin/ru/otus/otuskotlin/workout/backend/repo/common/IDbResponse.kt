@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.workout.backend.common.repo.common
+package ru.otus.otuskotlin.workout.backend.repo.common
 
 import ru.otus.otuskotlin.workout.backend.common.models.CommonErrorModel
 
