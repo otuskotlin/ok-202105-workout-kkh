@@ -87,7 +87,7 @@ class ExerciseCrudValidationTest {
         runBlocking { crud.read(context) }
 
         assertEquals(CorStatus.ERROR, context.status)
-        assertEquals(2, context.errors.size)
+        assertEquals(1, context.errors.size)
     }
 
     @Test
@@ -140,7 +140,7 @@ class ExerciseCrudValidationTest {
         println("--" + context.requestExerciseId)
 
         assertEquals(CorStatus.ERROR, context.status)
-        assertEquals(7, context.errors.size)
+        assertEquals(6, context.errors.size)
     }
 
     @Test
@@ -172,7 +172,7 @@ class ExerciseCrudValidationTest {
         runBlocking { crud.delete(context) }
 
         assertEquals(CorStatus.ERROR, context.status)
-        assertEquals(2, context.errors.size)
+        assertEquals(1, context.errors.size)
     }
 
     @Test
@@ -204,6 +204,6 @@ class ExerciseCrudValidationTest {
         runBlocking { crud.search(context) }
 
         assertEquals(CorStatus.ERROR, context.status)
-        assertEquals(2, context.errors.size)
+        assertEquals(1, context.errors.size)
     }
 }
