@@ -7,16 +7,16 @@ import java.util.concurrent.CompletionStage
 @Dao
 interface ExerciseCassandraDAO {
     @Insert
-    fun create(dto: ExerciseCassandraDTO): CompletionStage<Unit>
+    fun create(dto: ExerciseCassandraDTO): CompletionStage<Void>
 
     @Select
     fun read(id: String): CompletionStage<ExerciseCassandraDTO?>
 
     @Update(ifExists = true)
-    fun update(dto: ExerciseCassandraDTO): CompletionStage<Unit>
+    fun update(dto: ExerciseCassandraDTO): CompletionStage<Void>
 
     @Delete
-    fun delete(dto: ExerciseCassandraDTO): CompletionStage<Unit>
+    fun delete(dto: ExerciseCassandraDTO): CompletionStage<Void>
 
     @QueryProvider(
         providerClass = ExerciseCassandraSearchProvider::class,

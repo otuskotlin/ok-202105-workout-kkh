@@ -13,6 +13,7 @@ abstract class RepoExerciseSearchTest {
     @Test
     fun searchTitleAndDescription() {
         val result = runBlocking { repo.search(DbExerciseFilterRequest("приседания")) }
+        result.errors.forEach { println("error: $it") }
         assertEquals(true, result.isSuccess)
         val expected = listOf(initObjects[0], initObjects[1], initObjects[2])
         assertEquals(
@@ -23,10 +24,9 @@ abstract class RepoExerciseSearchTest {
 
     @Test
     fun searchOnlyTitle() {
-        val result =
-            runBlocking {
-                repo.search(DbExerciseFilterRequest("приседания", DbExerciseFilterRequest.SearchMode.TITLE))
-            }
+        val result = runBlocking {
+            repo.search(DbExerciseFilterRequest("приседания", DbExerciseFilterRequest.SearchMode.TITLE))
+        }
         assertEquals(true, result.isSuccess)
         val expected = listOf(initObjects[0], initObjects[2])
         assertEquals(
@@ -55,7 +55,7 @@ abstract class RepoExerciseSearchTest {
 
     companion object : BaseInitExercise() {
         override val initObjects: List<ExerciseModel> = listOf(
-            createInitTestModel("exercise 1", title = "Приседания со штангой"),
+            createInitTestModel("exercise 1", title = "приседания со штангой"),
             createInitTestModel("exercise 2", description = "Как приседания со штангой"),
             createInitTestModel("exercise 3", title = "Глубокие приседания"),
             createInitTestModel("exercise 4", description = "Подъем на бицепс со штангой")

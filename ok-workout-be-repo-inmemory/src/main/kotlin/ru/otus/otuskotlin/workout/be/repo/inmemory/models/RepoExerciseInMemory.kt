@@ -88,7 +88,7 @@ class RepoExerciseInMemory(
         errors = listOf(
             CommonErrorModel(
                 field = "id",
-                message = "Not Found"
+                message = "Not found"
             )
         ),
         result = null
@@ -120,7 +120,7 @@ class RepoExerciseInMemory(
                 errors = listOf(
                     CommonErrorModel(
                         field = "id",
-                        message = "Not Found"
+                        message = "Not found"
                     )
                 ),
                 result = null
@@ -147,7 +147,7 @@ class RepoExerciseInMemory(
                 errors = listOf(
                     CommonErrorModel(
                         field = "id",
-                        message = "Not Found",
+                        message = "Not found",
                     )
                 ),
                 result = null

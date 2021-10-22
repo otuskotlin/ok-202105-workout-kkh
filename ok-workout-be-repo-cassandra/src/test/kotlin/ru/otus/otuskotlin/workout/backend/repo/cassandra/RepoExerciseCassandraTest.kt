@@ -13,27 +13,22 @@ import java.net.InetSocketAddress
 
 class RepoAddCassandraCreateTest : RepoExerciseCreateTest() {
     override val repo: IRepoExercise = TestCompanion.createRepo(initObjects)
-
 }
 
 class RepoAddCassandraReadTest : RepoExerciseReadTest() {
     override val repo: IRepoExercise = TestCompanion.createRepo(initObjects)
-
 }
 
 class RepoAddCassandraUpdateTest : RepoExerciseUpdateTest() {
     override val repo: IRepoExercise = TestCompanion.createRepo(initObjects)
-
 }
 
 class RepoAddCassandraDeleteTest : RepoExerciseDeleteTest() {
     override val repo: IRepoExercise = TestCompanion.createRepo(initObjects)
-
 }
 
 class RepoAddCassandraSearchTest : RepoExerciseSearchTest() {
     override val repo: IRepoExercise = TestCompanion.createRepo(initObjects)
-
 }
 
 class TestCassandraContainer : CassandraContainer<TestCassandraContainer>("cassandra:3.11.2")
@@ -68,6 +63,7 @@ object TestCompanion {
         )
         session.execute(ExerciseCassandraDTO.table(keyspace, tableName))
         session.execute(ExerciseCassandraDTO.titleIndex(keyspace, tableName))
+        session.execute(ExerciseCassandraDTO.descriptionIndex(keyspace, tableName))
         val dao = mapper.exerciseCassandraDao(keyspace, tableName)
         CompletableFutures
             .allDone(initObjects.map { dao.create(ExerciseCassandraDTO(it)) })

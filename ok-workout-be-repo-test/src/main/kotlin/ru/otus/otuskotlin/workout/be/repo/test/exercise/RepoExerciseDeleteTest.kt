@@ -30,7 +30,7 @@ abstract class RepoExerciseDeleteTest {
             listOf(
                 CommonErrorModel(
                     field = "id",
-                    message = "Not Found"
+                    message = "Not found"
                 )
             ),
             result.errors

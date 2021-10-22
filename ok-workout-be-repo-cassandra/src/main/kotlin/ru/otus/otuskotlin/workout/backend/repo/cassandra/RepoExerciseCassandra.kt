@@ -1,6 +1,7 @@
 package ru.otus.otuskotlin.workout.backend.repo.cassandra
 
 import kotlinx.coroutines.future.await
+import kotlinx.coroutines.withTimeout
 import ru.otus.otuskotlin.workout.backend.common.models.CommonErrorModel
 import ru.otus.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.*
@@ -20,6 +21,7 @@ class RepoExerciseCassandra(
                 DbExerciseResponse(created.toExerciseModel())
             }
         } catch (e: Exception) {
+            println("catch: ${e.message}")
             DbExerciseResponse(e)
         }
     }

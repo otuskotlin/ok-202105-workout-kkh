@@ -27,7 +27,7 @@ abstract class RepoExerciseReadTest {
         assertEquals(false, result.isSuccess)
         assertEquals(null, result.result)
         assertEquals(
-            listOf(CommonErrorModel(field = "id", message = "Not Found")),
+            listOf(CommonErrorModel(field = "id", message = "Not found")),
             result.errors
         )
     }

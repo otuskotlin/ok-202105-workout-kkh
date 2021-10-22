@@ -4,6 +4,7 @@ import com.datastax.oss.driver.api.core.cql.AsyncResultSet
 import com.datastax.oss.driver.api.mapper.MapperContext
 import com.datastax.oss.driver.api.mapper.entity.EntityHelper
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder
+import kotlinx.coroutines.future.await
 import ru.otus.otuskotlin.workout.backend.common.repo.common.exercise.DbExerciseFilterRequest
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CompletionStage
@@ -17,11 +18,54 @@ class ExerciseCassandraSearchProvider(
     fun search(
         req: DbExerciseFilterRequest
     ): CompletionStage<Collection<ExerciseCassandraDTO>> {
-        var select = entityHelper.selectStart()
+        var select = entityHelper.selectStart().allowFiltering()
         if (req.searchStr.isNotBlank()) {
-            select = select
-                .whereColumn(ExerciseCassandraDTO.COLUMN_TITLE)
-                .like(QueryBuilder.literal("%${req.searchStr}%"))
+            when (req.mode) {
+                DbExerciseFilterRequest.SearchMode.DESCRIPTION -> {
+                    select = select
+                        .whereColumn(ExerciseCassandraDTO.COLUMN_DESCRIPTION)
+                        .like(QueryBuilder.literal("%${req.searchStr}%"))
+                }
+                DbExerciseFilterRequest.SearchMode.TITLE -> {
+                    select = select
+                        .whereColumn(ExerciseCassandraDTO.COLUMN_TITLE)
+                        .like(QueryBuilder.literal("%${req.searchStr}%"))
+                }
+                DbExerciseFilterRequest.SearchMode.NONE -> {
+                    select = select
+                        .whereColumn(ExerciseCassandraDTO.COLUMN_DESCRIPTION)
+                        .like(QueryBuilder.literal("%${req.searchStr}%"))
+                        .whereColumn(ExerciseCassandraDTO.COLUMN_TITLE)
+                        .like(QueryBuilder.literal("%${req.searchStr}%"))
+                    println("select: $select")
+                }
+            }
+
+//            when (req.mode) {
+//                DbExerciseFilterRequest.SearchMode.NONE -> {
+//                    println("case: NONE")
+//                    select = select
+//                        .whereColumn(ExerciseCassandraDTO.COLUMN_TITLE)
+//                        .whereColumns(ExerciseCassandraDTO.COLUMN_TITLE, ExerciseCassandraDTO.COLUMN_DESCRIPTION)
+//                        .isEqualTo(QueryBuilder.literal("%${req.searchStr}%"))
+//                        .build()
+//                        .like(QueryBuilder.literal("%${req.searchStr}%"))
+//                }
+//
+//                DbExerciseFilterRequest.SearchMode.TITLE -> {
+//                    println("case: TITLE")
+//                    select = select
+//                        .whereColumn(ExerciseCassandraDTO.COLUMN_TITLE)
+//                        .like(QueryBuilder.literal("%${req.searchStr}%"))
+//                }
+//
+//                DbExerciseFilterRequest.SearchMode.DESCRIPTION -> {
+//                    println("case: DESCRIPTION")
+//                    select = select
+//                        .whereColumn(ExerciseCassandraDTO.COLUMN_DESCRIPTION)
+//                        .like(QueryBuilder.literal("%${req.searchStr}%"))
+//                }
+//            }
         }
 
         val fetcher = CollectionFetcher()
@@ -43,7 +87,7 @@ class ExerciseCassandraSearchProvider(
                 t != null -> resultFuture.completeExceptionally(t)
                 resultSet == null -> resultFuture.completeExceptionally(IllegalStateException("Result set is null"))
                 else -> {
-                    buffer.addAll(resultSet.currentPage().map { entityHelper.get(it) })
+                    buffer.addAll(resultSet.currentPage().map { entityHelper.get(it, false) })
                     if (resultSet.hasMorePages()) {
                         resultSet.fetchNextPage().whenComplete(this)
                     } else {

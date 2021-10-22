@@ -82,5 +82,15 @@ data class ExerciseCassandraDTO(
                 .andColumn(COLUMN_TITLE)
                 .withSASIOptions(mapOf("mode" to "CONTAINS", "tokenization_locale" to locale))
                 .build()
+
+        fun descriptionIndex(keyspace: String, tableName: String, locale: String = "en") =
+            SchemaBuilder
+                .createIndex()
+                .ifNotExists()
+                .usingSASI()
+                .onTable(keyspace, tableName)
+                .andColumn(COLUMN_DESCRIPTION)
+                .withSASIOptions(mapOf("mode" to "CONTAINS", "tokenization_locale" to locale))
+                .build()
     }
 }
