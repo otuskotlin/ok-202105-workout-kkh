@@ -30,7 +30,7 @@ object ExerciseStub {
     fun getModelExercise() = squatsStub
     fun getModelExerciseTwo() = pullUpsStub
 
-    fun getModelExercise(model: (ExerciseModel.() -> Unit)? = null) = squatsStub.also { stub ->
+    fun getModelExercise(model: (ExerciseModel.() -> Unit)? = null) = squatsStub.copy().also { stub ->
         model?.let { stub.apply(it) }
     }
 
