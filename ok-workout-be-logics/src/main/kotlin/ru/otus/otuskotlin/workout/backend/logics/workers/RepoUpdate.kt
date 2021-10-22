@@ -9,7 +9,6 @@ internal fun CorChainDsl<BeContext>.repoUpdate(title: String) = worker {
     this.title = title
     description = "Data from request updates the DB Repository object"
     handle {
-        println("handle in repoUpdate")
         val result = exerciseRepo.update(DbExerciseModelRequest(requestExercise))
         val resultValue = result.result
         if (resultValue != null && result.isSuccess) {

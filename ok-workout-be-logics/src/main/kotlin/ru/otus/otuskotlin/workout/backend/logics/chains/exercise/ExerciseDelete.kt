@@ -28,10 +28,6 @@ object ExerciseDelete : ICorExec<BeContext> by chain<BeContext>({
 
     validationLogics {
         validate<String?> {
-            on { requestId }
-            validator(StringNonEmptyValidator(field = "requestId"))
-        }
-        validate<String?> {
             on { requestExerciseId.asString() }
             validator(StringNonEmptyValidator(field = "requestId"))
         }

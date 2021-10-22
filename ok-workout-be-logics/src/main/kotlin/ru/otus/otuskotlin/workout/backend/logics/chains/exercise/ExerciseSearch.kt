@@ -27,10 +27,6 @@ object ExerciseSearch : ICorExec<BeContext> by chain<BeContext>({
     // validation
     validationLogics {
         validate<String?> {
-            on { requestId }
-            validator(StringNonEmptyValidator(field = "requestId"))
-        }
-        validate<String?> {
             on { requestSearchExercise }
             validator(StringNonEmptyValidator(field = "requestSearchExercise"))
         }
