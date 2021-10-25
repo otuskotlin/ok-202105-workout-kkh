@@ -31,19 +31,7 @@ data class WorkoutRow(
         exercisesBlock = exercisesBlock?.map {
             ExercisesBlockModel(
                 exercise = it.exercise.toInternal(),
-                sets = it.sets.map { oneSet ->
-                    OneSetModel(
-                        performance = oneSet.performance.map { performance ->
-                            PerformanceModel(
-                                weight = performance.weight,
-                                measure = PerformanceModel.Measure.valueOf(performance.measure),
-                                repetition = performance.repetition
-                            )
-                        }.toMutableList(),
-                        status = OneSetModel.Status.valueOf(oneSet.status),
-                        modificationExercise = OneSetModel.ModificationExercise.valueOf(oneSet.modificationExercise)
-                    )
-                }.toMutableList(),
+                sets = it.sets.map { oneSet -> oneSet.createOneSetModel() }.toMutableList(),
                 modificationBlockExercises = ModificationBlockExercises.valueOf(it.modificationBlockExercises),
             )
         }?.toMutableList() ?: mutableListOf(),
@@ -73,4 +61,22 @@ data class WorkoutRow(
         val measure: String = performanceModel.measure.name
         val repetition: Int = performanceModel.repetition
     }
+}
+
+private fun WorkoutRow.Performance.createPerformanceModel(): PerformanceModel {
+    return PerformanceModel(
+        weight = this.weight,
+        measure = PerformanceModel.Measure.valueOf(this.measure),
+        repetition = this.repetition
+    )
+}
+
+private fun WorkoutRow.OneSet.createOneSetModel(): OneSetModel {
+    return OneSetModel(
+        performance = this.performance.map { performance ->
+            performance.createPerformanceModel()
+        }.toMutableList(),
+        status = OneSetModel.Status.valueOf(this.status),
+        modificationExercise = OneSetModel.ModificationExercise.valueOf(this.modificationExercise)
+    )
 }
