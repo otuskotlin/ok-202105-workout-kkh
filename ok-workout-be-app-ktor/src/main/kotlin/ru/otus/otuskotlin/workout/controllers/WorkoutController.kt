@@ -1,10 +1,9 @@
 package ru.otus.otuskotlin.workout.controllers
 
-import WorkoutService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.WorkoutService
 import io.ktor.application.*
 import ru.otus.otuskotlin.workout.helpers.handleRoute
 import ru.otus.otuskotlin.workout.openapi.models.*
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
 
 suspend fun ApplicationCall.initWorkout(workoutService: WorkoutService) {
 

@@ -1,8 +1,8 @@
 package ru.otus.otuskotlin.workout.controllers
 
-import ExerciseService
-import IHandlerRequests
-import WorkoutService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.ExerciseService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.IHandlerRequests
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.WorkoutService
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.http.cio.websocket.*
@@ -10,10 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ClosedReceiveChannelException
 import kotlinx.coroutines.withContext
 import ru.otus.otuskotlin.workout.openapi.models.*
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.common.models.IUserSession
-import ru.workout.otuskotlin.workout.backend.mapping.openapi.toUpdateExerciseResponse
-import ru.workout.otuskotlin.workout.backend.mapping.openapi.toUpdateWorkoutResponse
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.models.IUserSession
+import ru.otus.otuskotlin.workout.backend.mapping.openapi.toUpdateExerciseResponse
+import ru.otus.otuskotlin.workout.backend.mapping.openapi.toUpdateWorkoutResponse
 import java.time.Instant
 
 // TODO: 05.10.2021 Need refactoring

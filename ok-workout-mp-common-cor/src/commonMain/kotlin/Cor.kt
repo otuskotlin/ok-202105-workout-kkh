@@ -7,13 +7,8 @@ interface ICorChainDsl<T> {
 }
 
 interface ICorWorkerDsl<T> {
-    fun handle(function: T.() -> Unit)
+    fun handle(function: suspend T.() -> Unit)
 }
-
-//interface ICorHandlerDsl<T> {
-//    fun on(function: T.() -> Boolean)
-//    fun except(function: T.(e: Throwable) -> Unit)
-//}
 
 interface ICorExecDsl<T> {
     val title: String

@@ -1,14 +1,14 @@
 package ru.otus.otuskotlin.workout.be.app.rabbit
 
-import WorkoutService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.WorkoutService
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.rabbitmq.client.CancelCallback
 import com.rabbitmq.client.Channel
 import com.rabbitmq.client.DeliverCallback
 import kotlinx.coroutines.runBlocking
 import ru.otus.otuskotlin.workout.openapi.models.*
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.context.CorStatus
 import java.time.Instant
 
 class RabbitWorkoutProcessor(

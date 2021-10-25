@@ -12,6 +12,7 @@ dependencies {
     implementation(project(":ok-workout-mp-validation"))
     implementation(project(":ok-workout-be-common"))
     implementation(project(":ok-workout-be-stubs"))
+    implementation(project(":ok-workout-be-repo-inmemory"))
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))

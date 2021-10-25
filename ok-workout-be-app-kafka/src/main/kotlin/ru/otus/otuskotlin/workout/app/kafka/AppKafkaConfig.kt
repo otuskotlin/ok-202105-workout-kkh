@@ -1,8 +1,8 @@
 package ru.otus.otuskotlin.workout.app.kafka
 
-import ExerciseService
-import IHandlerRequests
-import WorkoutService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.ExerciseService
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.IHandlerRequests
+import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.WorkoutService
 import org.apache.kafka.clients.consumer.Consumer
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.consumer.KafkaConsumer

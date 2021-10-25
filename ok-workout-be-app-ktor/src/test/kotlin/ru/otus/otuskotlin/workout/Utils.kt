@@ -1,11 +1,9 @@
 package ru.otus.otuskotlin.workout
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import ru.otus.otuskotlin.workout.Utils.stubCreatableWorkout
 import ru.otus.otuskotlin.workout.Utils.stubResponseWorkout
 import ru.otus.otuskotlin.workout.openapi.models.*
-import ru.workout.otuskotlin.workout.backend.common.models.WorkoutModel
-import ru.workout.otuskotlin.workout.backend.mapping.openapi.toTransport
+import ru.otus.otuskotlin.workout.backend.mapping.openapi.toTransport
 
 object Utils {
     val mapper = jacksonObjectMapper()
@@ -16,18 +14,7 @@ object Utils {
         )
 
     val stubResponseExercise = ExerciseStub.getModelExercise().toTransport()
-//    val stubResponseWorkout = ResponseWorkout(
-//        date = WorkoutStub.getModelWorkout().workoutDate.toString(),
-//        duration = WorkoutStub.getModelWorkout().duration,
-//        recoveryTime = WorkoutStub.getModelWorkout().recoveryTime,
-//        modificationWorkout = ResponseWorkout.ModificationWorkout
-//            .valueOf(WorkoutStub.getModelWorkout().modificationWorkout.name),
-//        exercisesBlock = WorkoutStub.getModelWorkout().exercisesBlock.map {
-//            ExercisesBlock()
-//        },
-//        id = WorkoutStub.getModelWorkout().idWorkout.asString(),
-//        permissions = WorkoutStub.getModelWorkout().permissions.map { Permissions.valueOf(it.name) }.toSet()
-//    )
+
     val stubResponseWorkout = WorkoutStub.getModelWorkout().toTransport()
 
     val stubResponseWorkoutTwo = WorkoutStub.getModelWorkoutTwo().toTransport()

@@ -2,10 +2,10 @@ package ru.otus.otuskotlin.workout.backend.logics
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
-import ru.workout.otuskotlin.workout.backend.common.models.ExerciseIdModel
-import ru.workout.otuskotlin.workout.backend.common.models.MpStubCases
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.context.CorStatus
+import ru.otus.otuskotlin.workout.backend.common.models.ExerciseIdModel
+import ru.otus.otuskotlin.workout.backend.common.models.MpStubCases
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -55,7 +55,7 @@ class ExerciseCrudValidationTest {
         runBlocking { crud.create(context) }
 
         assertEquals(CorStatus.ERROR, context.status)
-        assertEquals(6, context.errors.size)
+        assertEquals(5, context.errors.size)
     }
 
     @Test
@@ -87,7 +87,7 @@ class ExerciseCrudValidationTest {
         runBlocking { crud.read(context) }
 
         assertEquals(CorStatus.ERROR, context.status)
-        assertEquals(2, context.errors.size)
+        assertEquals(1, context.errors.size)
     }
 
     @Test
@@ -140,7 +140,7 @@ class ExerciseCrudValidationTest {
         println("--" + context.requestExerciseId)
 
         assertEquals(CorStatus.ERROR, context.status)
-        assertEquals(7, context.errors.size)
+        assertEquals(6, context.errors.size)
     }
 
     @Test
@@ -172,7 +172,7 @@ class ExerciseCrudValidationTest {
         runBlocking { crud.delete(context) }
 
         assertEquals(CorStatus.ERROR, context.status)
-        assertEquals(2, context.errors.size)
+        assertEquals(1, context.errors.size)
     }
 
     @Test
@@ -204,6 +204,6 @@ class ExerciseCrudValidationTest {
         runBlocking { crud.search(context) }
 
         assertEquals(CorStatus.ERROR, context.status)
-        assertEquals(2, context.errors.size)
+        assertEquals(1, context.errors.size)
     }
 }

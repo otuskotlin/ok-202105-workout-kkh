@@ -1,4 +1,4 @@
-import ru.workout.otuskotlin.workout.backend.common.models.*
+import ru.otus.otuskotlin.workout.backend.common.models.*
 import java.time.Instant
 
 object WorkoutStub {

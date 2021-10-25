@@ -8,7 +8,7 @@ dependencies {
     val jacksonVersion: String by project
     val rabbitVersion: String by project
     val slf4jVersion: String by project
-    val testcontainersVersion: String by project
+    val testContainersVersion: String by project
 
     implementation(kotlin("stdlib"))
 
@@ -25,6 +25,6 @@ dependencies {
 
     implementation("org.slf4j:slf4j-simple:$slf4jVersion")
 
-    testImplementation("org.testcontainers:rabbitmq:$testcontainersVersion")
+    testImplementation("org.testcontainers:rabbitmq:$testContainersVersion")
     testImplementation(kotlin("test"))
 }

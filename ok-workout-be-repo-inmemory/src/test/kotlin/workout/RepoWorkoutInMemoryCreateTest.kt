@@ -1,0 +1,4 @@
+package workout
+
+class RepoWorkoutInMemoryCreateTest {
+}

@@ -51,6 +51,8 @@ dependencies {
     implementation(project(":ok-workout-be-transport-openapi"))
     implementation(project(":ok-workout-be-logics"))
 
+    implementation(project(":ok-workout-be-repo-inmemory"))
+
 
     implementation(project(":ok-workout-be-stubs"))
 

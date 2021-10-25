@@ -5,7 +5,6 @@ import CorComponentDsl
 import ICorChainDsl
 import ICorExec
 import ICorWorkerDsl
-import kotlinx.coroutines.delay
 
 fun <T> ICorChainDsl<T>.worker(function: CorWorkerDsl<T>.() -> Unit) {
     add(CorWorkerDsl<T>().apply(function))
@@ -14,7 +13,7 @@ fun <T> ICorChainDsl<T>.worker(function: CorWorkerDsl<T>.() -> Unit) {
 fun <T> ICorChainDsl<T>.worker(
     title: String,
     description: String = "",
-    function: T.() -> Unit
+    function: suspend T.() -> Unit
 ) {
     add(
         CorWorkerDsl<T>(
@@ -28,7 +27,7 @@ fun <T> ICorChainDsl<T>.worker(
 class CorWorkerDsl<T>(
     override var title: String = "",
     override var description: String = "",
-    private var blockHandle: T.() -> Unit = {},
+    private var blockHandle: suspend T.() -> Unit = {},
 ) : CorComponentDsl<T>(), ICorWorkerDsl<T> {
     override fun build(): ICorExec<T> = CorWorker<T>(
         title = title,
@@ -38,7 +37,7 @@ class CorWorkerDsl<T>(
         blockExcept = blockExcept
     )
 
-    override fun handle(function: T.() -> Unit) {
+    override fun handle(function: suspend T.() -> Unit) {
         blockHandle = function
     }
 }
@@ -47,7 +46,7 @@ class CorWorker<T>(
     override val title: String,
     override val description: String,
     override val blockOn: T.() -> Boolean,
-    private val blockHandle: T.() -> Unit,
+    private val blockHandle: suspend T.() -> Unit,
     override val blockExcept: T.(e: Throwable) -> Unit
 ) : AbstractWorker<T>(blockOn, blockExcept) {
     override suspend fun handle(context: T) {

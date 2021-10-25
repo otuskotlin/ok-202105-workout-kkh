@@ -4,9 +4,9 @@ import handlers.CorChainDsl
 import handlers.chain
 import handlers.worker
 import ru.otus.otuskotlin.workout.backend.logics.workers.noMatchingStubs
-import ru.workout.otuskotlin.workout.backend.common.context.BeContext
-import ru.workout.otuskotlin.workout.backend.common.context.CorStatus
-import ru.workout.otuskotlin.workout.backend.common.models.MpStubCases
+import ru.otus.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.context.CorStatus
+import ru.otus.otuskotlin.workout.backend.common.models.MpStubCases
 
 internal fun CorChainDsl<BeContext>.exerciseUpdateStub(title: String) = chain {
     this.title = title
