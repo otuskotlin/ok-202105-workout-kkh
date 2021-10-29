@@ -11,6 +11,7 @@ import ru.otus.otuskotlin.workout.controllers.KtorUserSession
 import java.time.Duration
 
 data class AppKtorConfig(
+    val auth: KtorAuthConfig = KtorAuthConfig.TEST,
     val objectMapper: ObjectMapper = jacksonObjectMapper(),
     val userSessions: MutableSet<KtorUserSession> = mutableSetOf(),
     val exerciseRepoTest: IRepoExercise = RepoExerciseInMemory(initObjects = listOf()),
