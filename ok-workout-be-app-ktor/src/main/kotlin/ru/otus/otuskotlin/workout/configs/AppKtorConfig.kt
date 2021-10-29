@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.workout
+package ru.otus.otuskotlin.workout.configs
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper

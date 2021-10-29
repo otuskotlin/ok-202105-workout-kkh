@@ -4,11 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import org.junit.Test
-import ru.otus.otuskotlin.workout.AppKtorConfig
+import ru.otus.otuskotlin.workout.configs.AppKtorConfig
 import ru.otus.otuskotlin.workout.Utils
 import ru.otus.otuskotlin.workout.backend.common.models.ExerciseIdModel
-import ru.otus.otuskotlin.workout.backend.repo.common.exercise.IRepoExercise
-import ru.otus.otuskotlin.workout.backend.mapping.openapi.toTransport
 import ru.otus.otuskotlin.workout.be.repo.inmemory.models.RepoExerciseInMemory
 import ru.otus.otuskotlin.workout.module
 import ru.otus.otuskotlin.workout.openapi.models.*

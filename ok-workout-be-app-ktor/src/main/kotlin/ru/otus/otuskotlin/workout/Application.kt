@@ -8,6 +8,7 @@ import io.ktor.jackson.*
 import io.ktor.websocket.*
 import ru.otus.otuskotlin.workout.plugins.configRouting
 import io.ktor.server.netty.EngineMain
+import ru.otus.otuskotlin.workout.configs.AppKtorConfig
 
 fun main(args: Array<String>): Unit = EngineMain.main(args)
 
