@@ -58,4 +58,18 @@ class AuthTest : RouterTest() {
             result = HttpStatusCode.Unauthorized
         )
     }
+
+    @Test
+    fun authWrongAudienceTest() {
+        testPostRequest<ReadExerciseResponse>(
+            body = data,
+            uri = "/exercise/read",
+            config = AppKtorConfig(
+                auth = KtorAuthConfig.TEST.copy(
+                    audience = "other"
+                )
+            ),
+            result = HttpStatusCode.Unauthorized
+        )
+    }
 }
