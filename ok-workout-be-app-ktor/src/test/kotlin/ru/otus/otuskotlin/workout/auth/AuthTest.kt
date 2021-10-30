@@ -13,15 +13,16 @@ import kotlin.test.assertNull
 
 class AuthTest : RouterTest() {
 
+    private val data = ReadExerciseRequest(readExerciseId = "eID:0001", debug = Utils.stubDebugSuccess)
+
     @Test
     fun authPositiveTest() {
-        val data = ReadExerciseRequest(readExerciseId = "eID:0001", debug = Utils.stubDebugSuccess)
-        println("data: $data")
-
         testPostRequest<ReadExerciseResponse>(
             body = data,
             uri = "/exercise/read",
-            config = AppKtorConfig(auth = KtorAuthConfig.TEST.copy())
+            config = AppKtorConfig(
+                auth = KtorAuthConfig.TEST.copy()
+            )
         ) {
             println(this)
             assertEquals(ReadExerciseResponse.Result.SUCCESS, result)
@@ -32,8 +33,6 @@ class AuthTest : RouterTest() {
 
     @Test
     fun authWrongIssuerTest() {
-        val data = ReadExerciseRequest(readExerciseId = "eID:0001", debug = Utils.stubDebugSuccess)
-
         testPostRequest<ReadExerciseResponse>(
             body = data,
             uri = "/exercise/read",
@@ -46,4 +45,17 @@ class AuthTest : RouterTest() {
         )
     }
 
+    @Test
+    fun authWrongSecretTest() {
+        testPostRequest<ReadExerciseResponse>(
+            body = data,
+            uri = "/exercise/read",
+            config = AppKtorConfig(
+                auth = KtorAuthConfig.TEST.copy(
+                    secret = "other"
+                )
+            ),
+            result = HttpStatusCode.Unauthorized
+        )
+    }
 }
