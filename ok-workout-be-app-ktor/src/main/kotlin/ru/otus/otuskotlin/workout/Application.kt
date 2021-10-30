@@ -13,6 +13,7 @@ import io.ktor.websocket.*
 import ru.otus.otuskotlin.workout.plugins.configRouting
 import io.ktor.server.netty.EngineMain
 import ru.otus.otuskotlin.workout.configs.AppKtorConfig
+import ru.otus.otuskotlin.workout.configs.KtorAuthConfig.Companion.GROUPS_CLAIM
 
 fun main(args: Array<String>): Unit = EngineMain.main(args)
 
@@ -32,6 +33,23 @@ fun Application.module(
                     .withIssuer(config.auth.issuer)
                     .build()
             )
+            validate { jwtCredential ->
+                when {
+                    !jwtCredential.payload.audience.contains(config.auth.audience) -> {
+                        log.error("Unsupported audience in JWT token ${jwtCredential.payload.audience}. Must be ${config.auth.audience}")
+                        null
+                    }
+                    jwtCredential.payload.issuer != config.auth.issuer -> {
+                        log.error("Wrong issuer in JWT token ${jwtCredential.payload.issuer}. Must be ${config.auth.issuer}")
+                        null
+                    }
+                    jwtCredential.payload.getClaim(GROUPS_CLAIM).asList(String::class.java).isNullOrEmpty() -> {
+                        log.error("Groups claim must not be empty in JWT token")
+                        null
+                    }
+                    else -> JWTPrincipal(jwtCredential.payload)
+                }
+            }
         }
     }
 
