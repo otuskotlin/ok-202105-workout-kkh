@@ -10,9 +10,9 @@ data class KtorAuthConfig(
 ) {
     constructor(environment: ApplicationEnvironment) : this(
         secret = environment.config.property("jwt.secret").getString(),
-        issuer = environment.config.property("jwt.secret").getString(),
-        audience = environment.config.property("jwt.secret").getString(),
-        realm = environment.config.property("jwt.secret").getString()
+        issuer = environment.config.property("jwt.issuer").getString(),
+        audience = environment.config.property("jwt.audience").getString(),
+        realm = environment.config.property("jwt.realm").getString()
     )
 
     companion object {
