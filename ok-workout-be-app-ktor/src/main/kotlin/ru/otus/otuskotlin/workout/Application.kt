@@ -21,7 +21,7 @@ fun main(args: Array<String>): Unit = EngineMain.main(args)
 @JvmOverloads
 fun Application.module(
     testing: Boolean = false,
-    config: AppKtorConfig = AppKtorConfig()
+    config: AppKtorConfig = AppKtorConfig(environment)
 ) {
     install(Authentication) {
         jwt("auth-jwt") {
