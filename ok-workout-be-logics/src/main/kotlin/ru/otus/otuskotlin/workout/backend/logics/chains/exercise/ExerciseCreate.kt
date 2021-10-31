@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.workout.backend.logics.chains.exercise
 
 import ICorExec
 import chain
+import handlers.worker
 import ru.otus.otuskotlin.workout.backend.logics.chains.stubs.excercise.exerciseCreateStub
 import ru.otus.otuskotlin.workout.backend.logics.helpers.validationLogics
 import ru.otus.otuskotlin.workout.backend.logics.workers.*
@@ -12,6 +13,7 @@ import ru.otus.otuskotlin.workout.backend.logics.workers.prepareAnswer
 import ru.otus.otuskotlin.workout.validation.validators.ListNonEmptyValidator
 import ru.otus.otuskotlin.workout.validation.validators.StringNonEmptyValidator
 import ru.otus.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.context.CorStatus
 
 object ExerciseCreate : ICorExec<BeContext> by chain<BeContext>({
     checkOperationWorker(
@@ -49,6 +51,16 @@ object ExerciseCreate : ICorExec<BeContext> by chain<BeContext>({
     }
 
     chainPermissions("Вычисление разрешений для пользователя")
+
+    worker {
+        title = "Инициализация dbExercise"
+        on { status == CorStatus.RUNNING }
+        handle {
+            dbExercise.authorId = principal.id
+        }
+    }
+
+    accessValidation("Вычисление прав доступа")
 
     repoCreate("Запись объекта в БД")
 
