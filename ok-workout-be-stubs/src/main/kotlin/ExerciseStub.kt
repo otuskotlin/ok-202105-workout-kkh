@@ -1,3 +1,4 @@
+import ru.otus.otuskotlin.workout.backend.common.models.AuthorIdModel
 import ru.otus.otuskotlin.workout.backend.common.models.ExerciseIdModel
 import ru.otus.otuskotlin.workout.backend.common.models.ExerciseModel
 import ru.otus.otuskotlin.workout.backend.common.models.ExercisePermissions
@@ -6,6 +7,7 @@ object ExerciseStub {
     private val squatsStub = ExerciseModel(
         title = "Приседания со штангой",
         description = "Базовое упражнение",
+        authorId = AuthorIdModel("00000000-0000-0000-0000-000000000001"),
         targetMuscleGroup = mutableListOf("Квадрицепсы"),
         synergisticMuscleGroup = mutableListOf(
             "Большие ягодичные",
@@ -20,6 +22,7 @@ object ExerciseStub {
     private val pullUpsStub = ExerciseModel(
         title = "Подтягивания",
         description = "Базовое упражнение",
+        authorId = AuthorIdModel("00000000-0000-0000-0000-000000000002"),
         targetMuscleGroup = mutableListOf("Широчайшие мышцы спины"),
         synergisticMuscleGroup = mutableListOf("Бицепс"),
         executionTechnique = "Подтягивание выполняется на перекладине",
