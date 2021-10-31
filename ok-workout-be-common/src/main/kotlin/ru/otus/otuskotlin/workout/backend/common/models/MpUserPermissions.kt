@@ -1,6 +1,6 @@
 package ru.otus.otuskotlin.workout.backend.common.models
 
-enum class MpUserPermission {
+enum class MpUserPermissions {
     CREATE_OWN,
 
     READ_OWN,
