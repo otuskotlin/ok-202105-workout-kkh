@@ -8,5 +8,6 @@ data class ExerciseModel(
     var synergisticMuscleGroup: MutableList<String> = mutableListOf(),
     var executionTechnique: String = "",
     var idExercise: ExerciseIdModel = ExerciseIdModel.NONE,
+    var principalRelations: Set<MpPrincipalRelations> = emptySet(),
     var permissions: MutableSet<ExercisePermissions> = mutableSetOf()
 )
