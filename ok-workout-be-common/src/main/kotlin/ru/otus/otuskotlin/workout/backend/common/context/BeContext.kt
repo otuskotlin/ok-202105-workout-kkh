@@ -17,6 +17,8 @@ data class BeContext(
     var config: ContextConfig = ContextConfig(),
     var exerciseRepo: IRepoExercise = IRepoExercise.NONE,
 
+    var dbExercise: ExerciseModel = ExerciseModel(),
+
     var requestId: String = "",
     var requestExerciseId: ExerciseIdModel = ExerciseIdModel.NONE,
     var requestExercise: ExerciseModel = ExerciseModel(),
