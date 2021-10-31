@@ -18,6 +18,7 @@ data class BeContext(
     var exerciseRepo: IRepoExercise = IRepoExercise.NONE,
 
     var dbExercise: ExerciseModel = ExerciseModel(),
+    var permitted: Boolean = false,
 
     var requestId: String = "",
     var requestExerciseId: ExerciseIdModel = ExerciseIdModel.NONE,
