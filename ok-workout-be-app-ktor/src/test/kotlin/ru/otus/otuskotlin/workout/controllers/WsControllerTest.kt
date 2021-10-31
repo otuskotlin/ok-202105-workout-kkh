@@ -6,13 +6,14 @@ import io.ktor.server.testing.*
 import org.junit.Test
 import ru.otus.otuskotlin.workout.module
 import ru.otus.otuskotlin.workout.Utils
+import ru.otus.otuskotlin.workout.configs.AppKtorConfig
 import ru.otus.otuskotlin.workout.openapi.models.*
 import kotlin.test.assertIs
 
 class WsControllerTest {
     @Test
     fun wsExerciseTest() {
-        withTestApplication({ module(testing = true) }) {
+        withTestApplication({ module(testing = true, config = AppKtorConfig()) }) {
             handleWebSocketConversation("exercise/ws") { incoming, outgoing ->
                 run {
                     val responseFrame = incoming.receive()
@@ -39,7 +40,7 @@ class WsControllerTest {
 
     @Test
     fun wsWorkoutTest() {
-        withTestApplication({ module(testing = true) }) {
+        withTestApplication({ module(testing = true, config = AppKtorConfig()) }) {
             handleWebSocketConversation("workout/ws") { incoming, outgoing ->
                 run {
                     val responseFrame = incoming.receive()
