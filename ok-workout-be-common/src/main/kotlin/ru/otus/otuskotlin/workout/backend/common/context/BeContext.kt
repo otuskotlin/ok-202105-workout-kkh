@@ -12,6 +12,7 @@ data class BeContext(
 
     val userSession: IUserSession<*> = IUserSession.Companion.EmptySession,
     var principal: MpPrincipalModel = MpPrincipalModel.NONE,
+    val chainPermissions: MutableSet<MpUserPermissions> = mutableSetOf(),
 
     var config: ContextConfig = ContextConfig(),
     var exerciseRepo: IRepoExercise = IRepoExercise.NONE,
