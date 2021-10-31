@@ -128,6 +128,7 @@ private fun IError.toTransport() = RequestError(
 fun ExerciseModel.toTransport() = ResponseExercise(
     title = title.takeIf { it.isNotBlank() },
     description = description.takeIf { it.isNotBlank() },
+    authorId = authorId.takeIf { it != AuthorIdModel.NONE }?.asString(),
     targetMuscleGroup = targetMuscleGroup.takeIf { it.isNotEmpty() },
     synergisticMuscleGroup = synergisticMuscleGroup.takeIf { it.isNotEmpty() },
     executionTechnique = executionTechnique.takeIf { it.isNotBlank() },
