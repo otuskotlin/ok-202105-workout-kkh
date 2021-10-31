@@ -140,6 +140,9 @@ components:
         description:
           type: string
           description: Exercise description
+        authorId:
+          type: string
+          title: Идентификатор автора упражнения
         targetMuscleGroup:
           type: array
           items:
