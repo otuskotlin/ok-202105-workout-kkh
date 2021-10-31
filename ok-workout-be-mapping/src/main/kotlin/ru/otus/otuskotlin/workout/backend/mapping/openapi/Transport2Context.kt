@@ -111,6 +111,7 @@ fun BeContext.setQuery(query: ChainOfExercisesRequest) = apply {
 private fun CreatableExercise.toModel() = ExerciseModel(
     title = title ?: "",
     description = description ?: "",
+    authorId = AuthorIdModel(authorId ?: ""),
     targetMuscleGroup = targetMuscleGroup?.toMutableList() ?: mutableListOf(),
     synergisticMuscleGroup = synergisticMuscleGroup?.toMutableList() ?: mutableListOf(),
     executionTechnique = executionTechnique ?: "",
@@ -179,7 +180,7 @@ private fun BaseDebugRequest.StubCase?.toModel(): MpStubCases = when (this) {
     null -> MpStubCases.NONE
 }
 
-private fun BaseDebugRequest.Mode?.toModel() = when(this) {
+private fun BaseDebugRequest.Mode?.toModel() = when (this) {
     BaseDebugRequest.Mode.STUB -> WorkMode.STUB
     BaseDebugRequest.Mode.TEST -> WorkMode.TEST
     BaseDebugRequest.Mode.PROD -> WorkMode.PROD
