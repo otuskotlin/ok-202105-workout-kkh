@@ -11,6 +11,7 @@ data class BeContext(
     var workMode: WorkMode = WorkMode.PROD,
 
     val userSession: IUserSession<*> = IUserSession.Companion.EmptySession,
+    var principal: MpPrincipalModel = MpPrincipalModel.NONE,
 
     var config: ContextConfig = ContextConfig(),
     var exerciseRepo: IRepoExercise = IRepoExercise.NONE,
