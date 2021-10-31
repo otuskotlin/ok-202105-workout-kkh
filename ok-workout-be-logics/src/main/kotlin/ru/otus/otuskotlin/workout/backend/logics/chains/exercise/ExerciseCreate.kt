@@ -48,6 +48,8 @@ object ExerciseCreate : ICorExec<BeContext> by chain<BeContext>({
         }
     }
 
+    chainPermissions("Вычисление разрешений для пользователя")
+
     repoCreate("Запись объекта в БД")
 
     prepareAnswer("Подготовка ответа")
