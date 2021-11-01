@@ -61,8 +61,10 @@ object ExerciseCreate : ICorExec<BeContext> by chain<BeContext>({
     }
 
     accessValidation("Вычисление прав доступа")
+    prepareExerciseForSaving("Подготовка объекта упражнения для сохранения")
 
     repoCreate("Запись объекта в БД")
+    frontPermissions(title = "Вычисление пользовательских разрешений для фронтенда")
 
     prepareAnswer("Подготовка ответа")
 
