@@ -11,7 +11,7 @@ internal fun CorChainDsl<BeContext>.repoCreate(title: String) = worker {
     description = "Data from request are stored in the DB repository"
     on { status == CorStatus.RUNNING }
     handle {
-        val result = exerciseRepo.create(DbExerciseModelRequest(exercise = requestExercise))
+        val result = exerciseRepo.create(DbExerciseModelRequest(exercise = dbExercise))
         val resultValue = result.result
         if (result.isSuccess && resultValue != null) {
             responseExercise = resultValue
