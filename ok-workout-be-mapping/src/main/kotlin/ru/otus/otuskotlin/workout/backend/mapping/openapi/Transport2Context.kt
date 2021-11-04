@@ -144,6 +144,7 @@ private fun ExercisesBlock.toModel() = ExercisesBlockModel(
 private fun ResponseExercise.toModel() = ExerciseModel(
     title = title ?: "",
     description = description ?: "",
+    authorId = AuthorIdModel(authorId ?: ""),
     targetMuscleGroup = targetMuscleGroup?.toMutableList() ?: mutableListOf(),
     synergisticMuscleGroup = synergisticMuscleGroup?.toMutableList() ?: mutableListOf(),
     executionTechnique = executionTechnique ?: "",
