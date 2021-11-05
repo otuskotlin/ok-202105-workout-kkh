@@ -2,10 +2,15 @@ package ru.otus.otuskotlin.workout.backend.logics.chains.exercise
 
 import ICorExec
 import chain
+import handlers.chain
+import handlers.worker
 import ru.otus.otuskotlin.workout.backend.logics.chains.stubs.excercise.exerciseSearchStub
 import ru.otus.otuskotlin.workout.backend.logics.helpers.validationLogics
 import ru.otus.otuskotlin.workout.validation.validators.StringNonEmptyValidator
 import ru.otus.otuskotlin.workout.backend.common.context.BeContext
+import ru.otus.otuskotlin.workout.backend.common.context.CorStatus
+import ru.otus.otuskotlin.workout.backend.common.models.MpSearchTypes
+import ru.otus.otuskotlin.workout.backend.common.models.MpUserPermissions
 import ru.otus.otuskotlin.workout.backend.logics.workers.*
 import ru.otus.otuskotlin.workout.backend.logics.workers.chainInitWorker
 import ru.otus.otuskotlin.workout.backend.logics.workers.checkOperationWorker
@@ -25,10 +30,33 @@ object ExerciseSearch : ICorExec<BeContext> by chain<BeContext>({
     exerciseSearchStub(title = "Обработка стабкейса для SEARCH")
 
     // validation
-    validationLogics {
-        validate<String?> {
-            on { requestSearchExercise }
-            validator(StringNonEmptyValidator(field = "requestSearchExercise"))
+//    validationLogics {
+//        validate<String?> {
+//            on { requestSearchExercise }
+//            validator(StringNonEmptyValidator(field = "requestSearchExercise"))
+//        }
+//    }
+
+    chainPermissions("Вычисление разрешений для пользователя")
+
+    chain {
+        title = "Подготовка поискового запроса"
+        description = "Добавление ограничений в поисковый запрос согласно правам доступа"
+        on {
+            status == CorStatus.RUNNING }
+        worker {
+            title = "Определение типа поиска"
+            description = title
+            handle {
+                dbExerciseFilter.searchTypes = listOf(
+                    MpSearchTypes.AUTHOR.takeIf { chainPermissions.contains(MpUserPermissions.SEARCH_AUTHOR) },
+                    MpSearchTypes.PUBLIC.takeIf { chainPermissions.contains(MpUserPermissions.SEARCH_PUBLIC) }
+                ).filterNotNull().toMutableSet()
+            }
+        }
+        worker("Копируем все поля поиска") {
+            dbExerciseFilter.searchStr = requestExerciseFilter.searchStr
+            dbExerciseFilter.authorId = requestExerciseFilter.authorId
         }
     }
 
