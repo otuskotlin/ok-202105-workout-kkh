@@ -17,12 +17,12 @@ fun ICorChainDsl<BeContext>.chainPermissions(title: String) = worker {
         val permAdd: Set<MpUserPermissions> = principal.groups.map {
             when (it) {
                 MpUserGroups.USER -> setOf(
-                    MpUserPermissions.CREATE_OWN,
-                    MpUserPermissions.READ_OWN,
+                    MpUserPermissions.CREATE_AUTHOR,
+                    MpUserPermissions.READ_AUTHOR,
                     MpUserPermissions.READ_PUBLIC,
-                    MpUserPermissions.UPDATE_OWN,
-                    MpUserPermissions.DELETE_OWN,
-                    MpUserPermissions.SEARCH_OWN,
+                    MpUserPermissions.UPDATE_AUTHOR,
+                    MpUserPermissions.DELETE_AUTHOR,
+                    MpUserPermissions.SEARCH_AUTHOR,
                     MpUserPermissions.SEARCH_PUBLIC
                 )
                 MpUserGroups.ADMIN -> setOf()
@@ -36,8 +36,8 @@ fun ICorChainDsl<BeContext>.chainPermissions(title: String) = worker {
                 MpUserGroups.ADMIN -> setOf()
                 MpUserGroups.TEST -> setOf()
                 MpUserGroups.BAN -> setOf(
-                    MpUserPermissions.CREATE_OWN,
-                    MpUserPermissions.UPDATE_OWN,
+                    MpUserPermissions.CREATE_AUTHOR,
+                    MpUserPermissions.UPDATE_AUTHOR,
                 )
             }
         }.flatten().toSet()
