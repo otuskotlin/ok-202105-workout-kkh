@@ -1,17 +1,17 @@
 package ru.otus.otuskotlin.workout.backend.common.models
 
 enum class MpUserPermissions {
-    CREATE_OWN,
+    CREATE_AUTHOR,
 
-    READ_OWN,
+    READ_AUTHOR,
     READ_PUBLIC,
 
-    UPDATE_OWN,
+    UPDATE_AUTHOR,
     UPDATE_PUBLIC,
 
-    DELETE_OWN,
+    DELETE_AUTHOR,
     DELETE_PUBLIC,
 
-    SEARCH_OWN,
+    SEARCH_AUTHOR,
     SEARCH_PUBLIC
 }
