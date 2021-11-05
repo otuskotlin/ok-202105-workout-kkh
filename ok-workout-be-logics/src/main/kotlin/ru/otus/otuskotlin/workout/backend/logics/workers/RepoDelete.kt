@@ -14,7 +14,7 @@ internal fun CorChainDsl<BeContext>.repoDelete(title: String) = worker {
         val result = exerciseRepo.delete(DbExerciseIdRequest(requestExerciseId))
         val resultValue = result.result
         if (resultValue != null && result.isSuccess) {
-            responseExercise = resultValue
+            dbExercise = resultValue
         } else {
             result.errors.forEach {
                 addError(it)

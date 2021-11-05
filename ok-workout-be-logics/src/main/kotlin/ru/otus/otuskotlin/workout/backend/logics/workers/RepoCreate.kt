@@ -14,7 +14,7 @@ internal fun CorChainDsl<BeContext>.repoCreate(title: String) = worker {
         val result = exerciseRepo.create(DbExerciseModelRequest(exercise = dbExercise))
         val resultValue = result.result
         if (result.isSuccess && resultValue != null) {
-            responseExercise = resultValue
+            dbExercise = resultValue
         } else {
             result.errors.forEach {
                 addError(it)
