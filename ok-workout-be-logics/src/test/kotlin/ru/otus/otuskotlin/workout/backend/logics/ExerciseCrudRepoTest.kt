@@ -7,6 +7,7 @@ import ru.otus.otuskotlin.workout.backend.common.context.BeContext
 import ru.otus.otuskotlin.workout.backend.common.context.ContextConfig
 import ru.otus.otuskotlin.workout.backend.common.context.CorStatus
 import ru.otus.otuskotlin.workout.backend.common.models.ExerciseIdModel
+import ru.otus.otuskotlin.workout.backend.common.models.MpExerciseSearchFilter
 import ru.otus.otuskotlin.workout.backend.common.models.WorkMode
 import ru.otus.otuskotlin.workout.backend.logics.helpers.principalUser
 import kotlin.test.Test
@@ -140,7 +141,7 @@ class ExerciseCrudRepoTest {
         val context = BeContext(
             workMode = WorkMode.TEST,
             requestExerciseId = ExerciseStub.getModelExercise().idExercise,
-            requestSearchExercise = "жим",
+            requestExerciseFilter = MpExerciseSearchFilter(searchStr = "жим"),
             operation = BeContext.MpOperations.SEARCH,
             principal = principalUser()
         )
