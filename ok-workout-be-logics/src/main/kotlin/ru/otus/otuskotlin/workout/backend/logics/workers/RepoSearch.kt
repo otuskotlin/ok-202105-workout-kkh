@@ -9,9 +9,11 @@ import ru.otus.otuskotlin.workout.backend.repo.common.exercise.DbExerciseFilterR
 internal fun CorChainDsl<BeContext>.repoSearch(title: String) = worker {
     this.title = title
     description = "Search for exercises"
-    on { status == CorStatus.RUNNING }
+    on {
+        status == CorStatus.RUNNING
+    }
     handle {
-        val result = exerciseRepo.search(DbExerciseFilterRequest(requestSearchExercise))
+        val result = exerciseRepo.search(DbExerciseFilterRequest.of(dbExerciseFilter))
         if (result.isSuccess) {
             foundExercises = result.result.toMutableList()
         } else {
