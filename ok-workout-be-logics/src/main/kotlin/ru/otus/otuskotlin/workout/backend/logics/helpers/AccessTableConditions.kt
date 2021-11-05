@@ -14,14 +14,14 @@ val accessTable = mapOf(
     // Create
     AccessTableConditions(
         operation = BeContext.MpOperations.CREATE,
-        permission = MpUserPermissions.CREATE_OWN,
+        permission = MpUserPermissions.CREATE_AUTHOR,
         relation = MpPrincipalRelations.NONE
     ) to true,
 
     // Read
     AccessTableConditions(
         operation = BeContext.MpOperations.READ,
-        permission = MpUserPermissions.READ_OWN,
+        permission = MpUserPermissions.READ_AUTHOR,
         relation = MpPrincipalRelations.AUTHOR
     ) to true,
     AccessTableConditions(
@@ -33,14 +33,14 @@ val accessTable = mapOf(
     // Update
     AccessTableConditions(
         operation = BeContext.MpOperations.UPDATE,
-        permission = MpUserPermissions.UPDATE_OWN,
+        permission = MpUserPermissions.UPDATE_AUTHOR,
         relation = MpPrincipalRelations.AUTHOR
     ) to true,
 
     // Delete
     AccessTableConditions(
         operation = BeContext.MpOperations.DELETE,
-        permission = MpUserPermissions.DELETE_OWN,
+        permission = MpUserPermissions.DELETE_AUTHOR,
         relation = MpPrincipalRelations.AUTHOR
     ) to true
 )
