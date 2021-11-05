@@ -64,6 +64,14 @@ object ExerciseCreate : ICorExec<BeContext> by chain<BeContext>({
     prepareExerciseForSaving("Подготовка объекта упражнения для сохранения")
 
     repoCreate("Запись объекта в БД")
+
+    worker {
+        title = "Подготовка результата к отправке"
+        description = title
+        on { status == CorStatus.RUNNING }
+        handle { responseExercise = dbExercise }
+    }
+
     frontPermissions(title = "Вычисление пользовательских разрешений для фронтенда")
 
     prepareAnswer("Подготовка ответа")
