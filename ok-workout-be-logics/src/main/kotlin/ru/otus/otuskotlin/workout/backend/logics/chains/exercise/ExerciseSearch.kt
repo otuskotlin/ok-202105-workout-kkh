@@ -43,7 +43,8 @@ object ExerciseSearch : ICorExec<BeContext> by chain<BeContext>({
         title = "Подготовка поискового запроса"
         description = "Добавление ограничений в поисковый запрос согласно правам доступа"
         on {
-            status == CorStatus.RUNNING }
+            status == CorStatus.RUNNING
+        }
         worker {
             title = "Определение типа поиска"
             description = title
@@ -54,13 +55,15 @@ object ExerciseSearch : ICorExec<BeContext> by chain<BeContext>({
                 ).filterNotNull().toMutableSet()
             }
         }
-        worker("Копируем все поля поиска") {
+        worker("Копируем поля поиска") {
             dbExerciseFilter.searchStr = requestExerciseFilter.searchStr
             dbExerciseFilter.authorId = requestExerciseFilter.authorId
         }
     }
 
     repoSearch("Ищем упражнения в БД")
+
+    frontPermissions(title = "Вычисление пользовательских разрешений для фронтенда")
 
     prepareAnswer("Подготовка ответа")
 }).build()

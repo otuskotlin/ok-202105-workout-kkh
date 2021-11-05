@@ -76,5 +76,7 @@ object ExerciseUpdate : ICorExec<BeContext> by chain<BeContext>({
         handle { responseExercise = dbExercise }
     }
 
+    frontPermissions(title = "Вычисление пользовательских разрешений для фронтенда")
+
     prepareAnswer("Подготовка ответа")
 }).build()
