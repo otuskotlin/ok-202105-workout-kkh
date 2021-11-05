@@ -18,6 +18,8 @@ data class BeContext(
     var exerciseRepo: IRepoExercise = IRepoExercise.NONE,
 
     var dbExercise: ExerciseModel = ExerciseModel(),
+    var dbExerciseFilter: MpExerciseSearchFilter = MpExerciseSearchFilter(),
+    var requestExerciseFilter: MpExerciseSearchFilter = MpExerciseSearchFilter(),
     var permitted: Boolean = false,
 
     var requestId: String = "",
