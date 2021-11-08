@@ -11,9 +11,16 @@ data class BeContext(
     var workMode: WorkMode = WorkMode.PROD,
 
     val userSession: IUserSession<*> = IUserSession.Companion.EmptySession,
+    var principal: MpPrincipalModel = MpPrincipalModel.NONE,
+    val chainPermissions: MutableSet<MpUserPermissions> = mutableSetOf(),
 
     var config: ContextConfig = ContextConfig(),
     var exerciseRepo: IRepoExercise = IRepoExercise.NONE,
+
+    var dbExercise: ExerciseModel = ExerciseModel(),
+    var dbExerciseFilter: MpExerciseSearchFilter = MpExerciseSearchFilter(),
+    var requestExerciseFilter: MpExerciseSearchFilter = MpExerciseSearchFilter(),
+    var permitted: Boolean = false,
 
     var requestId: String = "",
     var requestExerciseId: ExerciseIdModel = ExerciseIdModel.NONE,

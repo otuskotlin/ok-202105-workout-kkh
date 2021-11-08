@@ -24,6 +24,7 @@ object Utils {
     val stubCreatableExercise = CreatableExercise(
         title = stubResponseExercise.title,
         description = stubResponseExercise.description,
+        authorId = stubResponseExercise.authorId,
         targetMuscleGroup = stubResponseExercise.targetMuscleGroup,
         synergisticMuscleGroup = stubResponseExercise.synergisticMuscleGroup,
         executionTechnique = stubResponseExercise.executionTechnique,

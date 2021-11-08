@@ -7,7 +7,9 @@ import ru.otus.otuskotlin.workout.backend.common.context.BeContext
 import ru.otus.otuskotlin.workout.backend.common.context.ContextConfig
 import ru.otus.otuskotlin.workout.backend.common.context.CorStatus
 import ru.otus.otuskotlin.workout.backend.common.models.ExerciseIdModel
+import ru.otus.otuskotlin.workout.backend.common.models.MpExerciseSearchFilter
 import ru.otus.otuskotlin.workout.backend.common.models.WorkMode
+import ru.otus.otuskotlin.workout.backend.logics.helpers.principalUser
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -16,7 +18,7 @@ class ExerciseCrudRepoTest {
 
     @Test
     fun createSuccessTest() {
-        val repo = RepoExerciseInMemory(initObjects = listOf())
+        val repo = RepoExerciseInMemory()
         val crud = ExerciseCrud(
             config = ContextConfig(
                 repoExerciseTest = repo
@@ -25,7 +27,8 @@ class ExerciseCrudRepoTest {
         val context = BeContext(
             workMode = WorkMode.TEST,
             requestExercise = ExerciseStub.getModelExercise() { idExercise = ExerciseIdModel.NONE },
-            operation = BeContext.MpOperations.CREATE
+            operation = BeContext.MpOperations.CREATE,
+            principal = principalUser()
         )
         runBlocking {
             crud.create(context)
@@ -49,7 +52,8 @@ class ExerciseCrudRepoTest {
         val context = BeContext(
             workMode = WorkMode.TEST,
             requestExerciseId = ExerciseStub.getModelExercise().idExercise,
-            operation = BeContext.MpOperations.READ
+            operation = BeContext.MpOperations.READ,
+            principal = principalUser()
         )
         runBlocking {
             crud.read(context)
@@ -73,7 +77,8 @@ class ExerciseCrudRepoTest {
         val context = BeContext(
             workMode = WorkMode.TEST,
             requestExercise = ExerciseStub.getModelExercise(),
-            operation = BeContext.MpOperations.UPDATE
+            operation = BeContext.MpOperations.UPDATE,
+            principal = principalUser()
         )
         runBlocking { crud.update(context) }
         assertEquals(CorStatus.SUCCESS, context.status)
@@ -95,7 +100,8 @@ class ExerciseCrudRepoTest {
         val context = BeContext(
             workMode = WorkMode.TEST,
             requestExerciseId = ExerciseStub.getModelExercise().idExercise,
-            operation = BeContext.MpOperations.DELETE
+            operation = BeContext.MpOperations.DELETE,
+            principal = principalUser()
         )
         runBlocking { crud.delete(context) }
         assertEquals(CorStatus.SUCCESS, context.status)
@@ -135,8 +141,9 @@ class ExerciseCrudRepoTest {
         val context = BeContext(
             workMode = WorkMode.TEST,
             requestExerciseId = ExerciseStub.getModelExercise().idExercise,
-            requestSearchExercise = "жим",
-            operation = BeContext.MpOperations.SEARCH
+            requestExerciseFilter = MpExerciseSearchFilter(searchStr = "жим"),
+            operation = BeContext.MpOperations.SEARCH,
+            principal = principalUser()
         )
         runBlocking { crud.search(context) }
         assertEquals(CorStatus.SUCCESS, context.status)

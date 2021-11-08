@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.workout.be.repo.test.exercise
 
 import kotlinx.coroutines.runBlocking
 import ru.otus.otuskotlin.workout.backend.common.models.ExerciseModel
+import ru.otus.otuskotlin.workout.backend.common.models.MpExerciseSearchFilter
 import ru.otus.otuskotlin.workout.backend.repo.common.exercise.DbExerciseFilterRequest
 import ru.otus.otuskotlin.workout.backend.repo.common.exercise.IRepoExercise
 import kotlin.test.Test
@@ -25,7 +26,14 @@ abstract class RepoExerciseSearchTest {
     @Test
     fun searchOnlyTitle() {
         val result = runBlocking {
-            repo.search(DbExerciseFilterRequest("приседания", DbExerciseFilterRequest.SearchMode.TITLE))
+            repo.search(
+                DbExerciseFilterRequest.of(
+                    MpExerciseSearchFilter(
+                        searchStr = "приседания",
+                        mode = DbExerciseFilterRequest.SearchMode.TITLE
+                    )
+                )
+            )
         }
         assertEquals(true, result.isSuccess)
         val expected = listOf(initObjects[0], initObjects[2])
@@ -38,7 +46,14 @@ abstract class RepoExerciseSearchTest {
     @Test
     fun searchOnlyDescription() {
         val result = runBlocking {
-            repo.search(DbExerciseFilterRequest("штангой", DbExerciseFilterRequest.SearchMode.DESCRIPTION))
+            repo.search(
+                DbExerciseFilterRequest.of(
+                    MpExerciseSearchFilter(
+                        searchStr = "штангой",
+                        mode = DbExerciseFilterRequest.SearchMode.DESCRIPTION
+                    )
+                )
+            )
         }
         assertEquals(true, result.isSuccess)
         val expected = listOf(initObjects[1], initObjects[3])

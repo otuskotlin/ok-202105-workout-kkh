@@ -4,30 +4,34 @@ import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.ExerciseService
 import ru.otus.otuskotlin.workout.be.service.openapi.exceptions.WorkoutService
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.application.*
+import io.ktor.auth.*
 import io.ktor.routing.*
 import io.ktor.websocket.*
 import ru.otus.otuskotlin.workout.controllers.*
 
-fun Routing.exercise(exerciseService: ExerciseService) = route("exercise") {
-    post("init") {
-        call.initExercise(exerciseService)
+fun Routing.exercise(exerciseService: ExerciseService) =
+    authenticate("auth-jwt") {
+        route("exercise") {
+            post("init") {
+                call.initExercise(exerciseService)
+            }
+            post("create") {
+                call.createExercise(exerciseService)
+            }
+            post("read") {
+                call.readExercise(exerciseService)
+            }
+            post("update") {
+                call.updateExercise(exerciseService)
+            }
+            post("delete") {
+                call.deleteExercise(exerciseService)
+            }
+            post("search") {
+                call.searchExercise(exerciseService)
+            }
+        }
     }
-    post("create") {
-        call.createExercise(exerciseService)
-    }
-    post("read") {
-        call.readExercise(exerciseService)
-    }
-    post("update") {
-        call.updateExercise(exerciseService)
-    }
-    post("delete") {
-        call.deleteExercise(exerciseService)
-    }
-    post("search") {
-        call.searchExercise(exerciseService)
-    }
-}
 
 fun Routing.workout(workoutService: WorkoutService) = route("workout") {
     post("init") {

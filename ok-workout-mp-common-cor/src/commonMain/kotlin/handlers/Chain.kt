@@ -14,7 +14,7 @@ fun <T> ICorChainDsl<T>.chain(function: CorChainDsl<T>.() -> Unit) {
 class CorChainDsl<T>(
     private val workers: MutableList<ICorExecDsl<T>> = mutableListOf(),
     override var title: String = "",
-    override val description: String = "",
+    override var description: String = "",
 ) : CorComponentDsl<T>(), ICorChainDsl<T> {
     override fun add(worker: ICorExecDsl<T>) {
         workers.add(worker)
