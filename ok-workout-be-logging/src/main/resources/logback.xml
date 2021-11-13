@@ -21,41 +21,44 @@
         </encoder>
     </appender>
 
-    <appender name="asyncMyLogKafka" class="net.logstash.logback.appender.LoggingEventAsyncDisruptorAppender">
+    <appender name="asyncMyLogKafka"
+              class="net.logstash.logback.appender.LoggingEventAsyncDisruptorAppender">
         <if condition='!property("LOGS_KAFKA_HOSTS").equals("LOGS_KAFKA_HOSTS_IS_UNDEFINED")
             &amp;&amp; !property("LOGS_KAFKA_HOSTS").isEmpty()'>
             <then>
                 <appender name="kafkaVerboseAppender"
                           class="com.github.danielwegener.logback.kafka.KafkaAppender">
-                <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-                    <providers>
-                        <timestamp/>
-                        <version/>
-                        <pattern>
+                    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                        <providers>
+                            <timestamp/>
+                            <version/>
                             <pattern>
-                                {
-                                "component": "${SERVICE_NAME}"
-                                "container-id": ${HOSTNAME}"
-                                }
+                                <pattern>
+                                    {
+                                    "component": "${SERVICE_NAME}"
+                                    "container-id": ${HOSTNAME}"
+                                    }
+                                </pattern>
                             </pattern>
-                        </pattern>
-                        <message/>
-                        <loggerName/>
-                        <threadName/>
-                        <logLevel/>
-                        <logstashMarkers/>
-                        <callerData/>
-                        <stackTrace/>
-                        <context/>
-                        <mdc/>
-                        <logstashMarkers/>
-                        <arguments/>
-                        <tags/>
-                    </providers>
-                </encoder>
-                <topic>${LOGS_KAFKA_TOPIC}</topic>
-                <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
-                <producerConfig>bootstrap.servers=${LOGS_KAFKA_HOSTS}</producerConfig>
+                            <message/>
+                            <loggerName/>
+                            <threadName/>
+                            <logLevel/>
+                            <logstashMarkers/>
+                            <callerData/>
+                            <stackTrace/>
+                            <context/>
+                            <mdc/>
+                            <logstashMarkers/>
+                            <arguments/>
+                            <tags/>
+                        </providers>
+                    </encoder>
+                    <topic>${LOGS_KAFKA_TOPIC}</topic>
+                    <deliveryStrategy
+                            class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
+                    <producerConfig>bootstrap.servers=${LOGS_KAFKA_HOSTS}</producerConfig>
+                </appender>
             </then>
         </if>
     </appender>
