@@ -10,7 +10,7 @@ suspend fun ApplicationCall.initExercise(exerciseService: ExerciseService) {
 
     handleRoute<InitExerciseRequest, InitExerciseResponse>(
         "init-exercise",
-        mpLogger(this::class.java)
+        mpLogger(this::initExercise::class.java)
     ) { request ->
         exerciseService.initExercise(this, request)
     }
@@ -19,7 +19,7 @@ suspend fun ApplicationCall.initExercise(exerciseService: ExerciseService) {
 suspend fun ApplicationCall.createExercise(exerciseService: ExerciseService) {
     handleRoute<CreateExerciseRequest, CreateExerciseResponse>(
         "create-exercise",
-        mpLogger(this::class.java)
+        mpLogger(this::createExercise::class.java)
     ) { request ->
         exerciseService.createExercise(this, request)
     }
@@ -28,7 +28,7 @@ suspend fun ApplicationCall.createExercise(exerciseService: ExerciseService) {
 suspend fun ApplicationCall.readExercise(exerciseService: ExerciseService) {
     handleRoute<ReadExerciseRequest, ReadExerciseResponse>(
         "read-exercise",
-        mpLogger(this::class.java)
+        mpLogger(this::readExercise::class.java)
     ) { request ->
         exerciseService.readExercise(this, request)
     }
@@ -37,7 +37,7 @@ suspend fun ApplicationCall.readExercise(exerciseService: ExerciseService) {
 suspend fun ApplicationCall.updateExercise(exerciseService: ExerciseService) {
     handleRoute<UpdateExerciseRequest, UpdateExerciseResponse>(
         "update-exercise",
-        mpLogger(this::class.java)
+        mpLogger(this::updateExercise::class.java)
     ) { request ->
         exerciseService.updateExercise(this, request)
     }
@@ -46,7 +46,7 @@ suspend fun ApplicationCall.updateExercise(exerciseService: ExerciseService) {
 suspend fun ApplicationCall.deleteExercise(exerciseService: ExerciseService) {
     handleRoute<DeleteExerciseRequest, DeleteExerciseResponse>(
         "delete-exercise",
-        mpLogger(this::class.java)
+        mpLogger(this::deleteExercise::class.java)
     ) { request ->
         exerciseService.deleteExercise(this, request)
     }
@@ -55,7 +55,7 @@ suspend fun ApplicationCall.deleteExercise(exerciseService: ExerciseService) {
 suspend fun ApplicationCall.searchExercise(exerciseService: ExerciseService) {
     handleRoute<SearchExerciseRequest, SearchExerciseResponse>(
         "search-exercise",
-        mpLogger(this::class.java)
+        mpLogger(this::searchExercise::class.java)
     ) { request ->
         exerciseService.searchExercise(this, request)
     }
