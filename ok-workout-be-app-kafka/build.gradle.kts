@@ -46,6 +46,4 @@ dependencies {
     implementation(project(":ok-workout-be-logics"))
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinTestJunitVersion")
-
-    implementation("org.slf4j:slf4j-simple:$slf4jVersion")
 }
