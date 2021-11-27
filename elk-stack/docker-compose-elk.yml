@@ -2,6 +2,13 @@ version: "3.3"
 
 services:
 
+  app:
+    image: ok-workout-be-app-ktor:0.0.1
+    ports:
+      - "8080:8080"
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+
   elasticsearch:
     build:
       context: images/elasticsearch
@@ -56,11 +63,6 @@ services:
       - elasticsearch
       - kafka
       - zookeeper
-
-  app:
-    image: ok-workout-be-app-ktor:0.0.1
-    ports:
-      - "8080:8080"
 
   kafdrop:
     image: obsidiandynamics/kafdrop:3.27.0
