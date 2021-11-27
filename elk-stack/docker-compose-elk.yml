@@ -53,8 +53,8 @@ services:
       BOOTSTRAP_SERVERS: "kafka:9092"
     links:
       - elasticsearch
-#      - kafka
-#      - zookeeper
+      - kafka
+      - zookeeper
 
   kafdrop:
     image: obsidiandynamics/kafdrop:3.27.0
