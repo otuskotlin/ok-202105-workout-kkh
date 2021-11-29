@@ -36,9 +36,6 @@ dependencies {
     implementation("io.ktor:ktor-auth:$ktorVersion")
     implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
 
-
-    implementation("ch.qos.logback:logback-classic:$logbackVersion")
-
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
     testImplementation(kotlin("test-junit"))
 
@@ -56,6 +53,7 @@ dependencies {
 
     implementation(project(":ok-workout-be-repo-inmemory"))
 
+    implementation(project(":ok-workout-be-logging"))
 
     implementation(project(":ok-workout-be-stubs"))
 

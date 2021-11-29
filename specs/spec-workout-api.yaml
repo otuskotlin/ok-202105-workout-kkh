@@ -113,3 +113,39 @@ components:
         - update
         - delete
         - send
+
+    MpLogModel:
+      description: Модель логирования
+      allOf:
+        - type: object
+          properties:
+            requestExerciseId:
+              type: string
+            requestExercise:
+              $ref: './spec-workout-api-exercise.yaml#/components/schemas/ResponseExercise'
+            responseExercise:
+              $ref: './spec-workout-api-exercise.yaml#/components/schemas/ResponseExercise'
+            responseExercises:
+              type: array
+              items:
+                $ref: './spec-workout-api-exercise.yaml#/components/schemas/ResponseExercise'
+
+    CommonLogModel:
+      description: Модель логирования
+      allOf:
+        - type: object
+          properties:
+            messageId:
+              type: string
+            messageTime:
+              type: string
+            logId:
+              type: string
+            source:
+              type: string
+            exercise:
+              $ref: '#/components/schemas/MpLogModel'
+            errors:
+              type: array
+              items:
+                $ref: '#/components/schemas/RequestError'

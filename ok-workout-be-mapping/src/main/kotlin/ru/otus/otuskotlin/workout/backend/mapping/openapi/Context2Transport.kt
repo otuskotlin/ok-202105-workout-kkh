@@ -4,6 +4,8 @@ import ru.otus.otuskotlin.workout.openapi.models.*
 import ru.otus.otuskotlin.workout.openapi.models.Performance
 import ru.otus.otuskotlin.workout.backend.common.context.BeContext
 import ru.otus.otuskotlin.workout.backend.common.models.*
+import java.time.Instant
+import java.util.*
 
 fun BeContext.toInitExerciseResponse() = InitExerciseResponse(
     messageType = "InitExerciseResponse",
@@ -144,6 +146,21 @@ fun WorkoutModel.toTransport() = ResponseWorkout(
     exercisesBlock = exercisesBlock.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
     id = idWorkout.asString(),
     permissions = permissions.takeIf { it.isNotEmpty() }?.map { Permissions.valueOf(it.name) }?.toSet()
+)
+
+fun BeContext.toLog(logId: String) = CommonLogModel(
+    messageId = UUID.randomUUID().toString(),
+    messageTime = Instant.now().toString(),
+    logId = logId,
+    source = "ok-workout",
+    exercise = MpLogModel(
+        requestExerciseId = requestExerciseId.takeIf { it != ExerciseIdModel.NONE }?.asString(),
+        requestExercise = requestExercise.takeIf { it != ExerciseModel() }?.toTransport(),
+        responseExercise = requestExercise.takeIf { it != ExerciseModel() }?.toTransport(),
+        responseExercises = foundExercises.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
+    ),
+    errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() }
+
 )
 
 private fun ExercisesBlockModel.toTransport() = ExercisesBlock(
