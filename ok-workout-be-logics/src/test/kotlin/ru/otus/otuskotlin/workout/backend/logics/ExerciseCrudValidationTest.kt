@@ -5,6 +5,7 @@ import org.junit.Test
 import ru.otus.otuskotlin.workout.backend.common.context.BeContext
 import ru.otus.otuskotlin.workout.backend.common.context.CorStatus
 import ru.otus.otuskotlin.workout.backend.common.models.ExerciseIdModel
+import ru.otus.otuskotlin.workout.backend.common.models.MpExerciseSearchFilter
 import ru.otus.otuskotlin.workout.backend.common.models.MpStubCases
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -180,7 +181,7 @@ class ExerciseCrudValidationTest {
         val crud = ExerciseCrud()
         val context = BeContext(
             requestId = "rID:00111",
-            requestSearchExercise = "Подтягивания",
+            requestExerciseFilter = MpExerciseSearchFilter(searchStr = "Подтягивания"),
             stubCase = MpStubCases.SUCCESS,
             requestExercise = ExerciseStub.getModelExercise(),
             operation = BeContext.MpOperations.SEARCH

@@ -27,7 +27,6 @@ data class BeContext(
     var requestExercise: ExerciseModel = ExerciseModel(),
     var responseExercise: ExerciseModel = ExerciseModel(),
     var responseExercises: MutableList<ExercisesBlockModel> = mutableListOf(),
-    var requestSearchExercise: String = "",
     var requestWorkoutId: WorkoutIdModel = WorkoutIdModel.NONE,
     var requestWorkout: WorkoutModel = WorkoutModel(),
     var responseWorkout: WorkoutModel = WorkoutModel(),

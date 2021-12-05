@@ -4,6 +4,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import ru.otus.otuskotlin.workout.backend.common.context.BeContext
 import ru.otus.otuskotlin.workout.backend.common.context.CorStatus
+import ru.otus.otuskotlin.workout.backend.common.models.MpExerciseSearchFilter
 import ru.otus.otuskotlin.workout.backend.common.models.MpStubCases
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -117,7 +118,7 @@ class ExerciseCrudTest {
             requestId = "rID:0001",
             operation = BeContext.MpOperations.SEARCH,
             stubCase = MpStubCases.SUCCESS,
-            requestSearchExercise = "Приседания"
+            requestExerciseFilter = MpExerciseSearchFilter(searchStr = "Приседания"),
         )
         runBlocking {
             crud.search(context)
