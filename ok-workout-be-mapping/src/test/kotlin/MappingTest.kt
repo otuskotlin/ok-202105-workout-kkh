@@ -149,7 +149,7 @@ class MappingTest {
     fun searchExerciseRequest() {
         beContext.setQuery(searchExerciseRequest)
         assertEquals("rID:0001", beContext.requestId)
-        assertTrue(beContext.requestSearchExercise.isNotEmpty())
+        assertTrue(beContext.requestExerciseFilter.searchStr.isNotEmpty())
     }
 
     @Test
