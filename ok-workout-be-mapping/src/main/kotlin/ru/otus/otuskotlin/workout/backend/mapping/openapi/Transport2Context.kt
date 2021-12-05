@@ -46,7 +46,9 @@ fun BeContext.setQuery(query: DeleteExerciseRequest) = apply {
 fun BeContext.setQuery(query: SearchExerciseRequest) = apply {
     operation = BeContext.MpOperations.SEARCH
     requestId = query.requestId ?: ""
-    requestSearchExercise = query.search ?: ""
+    requestExerciseFilter = query.search?.let {
+        MpExerciseSearchFilter(searchStr = it)
+    } ?: MpExerciseSearchFilter()
     workMode = query.debug?.mode.toModel()
     stubCase = query.debug?.stubCase.toModel()
 }
