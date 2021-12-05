@@ -1,0 +1,96 @@
+POST http://127.0.0.1:8080/exercise/create
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhdWRpZW5jZSIsImZuYW1lIjoiSXZhbiIsImxuYW1lIjoiSXZhbm92IiwiaXNzIjoiaXNzdWVyIiwiZ3JvdXBzIjpbIlRFU1QiLCJVU0VSIl0sIm1uYW1lIjoiUy4iLCJleHAiOjE2NzI1MzEyMDB9.ChgyoVIa1mPO1khMv2_KtIHrnvtYIAFu5V_C5aNfj58
+
+{
+  "messageType": "CreateExerciseRequest",
+  "requestId": "rID:0001111",
+  "createExercise": {
+    "title": "Глубокие приседания со штангой",
+    "description": "Базовое упражнение",
+    "targetMuscleGroup": [
+      "Квадрицепсы"
+    ],
+    "synergisticMuscleGroup": [
+      "Большие ягодичные",
+      "Приводящие бедра",
+      "Камбаловидные"
+    ],
+    "executionTechnique": "Выполняющий упражнение приседает и затем встаёт, возвращаясь в положение стоя"
+  },
+  "debug": {
+    "mode": "test"
+  }
+}
+
+###
+
+POST http://127.0.0.1:8080/exercise/read
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhdWRpZW5jZSIsImZuYW1lIjoiSXZhbiIsImxuYW1lIjoiSXZhbm92IiwiaXNzIjoiaXNzdWVyIiwiZ3JvdXBzIjpbIlRFU1QiLCJVU0VSIl0sIm1uYW1lIjoiUy4iLCJleHAiOjE2NzI1MzEyMDB9.ChgyoVIa1mPO1khMv2_KtIHrnvtYIAFu5V_C5aNfj58
+
+{
+  "messageType": "ReadExerciseRequest",
+  "requestId": "rID:0002",
+  "readExerciseId": "5ed0deb5-3b36-4dbd-a229-9cea008725f2",
+  "debug": {
+    "mode": "test"
+  }
+}
+
+###
+
+POST http://127.0.0.1:8080/exercise/update
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhdWRpZW5jZSIsImZuYW1lIjoiSXZhbiIsImxuYW1lIjoiSXZhbm92IiwiaXNzIjoiaXNzdWVyIiwiZ3JvdXBzIjpbIlRFU1QiLCJVU0VSIl0sIm1uYW1lIjoiUy4iLCJleHAiOjE2NzI1MzEyMDB9.ChgyoVIa1mPO1khMv2_KtIHrnvtYIAFu5V_C5aNfj58
+
+{
+  "messageType": "UpdateExerciseRequest",
+  "requestId": "rID:0004",
+  "updateExercise": {
+    "title": "Подтягивания",
+    "description": "Базовое упражнение",
+    "targetMuscleGroup": [
+      "Широчайшие мышцы спины"
+    ],
+    "synergisticMuscleGroup": [
+      "Бицепс",
+      "Мышцы предплечья"
+    ],
+    "executionTechnique": "Вися на неподвижной перекладине над головой, нужно постараться подтянуть своё тело вверх до касания грудью (или подбородком) перекладины.",
+    "id": "5ed0deb5-3b36-4dbd-a229-9cea008725f2"
+  },
+  "debug": {
+    "mode": "test"
+  }
+}
+
+###
+
+POST http://127.0.0.1:8080/exercise/delete
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhdWRpZW5jZSIsImZuYW1lIjoiSXZhbiIsImxuYW1lIjoiSXZhbm92IiwiaXNzIjoiaXNzdWVyIiwiZ3JvdXBzIjpbIlRFU1QiLCJVU0VSIl0sIm1uYW1lIjoiUy4iLCJleHAiOjE2NzI1MzEyMDB9.ChgyoVIa1mPO1khMv2_KtIHrnvtYIAFu5V_C5aNfj58
+
+{
+  "messageType": "DeleteExerciseRequest",
+  "requestId": "rID:0005",
+  "deleteExerciseId": "5ed0deb5-3b36-4dbd-a229-9cea008725f2",
+  "debug": {
+    "mode": "test"
+  }
+}
+
+###
+
+POST http://127.0.0.1:8080/exercise/search
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhdWRpZW5jZSIsImZuYW1lIjoiSXZhbiIsImxuYW1lIjoiSXZhbm92IiwiaXNzIjoiaXNzdWVyIiwiZ3JvdXBzIjpbIlRFU1QiLCJVU0VSIl0sIm1uYW1lIjoiUy4iLCJleHAiOjE2NzI1MzEyMDB9.ChgyoVIa1mPO1khMv2_KtIHrnvtYIAFu5V_C5aNfj58
+
+{
+  "messageType": "SearchExerciseRequest",
+  "requestId": "rID:0006",
+  "search": "подтягивания",
+  "debug": {
+    "mode": "test"
+  }
+}
